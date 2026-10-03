@@ -1,0 +1,1 @@
+assert(game.PlaceId == 140221183064352); print("BOMB_SYNC_CHECK", game.PlaceId, game:GetService("GroupService"):GetGroupInfoAsync(204998424).Name, game.ReplicatedStorage.Shared.Simulation.ClassName, #game.ReplicatedStorage.Assets.TutorialUI:GetDescendants(), game.ServerScriptService.Server.Tutorial.ClassName, game.StarterPlayer.StarterPlayerScripts.Client.Tutorial.ClassName)

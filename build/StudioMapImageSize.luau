@@ -1,0 +1,1 @@
+assert(game.PlaceId==140221183064352); for _,id in {123264576899987,131156549136240,100575841870639} do local info=game:GetService("MarketplaceService"):GetProductInfoAsync(id); local img=game:GetService("AssetService"):CreateEditableImageAsync(Content.fromUri("rbxassetid://"..id)); print("BOMB_MAP_ASSET",id,info.Name,info.Creator.CreatorTargetId,img.Size); img:Destroy() end

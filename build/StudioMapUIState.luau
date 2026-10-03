@@ -1,0 +1,1 @@
+local ui=game.Players.LocalPlayer.PlayerGui.TutorialUI; print("BOMB_MAP_UI_STATE",ui.Header.Energy.Text,ui.PlayArea.Board.Exit.Gate.ImageRectOffset,ui.PlayArea.Board.Hero.Position,ui.PlayArea.Board.Cell_11_2.Object.Visible,ui.PlayArea.Board.Ground.IsLoaded); print("BOMB_MAP_ROUTE_HANDLE",_G.BombMapRoute~=nil)

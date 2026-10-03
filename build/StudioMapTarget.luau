@@ -1,0 +1,1 @@
+assert(game.PlaceId==140221183064352); print("BOMB_MAP_TARGET",game.PlaceId,game.CreatorId,game.ReplicatedStorage.Assets.TutorialUI.PlayArea.Board.Ground.ClassName,game.ReplicatedStorage.Assets.TutorialUI.PlayArea.Board.Cell_2_2.Object.ClassName)

@@ -1,0 +1,1 @@
+local ui=game.Players.LocalPlayer.PlayerGui.TutorialUI; print("BOMB_MAP_OPEN_CHECK",ui.Header.Energy.Text,ui.PlayArea.Board.Exit.Gate.ImageRectOffset,ui.PlayArea.Board.Exit.Remaining.Visible,ui.PlayArea.Board.Exit.Sparkle.Visible,ui.PlayArea.Board.Ground.IsLoaded)

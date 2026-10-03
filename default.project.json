@@ -1,0 +1,44 @@
+{
+  "name": "Bomb Your Way!",
+  "serveAddress": "127.0.0.1",
+  "servePort": 34873,
+  "servePlaceIds": [
+    140221183064352
+  ],
+  "blockedPlaceIds": [
+    76731115719804,
+    110781674030628
+  ],
+  "tree": {
+    "$className": "DataModel",
+    "$ignoreUnknownInstances": true,
+    "ReplicatedStorage": {
+      "$className": "ReplicatedStorage",
+      "$ignoreUnknownInstances": true,
+      "Shared": {
+        "$path": "game/Shared"
+      },
+      "Assets": {
+        "$path": "game/Assets"
+      }
+    },
+    "ServerScriptService": {
+      "$className": "ServerScriptService",
+      "$ignoreUnknownInstances": true,
+      "Server": {
+        "$path": "game/Server"
+      }
+    },
+    "StarterPlayer": {
+      "$className": "StarterPlayer",
+      "$ignoreUnknownInstances": true,
+      "StarterPlayerScripts": {
+        "$className": "StarterPlayerScripts",
+        "$ignoreUnknownInstances": true,
+        "Client": {
+          "$path": "game/Client"
+        }
+      }
+    }
+  }
+}

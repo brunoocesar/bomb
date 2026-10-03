@@ -1,0 +1,9 @@
+[package]
+name = "azvar/boomblox"
+version = "0.1.0"
+realm = "shared"
+registry = "https://github.com/UpliftGames/wally-index"
+
+[dependencies]
+DataServiceTyped = "leifstout/dataservicetyped@1.0.5"
+TopbarPlus = "legitatx/topbarplus@3.0.5"

@@ -1,0 +1,1 @@
+local ui=game.Players.LocalPlayer.PlayerGui.TutorialUI; game:GetService("ContentProvider"):PreloadAsync({ui.PlayArea.Board.Hero.Sprite,ui.PlayArea.Board.Frog.Sprite},function(content,status) print("BOMB_UI_IMAGE_LOAD",content,tostring(status)) end); print("BOMB_VISIBLE_IMAGES",ui.PlayArea.Board.Hero.Sprite.IsLoaded,ui.PlayArea.Board.Frog.Sprite.IsLoaded)

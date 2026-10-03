@@ -1,0 +1,70 @@
+﻿{
+    "schemaVersion":  1,
+    "uploadedAt":  "2026-10-03",
+    "placeId":  "140221183064352",
+    "universeId":  "10769176732",
+    "creatorType":  "Group",
+    "creatorId":  "204998424",
+    "creatorName":  "Capyboom Studios",
+    "imageIds":  {
+                     "hero":  "90806353338434",
+                     "heroMovement":  "91950694401695",
+                     "frog":  "74186461083911"
+                 },
+    "assets":  [
+                   {
+                       "key":  "hero",
+                       "sourcePath":  "hero/base/hero-v1.png",
+                       "sourceSize":  [
+                                          1254,
+                                          1254
+                                      ],
+                       "deliveredSize":  [
+                                             1024,
+                                             1024
+                                         ],
+                       "sha256":  "35C60B50773083754632C44C7633A7F9463336420EB7D82CC830112C26797F53",
+                       "imageId":  "90806353338434",
+                       "uploadMethod":  "Roblox Studio Import Queue",
+                       "verifiedOwnerId":  "204998424",
+                       "resolutionCheck":  "CreateEditableImageAsync",
+                       "runtimeStatus":  "ImageLabel loaded and inspected in Play"
+                   },
+                   {
+                       "key":  "heroMovement",
+                       "sourcePath":  "hero/base/hero-movement-v1.png",
+                       "sourceSize":  [
+                                          1254,
+                                          1254
+                                      ],
+                       "deliveredSize":  [
+                                             1024,
+                                             1024
+                                         ],
+                       "sha256":  "43FFB6948CD1BA38C203DA1B7A41059BB7F87D0CCADBD3E83CFAD26973C29586",
+                       "imageId":  "91950694401695",
+                       "uploadMethod":  "Roblox Studio Import Queue",
+                       "verifiedOwnerId":  "204998424",
+                       "resolutionCheck":  "CreateEditableImageAsync",
+                       "runtimeStatus":  "ImageLabel loaded and inspected in Play"
+                   },
+                   {
+                       "key":  "frog",
+                       "sourcePath":  "frog/base/frog-clean-v1.png",
+                       "sourceSize":  [
+                                          1254,
+                                          1254
+                                      ],
+                       "deliveredSize":  [
+                                             1024,
+                                             1024
+                                         ],
+                       "sha256":  "94208945D0D59CD78977076719C9EED720A656FA7C00A83F426DE9AF1D3FF555",
+                       "imageId":  "74186461083911",
+                       "uploadMethod":  "Roblox Studio Import Queue",
+                       "verifiedOwnerId":  "204998424",
+                       "resolutionCheck":  "CreateEditableImageAsync",
+                       "runtimeStatus":  "ImageLabel preload confirmed; mounted composition pending"
+                   }
+               ]
+}

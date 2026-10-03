@@ -1,0 +1,1 @@
+for _,id in {90806353338434,91950694401695,74186461083911} do local ok,img=pcall(function() return game:GetService("AssetService"):CreateEditableImageAsync(Content.fromUri("rbxassetid://"..id)) end); if ok and img then print("BOMB_IMAGE_SIZE",id,img.Size); img:Destroy() else print("BOMB_IMAGE_SIZE_ERROR",id,tostring(img)) end end

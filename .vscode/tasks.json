@@ -1,0 +1,24 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "Rojo: Serve",
+      "type": "process",
+      "command": "rojo",
+      "args": ["serve", "default.project.json", "--address", "127.0.0.1"],
+      "options": { "cwd": "${workspaceFolder}" },
+      "isBackground": true,
+      "problemMatcher": [],
+      "presentation": { "reveal": "always", "panel": "dedicated" }
+    },
+    {
+      "label": "Rojo: Build",
+      "type": "process",
+      "command": "rojo",
+      "args": ["build", "default.project.json", "--output", "build/Bomb-Your-Way.rbxlx"],
+      "options": { "cwd": "${workspaceFolder}" },
+      "group": "build",
+      "problemMatcher": []
+    }
+  ]
+}

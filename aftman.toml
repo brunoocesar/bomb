@@ -1,0 +1,4 @@
+# Compatibility manifest for the Rojo VS Code extension on machines where
+# Aftman appears before Rokit in PATH. Keep this version aligned with rokit.toml.
+[tools]
+rojo = "rojo-rbx/rojo@7.7.0"

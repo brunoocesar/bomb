@@ -1,0 +1,61 @@
+﻿{
+    "schemaVersion":  1,
+    "uploadedAt":  "2026-10-03",
+    "placeId":  "140221183064352",
+    "creatorType":  "Group",
+    "creatorId":  "204998424",
+    "creatorName":  "Capyboom Studios",
+    "assets":  [
+                   {
+                       "key":  "atlas",
+                       "sourcePath":  "tutorial/objects-v1.png",
+                       "imageId":  "123264576899987",
+                       "sourceSize":  [
+                                          1254,
+                                          1254
+                                      ],
+                       "deliveredSize":  [
+                                             1024,
+                                             1024
+                                         ],
+                       "sha256":  "5D5FBE6FFE2E5682CD4A7A972E4E056C9610548F97A38BCEE5F45ADED0F5E5F6",
+                       "uploadMethod":  "Roblox Studio Import Queue",
+                       "verifiedOwnerId":  "204998424",
+                       "resolutionCheck":  "CreateEditableImageAsync"
+                   },
+                   {
+                       "key":  "garden",
+                       "sourcePath":  "tutorial/garden-ground-v1.png",
+                       "imageId":  "131156549136240",
+                       "sourceSize":  [
+                                          1507,
+                                          1044
+                                      ],
+                       "deliveredSize":  [
+                                             1023,
+                                             709
+                                         ],
+                       "sha256":  "87295874F6539E9E52CB5A9CBE38A634F86013648A17D4F5F94BF0CF5235E6FE",
+                       "uploadMethod":  "Roblox Studio Import Queue",
+                       "verifiedOwnerId":  "204998424",
+                       "resolutionCheck":  "CreateEditableImageAsync"
+                   },
+                   {
+                       "key":  "courtyard",
+                       "sourcePath":  "tutorial/courtyard-ground-v1.png",
+                       "imageId":  "100575841870639",
+                       "sourceSize":  [
+                                          1507,
+                                          1044
+                                      ],
+                       "deliveredSize":  [
+                                             1023,
+                                             709
+                                         ],
+                       "sha256":  "C689EAD72E776ED495AD08EA58448585F2D24CE50011CA4E5A265ED369D9C4A3",
+                       "uploadMethod":  "Roblox Studio Import Queue",
+                       "verifiedOwnerId":  "204998424",
+                       "resolutionCheck":  "CreateEditableImageAsync"
+                   }
+               ]
+}

@@ -1,0 +1,638 @@
+PAGE 1
+DOCUMENTO DE VISÃO E PRODUÇÃO
+BOMB YOUR
+WAY!
+!
+Uma aventura 2D de bombas, exploração, segredos e sapinhos colecionáveis,
+criada para funcionar bem no Roblox desde a primeira sessão.
+Versão 1.0 • Planejamento inicial • 03 de outubro de 2026
+
+
+PAGE 2
+BOMB YOUR WAY!  •  PLANO INICIAL DO PROJETO
+02
+1
+VISÃO DO PRODUTO
+A proposta em uma frase
+ Abra caminho com bombas, derrote monstros e resgate sapinhos
+ em uma aventura cheia de segredos.
+Bomb Your Way! será uma aventura 2D de campanha, feita com sprites e objetos em ScreenGui. O
+jogador atravessa áreas compactas, quebra obstáculos, encontra melhorias, destrói caixas de energia
+e abre a passagem para a etapa seguinte. O jogo funciona completamente sozinho e pode receber
+cooperação em uma expansão futura.
+O objetivo comercial e de design é conquistar três resultados ao mesmo tempo: uma primeira
+impressão que converta, uma primeira sessão que chegue rapidamente à diversão e uma progressão
+que dê motivos concretos para retornar.
+Pilares do projeto
+ Pilar
+Aplicação prática
+Clareza imediata
+Nome, ícone e primeira fase mostram bombas, destruição, inimigos e progressão.
+Ação satisfatória
+Pavio legível, explosão forte, blocos se desfazendo, reação em cadeia e coleta rápida.
+Fases com propósito
+Cada etapa tem caixas de energia, caminho, perigo e recompensas opcionais.
+Coleção visível
+Roupas, aparências de bombas e sapinhos reforçam identidade e progressão.
+Escopo controlado
+Conteúdo modular, celular como prioridade e campanha solo desde o lançamento.
+Público inicial: jogadores de celular que gostam de aventura casual, ação legível, progressão e personagens fofos. A
+classificação exata de idade deverá seguir o questionário de maturidade do Roblox quando o conteúdo estiver fechado.
+
+
+PAGE 3
+BOMB YOUR WAY!  •  PLANO INICIAL DO PROJETO
+03
+2
+EXPERIÊNCIA PRINCIPAL
+O ciclo que sustenta cada sessão
+ 1. ENTRAR
+2. EXPLORAR
+3. EXPLODIR
+4. DESBLOQUEAR
+5. AVANÇAR
+Começar ou continuar
+da última etapa.
+Ler o mapa, inimigos,
+segredos e rotas.
+Quebrar obstáculos e
+atingir alvos com boa
+posição.
+Destruir caixas de
+energia e recolher
+recompensas.
+Abrir a porta e levar o
+progresso à próxima
+etapa.
+Regras fundamentais
+ • Controle: movimentação em quatro direções e um botão principal de bomba. A simplicidade deixa
+ espaço para decisões de posição e tempo.
+• Explosão: segue linhas do tabuleiro, para em paredes resistentes e destrói blocos permitidos. O
+ alcance deve ser visível antes de o jogador depender dele.
+• Objetivo comum: destruir todas as caixas de energia da etapa para abrir a porta. O contador mostra
+ “Energia: 2/3”.
+• Inimigos: criam risco e controlam espaço. Eliminar todos só será obrigatório em arenas específicas.
+ • Falha: ao morrer, o jogador reinicia a etapa atual. A punição curta mantém o ritmo e incentiva nova
+ tentativa.
+• Progresso local: melhorias temporárias e montaria acompanham o jogador entre etapas da mesma
+ fase.
+Sensação desejada
+Cada bomba deve criar antecipação, impacto e recompensa. O sinal sonoro acelera, a explosão forma
+uma cruz clara, o cenário responde, itens saltam e são puxados ao jogador. O efeito precisa ser forte
+sem esconder ameaças nem confundir o alcance real.
+
+
+PAGE 4
+BOMB YOUR WAY!  •  PLANO INICIAL DO PROJETO
+04
+3
+PRIMEIRA SESSÃO
+Os primeiros 12 minutos
+O jogador novo entra diretamente na primeira fase. O lobby completo aparece depois da primeira
+vitória. Essa decisão reduz a chance de abandono em menus e apresenta o produto real primeiro.
+Tempo
+Experiência
+Sinal esperado
+0-20 s
+Controle imediato diante de um bloco simples.
+Movimenta-se e percebe o objetivo.
+20-60 s
+Coloca a primeira bomba, abre caminho e coleta um item.
+Entende bomba, distância e
+recompensa.
+1-3 min
+Enfrenta um inimigo lento e destrói as caixas de energia.
+Conclui a primeira etapa.
+3-6 min
+Resgata e experimenta o primeiro sapinho.
+Recebe novidade marcante cedo.
+6-10 min
+Combina inimigo, obstáculo e segredo.
+Demonstra domínio inicial.
+10-12 min
+Enfrenta um minichefe e vê a próxima recompensa.
+Finaliza com conquista e próximo
+objetivo.
+Tutorial integrado
+A geometria ensina antes do texto: um bloco impede o caminho; o primeiro corredor oferece espaço
+seguro para fugir; o inimigo inicial anda devagar; a primeira caixa de energia fica visível perto da
+porta. Mensagens usam uma linha, desaparecem depois da ação correta e nunca travam o controle.
+Critérios de aprovação do começo
+ • Jogadores novos conseguem colocar a primeira bomba sem explicação externa.
+ • A maioria entende por que a porta abriu e sabe identificar a próxima caixa de energia.
+ • O sapinho aparece cedo o bastante para ser parte da primeira impressão.
+ • Nenhuma tela de loja, recompensa diária ou cadastro interrompe os primeiros minutos.
+ 
+
+PAGE 5
+BOMB YOUR WAY!  •  PLANO INICIAL DO PROJETO
+05
+4
+ARQUITETURA DA CAMPANHA
+Mundos, fases e etapas
+ 1 mundo = 4 fases. Cada fase contém várias etapas conectadas e
+ termina em uma conquista clara.
+Cada etapa é uma pequena arena. A fase cria a sensação de atravessar um lugar inteiro, mantendo
+produção modular e reinícios curtos. O número de etapas cresce conforme o jogador domina as
+mecânicas.
+Momento da campanha
+Fase 1
+Fase 2
+Fase 3
+Fase 4
+Mundo 1 - Introdução
+2 etapas
+2 etapas
+3 etapas
+2 etapas + chefe
+Mundo 2 - Combinações
+3 etapas
+3 etapas
+3 etapas
+3 etapas + chefe
+Mundo 3 - Domínio
+3 etapas
+4 etapas
+4 etapas
+3 etapas + chefe
+Duração proposta
+Etapas comuns devem durar aproximadamente 45-90 segundos; fases completas ficam, em geral,
+entre 3 e 7 minutos. Chefes podem durar mais. Esses tempos serão ajustados por telemetria:
+adicionar etapas apenas para aumentar duração piora a experiência.
+Checkpoints e salvamento
+ • A porta entre etapas funciona como checkpoint salvo.
+ • Ao voltar depois, o jogador continua da etapa correta com um estado funcional de melhorias.
+ • Ao morrer, obstáculos, inimigos e caixas da etapa são restaurados.
+ • Tesouros únicos já registrados não geram recompensas duplicadas.
+ 
+
+PAGE 6
+BOMB YOUR WAY!  •  PLANO INICIAL DO PROJETO
+06
+5
+EXEMPLO DE FASE
+Fase: A Casa Apagada
+A fase demonstra como uma localização contínua pode ser dividida em áreas compactas sem perder a
+sensação de jornada.
+Etapa
+Objetivo e composição
+Novidade
+1. Quintal
+Explodir entulho, evitar criaturas do jardim e destruir 2 caixas externas.
+Caixa de energia e porta
+principal.
+2. Cozinha
+Abrir rotas entre móveis, lidar com piso escorregadio e destruir 3
+caixas.
+Reação em cadeia com
+botijões fictícios.
+3. Corredor
+Usar portas laterais, evitar inimigo perseguidor e encontrar um segredo.
+Linha de visão e risco de
+corredor estreito.
+4. Porão
+Ativar energia final, resgatar sapinho e vencer guardião.
+Minichefe e recompensa da
+fase.
+Como evitar a sensação de faxina
+ • As caixas de energia têm núcleo luminoso, som próprio e contraste constante em todos os mundos.
+ • O desafio vem de alcançá-las e posicionar a bomba, não de destruir dezenas de blocos aleatórios.
+ • A etapa oferece pistas visuais sobre rotas fechadas e mostra quantas caixas faltam.
+ • Algumas caixas ficam expostas; outras exigem combate, exploração ou uma reação em cadeia curta.
+ 
+Estrutura de novidade
+Apresentar → praticar → combinar → testar. Uma mecânica aparece sozinha, volta em situação mais
+difícil e depois se combina com outra. A quarta fase do mundo verifica o domínio em um chefe ou
+sequência especial.
+
+
+PAGE 7
+BOMB YOUR WAY!  •  PLANO INICIAL DO PROJETO
+07
+6
+PERSONAGEM E MONTARIA
+Identidade visual e função
+Protagonista
+Monstrinho laranja em forma de feijão, barriga creme e
+pavio expressivo. Corpo fixo facilita animação e roupas.
+Montaria
+Sapinho verde-água, largo e arredondado. A silhueta fofa
+combina com o protagonista e permanece legível em sprites
+pequenos.
+Função do sapinho
+A coleção libera aparências; dentro da fase, um ovo ou ponto de resgate ativa a montaria equipada. O
+sapinho absorve um acerto e pode realizar um salto curto apenas em passagens projetadas para isso.
+A campanha continua concluível sem ele.
+Customização modular
+ Categoria
+Exemplos
+Regra de produção
+Cor e estampa
+Pastel, listras, barriga de estrela.
+Mantém a mesma anatomia e animações.
+Cabeça
+Boné, coroa, chapéu; pavio sempre visível.
+Evita cobrir a chama e a leitura da silhueta.
+Rosto
+Óculos, olhos sonolentos, sobrancelhas.
+Mudanças cosméticas simples.
+Roupa
+Jardineira, capa, astronauta.
+Camadas ajustadas ao corpo base.
+Sapinhos
+Lagoa, brasa, gelo, estrela.
+Mesma função; aparência e efeitos discretos.
+
+
+PAGE 8
+BOMB YOUR WAY!  •  PLANO INICIAL DO PROJETO
+08
+7
+LOBBY
+Acampamento como menu principal
+Depois da primeira vitória, o jogador chega a um lobby inspirado na estrutura de jogos como Fortnite e
+Free Fire: personagem em destaque, customização acessível e um botão principal muito claro. O
+design visual será próprio: uma clareira cartoon usada como acampamento do protagonista.
+Área
+Conteúdo
+Objetivo
+Centro
+Personagem e sapinho equipados, com animações
+curtas.
+Valorizar identidade e cosméticos.
+Direita
+Próxima fase, progresso e botão CONTINUAR.
+Retomar a campanha em um toque.
+Esquerda
+Aventura, Personagem, Sapinhos e Loja.
+Organizar os poucos sistemas essenciais.
+Topo
+Moedas, configurações e perfil.
+Informação persistente sem ocupar o foco.
+Inferior
+Desafio diário e próxima recompensa.
+Mostrar um motivo concreto para voltar.
+Comportamento do botão principal
+ • Primeiro acesso: “JOGAR”. O clique inicia a primeira fase.
+ • Campanha iniciada: “CONTINUAR - Floresta, Fase 2”.
+ • Após concluir uma fase: “PRÓXIMA FASE”, com retorno ao lobby como opção secundária.
+ 
+ O lobby deve responder em segundos: onde continuo, o que
+ conquistei e o que posso desbloquear depois.
+
+
+PAGE 9
+BOMB YOUR WAY!  •  PLANO INICIAL DO PROJETO
+09
+8
+PROGRESSÃO E RETORNO
+Motivos para continuar amanhã
+A campanha cria avanço; domínio e coleção criam retorno. Recompensas de calendário ajudam, mas
+não devem compensar uma base repetitiva.
+Sistema
+Como funciona
+Métrica favorecida
+Continuação da
+aventura
+Progresso salvo e próximo objetivo exposto no lobby.
+D1, D7 e dias jogados.
+Três medalhas por
+fase
+Concluir; achar todos os segredos; concluir sem morrer.
+Rejogabilidade e domínio.
+Coleção transparente
+Cada item informa onde ou como é obtido.
+Metas de médio prazo.
+Desafio diário
+Regra especial em conteúdo existente, com recompensa
+limitada.
+Retorno e variedade.
+Missões
+Ações de jogo: segredos, combos, chefes e resgates.
+Sessão ativa.
+Atualizações
+Novo mundo, conjunto de fases ou desafio especial.
+Reativação e D30.
+Recompensa diária recomendada
+Uma trilha curta de sete dias que não zera quando o jogador falta. Entrega moedas e cosméticos
+menores; o melhor prêmio visual aparece no sétimo resgate, sem exigir sete dias consecutivos.
+O que fica para depois do lançamento
+ • Cooperação online em dupla e bônus por convite.
+ • Ranking de tempo apenas quando as fases estiverem equilibradas.
+ • Eventos sazonais, clãs ou sistemas sociais maiores.
+ • Montarias com habilidades diferentes, após validar o desenho das fases.
+ 
+
+PAGE 10
+BOMB YOUR WAY!  •  PLANO INICIAL DO PROJETO
+10
+9
+CONTEÚDO E DIFICULDADE
+Como manter variedade sem explodir o
+escopo
+Cada mundo recebe uma identidade visual, um grupo pequeno de inimigos e duas mecânicas centrais.
+As mesmas peças são combinadas em situações novas.
+Elemento
+Quantidade inicial
+sugerida
+Uso
+Mundos
+3
+Doze fases no total; escopo de lançamento ajustável após
+testes.
+Inimigos por mundo
+3 comuns + 1 especial
+Patrulha, perseguição, tiro e controle de espaço.
+Chefes
+1 por mundo
+Teste de domínio e momento forte de recompensa.
+Power-ups básicos
+4-5
+Mais bombas, alcance, velocidade e efeitos situacionais.
+Segredos
+1 principal por fase
+Tesouro, roupa, moeda especial ou sapinho.
+Curva de dificuldade
+ • Mundo 1: ensina bomba, explosão, caixas, inimigos e montaria.
+ • Mundo 2: combina movimento de inimigos, terreno e reações em cadeia.
+ • Mundo 3: exige planejamento, rotas de risco e domínio das combinações.
+ 
+Power-ups
+As melhorias temporárias aumentam quantidade de bombas, alcance e velocidade. Elas duram
+durante a fase, criando crescimento sem quebrar o equilíbrio permanente. Melhorias raras podem
+transformar uma tentativa, mas não devem ser necessárias para passar.
+
+
+PAGE 11
+BOMB YOUR WAY!  •  PLANO INICIAL DO PROJETO
+11
+10
+INTERFACE E QUALIDADE
+Feito primeiro para celular
+ Área
+Decisão
+Controles
+Direcional grande à esquerda; botão de bomba à direita; áreas afastadas das bordas e do gesto
+do sistema.
+Leitura
+Chão discreto, paredes fortes, inimigos contrastantes e caixas de energia sempre reconhecíveis.
+Câmera
+Campo suficiente para planejar fuga; zoom consistente por etapa.
+Feedback
+Som, vibração opcional, flash curto, partículas contidas e animação da porta.
+Acessibilidade
+Não depender apenas de cor; símbolos e movimento reforçam perigo, energia e raridade.
+Desempenho
+Pools de efeitos, sprites compactos, limite de partículas e testes em Android de pouca memória.
+Diretrizes de tela
+ • Durante a fase, mostrar apenas vidas/estado, bombas, energia restante e pausa.
+ • Após a fase, apresentar medalhas, recompensas e o botão Próxima Fase em uma tela curta.
+ • Permitir pular cenas e reduzir efeitos visuais nas configurações.
+ • Evitar pop-ups de compra durante combate, morte ou tutorial.
+ 
+Áudio
+A música muda por mundo, mas o pavio, a explosão, o dano e a porta têm prioridade na mixagem. O
+som da bomba precisa comunicar tempo sem exigir que o jogador conte segundos.
+
+
+PAGE 12
+BOMB YOUR WAY!  •  PLANO INICIAL DO PROJETO
+12
+11
+APRESENTAÇÃO E AQUISIÇÃO
+A página precisa prometer o jogo real
+Nome: Bomb Your Way! comunica que bombas abrem o caminho. O ícone e as thumbnails completam
+a ideia de aventura, inimigos e progressão.
+Peça
+Composição recomendada
+Ícone 1:1
+Rosto do monstrinho, pavio aceso, bomba em primeiro plano e expressão determinada. Poucos
+elementos.
+Thumbnail principal
+Monstrinho montado no sapinho, bomba entre blocos, monstros e tesouro/porta ao fundo.
+Thumbnail secundária
+Reação em cadeia destruindo caixas de energia e abrindo a porta.
+Vídeo curto
+Bomba → destruição → sapinho → chefe → recompensa, sem introdução longa.
+Primeira frase
+“Abra caminho com bombas, derrote monstros e resgate sapinhos em uma aventura cheia de
+segredos.”
+Teste de embalagem
+Manter variações realmente diferentes de ícone e thumbnail, acompanhar taxa de jogo por origem e
+verificar se quem clicou encontra rapidamente o que foi prometido. Uma imagem pode aumentar
+cliques e piorar abandono se atrair o público errado.
+Posicionamento
+A identidade deve combinar aventura acessível, explosões e personagens colecionáveis. Evitar
+chamar o jogo de simulador ou sugerir multiplayer competitivo quando essas experiências não
+existem. Metadados coerentes ajudam aquisição e confiança.
+
+
+PAGE 13
+BOMB YOUR WAY!  •  PLANO INICIAL DO PROJETO
+13
+12
+MONETIZAÇÃO
+Receita sem enfraquecer a campanha
+ Oferta
+Modelo
+Regra
+Skins completas
+Compra direta
+Visual claro e preço visível; corpo base preservado.
+Acessórios
+Compra direta ou pacote
+Mistura livre entre cabeça, rosto e roupa.
+Aparências de sapinho
+Compra e desbloqueios
+Função igual; itens especiais também vêm da campanha.
+Bombas cosméticas
+Compra direta
+Explosão real continua legível e com o mesmo alcance.
+Pacote de apoiador
+Conjunto cosmético
+Sem poder permanente ou bloqueio de progresso.
+Momento das ofertas
+A loja aparece no lobby depois da primeira vitória. O jogo pode mostrar itens obtidos e combinações
+possíveis, mas não deve interromper uma fase para vender. As primeiras ofertas precisam ter valor
+visual compreensível, sem múltiplas moedas e telas complexas.
+Economia inicial
+ • Uma moeda gratuita obtida em fases, medalhas, missões e desafios.
+ • Robux usado para cosméticos diretos e pacotes; preços definidos após pesquisa e teste.
+ • Itens da campanha continuam valiosos e visualmente distintos dos vendidos.
+ • Sem venda de vidas, dano, alcance ou conclusão automática no lançamento.
+ 
+
+PAGE 14
+BOMB YOUR WAY!  •  PLANO INICIAL DO PROJETO
+14
+13
+MÉTRICAS
+Instrumentação para descobrir
+problemas
+O Roblox atualmente destaca taxa de jogo, abandono inicial, tempo por usuário, dias jogados e
+sessões qualificadas, além de interação intencional com amigos e monetização. A equipe deve
+acompanhar primeiro a experiência e a retenção; aquisição paga só faz sentido depois de corrigir o
+início.
+Pergunta
+Evento/KPI
+Ação quando estiver ruim
+A página atrai?
+Impressão → jogada, por origem.
+Testar ícone, thumbnail, título e público.
+O começo funciona?
+Entrada, movimento, 1ª bomba, 1º bloco
+e 1ª etapa.
+Remover espera e simplificar ensino.
+Onde abandonam?
+Permanência em 1, 3, 5 e 10 min.
+Rever o trecho exato e desempenho.
+A dificuldade está certa?
+Mortes, tentativas e saída por etapa.
+Ajustar espaço, inimigos e checkpoint.
+O sapinho importa?
+Resgate, ativação e continuidade depois
+dele.
+Melhorar apresentação e utilidade.
+Há retorno?
+D1, D7, D30 e dias jogados.
+Rever progressão, conteúdo e metas.
+A sessão tem valor?
+Tempo por usuário e fases concluídas.
+Melhorar variedade e próximo objetivo.
+Eventos mínimos
+ftue_started, first_move, first_bomb, first_block_destroyed, stage_started, energy_box_destroyed,
+stage_completed, player_died, stage_abandoned, frog_rescued, secret_found, phase_completed,
+next_phase_started, lobby_continue_clicked, daily_challenge_started/completed e
+purchase_prompted/completed.
+Metas
+Usar os benchmarks de jogos semelhantes mostrados no Creator Analytics e comparar coortes
+antes/depois de cada mudança. Percentuais universais seriam enganosos; a meta válida nasce do
+público real, dispositivo e origem de tráfego do próprio jogo.
+
+
+PAGE 15
+BOMB YOUR WAY!  •  PLANO INICIAL DO PROJETO
+15
+14
+PRODUÇÃO
+Construir primeiro o que prova o jogo
+ Marco
+Entregável
+Critério para avançar
+1. Protótipo
+Movimento, grade, bomba, explosão, dano e controle
+móvel.
+Ação responsiva e legível em celular
+fraco.
+2. Fatia vertical
+3 etapas, caixa de energia, porta, inimigo, segredo,
+sapinho e minichefe.
+Primeiros 10-12 min compreensíveis
+sem ajuda.
+3. Base persistente
+Salvamento, checkpoints, lobby, coleção e recompensas.
+Retorno coloca o jogador no lugar certo.
+4. Conteúdo
+Mundos, fases, chefes e cosméticos usando módulos
+aprovados.
+Variedade sem piora de desempenho.
+5. Teste fechado
+Novos jogadores, telemetria e correções de abandono.
+Fluxo inicial e dificuldade validados.
+6. Lançamento
+Página, thumbnails, vídeo, desafio diário e operação.
+Métricas estáveis antes de ampliar
+tráfego.
+Escopo recomendado de lançamento
+O alvo inicial é 3 mundos, 4 fases por mundo e chefes ao fim de cada mundo. A quantidade final só é
+confirmada depois da fatia vertical: se produzir uma boa fase exigir mais trabalho do que previsto,
+lançar menos conteúdo polido será mais profissional que preencher a campanha com etapas
+repetitivas.
+Papéis principais
+ • Game design: regras, curva, objetivos, métricas e teste.
+ • Programação: sistemas, salvamento, interface, telemetria e performance.
+ • Arte: sprites, cenários modulares, efeitos, animações e materiais da página.
+ • Level design: etapas, rotas, segredos, dificuldade e validação.
+ 
+
+PAGE 16
+BOMB YOUR WAY!  •  PLANO INICIAL DO PROJETO
+16
+15
+PLANO DE VALIDAÇÃO
+Teste antes de investir em divulgação
+O primeiro teste deve observar jogadores que nunca viram o projeto. Explicar enquanto eles jogam
+destrói o teste: a equipe registra onde hesitam, morrem, ignoram pistas ou abandonam.
+Rodada
+Foco
+Perguntas
+A - Controle
+Protótipo
+A bomba responde bem? O jogador prevê a explosão? O toque cobre
+informação?
+B - Tutorial
+Primeiros 3 minutos
+Ele entende objetivo, caixas e porta sem explicação oral?
+C - Interesse
+Primeiros 12 minutos
+O sapinho e o minichefe melhoram a vontade de continuar?
+D - Retorno
+24 horas
+O jogador lembra onde continuar e existe objetivo claro?
+E - Escala
+Diversos aparelhos
+Carregamento, FPS, memória e falhas permanecem aceitáveis?
+Ordem de correção
+ 1. Travamentos, perda de progresso e controles ruins.
+ 2. Abandono antes da primeira etapa e confusão de objetivo.
+ 3. Picos injustos de dificuldade ou etapas lentas.
+ 4. Falta de meta depois da primeira sessão.
+ 5. Economia, cosméticos e otimização de compra.
+ 
+ Não comprar tráfego para diagnosticar uma experiência que ainda
+falha em teste fechado. Primeiro corrigir o produto; depois ampliar
+ a aquisição.
+
+
+PAGE 17
+BOMB YOUR WAY!  •  PLANO INICIAL DO PROJETO
+17
+16
+DECISÕES CONSOLIDADAS
+Base aprovada do projeto
+ Tema
+Decisão atual
+Nome
+Bomb Your Way!
+Formato
+Aventura 2D construída em ScreenGui, focada em campanha solo.
+Protagonista
+Monstrinho laranja, barriga creme e pavio expressivo.
+Montaria
+Sapinho verde-água fofo; resgate em fase e coleção de aparências.
+Estrutura
+Cada mundo tem 4 fases; cada fase tem várias etapas conectadas.
+Objetivo da etapa
+Destruir caixas de energia para abrir a porta, com combate e segredos.
+Lobby
+Acampamento cartoon com personagem central e botão Continuar.
+Progressão
+Campanha, medalhas, segredos, cosméticos e desafios.
+Monetização
+Cosméticos diretos, sem poder permanente no lançamento.
+Prioridade técnica
+Celular, carregamento rápido, leitura clara e salvamento confiável.
+Questões para a próxima etapa
+ • Definir os três mundos iniciais e suas identidades visuais.
+ • Definir os power-ups básicos e inimigos do Mundo 1.
+ • Desenhar as etapas da fatia vertical em papel antes de produzir arte final.
+ • Escolher o tom da história e o antagonista.
+ • Criar o primeiro protótipo e instrumentar o funil desde o início.
+ 
+Referências oficiais consultadas
+Roblox Creator Hub - Discovery: https://create.roblox.com/docs/discovery
+Roblox Creator Hub - Analytics: https://create.roblox.com/docs/production/analytics
+Roblox Creator Hub - Onboarding: https://create.roblox.com/docs/production/game-design/onboarding
+Roblox Creator Hub - Engagement: https://create.roblox.com/docs/production/analytics/engagement
+ Próximo passo recomendado: produzir e testar uma fatia vertical
+ de três etapas antes de expandir a campanha.

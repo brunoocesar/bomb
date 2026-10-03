@@ -1,0 +1,1 @@
+local ui=game.Players.LocalPlayer.PlayerGui.TutorialUI; print("BOMB_MAP_PORTRAIT",ui.AbsoluteSize,ui.PlayArea.Board.AbsoluteSize,ui.PlayArea.Board.Ground.IsLoaded,ui.PlayArea.Board.Exit.Gate.IsLoaded); assert(_G.BombMapRoute); _G.BombMapRoute.advance=true

@@ -1,0 +1,7 @@
+build/browser-profile/
+build/tools/
+build/Client-regression.lua
+*.log
+*.rbxl
+*.rbxl.lock
+*.rbxlx.lock

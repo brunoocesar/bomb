@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="pt-BR">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Bomb Your Way! — Prévia dos sprites</title>
+<style>
+body{margin:0;background:#111c30;color:#f4f7ff;font:16px system-ui;padding:24px}main{max-width:920px;margin:auto}h1{color:#ffad49}p{line-height:1.5;color:#becce3}section{display:flex;gap:20px;flex-wrap:wrap}label{display:grid;gap:8px}select,button{font:inherit;padding:10px;border-radius:8px;border:1px solid #60718c;background:#21324b;color:white}canvas{display:block;width:min(100%,800px);height:auto;border:1px solid #60718c;border-radius:16px;margin-top:24px;background:repeating-conic-gradient(#23334b 0 25%,#1b2940 0 50%) 0/32px 32px}#status{color:#ffc16e}
+</style>
+<main>
+<h1>Bomb Your Way! — Sprites base</h1>
+<p>Prévia de arte local. Personagem e sapinho são imagens independentes. As animações e os encaixes ainda precisam de validação no Roblox.</p>
+<section>
+<label>Exibição<select id="entity"><option value="hero">Protagonista</option><option value="frog">Sapinho</option><option value="mounted">Composição montada</option></select></label>
+<label>Animação<select id="animation"></select></label>
+<label>Direção<select id="direction"><option value="down">Frente</option><option value="left">Esquerda</option><option value="right">Direita</option><option value="up">Costas</option></select></label>
+<label>Velocidade<select id="speed"><option value="6">6 quadros/s</option><option value="8" selected>8 quadros/s</option><option value="12">12 quadros/s</option></select></label>
+<button id="pause">Pausar</button>
+</section>
+<canvas width="800" height="480"></canvas>
+<p id="status"></p>
+<p>Para criar novas skins, siga o contrato em README.md e preserve a ordem dos quadros, os pontos de apoio e a anatomia.</p>
+</main>
+<script src="sprite-manifest.js"></script>
+<script>
+const manifest=window.spriteManifest, images={}, canvas=document.querySelector('canvas'), context=canvas.getContext('2d');
+const entity=document.querySelector('#entity'), animation=document.querySelector('#animation'), direction=document.querySelector('#direction'), speed=document.querySelector('#speed'), status=document.querySelector('#status');
+let paused=false, previous=0, elapsed=0;
+function updateAnimations(){
+ animation.replaceChildren();
+ const names=entity.value==='mounted'?['walk','idle']:Object.keys(manifest.animationMap[entity.value]);
+ for(const name of names){const option=document.createElement('option');option.value=name;option.textContent=name;animation.append(option)}
+ elapsed=0;
+}
+function sequence(kind,name){const choices=manifest.animationMap[kind][name];return choices?.[direction.value]||null}
+function frame(sequence){
+ const [atlasId,row,start,end]=sequence, atlas=manifest.atlases.find(item=>item.id===atlasId);
+ const column=start+Math.floor(elapsed*Number(speed.value))%(end-start+1);
+ return {atlas, data:atlas.frames.find(item=>item.row===row&&item.column===column)};
+}
+function draw(sequence,x,y,scale){
+ const {atlas,data}=frame(sequence),[sx,sy,sw,sh]=data.rect,[bx,by,bw,bh]=data.opaqueBounds;
+ const anchorX=bx+bw/2, anchorY=by+bh;
+ context.drawImage(images[atlas.id],sx,sy,sw,sh,x-anchorX*scale,y-anchorY*scale,sw*scale,sh*scale);
+ return {top:y-bh*scale,height:bh*scale};
+}
+function render(time){
+ if(previous&&!paused)elapsed+=(time-previous)/1000;previous=time;
+ context.clearRect(0,0,800,480);
+ if(entity.value==='mounted'){
+  const frog=sequence('frog',animation.value),hero=sequence('hero','mounted');
+  if(frog&&hero){const mount=draw(frog,400,400,1.6);draw(hero,400,mount.top+mount.height*.38,1.25);status.textContent='Composição de referência: o encaixe definitivo será ajustado por quadro na integração.'}
+ }else{
+  const chosen=sequence(entity.value,animation.value);
+  if(chosen){draw(chosen,400,390,2);status.textContent='Aparência base • fundo transparente • recorte do manifesto'}
+  else status.textContent='Esta ação não possui sequência própria nesta direção. Escolha frente ou costas, conforme o manifesto.';
+ }
+ requestAnimationFrame(render);
+}
+entity.addEventListener('change',updateAnimations);
+animation.addEventListener('change',()=>elapsed=0);
+direction.addEventListener('change',()=>elapsed=0);
+document.querySelector('#pause').addEventListener('click',event=>{paused=!paused;event.target.textContent=paused?'Reproduzir':'Pausar'});
+Promise.all(manifest.atlases.map(atlas=>new Promise((resolve,reject)=>{const image=new Image();images[atlas.id]=image;image.onload=resolve;image.onerror=()=>reject(new Error(atlas.path));image.src=atlas.path}))).then(()=>{updateAnimations();requestAnimationFrame(render)}).catch(error=>status.textContent='Não foi possível carregar: '+error.message);
+</script>
+</html>
