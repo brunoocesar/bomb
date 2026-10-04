@@ -1,0 +1,5 @@
+﻿assert(game.PlaceId==140221183064352 and not game:GetService("RunService"):IsRunning())
+assert(game.ReplicatedStorage.Shared.ArenaLayout)
+assert(game.ReplicatedStorage.Shared.Simulation.Source:find("function Simulation:steer",1,true))
+assert(game.ServerScriptService.Server.Tutorial.Source:find("session.sim:steer",1,true))
+print("BOMB_LAYOUT_INPUT_SYNC_OK")

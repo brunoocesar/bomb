@@ -1,132 +1,169 @@
-﻿{
-    "schemaVersion":  1,
-    "atlasPath":  "tutorial/objects-v1.png",
-    "imageSize":  [
-                      1254,
-                      1254
-                  ],
-    "columns":  4,
-    "rows":  5,
-    "frames":  {
-                   "wall":  [
-                                50,
-                                29,
-                                227,
-                                228
-                            ],
-                   "wood":  [
-                                359,
-                                31,
-                                223,
-                                223
-                            ],
-                   "energy":  [
-                                  672,
-                                  30,
-                                  223,
-                                  224
-                              ],
-                   "capacityCrate":  [
-                                         986,
-                                         30,
-                                         223,
-                                         223
-                                     ],
-                   "rangeCrate":  [
-                                      46,
-                                      277,
-                                      222,
-                                      222
-                                  ],
-                   "secretCrate":  [
-                                       354,
-                                       277,
-                                       232,
-                                       225
-                                   ],
-                   "coinCrate":  [
-                                     672,
-                                     277,
-                                     225,
-                                     220
-                                 ],
-                   "exitClosed":  [
-                                      953,
-                                      265,
-                                      288,
-                                      240
-                                  ],
-                   "exitOpen":  [
-                                    26,
-                                    512,
-                                    288,
-                                    239
-                                ],
-                   "capacity":  [
-                                    389,
-                                    537,
-                                    192,
-                                    201
-                                ],
-                   "range":  [
-                                 672,
-                                 532,
-                                 222,
-                                 222
-                             ],
-                   "coins":  [
-                                 987,
-                                 560,
-                                 219,
-                                 174
-                             ],
-                   "frog":  [
-                                56,
-                                778,
-                                211,
-                                218
-                            ],
-                   "secret":  [
-                                  369,
-                                  778,
-                                  203,
-                                  200
-                              ],
-                   "bomb":  [
-                                701,
-                                779,
-                                188,
-                                198
-                            ],
-                   "enemy":  [
-                                 975,
-                                 791,
-                                 244,
-                                 182
-                             ],
-                   "blastCore":  [
-                                     29,
-                                     996,
-                                     264,
-                                     243
-                                 ],
-                   "blastHorizontal":  [
-                                           336,
-                                           1051,
-                                           269,
-                                           155
-                                       ],
-                   "blastVertical":  [
-                                         704,
-                                         996,
-                                         163,
-                                         242
-                                     ],
-                   "sparkle":  [
-                                   1004,
-                                   1013,
-                                   192,
-                                   206
-                               ]
-               }
+{
+  "schemaVersion": 1,
+  "atlasPath": "tutorial/objects-v1.png",
+  "imageSize": [
+    1254,
+    1254
+  ],
+  "columns": 4,
+  "rows": 5,
+  "frames": {
+    "wall": [
+      50,
+      29,
+      227,
+      228
+    ],
+    "wood": [
+      359,
+      31,
+      223,
+      223
+    ],
+    "energy": [
+      672,
+      30,
+      223,
+      224
+    ],
+    "capacityCrate": [
+      986,
+      30,
+      223,
+      223
+    ],
+    "rangeCrate": [
+      46,
+      277,
+      222,
+      222
+    ],
+    "secretCrate": [
+      354,
+      277,
+      232,
+      225
+    ],
+    "coinCrate": [
+      672,
+      277,
+      225,
+      220
+    ],
+    "exitClosed": [
+      953,
+      265,
+      288,
+      240
+    ],
+    "exitOpen": [
+      26,
+      512,
+      288,
+      239
+    ],
+    "capacity": [
+      389,
+      537,
+      192,
+      201
+    ],
+    "range": [
+      672,
+      532,
+      222,
+      222
+    ],
+    "coins": [
+      987,
+      560,
+      219,
+      174
+    ],
+    "frog": [
+      56,
+      778,
+      211,
+      218
+    ],
+    "secret": [
+      369,
+      778,
+      203,
+      200
+    ],
+    "bomb": [
+      701,
+      779,
+      188,
+      198
+    ],
+    "enemy": [
+      975,
+      791,
+      244,
+      182
+    ],
+    "blastCore": [
+      29,
+      996,
+      264,
+      243
+    ],
+    "blastHorizontal": [
+      336,
+      1051,
+      269,
+      155
+    ],
+    "blastVertical": [
+      704,
+      996,
+      163,
+      242
+    ],
+    "sparkle": [
+      1004,
+      1013,
+      192,
+      206
+    ],
+    "blastJoinHorizontal": [
+      464,
+      1080,
+      16,
+      104
+    ],
+    "blastJoinVertical": [
+      720,
+      1108,
+      132,
+      16
+    ],
+    "blastTipLeft": [
+      339,
+      1080,
+      131,
+      104
+    ],
+    "blastTipRight": [
+      470,
+      1080,
+      132,
+      104
+    ],
+    "blastTipUp": [
+      720,
+      999,
+      132,
+      117
+    ],
+    "blastTipDown": [
+      720,
+      1116,
+      132,
+      117
+    ]
+  },
+  "blastCropNotes": "Connection strips and end caps cropped from original blastHorizontal/blastVertical; no new raster or upload."
 }

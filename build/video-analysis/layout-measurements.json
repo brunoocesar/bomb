@@ -1,0 +1,170 @@
+[
+  {
+    "viewport": [
+      320,
+      426
+    ],
+    "board": [
+      268.7,
+      186.0
+    ],
+    "previousWidth": 239.8,
+    "growthPercent": 12.0
+  },
+  {
+    "viewport": [
+      375,
+      600
+    ],
+    "board": [
+      351,
+      243.0
+    ],
+    "previousWidth": 351,
+    "growthPercent": 0.0
+  },
+  {
+    "viewport": [
+      768,
+      950
+    ],
+    "board": [
+      744,
+      515.1
+    ],
+    "previousWidth": 744,
+    "growthPercent": 0.0
+  },
+  {
+    "viewport": [
+      1280,
+      680
+    ],
+    "board": [
+      866.7,
+      600.0
+    ],
+    "previousWidth": 606.7,
+    "growthPercent": 42.9
+  },
+  {
+    "viewport": [
+      568,
+      280
+    ],
+    "board": [
+      288.9,
+      200.0
+    ],
+    "previousWidth": 245.6,
+    "growthPercent": 17.6
+  },
+  {
+    "viewport": [
+      812,
+      330
+    ],
+    "board": [
+      361.1,
+      250.0
+    ],
+    "previousWidth": 317.8,
+    "growthPercent": 13.6
+  },
+  {
+    "viewport": [
+      667,
+      280
+    ],
+    "board": [
+      288.9,
+      200.0
+    ],
+    "previousWidth": 245.6,
+    "growthPercent": 17.6
+  },
+  {
+    "viewport": [
+      1920,
+      980
+    ],
+    "board": [
+      1300.0,
+      900.0
+    ],
+    "previousWidth": 1040.0,
+    "growthPercent": 25.0
+  },
+  {
+    "viewport": [
+      2560,
+      1080
+    ],
+    "board": [
+      1444.4,
+      1000.0
+    ],
+    "previousWidth": 1184.4,
+    "growthPercent": 22.0
+  },
+  {
+    "viewport": [
+      1052,
+      430
+    ],
+    "board": [
+      505.6,
+      350.0
+    ],
+    "previousWidth": 462.2,
+    "growthPercent": 9.4
+  },
+  {
+    "viewport": [
+      640,
+      360
+    ],
+    "board": [
+      376,
+      260.3
+    ],
+    "previousWidth": 361.1,
+    "growthPercent": 4.1
+  },
+  {
+    "viewport": [
+      560,
+      400
+    ],
+    "board": [
+      231.1,
+      160.0
+    ],
+    "previousWidth": 202.2,
+    "growthPercent": 14.3
+  },
+  {
+    "viewport": [
+      561,
+      400
+    ],
+    "board": [
+      297,
+      205.6
+    ],
+    "previousWidth": 285,
+    "growthPercent": 4.2
+  },
+  {
+    "viewport": [
+      400,
+      561
+    ],
+    "board": [
+      376,
+      260.3
+    ],
+    "previousWidth": 376,
+    "growthPercent": 0.0
+  }
+]

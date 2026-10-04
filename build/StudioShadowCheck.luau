@@ -1,0 +1,5 @@
+﻿assert(game.PlaceId==140221183064352)
+print("BOMB_SHADOW_SESSION",game:GetService("RunService"):IsRunning())
+assert(game.ReplicatedStorage.Assets.TutorialUI.PlayArea.Board.PlayerShadow)
+assert(game.ReplicatedStorage.Assets.TutorialUI.PlayArea.Board.EnemyShadow_1)
+print("BOMB_SHADOW_SYNC_OK")

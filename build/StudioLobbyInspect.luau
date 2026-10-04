@@ -1,0 +1,1 @@
+assert(game.PlaceId == 140221183064352); print("BOMB_LOBBY_SESSION", game.PlaceId, game:GetService("RunService"):IsRunning(), game:GetService("RunService"):IsClient(), game.ReplicatedStorage.Assets:FindFirstChild("LobbyUI") ~= nil)

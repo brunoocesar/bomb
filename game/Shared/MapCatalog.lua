@@ -22,5 +22,11 @@ return {
 		blastHorizontal = { 336, 1051, 269, 155 },
 		blastVertical = { 704, 996, 163, 242 },
 		sparkle = { 1004, 1013, 192, 206 },
+		blastJoinHorizontal = { 464, 1080, 16, 104 },
+		blastJoinVertical = { 720, 1108, 132, 16 },
+		blastTipLeft = { 339, 1080, 131, 104 },
+		blastTipRight = { 470, 1080, 132, 104 },
+		blastTipUp = { 720, 999, 132, 117 },
+		blastTipDown = { 720, 1116, 132, 117 },
 	},
 }

@@ -29,7 +29,14 @@ try {
         $right=[Math]::Min($cellRight-1,$right+3); $bottom=[Math]::Min($cellBottom-1,$bottom+3)
         $frames[$names[$index]] = @($left,$top,($right-$left+1),($bottom-$top+1))
     }
-    $manifest=[ordered]@{schemaVersion=1;atlasPath='tutorial/objects-v1.png';imageSize=@($bitmap.Width,$bitmap.Height);columns=4;rows=5;frames=$frames}
+    # Deliberate interior cuts preserve white-hot connections and rounded outer caps.
+    $frames.blastJoinHorizontal = @(464,1080,16,104)
+    $frames.blastJoinVertical = @(720,1108,132,16)
+    $frames.blastTipLeft = @(339,1080,131,104)
+    $frames.blastTipRight = @(470,1080,132,104)
+    $frames.blastTipUp = @(720,999,132,117)
+    $frames.blastTipDown = @(720,1116,132,117)
+    $manifest=[ordered]@{schemaVersion=1;atlasPath='tutorial/objects-v1.png';imageSize=@($bitmap.Width,$bitmap.Height);columns=4;rows=5;frames=$frames;blastCropNotes='Connection strips and end caps cropped from original blastHorizontal/blastVertical; no new raster or upload.'}
     $manifest | ConvertTo-Json -Depth 5 | Set-Content (Join-Path $ProjectRoot 'art/maps/map-manifest.json') -Encoding UTF8
 } finally { $bitmap.Dispose() }
 Write-Output ('Measured {0} image sprites.' -f $frames.Count)

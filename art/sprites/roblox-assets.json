@@ -9,7 +9,8 @@
     "imageIds":  {
                      "hero":  "90806353338434",
                      "heroMovement":  "91950694401695",
-                     "frog":  "74186461083911"
+                     "frog":  "74186461083911",
+                     "mounted":  "91298046318312"
                  },
     "assets":  [
                    {
@@ -65,6 +66,24 @@
                        "verifiedOwnerId":  "204998424",
                        "resolutionCheck":  "CreateEditableImageAsync",
                        "runtimeStatus":  "ImageLabel preload confirmed; mounted composition pending"
+                   },
+                   {
+                       "key":  "mounted",
+                       "sourcePath":  "mounted/base/mounted-v1.png",
+                       "sourceSize":  [
+                                          1254,
+                                          1254
+                                      ],
+                       "deliveredSize":  [
+                                             1024,
+                                             1024
+                                         ],
+                       "imageId":  "91298046318312",
+                       "verifiedOwnerId":  "204998424",
+                       "sha256":  "7294E983CDAE9BBCFFF48D935FDD916EA5F27FD59985776F14AE4AA770B575F4",
+                       "uploadMethod":  "Roblox Studio Import Queue",
+                       "resolutionCheck":  "CreateEditableImageAsync",
+                       "runtimeStatus":  "ImageLabel loaded; four directions and ground support verified in Studio Play"
                    }
                ]
 }

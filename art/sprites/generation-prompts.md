@@ -2,6 +2,10 @@
 
 Generated with the built-in image generation tool. Transparent PNG output requested.
 
+## Unified mounted atlas v1
+
+The final prompt and references for the third sprite form are recorded in [mounted/generation-prompt.md](mounted/generation-prompt.md). This asset supersedes the two-image riding composition; earlier prompts below remain production history.
+
 ## Hero correction / supplemental back-walk atlas
 
 Edit this orange mascot sprite sheet. Preserve the exact orange bean mascot design, cream belly, proportions, cartoon line work, expressive wick flame and all existing poses. Correct two production issues: (1) output EXACTLY eight evenly spaced rows and eight columns, 64 sprites. Current sheet has seven rows and lacks walking back views. Insert a complete eight-frame back-facing walking cycle as row 4, showing no eyes/mouth/cream belly. Rows 1,2,3 stay walking front,left,right; row5 idle front; row6 existing front actions; row7 existing seated views; row8 existing back actions. (2) remove ALL scattered orange/red specks and glow outside the clean character silhouette; remove any floor/contact shadows. Absolutely clean transparent padding around every sprite. Actual transparent RGBA background. Make square canvas 2048x2048 if supported; strict uniform 8x8 grid with no dividers or text, generous margin in every cell. Maintain original poses and same body proportions, only the missing back-walk row is new. No labels or extra props.

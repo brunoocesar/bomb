@@ -10,4 +10,4 @@ for name, rect in manifest["frames"].items():
     lines.append("\t\t" + name + " = { " + ", ".join(map(str, rect)) + " },")
 lines += ["\t},", "}"]
 (ROOT / "game/Shared/MapCatalog.lua").write_text("\n".join(lines) + "\n", encoding="utf-8")
-print("Exported 20 measured map sprite rectangles.")
+print(f"Exported {len(manifest['frames'])} map sprite rectangles.")

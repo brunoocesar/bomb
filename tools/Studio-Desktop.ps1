@@ -1,5 +1,5 @@
 param(
-    [ValidateSet('Capture','Command','Click','RightClick','AssetId','Key','HoldKey','Paste','Resize','Inspect')][string]$Action,
+    [ValidateSet('Capture','Command','Click','Hover','HoldClick','RightClick','AssetId','Key','HoldKey','Paste','Resize','Inspect')][string]$Action,
     [string]$CommandFile,
     [string]$OutputPath = 'build/Studio-current.png',
     [int]$X,
@@ -17,6 +17,7 @@ Add-Type -TypeDefinition @'
 using System;
 using System.Runtime.InteropServices;
 public class StudioDesktop {
+    [DllImport("user32.dll")] public static extern bool SetProcessDPIAware();
     [DllImport("user32.dll")] public static extern bool SetForegroundWindow(IntPtr hWnd);
     [DllImport("user32.dll")] public static extern IntPtr GetForegroundWindow();
     [DllImport("user32.dll")] public static extern IntPtr GetAncestor(IntPtr hwnd,uint flags);
@@ -31,6 +32,7 @@ public class StudioDesktop {
     [DllImport("user32.dll")] public static extern void keybd_event(byte key,byte scan,uint flags,UIntPtr info);
 }
 '@
+[StudioDesktop]::SetProcessDPIAware() | Out-Null
 $window = [System.Windows.Automation.AutomationElement]::RootElement.FindAll(
     [System.Windows.Automation.TreeScope]::Children,[System.Windows.Automation.Condition]::TrueCondition
 ) | Where-Object {
@@ -46,6 +48,13 @@ $foregroundProcessId = [uint32]0
 $foregroundThread = [StudioDesktop]::GetWindowThreadProcessId($foreground,[ref]$foregroundProcessId)
 $currentThread = [StudioDesktop]::GetCurrentThreadId()
 if ($foregroundProcessId -ne $window.Current.ProcessId) {
+	$studioActivator=New-Object -ComObject WScript.Shell
+	$studioActivator.AppActivate($window.Current.ProcessId) | Out-Null
+	Start-Sleep -Milliseconds 100
+	# Windows may deny foreground activation after a long task while VS Code is focused.
+	[StudioDesktop]::keybd_event(18,0,0,[UIntPtr]::Zero)
+	[StudioDesktop]::keybd_event(18,0,2,[UIntPtr]::Zero)
+	[StudioDesktop]::ShowWindow($handle,9) | Out-Null
     [StudioDesktop]::AttachThreadInput($currentThread,$foregroundThread,$true) | Out-Null
     try { [StudioDesktop]::SetForegroundWindow($handle) | Out-Null }
     finally { [StudioDesktop]::AttachThreadInput($currentThread,$foregroundThread,$false) | Out-Null }
@@ -62,6 +71,14 @@ function Click-Point([int]$pointX,[int]$pointY) {
     [StudioDesktop]::mouse_event(4,0,0,0,[UIntPtr]::Zero)
 }
 switch ($Action) {
+    'Hover' { if (-not [StudioDesktop]::SetCursorPos($X,$Y)) { throw 'Windows denied cursor positioning.' }; Start-Sleep -Milliseconds 700 }
+    'HoldClick' {
+        if (-not $window.Current.BoundingRectangle.Contains($X,$Y)) { throw 'Click target outside Studio.' }
+        [StudioDesktop]::SetCursorPos($X,$Y) | Out-Null
+        [StudioDesktop]::mouse_event(2,0,0,0,[UIntPtr]::Zero)
+        try { Start-Sleep -Milliseconds 350 }
+        finally { [StudioDesktop]::mouse_event(4,0,0,0,[UIntPtr]::Zero) }
+    }
     'Resize' {
         if ($Width -lt 900 -or $Width -gt 1900 -or $Height -lt 700 -or $Height -gt 1000) { throw 'Invalid Studio preview window size.' }
         [StudioDesktop]::MoveWindow($handle,145,18,$Width,$Height,$true) | Out-Null
@@ -115,8 +132,10 @@ switch ($Action) {
         }
     }
     'Paste' {
+        if ($X -or $Y) { Click-Point $X $Y; [System.Windows.Forms.SendKeys]::SendWait('^a') }
         [System.Windows.Forms.Clipboard]::SetText((Get-Content -LiteralPath $CommandFile -Raw).Trim())
         [System.Windows.Forms.SendKeys]::SendWait('^v')
+        if ($Keys) { [System.Windows.Forms.SendKeys]::SendWait($Keys) }
     }
     'Inspect' {
         $window.FindAll([System.Windows.Automation.TreeScope]::Descendants,[System.Windows.Automation.Condition]::TrueCondition) |

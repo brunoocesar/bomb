@@ -4,9 +4,10 @@
     "robloxImageIds":  {
                            "hero":  "90806353338434",
                            "heroMovement":  "91950694401695",
-                           "frog":  "74186461083911"
+                           "frog":  "74186461083911",
+                           "mounted":  "91298046318312"
                        },
-    "integrationStatus":  "uploaded and linked; basic Studio Play verified; mounted composition pending",
+    "integrationStatus":  "Four atlases uploaded and linked; unified mounted rendering verified in Studio Play. See docs/CURVAS_E_PACK_MONTADO.md for test limits.",
     "atlases":  [
                     {
                         "id":  "hero",
@@ -3739,6 +3740,354 @@
                                                            ]
                                        }
                                    ]
+                    },
+                    {
+                        "id":  "mounted",
+                        "path":  "mounted/base/mounted-v1.png",
+                        "imageSize":  [
+                                          1254,
+                                          1254
+                                      ],
+                        "columns":  4,
+                        "rows":  4,
+                        "frames":  [
+                                       {
+                                           "id":  "mounted_r0_c0",
+                                           "row":  0,
+                                           "column":  0,
+                                           "rect":  [
+                                                        0,
+                                                        0,
+                                                        314,
+                                                        311
+                                                    ],
+                                           "opaqueBounds":  [
+                                                                76,
+                                                                25,
+                                                                176,
+                                                                271
+                                                            ],
+                                           "groundPivot":  [
+                                                               0.5223,
+                                                               0.9518
+                                                           ]
+                                       },
+                                       {
+                                           "id":  "mounted_r0_c1",
+                                           "row":  0,
+                                           "column":  1,
+                                           "rect":  [
+                                                        314,
+                                                        0,
+                                                        313,
+                                                        311
+                                                    ],
+                                           "opaqueBounds":  [
+                                                                70,
+                                                                30,
+                                                                179,
+                                                                267
+                                                            ],
+                                           "groundPivot":  [
+                                                               0.5096,
+                                                               0.955
+                                                           ]
+                                       },
+                                       {
+                                           "id":  "mounted_r0_c2",
+                                           "row":  0,
+                                           "column":  2,
+                                           "rect":  [
+                                                        627,
+                                                        0,
+                                                        313,
+                                                        311
+                                                    ],
+                                           "opaqueBounds":  [
+                                                                58,
+                                                                29,
+                                                                184,
+                                                                268
+                                                            ],
+                                           "groundPivot":  [
+                                                               0.4792,
+                                                               0.955
+                                                           ]
+                                       },
+                                       {
+                                           "id":  "mounted_r0_c3",
+                                           "row":  0,
+                                           "column":  3,
+                                           "rect":  [
+                                                        940,
+                                                        0,
+                                                        314,
+                                                        311
+                                                    ],
+                                           "opaqueBounds":  [
+                                                                58,
+                                                                25,
+                                                                179,
+                                                                270
+                                                            ],
+                                           "groundPivot":  [
+                                                               0.4697,
+                                                               0.9486
+                                                           ]
+                                       },
+                                       {
+                                           "id":  "mounted_r1_c0",
+                                           "row":  1,
+                                           "column":  0,
+                                           "rect":  [
+                                                        0,
+                                                        311,
+                                                        314,
+                                                        303
+                                                    ],
+                                           "opaqueBounds":  [
+                                                                64,
+                                                                20,
+                                                                212,
+                                                                265
+                                                            ],
+                                           "groundPivot":  [
+                                                               0.5414,
+                                                               0.9406
+                                                           ]
+                                       },
+                                       {
+                                           "id":  "mounted_r1_c1",
+                                           "row":  1,
+                                           "column":  1,
+                                           "rect":  [
+                                                        314,
+                                                        311,
+                                                        313,
+                                                        303
+                                                    ],
+                                           "opaqueBounds":  [
+                                                                57,
+                                                                18,
+                                                                218,
+                                                                269
+                                                            ],
+                                           "groundPivot":  [
+                                                               0.5304,
+                                                               0.9472
+                                                           ]
+                                       },
+                                       {
+                                           "id":  "mounted_r1_c2",
+                                           "row":  1,
+                                           "column":  2,
+                                           "rect":  [
+                                                        627,
+                                                        311,
+                                                        313,
+                                                        303
+                                                    ],
+                                           "opaqueBounds":  [
+                                                                56,
+                                                                18,
+                                                                223,
+                                                                268
+                                                            ],
+                                           "groundPivot":  [
+                                                               0.5351,
+                                                               0.9439
+                                                           ]
+                                       },
+                                       {
+                                           "id":  "mounted_r1_c3",
+                                           "row":  1,
+                                           "column":  3,
+                                           "rect":  [
+                                                        940,
+                                                        311,
+                                                        314,
+                                                        303
+                                                    ],
+                                           "opaqueBounds":  [
+                                                                59,
+                                                                17,
+                                                                200,
+                                                                268
+                                                            ],
+                                           "groundPivot":  [
+                                                               0.5064,
+                                                               0.9406
+                                                           ]
+                                       },
+                                       {
+                                           "id":  "mounted_r2_c0",
+                                           "row":  2,
+                                           "column":  0,
+                                           "rect":  [
+                                                        0,
+                                                        614,
+                                                        314,
+                                                        303
+                                                    ],
+                                           "opaqueBounds":  [
+                                                                52,
+                                                                21,
+                                                                215,
+                                                                266
+                                                            ],
+                                           "groundPivot":  [
+                                                               0.508,
+                                                               0.9472
+                                                           ]
+                                       },
+                                       {
+                                           "id":  "mounted_r2_c1",
+                                           "row":  2,
+                                           "column":  1,
+                                           "rect":  [
+                                                        314,
+                                                        614,
+                                                        313,
+                                                        303
+                                                    ],
+                                           "opaqueBounds":  [
+                                                                51,
+                                                                20,
+                                                                222,
+                                                                266
+                                                            ],
+                                           "groundPivot":  [
+                                                               0.5176,
+                                                               0.9439
+                                                           ]
+                                       },
+                                       {
+                                           "id":  "mounted_r2_c2",
+                                           "row":  2,
+                                           "column":  2,
+                                           "rect":  [
+                                                        627,
+                                                        614,
+                                                        313,
+                                                        303
+                                                    ],
+                                           "opaqueBounds":  [
+                                                                42,
+                                                                20,
+                                                                226,
+                                                                269
+                                                            ],
+                                           "groundPivot":  [
+                                                               0.4952,
+                                                               0.9538
+                                                           ]
+                                       },
+                                       {
+                                           "id":  "mounted_r2_c3",
+                                           "row":  2,
+                                           "column":  3,
+                                           "rect":  [
+                                                        940,
+                                                        614,
+                                                        314,
+                                                        303
+                                                    ],
+                                           "opaqueBounds":  [
+                                                                55,
+                                                                17,
+                                                                211,
+                                                                270
+                                                            ],
+                                           "groundPivot":  [
+                                                               0.5111,
+                                                               0.9472
+                                                           ]
+                                       },
+                                       {
+                                           "id":  "mounted_r3_c0",
+                                           "row":  3,
+                                           "column":  0,
+                                           "rect":  [
+                                                        0,
+                                                        917,
+                                                        314,
+                                                        337
+                                                    ],
+                                           "opaqueBounds":  [
+                                                                89,
+                                                                15,
+                                                                167,
+                                                                260
+                                                            ],
+                                           "groundPivot":  [
+                                                               0.5494,
+                                                               0.816
+                                                           ]
+                                       },
+                                       {
+                                           "id":  "mounted_r3_c1",
+                                           "row":  3,
+                                           "column":  1,
+                                           "rect":  [
+                                                        314,
+                                                        917,
+                                                        313,
+                                                        337
+                                                    ],
+                                           "opaqueBounds":  [
+                                                                72,
+                                                                13,
+                                                                179,
+                                                                266
+                                                            ],
+                                           "groundPivot":  [
+                                                               0.516,
+                                                               0.8279
+                                                           ]
+                                       },
+                                       {
+                                           "id":  "mounted_r3_c2",
+                                           "row":  3,
+                                           "column":  2,
+                                           "rect":  [
+                                                        627,
+                                                        917,
+                                                        313,
+                                                        337
+                                                    ],
+                                           "opaqueBounds":  [
+                                                                71,
+                                                                13,
+                                                                177,
+                                                                265
+                                                            ],
+                                           "groundPivot":  [
+                                                               0.5096,
+                                                               0.8249
+                                                           ]
+                                       },
+                                       {
+                                           "id":  "mounted_r3_c3",
+                                           "row":  3,
+                                           "column":  3,
+                                           "rect":  [
+                                                        940,
+                                                        917,
+                                                        314,
+                                                        337
+                                                    ],
+                                           "opaqueBounds":  [
+                                                                71,
+                                                                12,
+                                                                178,
+                                                                266
+                                                            ],
+                                           "groundPivot":  [
+                                                               0.5096,
+                                                               0.8249
+                                                           ]
+                                       }
+                                   ]
                     }
                 ],
     "animationMap":  {
@@ -3977,15 +4326,73 @@
                                                                      7
                                                                  ]
                                                     }
-                                  }
+                                  },
+                         "mounted":  {
+                                         "walk":  {
+                                                      "left":  [
+                                                                   "mounted",
+                                                                   1,
+                                                                   0,
+                                                                   3
+                                                               ],
+                                                      "right":  [
+                                                                    "mounted",
+                                                                    2,
+                                                                    0,
+                                                                    3
+                                                                ],
+                                                      "down":  [
+                                                                   "mounted",
+                                                                   0,
+                                                                   0,
+                                                                   3
+                                                               ],
+                                                      "up":  [
+                                                                 "mounted",
+                                                                 3,
+                                                                 0,
+                                                                 3
+                                                             ]
+                                                  },
+                                         "idle":  {
+                                                      "left":  [
+                                                                   "mounted",
+                                                                   1,
+                                                                   0,
+                                                                   0
+                                                               ],
+                                                      "right":  [
+                                                                    "mounted",
+                                                                    2,
+                                                                    0,
+                                                                    0
+                                                                ],
+                                                      "down":  [
+                                                                   "mounted",
+                                                                   0,
+                                                                   0,
+                                                                   0
+                                                               ],
+                                                      "up":  [
+                                                                 "mounted",
+                                                                 3,
+                                                                 0,
+                                                                 0
+                                                             ]
+                                                  }
+                                     }
                      },
     "animationMapConvention":  "[atlasId, zeroBasedRow, firstColumn, lastColumnInclusive]; only listed directions are authored",
     "skinContract":  {
-                         "preserveGameplayBounds":  true,
+                         "independentEntities":  false,
                          "frogSlots":  [
                                            "body"
                                        ],
-                         "independentEntities":  true,
+                         "equipUnit":  "complete skin pack: hero, heroMovement, frog, mounted",
+                         "overlayFramesMustMatchBody":  true,
+                         "preserveGameplayBounds":  true,
+                         "fuseMustRemainVisible":  true,
+                         "mountedIsUnifiedSprite":  true,
                          "heroSlots":  [
                                            "body",
                                            "head",
@@ -3993,8 +4400,6 @@
                                            "outfit",
                                            "bomb"
                                        ],
-                         "fuseMustRemainVisible":  true,
-                         "overlayFramesMustMatchBody":  true,
                          "preserveFrameOrder":  true
                      }
 }

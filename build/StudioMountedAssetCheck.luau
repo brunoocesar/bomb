@@ -1,0 +1,11 @@
+assert(game.PlaceId == 140221183064352 and game.GameId == 10769176732)
+local id = 91298046318312
+local info = game:GetService("MarketplaceService"):GetProductInfoAsync(id)
+assert(info.Creator.CreatorTargetId == 204998424, "Unexpected asset owner")
+local img = game:GetService("AssetService"):CreateEditableImageAsync(Content.fromUri("rbxassetid://" .. id))
+print("BOMB_MOUNTED_ASSET_OK", id, info.Name, info.Creator.CreatorTargetId, img.Size)
+img:Destroy()
+assert(game.ReplicatedStorage.Shared:FindFirstChild("SkinPacks"))
+assert(game.ReplicatedStorage.Shared.ActorMotion.Source:find("beginPath"))
+assert(game.StarterPlayer.StarterPlayerScripts.Client.Tutorial.Source:find('state.frog and "mounted" or "hero"'))
+print("BOMB_TURNS_MOUNTED_SYNC_OK", game:GetService("RunService"):IsRunning())

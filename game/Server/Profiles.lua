@@ -1,6 +1,7 @@
 local DataStoreService = game:GetService("DataStoreService")
 local HttpService = game:GetService("HttpService")
 local RunService = game:GetService("RunService")
+local ProfileData = require(game:GetService("ReplicatedStorage").Shared.ProfileData)
 
 local Profiles = {}
 local store = nil
@@ -9,24 +10,11 @@ if not RunService:IsStudio() then
 end
 
 local function defaults()
-	return { version = 1, stage = 1, coins = 0, deaths = 0, completed = false, secret = false, frogUnlocked = false }
+	return ProfileData.defaults(os.time())
 end
 
 local function sanitize(value)
-	if type(value) ~= "table" then
-		return defaults()
-	end
-	local result = defaults()
-	for _, name in ipairs({ "stage", "coins", "deaths", "capacity", "range" }) do
-		local number = value[name]
-		if type(number) == "number" and number == number and math.abs(number) < 1e9 then
-			result[name] = math.max(0, math.floor(number))
-		end
-	end
-	for _, name in ipairs({ "completed", "finished", "noDeaths", "secret", "frogUnlocked", "frog", "coinCache" }) do
-		result[name] = value[name] == true
-	end
-	return result
+	return ProfileData.sanitize(value, os.time())
 end
 
 function Profiles.open(userId)

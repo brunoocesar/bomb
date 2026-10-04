@@ -24,6 +24,10 @@ local function walk(model, path)
 				break
 			end
 		end
+		-- Plan from the position reached on screen, rather than the queued target.
+		while model.motion and model.time < model.motion.at + model.motion.duration and model.mode == "playing" do
+			model:step(0.05)
+		end
 		if (model.x == x and model.y == y) or model.mode ~= "playing" then
 			return false
 		end

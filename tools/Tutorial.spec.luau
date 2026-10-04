@@ -46,8 +46,9 @@ sim.range = 5
 expect(sim:placeBomb(), "valid first bomb")
 expect(not sim:placeBomb(), "no duplicate bomb")
 advance(sim, 0.3, "down")
-advance(sim, 0.3, "right")
-advance(sim, 0.3, "up")
+-- A changed direction starts immediately; release after one cell interval.
+advance(sim, 0.25, "right")
+advance(sim, 0.25, "up")
 local x = sim.x
 advance(sim, 0.3, "left")
 expect(sim.x == x, "cannot reenter bomb after leaving it")

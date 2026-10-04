@@ -1,0 +1,1 @@
+assert(game.PlaceId == 140221183064352); local r=game:GetService("RunService"); print("BOMB_LOBBY_STATE",r:IsEdit(),r.RunState,r:IsRunning(),r:IsClient(),r:IsServer(),#game:GetService("Players"):GetPlayers())

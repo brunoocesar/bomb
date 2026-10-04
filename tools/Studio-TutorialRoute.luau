@@ -46,6 +46,9 @@ local function walk(model, path)
 				break
 			end
 		end
+		while model.motion and model.time < model.motion.at + model.motion.duration and model.mode == "playing" do
+			model:step(0.05)
+		end
 		if (model.x == x and model.y == y) or model.mode ~= "playing" then
 			return false
 		end
@@ -146,6 +149,7 @@ local function refreshModel()
 			"x",
 			"y",
 			"direction",
+			"motion",
 			"frog",
 			"capacity",
 			"range",
@@ -156,6 +160,8 @@ local function refreshModel()
 			"tiles",
 			"bombs",
 			"blasts",
+			"blastConnections",
+			"blastCenters",
 			"items",
 			"enemies",
 		}
@@ -184,6 +190,9 @@ local function realWalk(path)
 			or latest.mode ~= "playing"
 			or os.clock() > deadline
 		remotes.Input:FireServer("move", "stop")
+		while latest.motion and latest.time < latest.motion.at + latest.motion.duration and latest.mode == "playing" do
+			task.wait(0.015)
+		end
 		if latest.stage ~= stage then
 			return true
 		end

@@ -1,32 +1,28 @@
 # Sprites de Bomb Your Way!
 
-## Organização
+Cada skin é um pack completo. A orientação mais recente do usuário substitui o contrato anterior de aparências independentes para protagonista e sapinho.
 
-- `hero/base`: protagonista sem roupas, separado da montaria.
-- `frog/base`: sapinho sem cavaleiro desenhado junto.
-- `hero/skins` e `frog/skins`: futuras aparências independentes.
-- `generation-prompts.md`: prompts usados com a ferramenta integrada de geração de imagens.
-- `sprite-manifest.json`: dimensões reais, recortes e sequências de animação.
-- `preview.html`: prévia animada local; abra no navegador, sem servidor ou instalação.
+- `hero/base`: protagonista a pé; `hero-movement-v1.png` complementa a caminhada de costas.
+- `frog/base`: sapinho sem cavaleiro, usado também pelo ícone do HUD.
+- `mounted/base/mounted-v1.png`: terceiro tipo de sprite; protagonista sentado no sapinho, desenhados juntos.
+- `sprite-manifest.json`: recortes medidos, pontos de apoio e sequências.
+- `roblox-assets.json`: registro de uploads ao grupo 204998424, Capyboom Studios.
+- `preview.html`: prévia local das três formas.
 
-O atlas principal do protagonista tem sete linhas. A caminhada de costas fica na quarta linha do atlas complementar `hero-movement-v1.png`. O manifesto seleciona apenas os quadros necessários desse complemento; não presume uma grade de oito linhas no protagonista. O atlas selecionado do sapinho é `frog-clean-v1.png`; `frog-v1.png` preserva a primeira geração como referência.
+## Contrato de packs
 
-Os PNGs são arquivos de arte com transparência, fora da árvore sincronizada pelo Rojo. Em 03/10/2026, os três atlas selecionados foram enviados pelo importador do Studio ao grupo **204998424 — Capyboom Studios**. Seus IDs estão em `game/Shared/SpriteImages.lua` e no registro `roblox-assets.json`. O Roblox entregou imagens de 1024×1024; os originais têm 1254×1254. O cliente converte os recortes para a resolução entregue sem alterar os PNGs locais. Rojo sincroniza os vínculos, não faz upload de imagens.
+Um único `skinPack` equipado seleciona os atlas `hero`, `heroMovement`, `frog` e `mounted`. O catálogo fica em `game/Shared/SkinPacks.lua`. O perfil salva esse identificador e os packs possuídos; o servidor aceita `equipSkinPack` apenas para packs existentes e possuídos. Apenas o pack base existe atualmente. A loja e a coleção de skins ainda não estão implementadas.
 
-## Contrato para skins
+Uma nova aparência precisa entregar as três formas completas, inclusive a caminhada de costas do personagem a pé. Crie uma pasta versionada por pack; preserve a base. Cada atlas deve registrar dimensões, colunas, recortes e animações no catálogo. Não misture personagem de um pack com sapinho ou montaria de outro.
 
-Cada skin completa substitui apenas o atlas da sua entidade. Ela deve preservar a ordem dos quadros, as direções, a anatomia, a proporção e o ponto de apoio. Não desenhe o protagonista dentro da imagem do sapinho: a composição montada usa duas imagens independentes.
+O atlas montado tem quatro colunas e quatro linhas: frente, esquerda, direita e costas. Cada linha fornece quatro poses de caminhada; idle usa a primeira pose, sem alternar pernas parado. A imagem mostra o sapinho reconhecível e o cavaleiro sentado, com pés laterais. A base visual acompanha os pés do sapinho. O cliente exibe uma única imagem montada; não sobrepõe novamente os dois atlas separados.
 
-Crie uma pasta por aparência, por exemplo `hero/skins/astronaut` ou `frog/skins/pond`. Guarde nela o PNG e seu manifesto. Não sobrescreva a base. Caso mude a resolução, registre novos recortes em pixels; mantenha o mesmo espaço lógico e pontos de apoio.
+Os recortes preservam a proporção original e usam escala uniforme de pixels. O ponto de apoio medido compensa as margens transparentes de cada quadro. As skins nunca alteram colisão, velocidade, dano, alcance ou proteção. A aparência equipada não concede a montaria: ela continua dependendo do resgate e pode ser perdida ao receber dano.
 
-Roupas e acessórios combináveis devem ser overlays transparentes por quadro, alinhados ao corpo base, com camadas separadas para cabeça, rosto e roupa. O pavio deve permanecer visível. Os arquivos atuais são corpos base completos; as camadas de roupas serão produzidas quando houver uma aparência definida.
+## Integração
 
-As skins são cosméticas: não alteram colisão, velocidade, alcance, proteção ou demais regras do jogo. A futura implementação deve manter a simulação independente da imagem e usar o mesmo quadro para corpo e overlays.
+Os PNGs ficam fora da árvore do Rojo. Rojo sincroniza módulos e vínculos; o importador do Studio envia as imagens. Os quatro atlas foram enviados em 03/10/2026 ao grupo autorizado. Os originais possuem 1254×1254 pixels; o Roblox entrega 1024×1024. O cliente converte os recortes à resolução entregue.
 
-## Animações e uso
+Os atlas antigos mantêm seus recortes e sequências. A antiga linha de poses sentadas do protagonista permanece no catálogo como referência de arte; a renderização montada agora usa o terceiro atlas. O atlas novo contém caminhada e idle nas quatro direções. Ações montadas específicas de dano, vitória, montar e desmontar ainda não foram produzidas; o jogo atual não as solicita.
 
-As linhas de caminhada têm oito quadros para cada direção. A ordem é frente (`down`), esquerda (`left`), direita (`right`) e costas (`up`). O manifesto descreve as demais poses sem presumir que toda ação tenha uma sequência lateral própria.
-
-Os recortes usam as dimensões reais do PNG, que podem diferir da resolução solicitada ao gerador. Não suponha células de 256 pixels. Os pontos de apoio são derivados dos limites visíveis de cada quadro para facilitar o alinhamento inicial. A composição com roupas e cavaleiro ainda precisa de ajuste visual na integração.
-
-As poses de ação são keyframes para sequências curtas; não são animação esquelética. A suavidade, o tempo de cada quadro, a leitura em tela pequena e a composição montada precisam de teste real no Roblox. A conferência dos PNGs não substitui esse teste.
+Para regenerar metadados, execute `tools/Measure-SpriteAtlases.ps1` e `tools/Generate-SpriteCatalog.py`. A geração preserva os PNGs e os IDs enviados. `tools/SkinPacks.spec.luau` valida resolução de frames, suporte visual e persistência do pack; `tools/Preview-Mounted.ps1` gera uma prévia estática.

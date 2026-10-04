@@ -1,0 +1,10 @@
+{
+  "ClassName": "Folder",
+  "Children": [
+    { "Name": "Music", "ClassName": "Sound", "Properties": { "Looped": true, "Volume": 0.25 } },
+    { "Name": "Click", "ClassName": "Sound", "Properties": { "Volume": 0.35 } },
+    { "Name": "Reward", "ClassName": "Sound", "Properties": { "Volume": 0.45 } },
+    { "Name": "ClickHaptic", "ClassName": "HapticEffect", "Properties": { "Type": "Custom", "Looped": false, "Position": [0.5, 0.5, 0], "Radius": 1 } },
+    { "Name": "ImpactHaptic", "ClassName": "HapticEffect", "Properties": { "Type": "Custom", "Looped": false, "Position": [0.5, 0.5, 0], "Radius": 1 } }
+  ]
+}

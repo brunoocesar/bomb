@@ -22,7 +22,9 @@ public static class SpriteBounds {
 $definitions = @(
     @{ id='hero'; path='hero/base/hero-v1.png'; bands=@(0,.132,.262,.394,.528,.674,.812,1) },
     @{ id='heroMovement'; path='hero/base/hero-movement-v1.png'; bands=@(0,.132,.262,.394,.530,.674,.814,1) },
-    @{ id='frog'; path='frog/base/frog-clean-v1.png'; bands=@(0,.125,.25,.375,.5,.625,.75,.875,1) }
+    @{ id='frog'; path='frog/base/frog-clean-v1.png'; bands=@(0,.125,.25,.375,.5,.625,.75,.875,1) },
+    # Measured gutters: uniform quarters would clip rear flames into right-facing frames.
+    @{ id='mounted'; path='mounted/base/mounted-v1.png'; columns=4; bands=@(0,.248,.49,.731,1) }
 )
 $atlases = @()
 foreach ($definition in $definitions) {
@@ -31,11 +33,12 @@ foreach ($definition in $definitions) {
     try {
         if (-not [System.Drawing.Image]::IsAlphaPixelFormat($bitmap.PixelFormat)) { throw 'Missing alpha channel' }
         $frames = @()
+        $columns = if ($definition.columns) { $definition.columns } else { 8 }
         for ($row=0; $row -lt $definition.bands.Count-1; $row++) {
-            for ($column=0; $column -lt 8; $column++) {
-                $x=[int][Math]::Round($column*$bitmap.Width/8)
+            for ($column=0; $column -lt $columns; $column++) {
+                $x=[int][Math]::Round($column*$bitmap.Width/$columns)
                 $y=[int][Math]::Round($definition.bands[$row]*$bitmap.Height)
-                $width=[int][Math]::Round(($column+1)*$bitmap.Width/8)-$x
+                $width=[int][Math]::Round(($column+1)*$bitmap.Width/$columns)-$x
                 $height=[int][Math]::Round($definition.bands[$row+1]*$bitmap.Height)-$y
                 $bounds=[SpriteBounds]::Find($bitmap,$x,$y,$width,$height)
                 $frames += [ordered]@{
@@ -47,7 +50,7 @@ foreach ($definition in $definitions) {
                 }
             }
         }
-        $atlases += [ordered]@{id=$definition.id;path=$definition.path;imageSize=@($bitmap.Width,$bitmap.Height);columns=8;rows=($definition.bands.Count-1);frames=$frames}
+        $atlases += [ordered]@{id=$definition.id;path=$definition.path;imageSize=@($bitmap.Width,$bitmap.Height);columns=$columns;rows=($definition.bands.Count-1);frames=$frames}
     } finally { $bitmap.Dispose() }
 }
 $uploadedRecordPath = Join-Path $ProjectRoot 'art/sprites/roblox-assets.json'
@@ -56,7 +59,7 @@ $integrationStatus = 'art only; upload and runtime validation pending'
 if (Test-Path -LiteralPath $uploadedRecordPath) {
     $uploadedRecord = Get-Content -LiteralPath $uploadedRecordPath -Raw -Encoding UTF8 | ConvertFrom-Json
     $uploadedIds = $uploadedRecord.imageIds
-    $integrationStatus = 'uploaded and linked; basic Studio Play verified; mounted composition pending'
+    $integrationStatus = 'uploaded and linked; runtime validation recorded in docs/CURVAS_E_PACK_MONTADO.md'
 }
 $manifest=[ordered]@{
     schemaVersion=1
@@ -83,12 +86,18 @@ $manifest=[ordered]@{
             disappear=@{down=@('frog',6,4,7)}
             celebrate=@{down=@('frog',7,0,7)}
         }
+        mounted=[ordered]@{
+            walk=@{down=@('mounted',0,0,3);left=@('mounted',1,0,3);right=@('mounted',2,0,3);up=@('mounted',3,0,3)}
+            idle=@{down=@('mounted',0,0,0);left=@('mounted',1,0,0);right=@('mounted',2,0,0);up=@('mounted',3,0,0)}
+        }
     }
     animationMapConvention='[atlasId, zeroBasedRow, firstColumn, lastColumnInclusive]; only listed directions are authored'
     skinContract=@{
         heroSlots=@('body','head','face','outfit','bomb')
         frogSlots=@('body')
-        independentEntities=$true
+        equipUnit='complete skin pack: hero, heroMovement, frog, mounted'
+        independentEntities=$false
+        mountedIsUnifiedSprite=$true
         preserveFrameOrder=$true
         preserveGameplayBounds=$true
         overlayFramesMustMatchBody=$true

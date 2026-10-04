@@ -8,7 +8,7 @@ body{margin:0;background:#111c30;color:#f4f7ff;font:16px system-ui;padding:24px}
 </style>
 <main>
 <h1>Bomb Your Way! — Sprites base</h1>
-<p>Prévia de arte local. Personagem e sapinho são imagens independentes. As animações e os encaixes ainda precisam de validação no Roblox.</p>
+<p>Prévia de arte local. Cada pack contém protagonista, sapinho e um terceiro atlas com os dois montados. A montaria é desenhada como uma imagem única.</p>
 <section>
 <label>Exibição<select id="entity"><option value="hero">Protagonista</option><option value="frog">Sapinho</option><option value="mounted">Composição montada</option></select></label>
 <label>Animação<select id="animation"></select></label>
@@ -47,8 +47,8 @@ function render(time){
  if(previous&&!paused)elapsed+=(time-previous)/1000;previous=time;
  context.clearRect(0,0,800,480);
  if(entity.value==='mounted'){
-  const frog=sequence('frog',animation.value),hero=sequence('hero','mounted');
-  if(frog&&hero){const mount=draw(frog,400,400,1.6);draw(hero,400,mount.top+mount.height*.38,1.25);status.textContent='Composição de referência: o encaixe definitivo será ajustado por quadro na integração.'}
+  const chosen=sequence('mounted',animation.value);
+  if(chosen){draw(chosen,400,400,1.2);status.textContent='Atlas montado único • ponto de apoio nos pés do sapinho • quatro direções'}
  }else{
   const chosen=sequence(entity.value,animation.value);
   if(chosen){draw(chosen,400,390,2);status.textContent='Aparência base • fundo transparente • recorte do manifesto'}
