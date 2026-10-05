@@ -1,0 +1,42 @@
+{
+    "creatorGroupId":  204998424,
+    "universeId":  10769176732,
+    "uploadMethod":  "Creator Dashboard",
+    "assets":  [
+                   {
+                       "durationSeconds":  24,
+                       "name":  "camp-theme-v1",
+                       "id":  "139323405075519",
+                       "kind":  "music"
+                   },
+                   {
+                       "durationSeconds":  0.18,
+                       "name":  "menu-click-v1",
+                       "id":  "94723519223362",
+                       "kind":  "click"
+                   },
+                   {
+                       "durationSeconds":  0.95002267573696142,
+                       "name":  "reward-v1",
+                       "id":  "102483984204817",
+                       "kind":  "reward"
+                   }
+               ],
+    "sources":  [
+                    {
+                        "file":  "camp-theme-v1.wav",
+                        "sha256":  "C4B84C67623C3D6DC603AEAB31EC120774265A6C24C545B2F700FC3B2096DCAB",
+                        "bytes":  1058444
+                    },
+                    {
+                        "file":  "menu-click-v1.wav",
+                        "sha256":  "9CE7A9E017DA7AC85CA7CA709F409E6E343EAB09FFC3DA42A014406CB35CF27B",
+                        "bytes":  7982
+                    },
+                    {
+                        "file":  "reward-v1.wav",
+                        "sha256":  "A3E2C078E2FEF21052906AA4CA6AEAE1AE5B6426369B2D5857E3EC3E64528657",
+                        "bytes":  41940
+                    }
+                ]
+}

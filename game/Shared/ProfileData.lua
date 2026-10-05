@@ -65,4 +65,8 @@ function ProfileData.sanitize(value, now)
 	LobbyProgress.initialize(result, now)
 	return result
 end
+function ProfileData.isReturning(profile)
+	return profile.visited == true or profile.completed == true
+end
+
 return ProfileData

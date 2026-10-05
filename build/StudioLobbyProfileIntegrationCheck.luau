@@ -1,0 +1,22 @@
+assert(game.PlaceId==140221183064352)
+task.spawn(function()
+ local qa=_G.BombLobbyQA
+ while not qa.state do task.wait(.05) end
+ assert(qa.state.location=="adventure" and qa.state.visited and not qa.state.completed)
+ assert(qa.state.saveStatus=="Local Studio session")
+ local input=game.ReplicatedStorage.Assets.TutorialRemotes.Input
+ input:FireServer("settings")
+ task.wait(.3)
+ assert(qa.state.location=="settings" and qa.state.paused)
+ input:FireServer("setting",{name="muted",value=true})
+ task.wait(.3)
+ assert(qa.state.settings.muted and game.SoundService.CampFeedback.Click.Volume==0)
+ input:FireServer("setting",{name="muted",value=false})
+ input:FireServer("closeSettings")
+ task.wait(.3)
+ assert(qa.state.location=="adventure" and qa.state.paused)
+ input:FireServer("pause",false)
+ task.wait(.3)
+ assert(not qa.state.paused and not qa.state.settings.muted)
+ print("BOMB_LOBBY_PROFILE_INTEGRATION_VERIFIED",qa.state.stage,qa.state.saveStatus)
+end)

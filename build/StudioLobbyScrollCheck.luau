@@ -1,0 +1,1 @@
+assert(game.PlaceId==140221183064352); local c=game.Players.LocalPlayer.PlayerGui.LobbyUI.Panel.Content; print("BOMB_LOBBY_SCROLL_STATE",c.CanvasPosition,c.AbsoluteCanvasSize,c.AbsoluteWindowSize,c.ScrollingEnabled,c.Active)

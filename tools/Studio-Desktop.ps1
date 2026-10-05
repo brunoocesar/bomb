@@ -1,9 +1,11 @@
 param(
-    [ValidateSet('Capture','Command','Click','Hover','HoldClick','RightClick','AssetId','Key','HoldKey','Paste','Resize','Inspect')][string]$Action,
+    [ValidateSet('Capture','Command','Click','Hover','ScrollDown','Drag','HoldClick','RightClick','AssetId','Key','HoldKey','Paste','Resize','Inspect')][string]$Action,
     [string]$CommandFile,
     [string]$OutputPath = 'build/Studio-current.png',
     [int]$X,
     [int]$Y,
+    [int]$EndX,
+    [int]$EndY,
     [string]$Keys,
     [int]$Width,
     [int]$Height
@@ -71,6 +73,24 @@ function Click-Point([int]$pointX,[int]$pointY) {
     [StudioDesktop]::mouse_event(4,0,0,0,[UIntPtr]::Zero)
 }
 switch ($Action) {
+    'Drag' {
+        if (-not $window.Current.BoundingRectangle.Contains($X,$Y) -or -not $window.Current.BoundingRectangle.Contains($EndX,$EndY)) { throw 'Drag target outside Studio.' }
+        [StudioDesktop]::SetCursorPos($X,$Y) | Out-Null
+        [StudioDesktop]::mouse_event(2,0,0,0,[UIntPtr]::Zero)
+        try {
+            for ($step=1; $step -le 20; $step++) {
+                [StudioDesktop]::SetCursorPos([int]($X+($EndX-$X)*$step/20),[int]($Y+($EndY-$Y)*$step/20)) | Out-Null
+                Start-Sleep -Milliseconds 25
+            }
+        } finally { [StudioDesktop]::mouse_event(4,0,0,0,[UIntPtr]::Zero) }
+        Start-Sleep -Milliseconds 500
+    }
+    'ScrollDown' {
+        if (-not $window.Current.BoundingRectangle.Contains($X,$Y)) { throw 'Scroll target outside Studio.' }
+        [StudioDesktop]::SetCursorPos($X,$Y) | Out-Null
+        [StudioDesktop]::mouse_event(2048,0,0,4294966816,[UIntPtr]::Zero)
+        Start-Sleep -Milliseconds 400
+    }
     'Hover' { if (-not [StudioDesktop]::SetCursorPos($X,$Y)) { throw 'Windows denied cursor positioning.' }; Start-Sleep -Milliseconds 700 }
     'HoldClick' {
         if (-not $window.Current.BoundingRectangle.Contains($X,$Y)) { throw 'Click target outside Studio.' }

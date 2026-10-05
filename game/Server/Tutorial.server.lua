@@ -6,6 +6,7 @@ local AnalyticsService = game:GetService("AnalyticsService")
 local Simulation = require(ReplicatedStorage.Shared.Simulation)
 local Tutorial = require(ReplicatedStorage.Shared.Tutorial)
 local LobbyProgress = require(ReplicatedStorage.Shared.LobbyProgress)
+local ProfileData = require(ReplicatedStorage.Shared.ProfileData)
 local Profiles = require(script.Parent.Profiles)
 local remotes = ReplicatedStorage.Assets.TutorialRemotes
 local sessions = {}
@@ -43,7 +44,7 @@ local function save(session, release)
 		if ok then
 			session.savedVersion = version
 			session.lastSave = os.clock()
-			session.saveStatus = "Checkpoint saved"
+			session.saveStatus = session.dirtyVersion == version and "Checkpoint saved" or "Save pending"
 		else
 			session.saveStatus = "Save pending - retrying"
 		end
@@ -70,7 +71,7 @@ local function addPlayer(player)
 		)
 		return
 	end
-	local returning = profile.data.visited == true or profile.data.completed == true
+	local returning = ProfileData.isReturning(profile.data)
 	LobbyProgress.initialize(profile.data, os.time())
 	profile.data.visited = true
 	local session = {

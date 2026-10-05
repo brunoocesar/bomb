@@ -14,7 +14,7 @@ function LobbyLayout.compute(width, height)
 	result.navigation = { gap, top, nav, math.min(bottom - top, result.navColumns == 2 and 124 or 256) }
 	if portrait then
 		local contentWidth = width - nav - 3 * gap
-		local heroHeight = math.max(142, math.min(height * 0.36, bottom - top - 156))
+		local heroHeight = math.max(142, math.min(height * 0.30, bottom - top - 156))
 		result.stage = { nav + 2 * gap, top, contentWidth, heroHeight }
 		result.card = { nav + 2 * gap, top + heroHeight + 8, contentWidth, bottom - top - heroHeight - 8 }
 		result.panel = table.clone(result.card)
@@ -22,12 +22,16 @@ function LobbyLayout.compute(width, height)
 		local cardWidth = math.clamp(width * 0.29, 232, 340)
 		local centerWidth = width - nav - cardWidth - 4 * gap
 		result.stage = { nav + 2 * gap, top, centerWidth, bottom - top }
-		result.card = { width - cardWidth - gap, top + math.max(0, (bottom - top - 280) / 2), cardWidth, math.min(
-			280,
-			bottom - top
-		) }
+		result.card = {
+			width - cardWidth - gap,
+			top + math.max(0, (bottom - top - 280) / 2),
+			cardWidth,
+			math.min(280, bottom - top),
+		}
 		result.panel = { width - cardWidth - gap, top, cardWidth, bottom - top }
 	end
+	result.reward = result.card[4] > 220 and { result.card[1], result.card[2], result.card[3], 132 }
+		or table.clone(result.footer)
 	return result
 end
 return LobbyLayout

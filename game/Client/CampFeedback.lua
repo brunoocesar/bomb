@@ -11,11 +11,14 @@ function Feedback.new(assets)
 	self.assets.Music.SoundId = Audio.music
 	self.assets.Click.SoundId = Audio.click
 	self.assets.Reward.SoundId = Audio.reward
-	for name, keys in pairs({ ClickHaptic = { { 0, 0.15 }, { 30, 0.15 }, { 55, 0 } }, ImpactHaptic = {
-		{ 0, 0.3 },
-		{ 60, 0.2 },
-		{ 120, 0 },
-	} }) do
+	for name, keys in pairs({
+		ClickHaptic = { { 0, 0.15 }, { 30, 0.15 }, { 55, 0 } },
+		ImpactHaptic = {
+			{ 0, 0.3 },
+			{ 60, 0.2 },
+			{ 120, 0 },
+		},
+	}) do
 		local effect = self.assets[name]
 		effect.Parent = Workspace
 		local waveform = {}
@@ -49,9 +52,10 @@ end
 
 function Feedback:update(state, previous)
 	self.enabled = state.settings.vibration and not state.settings.reducedEffects
-	self.assets.Music.Volume = state.settings.music * 0.25
-	self.assets.Click.Volume = state.settings.sfx * 0.35
-	self.assets.Reward.Volume = state.settings.sfx * 0.45
+	local gain = state.settings.muted and 0 or 1
+	self.assets.Music.Volume = state.settings.music * 0.25 * gain
+	self.assets.Click.Volume = state.settings.sfx * 0.35 * gain
+	self.assets.Reward.Volume = state.settings.sfx * 0.45 * gain
 	if state.location == "lobby" and self.assets.Music.SoundId ~= "" then
 		if not self.assets.Music.IsPlaying then
 			self.assets.Music:Play()

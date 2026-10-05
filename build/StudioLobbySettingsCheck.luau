@@ -1,0 +1,1 @@
+assert(game.PlaceId==140221183064352); assert(_G.BombLobbyQA.state.settings.reducedEffects==true,"Settings button did not apply"); assert(game.Players.LocalPlayer.PlayerGui.LobbyUI.Ambient.Visible==false,"Ambient effect remained visible"); print("BOMB_LOBBY_SETTINGS_BUTTON_VERIFIED",_G.BombLobbyQA.state.settings.reducedEffects)

@@ -1834,13 +1834,19 @@
             "Text": "ORIGINAL PACK",
             "Font": "GothamBold",
             "TextColor3": [
+              1.0,
+              0.9490196078431372,
+              0.8392156862745098
+            ],
+            "TextSize": 16,
+            "TextWrapped": true,
+            "ZIndex": 12,
+            "TextStrokeColor3": [
               0.09019607843137255,
               0.16470588235294117,
               0.23137254901960785
             ],
-            "TextSize": 16,
-            "TextWrapped": true,
-            "ZIndex": 12
+            "TextStrokeTransparency": 0.25
           },
           "Children": []
         },
@@ -1877,13 +1883,19 @@
             "Text": "Tap to turn \u2022 Preview your pack",
             "Font": "GothamBold",
             "TextColor3": [
+              1.0,
+              0.9490196078431372,
+              0.8392156862745098
+            ],
+            "TextSize": 13,
+            "TextWrapped": true,
+            "ZIndex": 12,
+            "TextStrokeColor3": [
               0.09019607843137255,
               0.16470588235294117,
               0.23137254901960785
             ],
-            "TextSize": 13,
-            "TextWrapped": true,
-            "ZIndex": 12
+            "TextStrokeTransparency": 0.25
           },
           "Children": []
         }
@@ -2233,7 +2245,7 @@
                 ],
                 [
                   0,
-                  38
+                  44
                 ]
               ]
             },
@@ -2245,7 +2257,7 @@
                 ],
                 [
                   0,
-                  8
+                  6
                 ]
               ]
             },
@@ -2254,9 +2266,9 @@
             "Text": "BACK",
             "Font": "GothamBold",
             "TextColor3": [
-              0.09019607843137255,
-              0.16470588235294117,
-              0.23137254901960785
+              1.0,
+              0.9490196078431372,
+              0.8392156862745098
             ],
             "TextSize": 16,
             "TextWrapped": true,
@@ -2505,6 +2517,59 @@
                   "Children": []
                 },
                 {
+                  "Name": "TrailPath",
+                  "ClassName": "Frame",
+                  "Properties": {
+                    "Size": {
+                      "UDim2": [
+                        [
+                          0,
+                          168
+                        ],
+                        [
+                          0,
+                          8
+                        ]
+                      ]
+                    },
+                    "Position": {
+                      "UDim2": [
+                        [
+                          0,
+                          30
+                        ],
+                        [
+                          0,
+                          134
+                        ]
+                      ]
+                    },
+                    "BorderSizePixel": 0,
+                    "BackgroundColor3": [
+                      0.5215686274509804,
+                      0.8745098039215686,
+                      0.7686274509803922
+                    ],
+                    "BackgroundTransparency": 0.2,
+                    "ZIndex": 13
+                  },
+                  "Children": [
+                    {
+                      "Name": "Corner",
+                      "ClassName": "UICorner",
+                      "Properties": {
+                        "CornerRadius": {
+                          "UDim": [
+                            0,
+                            4
+                          ]
+                        }
+                      },
+                      "Children": []
+                    }
+                  ]
+                },
+                {
                   "Name": "Trail_1",
                   "ClassName": "TextButton",
                   "Properties": {
@@ -2600,9 +2665,9 @@
                     "Text": "?",
                     "Font": "GothamBold",
                     "TextColor3": [
-                      0.09019607843137255,
-                      0.16470588235294117,
-                      0.23137254901960785
+                      1.0,
+                      0.9490196078431372,
+                      0.8392156862745098
                     ],
                     "TextSize": 16,
                     "TextWrapped": true,
@@ -2663,9 +2728,9 @@
                     "Text": "?",
                     "Font": "GothamBold",
                     "TextColor3": [
-                      0.09019607843137255,
-                      0.16470588235294117,
-                      0.23137254901960785
+                      1.0,
+                      0.9490196078431372,
+                      0.8392156862745098
                     ],
                     "TextSize": 16,
                     "TextWrapped": true,
@@ -2726,9 +2791,9 @@
                     "Text": "?",
                     "Font": "GothamBold",
                     "TextColor3": [
-                      0.09019607843137255,
-                      0.16470588235294117,
-                      0.23137254901960785
+                      1.0,
+                      0.9490196078431372,
+                      0.8392156862745098
                     ],
                     "TextSize": 16,
                     "TextWrapped": true,
@@ -5381,6 +5446,49 @@
                       "Children": []
                     }
                   ]
+                },
+                {
+                  "Name": "Save",
+                  "ClassName": "TextLabel",
+                  "Properties": {
+                    "Size": {
+                      "UDim2": [
+                        [
+                          1,
+                          0
+                        ],
+                        [
+                          0,
+                          32
+                        ]
+                      ]
+                    },
+                    "Position": {
+                      "UDim2": [
+                        [
+                          0,
+                          0
+                        ],
+                        [
+                          0,
+                          460
+                        ]
+                      ]
+                    },
+                    "BackgroundTransparency": 1,
+                    "BorderSizePixel": 0,
+                    "Text": "",
+                    "Font": "GothamBold",
+                    "TextColor3": [
+                      1.0,
+                      0.9490196078431372,
+                      0.8392156862745098
+                    ],
+                    "TextSize": 13,
+                    "TextWrapped": true,
+                    "ZIndex": 13
+                  },
+                  "Children": []
                 }
               ]
             },
@@ -5555,9 +5663,9 @@
                     "Text": "MUSIC",
                     "Font": "GothamBold",
                     "TextColor3": [
-                      0.09019607843137255,
-                      0.16470588235294117,
-                      0.23137254901960785
+                      1.0,
+                      0.9490196078431372,
+                      0.8392156862745098
                     ],
                     "TextSize": 16,
                     "TextWrapped": true,
@@ -5618,9 +5726,72 @@
                     "Text": "SOUND EFFECTS",
                     "Font": "GothamBold",
                     "TextColor3": [
-                      0.09019607843137255,
-                      0.16470588235294117,
-                      0.23137254901960785
+                      1.0,
+                      0.9490196078431372,
+                      0.8392156862745098
+                    ],
+                    "TextSize": 16,
+                    "TextWrapped": true,
+                    "ZIndex": 14,
+                    "BackgroundColor3": [
+                      0.2,
+                      0.30196078431372547,
+                      0.3568627450980392
+                    ],
+                    "AutoButtonColor": true
+                  },
+                  "Children": [
+                    {
+                      "Name": "Corner",
+                      "ClassName": "UICorner",
+                      "Properties": {
+                        "CornerRadius": {
+                          "UDim": [
+                            0,
+                            12
+                          ]
+                        }
+                      },
+                      "Children": []
+                    }
+                  ]
+                },
+                {
+                  "Name": "Mute",
+                  "ClassName": "TextButton",
+                  "Properties": {
+                    "Size": {
+                      "UDim2": [
+                        [
+                          1,
+                          0
+                        ],
+                        [
+                          0,
+                          46
+                        ]
+                      ]
+                    },
+                    "Position": {
+                      "UDim2": [
+                        [
+                          0,
+                          0
+                        ],
+                        [
+                          0,
+                          194
+                        ]
+                      ]
+                    },
+                    "BackgroundTransparency": 0,
+                    "BorderSizePixel": 0,
+                    "Text": "MUTE ALL AUDIO",
+                    "Font": "GothamBold",
+                    "TextColor3": [
+                      1.0,
+                      0.9490196078431372,
+                      0.8392156862745098
                     ],
                     "TextSize": 16,
                     "TextWrapped": true,
@@ -5672,7 +5843,7 @@
                         ],
                         [
                           0,
-                          194
+                          248
                         ]
                       ]
                     },
@@ -5681,9 +5852,9 @@
                     "Text": "VIBRATION",
                     "Font": "GothamBold",
                     "TextColor3": [
-                      0.09019607843137255,
-                      0.16470588235294117,
-                      0.23137254901960785
+                      1.0,
+                      0.9490196078431372,
+                      0.8392156862745098
                     ],
                     "TextSize": 16,
                     "TextWrapped": true,
@@ -5735,7 +5906,7 @@
                         ],
                         [
                           0,
-                          248
+                          302
                         ]
                       ]
                     },
@@ -5744,9 +5915,9 @@
                     "Text": "REDUCED EFFECTS",
                     "Font": "GothamBold",
                     "TextColor3": [
-                      0.09019607843137255,
-                      0.16470588235294117,
-                      0.23137254901960785
+                      1.0,
+                      0.9490196078431372,
+                      0.8392156862745098
                     ],
                     "TextSize": 16,
                     "TextWrapped": true,
@@ -5798,7 +5969,7 @@
                         ],
                         [
                           0,
-                          302
+                          356
                         ]
                       ]
                     },
@@ -5807,9 +5978,9 @@
                     "Text": "CONTROLS SIDE",
                     "Font": "GothamBold",
                     "TextColor3": [
-                      0.09019607843137255,
-                      0.16470588235294117,
-                      0.23137254901960785
+                      1.0,
+                      0.9490196078431372,
+                      0.8392156862745098
                     ],
                     "TextSize": 16,
                     "TextWrapped": true,
@@ -5861,7 +6032,7 @@
                         ],
                         [
                           0,
-                          356
+                          410
                         ]
                       ]
                     },
@@ -5870,9 +6041,9 @@
                     "Text": "CONTROLS OPACITY",
                     "Font": "GothamBold",
                     "TextColor3": [
-                      0.09019607843137255,
-                      0.16470588235294117,
-                      0.23137254901960785
+                      1.0,
+                      0.9490196078431372,
+                      0.8392156862745098
                     ],
                     "TextSize": 16,
                     "TextWrapped": true,
@@ -5924,7 +6095,7 @@
                         ],
                         [
                           0,
-                          410
+                          464
                         ]
                       ]
                     },
@@ -5933,9 +6104,9 @@
                     "Text": "LARGE TEXT",
                     "Font": "GothamBold",
                     "TextColor3": [
-                      0.09019607843137255,
-                      0.16470588235294117,
-                      0.23137254901960785
+                      1.0,
+                      0.9490196078431372,
+                      0.8392156862745098
                     ],
                     "TextSize": 16,
                     "TextWrapped": true,
@@ -5987,7 +6158,7 @@
                         ],
                         [
                           0,
-                          464
+                          518
                         ]
                       ]
                     },
@@ -5996,9 +6167,9 @@
                     "Text": "LANGUAGE",
                     "Font": "GothamBold",
                     "TextColor3": [
-                      0.09019607843137255,
-                      0.16470588235294117,
-                      0.23137254901960785
+                      1.0,
+                      0.9490196078431372,
+                      0.8392156862745098
                     ],
                     "TextSize": 16,
                     "TextWrapped": true,
@@ -6050,7 +6221,7 @@
                         ],
                         [
                           0,
-                          526
+                          580
                         ]
                       ]
                     },

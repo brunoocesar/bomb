@@ -1,0 +1,1 @@
+assert(game.PlaceId==140221183064352); local s=_G.BombLobbyQA.state; print("BOMB_LOBBY_LIVE",s.location,s.stage,s.energyDone,s.deaths,_G.BombMapRoute.advance,_G.BombMapRoute.stop,_G.BombLobbyMuteQA.status,os.clock()-(_G.BombLobbyMuteQA.heartbeat or 0))

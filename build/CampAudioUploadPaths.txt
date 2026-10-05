@@ -1,0 +1,1 @@
+"C:\Users\Samsung\OneDrive\Documentos\bomb\art\audio\camp\camp-theme-v1.wav" "C:\Users\Samsung\OneDrive\Documentos\bomb\art\audio\camp\menu-click-v1.wav" "C:\Users\Samsung\OneDrive\Documentos\bomb\art\audio\camp\reward-v1.wav"

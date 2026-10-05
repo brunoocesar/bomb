@@ -1,0 +1,30 @@
+assert(game.PlaceId==140221183064352)
+local ui=game.Players.LocalPlayer.PlayerGui.LobbyUI
+_G.BombLobbyInteractionQA={}
+local qa=_G.BombLobbyInteractionQA
+ui.Stage.RotateRight.Activated:Connect(function()
+ task.wait(.1)
+ qa.turned=ui.Stage.Hero.ImageRectOffset
+ print("BOMB_LOBBY_TURN_NATIVE",qa.turned)
+end)
+ui.Panel.Back.Activated:Connect(function()
+ task.wait(.1)
+ assert(ui:GetAttribute("OpenPanel")=="" and ui.Next.Visible)
+ if qa.turned then assert(ui.Stage.Hero.ImageRectOffset==qa.turned,"Back changed direction") end
+ print("BOMB_LOBBY_BACK_NATIVE",ui.Stage.Hero.ImageRectOffset)
+end)
+ui.Panel.Content.Character.Preview.Activated:Connect(function()
+ task.wait(.1)
+ print("BOMB_LOBBY_PREVIEW_NATIVE",ui.Stage.Hero.Image,ui.Stage.Frog.Visible)
+end)
+ui.Panel.Content.Settings.Mute.Activated:Connect(function()
+ task.wait(.4)
+ print("BOMB_LOBBY_MUTE_NATIVE",_G.BombLobbyQA.state.settings.muted,game.SoundService.CampFeedback.Music.Volume)
+end)
+ui.Panel.Content.Adventure.Trail_2.Activated:Connect(function()
+ task.wait(.2)
+ assert(not ui.Panel.Content.Adventure.Play.Active)
+ assert(_G.BombLobbyQA.state.location=="lobby")
+ print("BOMB_LOBBY_LOCKED_TRAIL_NATIVE",ui.Panel.Content.Adventure.TrailHint.Text)
+end)
+print("BOMB_LOBBY_INTERACTION_OBSERVERS_READY")

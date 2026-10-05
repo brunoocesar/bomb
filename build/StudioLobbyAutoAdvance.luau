@@ -1,10 +1,12 @@
-assert(game.PlaceId==140221183064352 and game:GetService("RunService"):IsStudio())
-assert(_G.BombMapRoute,"Route controller missing")
+assert(game.PlaceId==140221183064352)
+_G.BombLobbyAutoAdvance={status="running"}
 task.spawn(function()
- local deadline=os.clock()+300
- while os.clock()<deadline and not _G.BombMapRoute.stop do
+ while _G.BombLobbyQA.state.location~="lobby" do
+  if _G.BombMapRoute.stop then break end
   _G.BombMapRoute.advance=true
-  task.wait(.2)
+  _G.BombLobbyAutoAdvance.heartbeat=os.clock()
+  task.wait(.5)
  end
+ _G.BombLobbyAutoAdvance.status="finished"
+ print("BOMB_LOBBY_INSPECTION_RELEASE_FINISHED")
 end)
-print("BOMB_LOBBY_ROUTE_AUTO_ADVANCE")

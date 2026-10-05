@@ -25,7 +25,7 @@ for _, size in ipairs({
 }) do
 	local width, height = size[1], size[2]
 	local layout = Layout.compute(width, height)
-	for _, name in ipairs({ "header", "footer", "navigation", "stage", "card", "panel" }) do
+	for _, name in ipairs({ "header", "footer", "navigation", "stage", "card", "panel", "reward" }) do
 		local rect = layout[name]
 		expect(rect[3] > 0 and rect[4] > 0, "positive dimensions: " .. name)
 		expect(
@@ -33,9 +33,12 @@ for _, size in ipairs({
 			"inside safe area: " .. name
 		)
 	end
-	for _, name in ipairs({ "header", "footer", "navigation", "card", "panel" }) do
+	for _, name in ipairs({ "header", "footer", "navigation", "card", "panel", "reward" }) do
 		expect(not overlap(layout.stage, layout[name]), "hero unobscured by " .. name)
 	end
+	local card = layout.card
+	local continueButton = { card[1] + 12, card[2] + card[4] - 58, card[3] - 24, 46 }
+	expect(not overlap(layout.reward, continueButton), "reward keeps primary action accessible")
 	local columns = layout.navColumns
 	local nav = layout.navigation
 	expect((nav[3] - (columns - 1) * 6) / columns >= 44, "navigation touch width")

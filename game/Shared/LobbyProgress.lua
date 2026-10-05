@@ -3,6 +3,7 @@ local LobbyProgress = {}
 LobbyProgress.settings = {
 	music = 0.5,
 	sfx = 0.7,
+	muted = false,
 	vibration = true,
 	reducedEffects = false,
 	largeText = false,

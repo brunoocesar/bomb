@@ -1,62 +1,33 @@
-# Lobby — implementação em andamento
+# Lobby — estado atual
 
-Referência: GDD 2.0, 40 páginas, especialmente seções 18–20, 23, 26 e 31–34. A leitura integral foi realizada para esta tarefa. A decisão mais recente do usuário prevalece: cosméticos são packs completos de personagem, sapinho e versão montada.
+Implementação do acampamento do GDD 2.0 para o conteúdo existente de Bomb Your Way!: First Spark, Garden Gate e Rescue Courtyard. Interface do jogo em inglês; navegação por mouse, teclado e toque. O usuário substituiu cosméticos independentes por packs completos de personagem, sapinho e sprite montado.
 
-## Implementado nos arquivos
+## Entrega
 
-- LobbyUI autorada no repositório, com cenário, personagem central, navegação, próximo objetivo, perfil, configurações, missões e recompensas.
-- Layout independente da arena. Painéis laterais no computador e abaixo do personagem no formato vertical.
-- Fluxo servidor: primeiro acesso entra na aventura; perfil retornando entra no lobby; primeira vitória libera loja e retorno ao acampamento.
-- Botão Camp dos resultados abre a interface real. A pausa permite voltar ao acampamento quando liberado.
-- Simulação e entradas ficam congeladas no lobby. Continuar preserva a etapa; repetir o conteúdo concluído começa nova tentativa.
-- Pack base possui prévia das três formas. Sapinho bloqueado informa a origem do resgate.
-- Recompensas são validadas no servidor, sem duplicação no mesmo dia. Dados mutáveis do lobby são copiados antes de salvar assincronamente.
-- Configurações de lado/opacidade dos controles, texto maior e redução dos efeitos foram ligadas à interface.
-- Configurações acessíveis pela pausa antes da primeira vitória, com retorno à arena ainda pausada. Esse acesso não libera loja, recompensas ou seleção de fases.
-- Dados de perfil separados em `ProfileData.lua`; perfis v1 anteriores ao lobby migram como retornando, preservando campanha e coleção.
-- Música original de 24 segundos, clique de menu e recompensa gerados em `art/audio/camp`. `CampFeedback.lua` liga os volumes aos controles, toca sons de menu/recompensas e inclui feedback tátil opcional. Os IDs de áudio ainda estão vazios; não há prova de reprodução no Roblox.
-- Folhas discretas animadas no fundo, desativadas pela opção de efeitos reduzidos.
-- Arte nova: `art/lobby/camp-background-v1.png` e `art/lobby/menu-icons-v1.png`, produzida com imagegen integrada, no estilo cartoon existente.
+- Fundo próprio de clareira cartoon, tendas, caixas, caminho e ícones ilustrados. Personagem central animado, giro e preview montado/em pé; painéis preservam seu espaço.
+- Adventure com quatro nós conectados, medalhas, segredo, checkpoint e replay. Somente a fase existente está disponível; os demais nós explicam que a trilha não está aberta.
+- Character e Frogs com Original Pack completo, origem do resgate e silhueta bloqueada. Loja após a primeira vitória, preview honesto do pack incluído e suprimentos gratuitos; nenhum produto pago fictício.
+- Moedas, perfil e configurações no topo. Missões e próxima recompensa no rodapé. Trilha de sete coletas em dias não consecutivos, sem reinício por ausência; recompensas recomendadas sujeitas a balanceamento.
+- Configurações de música, efeitos sonoros, silêncio geral, vibração, redução de efeitos, lado/opacidade dos controles e texto grande. Inglês disponível. Preferências sanitizadas e salvas com o perfil.
+- Primeira sessão na aventura; perfil retornando abre o lobby. Continue preserva a etapa/posição na sessão; replay conserva conquistas e inicia nova tentativa.
+- Música calma, clique e recompensa próprios enviados ao grupo autorizado. Salvamento autoritativo com bloqueio de sessão, migração, retry e recompensas idempotentes. Perfil mostra o estado real de salvamento.
 
-Missões de três caixas/5 moedas, conclusão sem mortes/10 moedas e suprimentos diários/3 moedas são propostas de balanceamento para teste. A trilha de sete dias não consecutivos e o emblema Campfire implementam a recomendação do PDF. Não representam preços aprovados. Não há produtos pagos configurados nem compras simuladas.
+## Assets
 
-## Evidência estática atual
+Fundo 91547200008356; atlas de ícones 131533049817842. Música 139323405075519; clique 94723519223362; recompensa 102483984204817. Proprietário confirmado: grupo 204998424. Fontes/prompts em art/lobby e art/audio/camp; manifestos registram IDs e fontes. Place ID autorizado: 140221183064352, Universe ID 10769176732. Rojo em 127.0.0.1:34873.
 
-- LobbyProgress: 32 verificações, incluindo idempotência, dias não consecutivos, validação de configurações e isolamento de snapshots para salvamento.
-- ProfileData: 19 verificações de migração, reparação de campos inválidos, reconstrução de checkpoint, configurações, emblema e recompensas após reentrada. Transporte DataStore não exercitado.
-- LobbyLayout: 280 verificações em 14 áreas seguras, incluindo limites, sobreposição com personagem e dimensões de toque.
-- Regressões: tutorial 69; entradas 2524; packs 225; movimento visual 330; feedback 185; UI da arena em 14 áreas seguras.
-- Selene: zero erros/avisos. Build Rojo: `build/Bomb-Your-Way-lobby.rbxlx`.
+## Evidência
 
-## Trabalho ainda necessário
+Desktop e emulador iPhone XR em portrait/landscape: imagens carregadas, sete painéis, contraste, áreas seguras, controles de giro/Back >=44px, arrasto com acesso aos controles inferiores. Interações reais confirmadas: giro, Back preservando direção, preview, Equipped, mute nos dois sentidos, nó bloqueado e coleta de suprimentos. Coleta 20→23 moedas, segundo clique conservando 23, som carregado e texto CLAIMED TODAY.
 
-1. Imagens enviadas e integradas; verificar sua apresentação em todos os painéis e proporções de tela.
-2. Validar todos os painéis e botões no Roblox, computador e simulador de celular, com imagens carregadas.
-3. Verificar primeira vitória → Camp, continuação, replay, coleta de recompensas e reentrada de perfil.
-4. Enviar os três WAVs próprios, preencher `CampAudio.lua`, validar volumes, reprodução e feedback tátil em dispositivo compatível.
-5. Completar estados adicionais do catálogo de fases e revisar a animação ambiental em execução.
-6. Registrar prompts completos e verificação dos assets, capturas, limitações de persistência e auditoria final do GDD.
+Fluxo por entradas normais: vitória→lobby, replay, configurações pausando tempo da arena e Continue preservando posição/etapa. Áudio integrado: música avançando, mute, volumes, pausa na aventura e retomada no camp. Trilha visual atual confirmada após recarga dos assets; não se usa o clone antigo como evidência.
 
-## Estado do Studio observado
+A última recarga confirmou BOMB_LOBBY_PROFILE_WRAPPER_VERIFIED e BOMB_LOBBY_PROFILE_INTEGRATION_VERIFIED: módulos reais de perfil carregados, sessão inicial na aventura, configurações pausando, mute aplicado, retorno pausado e retomada normal. Testes de repositório: 16 verificações de reconexão, bloqueio, expiração, falha/retry e rejeição de token antigo. ProfileData: 20; LobbyProgress: 32; LobbyLayout: 336 em 14 áreas seguras. Selene dos módulos alterados sem erros/avisos; build Rojo concluído.
 
-Lugar confirmado `140221183064352`. A consulta retornou `RunService:IsRunning() == false` e `IsClient() == true`, com avaliação pelo debugger. O botão Stop mostra “Finalização”; Stop e Shift+F5 não removeram a sessão. A fila de importação não ficou visível depois de selecionar os PNGs, e não há prova de upload. Foi solicitado ao usuário reabrir o lugar e reconectar ao Rojo, enquanto prosseguem ajustes independentes. Não afirmar validação visual deste lobby nem publicação do lugar.
+## Limites e conteúdo posterior
 
-Uma consulta posterior também retornou `IsEdit() == true`, `RunState == Stopped`, `IsServer() == false` e um jogador presente. Os indicadores não bastam para confirmar a causa da falha do importador. Não tratar a hipótese de finalização travada como diagnóstico confirmado. Uma alternativa com `StudioService:PromptImportFilesAsync` carregou o seletor, mas `CreateAssetAsync` retornou explicitamente “not available yet” nesta instalação. Nenhum novo asset foi criado por essa alternativa. O script de diagnóstico/upload está em `tools/Studio-ImportLobbyArt.luau`, limitado aos dois PNGs e ao grupo autorizado, sem publicar lugar.
+Studio usa perfil local e não grava no DataStore de produção. Os testes de reconexão usam armazenamento injetado; permissões/disponibilidade/transporte reais entre servidores não foram testados. Android físico, multitouch, vibração física e desempenho em celular fraco também não foram testados. Esses limites não devem ser apresentados como testes executados.
 
-Referências consultadas: [HapticEffect](https://create.roblox.com/docs/reference/engine/classes/HapticEffect), [StudioService](https://create.roblox.com/docs/reference/engine/classes/StudioService) e [AssetService](https://create.roblox.com/docs/reference/engine/classes/AssetService). A documentação de uma API não prova que ela está liberada nesta instalação; o resultado observado acima prevalece.
+O projeto ainda não contém fases seguintes, outros mundos, packs adicionais ou produtos pagos. NEXT PHASE/NEW WORLD dependem desse catálogo; o lobby atual apresenta seleção/replay ao fim do conteúdo disponível. Não foram criados destinos, preços ou compras fictícios, nem implementada a campanha completa sem solicitação.
 
-O servidor Rojo respondeu em `127.0.0.1:34873` com projeto `Bomb Your Way!`, versão 7.7.0 e Place ID autorizado. A resposta prova que o servidor está ativo, mas não prova que o Studio aplicou todas as mudanças na sessão atual.
-
-## Recuperação e integração verificadas — 03/10/2026
-
-A sessão foi reaberta após salvar `build/Studio-before-lobby-recovery.rbxl`. O importador voltou a apresentar a fila e concluiu os dois PNGs no grupo Capyboom Studios. As observações da seção anterior são históricas.
-
-- Fundo: `91547200008356`, nome `BombYourWay-CampBackground-v1`, resolução entregue 1023×576.
-- Ícones: `131533049817842`, nome `BombYourWay-CampIcons-v1`, resolução entregue 1024×768.
-- `GetProductInfoAsync` confirmou proprietário 204998424 para ambos; `CreateEditableImageAsync` confirmou as dimensões.
-- `LobbyImages.lua` contém os IDs e as dimensões reais. A consulta da fonte de `StarterPlayerScripts.Client.Tutorial` confirmou a integração de `CampFeedback` no Studio.
-- O primeiro Play revelou colisão entre o filho `Profile.Name` e a propriedade `Instance.Name`. O controlador agora usa `FindFirstChild("Name")`. Essa falha passou despercebida na verificação estática e no build; exige repetição em execução.
-- Os tamanhos de texto responsivos agora atualizam `BaseTextSize`, evitando que a preferência de texto grande restaure tamanhos de uma orientação anterior.
-- Selene dos arquivos alterados: zero erros/avisos. Build Rojo concluído. Nenhuma versão do lugar publicada.
-
-O percurso de teste por entradas normais está em execução para validar vitória → acampamento. Ainda não há conclusão comprovada da validação completa dos menus ou do áudio.
+Nenhuma versão do lugar foi publicada. Repositório e assets autorais são a fonte de verdade. A auditoria por requisito está em AUDITORIA_LOBBY.md; o registro cronológico das tentativas e correções foi preservado em HISTORICO_VALIDACAO_LOBBY.md.

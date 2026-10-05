@@ -42,6 +42,7 @@ legacy.completed = true
 legacy.finished = false
 legacy.supplies.count = 6
 Progress.setting(legacy, "music", 0.25)
+Progress.setting(legacy, "muted", true)
 Progress.setting(legacy, "leftHanded", true)
 Progress.setting(legacy, "reducedEffects", true)
 expect(Progress.claim(legacy, "supply", now), "seventh resupply collected")
@@ -56,6 +57,7 @@ expect(
 	"settings survive serialization boundary"
 )
 expect(reopened.supplies.count == 7 and reopened.campBadge, "earned badge survives")
+expect(reopened.settings.muted and reopened.settings.music == 0.25, "mute persists without replacing chosen volume")
 expect(not Progress.claim(reopened, "supply", now), "reconnect does not duplicate reward")
 expect(reopened.coins == 15, "reconnect preserves exact balance")
 local later = Data.sanitize(reopened, now + 3 * 86400)

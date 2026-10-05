@@ -1,0 +1,1 @@
+assert(game.PlaceId==140221183064352); print("BOMB_LOBBY_EDIT_TRAIL",game.ReplicatedStorage.Assets.LobbyUI.Panel.Content.Adventure:FindFirstChild("TrailPath")~=nil,game.StarterPlayer.StarterPlayerScripts.Client.LobbyController.Source:find("Adventure.TrailPath",1,true)~=nil)

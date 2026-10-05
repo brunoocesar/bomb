@@ -18,7 +18,7 @@ Controller.__index = Controller
 local directions = { "down", "left", "up", "right" }
 local navNames = { "Adventure", "Character", "Frogs", "Shop" }
 local canvasHeights =
-	{ Adventure = 412, Character = 428, Frogs = 448, Shop = 484, Missions = 588, Profile = 472, Settings = 624 }
+	{ Adventure = 412, Character = 428, Frogs = 448, Shop = 484, Missions = 588, Profile = 504, Settings = 678 }
 
 local function place(view, rect)
 	view.Position = UDim2.fromOffset(rect[1], rect[2])
@@ -122,6 +122,7 @@ function Controller.new(player, assets, remotes)
 	end)
 	for index = 1, 4 do
 		self:connect(content.Adventure["Trail_" .. index].Activated, function()
+			self.lockedShopHint = false
 			self.selectedTrail = index
 			self:refresh()
 		end)
@@ -169,6 +170,7 @@ function Controller.new(player, assets, remotes)
 	local settingButtons = {
 		Music = "music",
 		Sfx = "sfx",
+		Mute = "muted",
 		Vibration = "vibration",
 		Effects = "reducedEffects",
 		Handed = "leftHanded",
@@ -225,6 +227,7 @@ function Controller:turn(offset)
 end
 
 function Controller:open(name)
+	self.lockedShopHint = false
 	if self.state and self.state.location == "settings" then
 		if name == nil then
 			self.remotes.Input:FireServer("closeSettings")
@@ -234,7 +237,8 @@ function Controller:open(name)
 	end
 	if name == "Shop" and not self.state.completed then
 		self:open("Adventure")
-		self.ui.Panel.Content.Adventure.TrailHint.Text = "Win First Spark to open the camp store."
+		self.lockedShopHint = true
+		self:refresh()
 		return
 	end
 	self.panel = name
@@ -266,18 +270,24 @@ function Controller:layout()
 	place(ui.Next, geometry.card)
 	place(ui.Panel, geometry.panel)
 	place(ui.Footer, geometry.footer)
+	for _, button in ipairs({ ui.Footer.Daily, ui.Footer.Reward }) do
+		local compact = width < 600
+		button.Icon.Size = UDim2.fromOffset(compact and 28 or 40, compact and 28 or 40)
+		button.Caption.Position = UDim2.fromOffset(compact and 44 or 56, 4)
+		button.Caption.Size = UDim2.new(1, compact and -50 or -64, 1, -8)
+		button.Caption:SetAttribute("BaseTextSize", compact and 13 or 14)
+	end
 	-- Keep new-item feedback beside the hero, or in the footer on compact screens.
 	local toast = ui.RewardToast
 	toast.AnchorPoint = Vector2.zero
+	place(toast, geometry.reward)
 	if geometry.card[4] > 220 then
-		place(toast, { geometry.card[1], geometry.card[2], geometry.card[3], 132 })
 		place(toast.Title, { 8, 4, geometry.card[3] - 16, 28 })
 		place(toast.Detail, { 8, 34, geometry.card[3] - 16, 44 })
 		place(toast.Equip, { 8, 84, geometry.card[3] * 0.68 - 12, 44 })
 		place(toast.Close, { geometry.card[3] * 0.68, 84, geometry.card[3] * 0.32 - 8, 44 })
 	else
 		local fw = geometry.footer[3]
-		place(toast, geometry.footer)
 		place(toast.Title, { 8, 2, fw * 0.5 - 16, 26 })
 		place(toast.Detail, { 8, 28, fw * 0.5 - 16, geometry.footer[4] - 30 })
 		place(toast.Equip, { fw * 0.5, 4, fw * 0.3 - 6, math.max(44, geometry.footer[4] - 8) })
@@ -293,6 +303,7 @@ function Controller:layout()
 	ui.Header.Title.TextSize = width < 600 and 15 or 23
 	local columns = geometry.navColumns
 	local buttonWidth = (geometry.navigation[3] - (columns - 1) * 6) / columns
+	self.compactNavigation = buttonWidth < 90
 	local buttonHeight = (geometry.navigation[4] - (4 / columns - 1) * 6) / (4 / columns)
 	for index, name in ipairs(navNames) do
 		local button = ui.Navigation[name]
@@ -308,13 +319,13 @@ function Controller:layout()
 			button.Caption,
 			narrow and { 0, buttonHeight - 20, buttonWidth, 18 } or { 50, 0, buttonWidth - 56, buttonHeight }
 		)
-		button.Caption:SetAttribute("BaseTextSize", narrow and 10 or 13)
-		button.Caption.TextSize = narrow and 10 or 13
+		button.Caption:SetAttribute("BaseTextSize", 13)
+		button.Caption.TextSize = 13
 		button.Caption.TextXAlignment = narrow and Enum.TextXAlignment.Center or Enum.TextXAlignment.Left
 	end
 	local sw, sh = geometry.stage[3], geometry.stage[4]
-	place(ui.Stage.RotateLeft, { 0, sh - 46, 40, 40 })
-	place(ui.Stage.RotateRight, { sw - 40, sh - 46, 40, 40 })
+	place(ui.Stage.RotateLeft, { 0, sh - 46, 44, 44 })
+	place(ui.Stage.RotateRight, { sw - 44, sh - 46, 44, 44 })
 	place(ui.Stage.PackName, { 44, sh - 48, sw - 88, 24 })
 	place(ui.Stage.InspectHint, { 0, sh - 22, sw, 20 })
 	ui.Stage.PackName:SetAttribute("BaseTextSize", sw < 220 and 12 or 16)
@@ -325,6 +336,7 @@ function Controller:layout()
 	for index = 1, 4 do
 		place(ui.Panel.Content.Adventure["Trail_" .. index], { (index - 1) * (44 + nodeGap), 116, 44, 44 })
 	end
+	place(ui.Panel.Content.Adventure.TrailPath, { 22, 134, 3 * (44 + nodeGap), 8 })
 	local cardHeight = geometry.card[4]
 	local artHeight = cardHeight > 220 and 74 or cardHeight > 160 and 30 or 0
 	ui.Next.Art.Visible = artHeight > 0
@@ -374,9 +386,15 @@ function Controller:refresh()
 	ui.Next.Detail.Text = self.primary.detail
 	ui.Header.Coins.Text = tostring(state.coins) .. "  "
 	ui.Stage.PackName.Text = "ORIGINAL PACK"
-	ui.Navigation.Shop.Caption.Text = state.completed and "SHOP" or "SHOP LOCKED"
-	ui.Footer.Daily.Caption.Text = "DAILY CHALLENGE\nClean run • 10 coins"
-	ui.Footer.Reward.Caption.Text = string.format("NEXT REWARD\nCampfire badge • %d/7 visits", state.supplies.count)
+	ui.Navigation.Adventure.Caption.Text = self.compactNavigation and "MAP" or "ADVENTURE"
+	ui.Navigation.Character.Caption.Text = self.compactNavigation and "PACK" or "CHARACTER"
+	ui.Navigation.Shop.Caption.Text = state.completed and "SHOP" or self.compactNavigation and "LOCKED" or "SHOP LOCKED"
+	local compact = ui.AbsoluteSize.X < 600
+	ui.Footer.Daily.Caption.Text = compact and "DAILY\nClean run\n10 coins" or "DAILY CHALLENGE\nClean run • 10 coins"
+	ui.Footer.Reward.Caption.Text = string.format(
+		compact and "CAMPFIRE\n%d/7 days" or "NEXT REWARD\nCampfire badge • %d/7 visits",
+		state.supplies.count
+	)
 	ui.RewardToast.Visible = state.location == "lobby"
 		and state.frogUnlocked
 		and not state.rewardSeen
@@ -393,8 +411,13 @@ function Controller:refresh()
 		or "CONTINUE FIRST SPARK"
 	content.Adventure.Play.Active = self.selectedTrail == 1
 	content.Adventure.Play.AutoButtonColor = self.selectedTrail == 1
-	content.Adventure.TrailHint.Text = self.selectedTrail == 1
-			and string.format("Stage %d/%d • %s", state.stage, #Tutorial.stages, Tutorial.stages[state.stage].name)
+	content.Adventure.TrailHint.Text = self.lockedShopHint and "Win First Spark to open the camp store."
+		or self.selectedTrail == 1 and string.format(
+			"Stage %d/%d • %s",
+			state.stage,
+			#Tutorial.stages,
+			Tutorial.stages[state.stage].name
+		)
 		or "This trail is not open yet. Explore First Spark and its secrets."
 	content.Character.Equip.Text = state.skinPack == "base" and "EQUIPPED" or "EQUIP COMPLETE PACK"
 	content.Frogs.Origin.Text = state.frogUnlocked
@@ -410,6 +433,7 @@ function Controller:refresh()
 			state.frogUnlocked and 1 or 0,
 			Tutorial.stages[state.stage].name
 		)
+	content.Profile.Save.Text = state.saveStatus or ""
 	content.Profile.EquipBadge.Text = state.supplies.count < 7 and "CLAIM SUPPLIES ON 7 DAYS"
 		or state.campBadge and "BADGE EQUIPPED"
 		or "EQUIP CAMPFIRE BADGE"
@@ -436,6 +460,7 @@ function Controller:refresh()
 	local settings = state.settings
 	content.Settings.Music.Text = string.format("MUSIC: %d%%", math.round(settings.music * 100))
 	content.Settings.Sfx.Text = string.format("SOUND EFFECTS: %d%%", math.round(settings.sfx * 100))
+	content.Settings.Mute.Text = "MUTE ALL AUDIO: " .. (settings.muted and "ON" or "OFF")
 	content.Settings.Vibration.Text = "VIBRATION: " .. (settings.vibration and "ON" or "OFF")
 	content.Settings.Effects.Text = "REDUCED EFFECTS: " .. (settings.reducedEffects and "ON" or "OFF")
 	content.Settings.Handed.Text = "CONTROLS: " .. (settings.leftHanded and "LEFT-HANDED" or "RIGHT-HANDED")
