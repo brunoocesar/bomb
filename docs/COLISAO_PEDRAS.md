@@ -1,0 +1,11 @@
+# Colisão das pedras fixas — 05/10/2026
+
+Atualização posterior: o movimento por trajetórias e clearPath descrito abaixo foi substituído por integração contínua em PlayerMovement. O contato visual das pedras e a segurança da ocupação foram preservados. Veja [MOVIMENTO_CONTINUO.md](MOVIMENTO_CONTINUO.md) para o código e a validação atuais. O restante desta página registra a primeira correção e seus resultados na época.
+
+Problema confirmado no código: clearPath usava floor/ceil para bloquear duas linhas inteiras da grade em movimentos fora do centro. Além disso, uma pedra adjacente impedia qualquer aproximação além do centro da célula livre. A arte das pedras já usa o recorte do atlas e ocupa a célula; não foi modificada nem deformada.
+
+ObstacleCollision define o contato no chão (0,44 célula de largura e 0,16 de profundidade). Seu deslocamento vertical vem do mesmo ponto de apoio de SpriteLayout. Simulation verifica o retângulo percorrido por esse contato contra as pedras internas. Permite aproximação até o contato, limitada à célula livre para manter colocação de bombas e dano por células sincronizados. Abaixo da pedra essa restrição da grade pode parar o movimento antes do contato físico; não se afirma colisão por contorno de pixels. Bordas externas, caixas, bombas e portão mantêm os bloqueios existentes. A explosão continua parando na célula inteira da pedra.
+
+ArenaDebug mostra o contato em verde, o ponto de apoio e a célula usada pelos perigos. Continua exclusivo do Studio e desativado por padrão.
+
+Validação: 821 verificações específicas de aproximação pelos quatro lados, saída, quina, ocupação, bombas, caixas e explosões; regressões de entrada (2524), tutorial (69), animação (330) e rota completa sem mortes aprovadas. Selene sem erros/avisos e build Rojo concluído. O módulo sincronizado passou as 821 verificações também no Roblox. Entradas normais levaram o jogador a x=4,28/y=4 junto à pedra 5:4, tanto no desktop quanto no iPhone XR emulado em landscape. Capturas em build/Studio-stone-contact-desktop.png e build/Studio-stone-contact-mobile.png. Overlay temporário desativado ao terminar. Não houve teste em celular físico nem medição de FPS neste ensaio; nenhuma versão do lugar foi publicada.

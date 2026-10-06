@@ -8,17 +8,20 @@ local Art = require(Shared.LobbyArt)
 local Images = require(Shared.LobbyImages)
 local Catalog = require(Shared.SpriteCatalog)
 local SpriteImages = require(Shared.SpriteImages)
-local Packs = require(Shared.SkinPacks)
 local Tutorial = require(Shared.Tutorial)
 local MapImages = require(Shared.MapImages)
 local Preferences = require(script.Parent.Preferences)
+local SpriteAnimation = require(Shared.SpriteAnimation)
+local SpriteLayout = require(Shared.SpriteLayout)
+local SkinPacks = require(Shared.SkinPacks)
+local PhaseRewards = require(Shared.PhaseRewards)
 
 local Controller = {}
 Controller.__index = Controller
 local directions = { "down", "left", "up", "right" }
 local navNames = { "Adventure", "Character", "Frogs", "Shop" }
 local canvasHeights =
-	{ Adventure = 412, Character = 428, Frogs = 448, Shop = 484, Missions = 588, Profile = 504, Settings = 678 }
+	{ Adventure = 412, Character = 590, Frogs = 448, Shop = 484, Missions = 588, Profile = 504, Settings = 678 }
 
 local function place(view, rect)
 	view.Position = UDim2.fromOffset(rect[1], rect[2])
@@ -34,12 +37,9 @@ local function icon(view, number)
 	view.ImageRectSize = Vector2.new(math.round((rect[1] + rect[3]) * sx) - x, math.round((rect[2] + rect[4]) * sy) - y)
 end
 
-local function sprite(view, pack, kind, animation, direction, time)
-	local sequence = Catalog.animations[kind][animation][direction]
-	local atlasId = Packs.atlas(pack, kind, sequence[1])
+local function sprite(selector, view, pack, kind, animation, direction, time)
+	local frame, atlasId = selector:select(view, pack, kind, animation, direction, time)
 	local atlas = Catalog.atlases[atlasId]
-	local column = sequence[3] + math.floor(time * 5) % (sequence[4] - sequence[3] + 1)
-	local frame = atlas.frames[sequence[2] * atlas.columns + column + 1]
 	local size = SpriteImages.imageSizes[atlasId]
 	local sx, sy = size[1] / atlas.imageSize[1], size[2] / atlas.imageSize[2]
 	local rect = frame.rect
@@ -47,7 +47,7 @@ local function sprite(view, pack, kind, animation, direction, time)
 	view.Image = SpriteImages[atlasId]
 	view.ImageRectOffset = Vector2.new(x, y)
 	view.ImageRectSize = Vector2.new(math.round((rect[1] + rect[3]) * sx) - x, math.round((rect[2] + rect[4]) * sy) - y)
-	return frame
+	return frame, atlasId
 end
 
 function Controller.new(player, assets, remotes)
@@ -61,6 +61,7 @@ function Controller.new(player, assets, remotes)
 		time = 0,
 		selectedTrail = 1,
 		connections = {},
+		animation = SpriteAnimation.new(),
 	}, Controller)
 	self.ui = assets.LobbyUI:Clone()
 	self.ui.Parent = player:WaitForChild("PlayerGui")
@@ -135,14 +136,23 @@ function Controller.new(player, assets, remotes)
 		self.mounted = not self.mounted
 	end)
 	self:connect(content.Character.Equip.Activated, function()
-		remotes.Input:FireServer("equipSkinPack", "base")
+		local id = self.previewPack or self.state.skinPack
+		if self.state.ownedSkinPacks and self.state.ownedSkinPacks[id] then
+			remotes.Input:FireServer("equipSkinPack", id)
+		end
 	end)
+	for _, id in ipairs({ "base", "cream", "scarf" }) do
+		self:connect(content.Character["Select_" .. id].Activated, function()
+			self.previewPack = id
+			self:refresh()
+		end)
+	end
 	self:connect(content.Frogs.Preview.Activated, function()
 		self.mounted = self.state.frogUnlocked
 	end)
 	self:connect(content.Frogs.Equip.Activated, function()
 		if self.state.frogUnlocked then
-			remotes.Input:FireServer("equipSkinPack", "base")
+			remotes.Input:FireServer("equipSkinPack", self.state.skinPack)
 		end
 	end)
 	self:connect(content.Shop.Preview.Activated, function()
@@ -385,7 +395,9 @@ function Controller:refresh()
 	ui.Next.Continue.Text = self.primary.text
 	ui.Next.Detail.Text = self.primary.detail
 	ui.Header.Coins.Text = tostring(state.coins) .. "  "
-	ui.Stage.PackName.Text = "ORIGINAL PACK"
+	local selectedPack = self.previewPack or state.skinPack
+	local packName = SkinPacks.names[selectedPack] or SkinPacks.names.base
+	ui.Stage.PackName.Text = string.upper(packName)
 	ui.Navigation.Adventure.Caption.Text = self.compactNavigation and "MAP" or "ADVENTURE"
 	ui.Navigation.Character.Caption.Text = self.compactNavigation and "PACK" or "CHARACTER"
 	ui.Navigation.Shop.Caption.Text = state.completed and "SHOP" or self.compactNavigation and "LOCKED" or "SHOP LOCKED"
@@ -406,23 +418,39 @@ function Controller:refresh()
 		state.noDeathsMedal and "earned" or "pending"
 	)
 	content.Adventure.Medals.Text = medals
-	content.Adventure.Play.Text = self.selectedTrail ~= 1 and "TRAIL CLOSED"
-		or state.finished and "REPLAY FIRST SPARK"
-		or "CONTINUE FIRST SPARK"
+	content.Adventure.Play.Text = self.selectedTrail ~= 1 and "PHASE NOT AVAILABLE"
+		or state.finished and "REPLAY AWAKENING FIELDS"
+		or "CONTINUE AWAKENING FIELDS"
 	content.Adventure.Play.Active = self.selectedTrail == 1
 	content.Adventure.Play.AutoButtonColor = self.selectedTrail == 1
-	content.Adventure.TrailHint.Text = self.lockedShopHint and "Win First Spark to open the camp store."
+	local keys = PhaseRewards.worldKeyCount(state, "world1")
+	content.Adventure.TrailHint.Text = self.lockedShopHint and "Win Awakening Fields to open the camp store."
 		or self.selectedTrail == 1 and string.format(
-			"Stage %d/%d • %s",
+			"Sun Keys %d/4 • Stage %d/%d\n%s",
+			keys,
 			state.stage,
 			#Tutorial.stages,
 			Tutorial.stages[state.stage].name
 		)
-		or "This trail is not open yet. Explore First Spark and its secrets."
-	content.Character.Equip.Text = state.skinPack == "base" and "EQUIPPED" or "EQUIP COMPLETE PACK"
-	content.Frogs.Origin.Text = state.frogUnlocked
-			and "Rescued in Rescue Courtyard.\nCosmetic companion from the Original Pack."
-		or "Locked • Rescue the frog in Rescue Courtyard."
+		or "This phase is not available yet. Explore Awakening Fields and its secrets."
+	local owned = state.ownedSkinPacks and state.ownedSkinPacks[selectedPack]
+	content.Character.PackName.Text = string.upper(packName)
+	content.Character.Includes.Text = owned and "Hero, Pond Frog and mounted appearance.\nOne complete matching pack."
+		or selectedPack == "cream" and "Find the secret in Entrance Flowerbeds."
+		or "Find the secret in Sun Courtyard."
+	content.Character.Equip.Text = not owned and "FIND THE SECRET TO UNLOCK"
+		or state.skinPack == selectedPack and "EQUIPPED"
+		or "EQUIP COMPLETE PACK"
+	content.Character.Equip.Active = owned == true
+	content.Character.Equip.AutoButtonColor = owned == true
+	for _, id in ipairs({ "base", "cream", "scarf" }) do
+		local available = state.ownedSkinPacks and state.ownedSkinPacks[id]
+		content.Character["Select_" .. id].Text = (id == selectedPack and "> " or "")
+			.. string.upper(SkinPacks.names[id])
+			.. (available and "" or " - LOCKED")
+	end
+	content.Frogs.Origin.Text = state.frogUnlocked and "Rescued in Sun Courtyard.\nPond Frog from your complete pack."
+		or "Locked • Rescue the Pond Frog in Sun Courtyard."
 	content.Frogs.Equip.Text = state.frogUnlocked and "EQUIP MATCHING PACK" or "RESCUE TO UNLOCK"
 	content.Frogs.Portrait.ImageColor3 = state.frogUnlocked and Color3.new(1, 1, 1) or Color3.new(0.08, 0.12, 0.14)
 	content.Profile:FindFirstChild("Name").Text = self.player.DisplayName .. (state.campBadge and " • CAMPFIRE" or "")
@@ -441,7 +469,7 @@ function Controller:refresh()
 	local daily = state.daily
 	content.Missions.Energy.Progress.Text =
 		string.format("Break 3 energy crates • %d/3\nReward: 5 coins", daily.crates)
-	content.Missions.Clear.Progress.Text = "Complete First Spark without dying.\nReward: 10 coins"
+	content.Missions.Clear.Progress.Text = "Complete Awakening Fields without dying.\nReward: 10 coins"
 	content.Missions.Supply.Progress.Text = string.format(
 		"%d/7 visits • Any days count.\nReward: 3 coins per claim + Campfire badge.",
 		state.supplies.count
@@ -454,7 +482,7 @@ function Controller:refresh()
 		or "IN PROGRESS"
 	local supplyText = state.supplies.lastDay == daily.day and "CLAIMED TODAY"
 		or state.completed and "CLAIM 3 COINS"
-		or "WIN FIRST SPARK TO UNLOCK"
+		or "WIN AWAKENING FIELDS TO UNLOCK"
 	content.Missions.Supply.Claim.Text = supplyText
 	content.Shop.Supply.Claim.Text = supplyText
 	local settings = state.settings
@@ -476,6 +504,7 @@ function Controller:render()
 		return
 	end
 	local direction = directions[self.direction]
+	local selectedPack = self.previewPack or state.skinPack
 	ui.Ambient.Visible = not state.settings.reducedEffects
 	if ui.Ambient.Visible then
 		for index = 1, 6 do
@@ -490,15 +519,31 @@ function Controller:render()
 	end
 	local sw, sh = ui.Stage.AbsoluteSize.X, ui.Stage.AbsoluteSize.Y
 	local mounted = self.mounted and state.frogUnlocked
-	local frame = sprite(ui.Stage.Hero, state.skinPack, mounted and "mounted" or "hero", "idle", direction, self.time)
-	local scale = math.min(sh * 0.6 / frame.opaqueBounds[4], sw * 0.68 / frame.opaqueBounds[3])
+	local shadowWidth = math.min(sw * (mounted and 0.38 or 0.22), sh * 0.5)
+	ui.Stage.Shadow.Position = UDim2.fromOffset(sw * 0.5, sh * 0.72)
+	ui.Stage.Shadow.Size = UDim2.fromOffset(shadowWidth, shadowWidth * 0.23)
+	ui.Stage.FrogShadow.Visible = not mounted and state.frogUnlocked
+	ui.Stage.FrogShadow.Position = UDim2.fromOffset(sw * 0.82, sh * 0.72)
+	ui.Stage.FrogShadow.Size = UDim2.fromOffset(math.min(sw * 0.16, sh * 0.21), sh * 0.04)
+	local frame, atlasId = sprite(
+		self.animation,
+		ui.Stage.Hero,
+		selectedPack,
+		mounted and "mounted" or "hero",
+		"idle",
+		direction,
+		self.time
+	)
+	local pack = SkinPacks.resolve(selectedPack)
+	local scale = SpriteLayout.fit(mounted and atlasId or { pack.hero, pack.heroMovement }, sw * 0.68, sh * 0.6)
 	local w, h = frame.rect[3] * scale, frame.rect[4] * scale
 	local bounce = state.settings.reducedEffects and 0 or math.sin(self.time * 1.4) * 1.5
 	place(ui.Stage.Hero, { sw * 0.5 - frame.groundPivot[1] * w, sh * 0.72 - frame.groundPivot[2] * h + bounce, w, h })
 	ui.Stage.Frog.Visible = not mounted and state.frogUnlocked
 	if ui.Stage.Frog.Visible then
-		local frog = sprite(ui.Stage.Frog, state.skinPack, "frog", "idle", direction, self.time)
-		local fs = math.min(sh * 0.25 / frog.opaqueBounds[4], sw * 0.25 / frog.opaqueBounds[3])
+		local frog, frogAtlas =
+			sprite(self.animation, ui.Stage.Frog, selectedPack, "frog", "idle", direction, self.time)
+		local fs = SpriteLayout.fit(frogAtlas, sw * 0.25, sh * 0.25)
 		local fw, fh = frog.rect[3] * fs, frog.rect[4] * fs
 		place(ui.Stage.Frog, { sw * 0.82 - frog.groundPivot[1] * fw, sh * 0.72 - frog.groundPivot[2] * fh, fw, fh })
 	end
@@ -508,10 +553,10 @@ function Controller:render()
 		frog = content.Character.PackArt.Frog,
 		mounted = content.Character.PackArt.Mounted,
 	}) do
-		sprite(view, state.skinPack, kind, "idle", "down", 0)
+		sprite(self.animation, view, selectedPack, kind, "idle", "down", 0)
 	end
-	sprite(content.Frogs.Portrait, state.skinPack, "frog", "idle", "down", self.time)
-	sprite(content.Shop.Pack, state.skinPack, "mounted", "idle", "down", 0)
+	sprite(self.animation, content.Frogs.Portrait, state.skinPack, "frog", "idle", "down", self.time)
+	sprite(self.animation, content.Shop.Pack, state.skinPack, "mounted", "idle", "down", 0)
 	ui.Background.ImageColor3 = state.completed and Color3.new(1, 1, 1) or Color3.new(0.9, 0.94, 1)
 end
 

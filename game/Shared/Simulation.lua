@@ -3,6 +3,8 @@ Simulation.__index = Simulation
 local ActorMotion = require(if script then script.Parent.ActorMotion else "./ActorMotion")
 local BlastVisual = require(if script then script.Parent.BlastVisual else "./BlastVisual")
 local SkinPacks = require(if script then script.Parent.SkinPacks else "./SkinPacks")
+local PlayerMovement = require(if script then script.Parent.PlayerMovement else "./PlayerMovement")
+local PhaseRewards = require(if script then script.Parent.PhaseRewards else "./PhaseRewards")
 
 local directions = { up = { 0, -1 }, right = { 1, 0 }, down = { 0, 1 }, left = { -1, 0 } }
 local patrolOrder = { "left", "up", "right", "down" }
@@ -21,6 +23,7 @@ function Simulation.new(definition, saved)
 		or { stage = 1, coins = 0, secret = false, frogUnlocked = false, completed = false, deaths = 0 }
 	self.profile.stage = math.clamp(math.floor(self.profile.stage or 1), 1, #definition.stages)
 	self.profile.skinPack = SkinPacks.normalize(self.profile.skinPack)
+	PhaseRewards.initialize(self.profile)
 	self.profile.ownedSkinPacks = self.profile.ownedSkinPacks or { [SkinPacks.default] = true }
 	if not self.profile.ownedSkinPacks[self.profile.skinPack] then
 		self.profile.skinPack = SkinPacks.default
@@ -58,10 +61,14 @@ function Simulation:loadStage()
 	self.tiles, self.bombs, self.blasts, self.items, self.enemies = {}, {}, {}, {}, {}
 	self.blastConnections, self.blastCenters = {}, {}
 	self.totalEnergy, self.energy = 0, 0
+	self.chestUnlocked = false
+	self.chest = self.definition.stages[self.stage].chest
+	self.exitX, self.exitY = 0, 0
 	self.capacity, self.range, self.frog = self.entry.capacity, self.entry.range, self.entry.frog
 	self.direction, self.mode = "down", "playing"
 	self.motion = nil
-	self.nextMove, self.nextEnemy = self.time, self.time + self.definition.enemyInterval
+	self.input = { 0, 0 }
+	self.nextEnemy = self.time + self.definition.enemyInterval
 	self.invulnerableUntil = self.time + 1.5
 	self.revision = (self.revision or 0) + 1
 	for y, row in ipairs(self.definition.stages[self.stage].rows) do
@@ -73,7 +80,20 @@ function Simulation:loadStage()
 			elseif tile == "D" then
 				self.exitX, self.exitY = x, y
 			elseif tile == "M" then
-				self.enemies[#self.enemies + 1] = { x = x, y = y, direction = "left", alive = true }
+				local kind = "patrol"
+				for _, spawn in ipairs(self.definition.stages[self.stage].enemySpawns or {}) do
+					if spawn.x + 1 == x and spawn.y + 1 == y then
+						kind = spawn.kind
+					end
+				end
+				self.enemies[#self.enemies + 1] = {
+					x = x,
+					y = y,
+					direction = "left",
+					alive = true,
+					kind = kind,
+					nextMove = self.time + (kind == "beetle" and 0.65 or self.definition.enemyInterval),
+				}
 			elseif tile == "F" then
 				self.items[cell] = "frog"
 			elseif tile ~= "." then
@@ -84,7 +104,70 @@ function Simulation:loadStage()
 			end
 		end
 	end
+	if self.chest and self.profile.phaseChests[self.definition.phaseId] then
+		-- A previously unlocked, unclaimed final chest resumes without danger.
+		for cell, tile in pairs(self.tiles) do
+			if destructible[tile] then
+				self.tiles[cell] = nil
+			end
+		end
+		self.energy = self.totalEnergy
+		self:unlockChest()
+	end
 	self:emit("stage_started")
+end
+
+function Simulation:unlockChest()
+	if not self.chest or self.chestUnlocked then
+		return false
+	end
+	self.chestUnlocked = true
+	PhaseRewards.unlockChest(self.profile, self.definition.phaseId)
+	self.bombs, self.blasts, self.blastCenters, self.blastConnections = {}, {}, {}, {}
+	for _, enemy in ipairs(self.enemies) do
+		if enemy.alive then
+			enemy.alive = false
+			enemy.retired = true
+		end
+	end
+	self:emit("chest_unlocked")
+	return true
+end
+
+function Simulation:canInteractChest()
+	if not self.chestUnlocked or self.mode ~= "playing" then
+		return false
+	end
+	local chest = self.chest
+	local left, top = chest.x + 1, chest.y + 1
+	local right, bottom = left + chest.width - 1, top + chest.height - 1
+	local dx = math.max(left - self.x, 0, self.x - right)
+	local dy = math.max(top - self.y, 0, self.y - bottom)
+	-- Require an accessible face, not a diagonal corner across a wall.
+	return (dx <= 1.25 and dy <= 0.45) or (dy <= 1.25 and dx <= 0.45)
+end
+
+function Simulation:interactChest()
+	if not self:canInteractChest() then
+		return false
+	end
+	self.mode = "claiming"
+	self:steer("stop")
+	self:emit("chest_claim_requested")
+	return true
+end
+
+function Simulation:confirmChestClaim(candidate)
+	if self.mode ~= "claiming" or not candidate.phaseKeys[self.definition.phaseId] then
+		return false
+	end
+	for _, field in ipairs({ "phaseKeys", "coins", "completed", "finished", "noDeaths" }) do
+		self.profile[field] = candidate[field]
+	end
+	self.mode = "won"
+	self:emit("stage_completed")
+	self:emit("phase_completed")
+	return true
 end
 
 function Simulation:blocked(x, y, actor)
@@ -102,7 +185,7 @@ function Simulation:blocked(x, y, actor)
 end
 
 function Simulation:placeBomb()
-	if self.mode ~= "playing" then
+	if self.mode ~= "playing" or self.chestUnlocked then
 		return false
 	end
 	local x, y = ActorMotion.cell(self, self.time)
@@ -139,10 +222,17 @@ function Simulation:pickup()
 		self.frog = true
 		self.profile.frogUnlocked = true
 		self:emit("frog_rescued")
-	elseif item == "secret" and not self.profile.secret then
-		self.profile.secret = true
-		self.profile.coins = self.profile.coins + 10
-		self:emit("secret_found")
+	elseif item == "secret" then
+		local stage = self.definition.stages[self.stage]
+		if stage.secretId then
+			if PhaseRewards.secret(self.profile, stage) then
+				self:emit("secret_found")
+			end
+		elseif not self.profile.secret then
+			self.profile.secret = true
+			self.profile.coins = self.profile.coins + 10
+			self:emit("secret_found")
+		end
 	elseif item == "coins" and not self.profile.coinCache then
 		self.profile.coinCache = true
 		self.profile.coins = self.profile.coins + 5
@@ -178,7 +268,7 @@ function Simulation:explode(cell)
 	local function hit(x, y)
 		local target = key(x, y)
 		local tile = self.tiles[target]
-		if tile == "#" then
+		if tile == "#" or tile == "X" then
 			return false
 		end
 		self.blasts[target] = self.time + self.definition.blastDuration
@@ -192,7 +282,11 @@ function Simulation:explode(cell)
 				self.energy = self.energy + 1
 				self:emit("energy_box_destroyed")
 				if self.energy == self.totalEnergy then
-					self:emit("door_opened")
+					if self.chest then
+						self:unlockChest()
+					else
+						self:emit("door_opened")
+					end
 				end
 			else
 				if not self.firstBlock then
@@ -202,7 +296,7 @@ function Simulation:explode(cell)
 				local reward = { A = "capacity", L = "range", S = "secret", C = "coins" }
 				if
 					reward[tile]
-					and not (tile == "S" and self.profile.secret)
+					and not (tile == "S" and (self.definition.stages[self.stage].secretId and self.profile.phaseSecrets[self.definition.stages[self.stage].secretId] or not self.definition.stages[self.stage].secretId and self.profile.secret))
 					and not (tile == "C" and self.profile.coinCache)
 				then
 					self.items[target] = reward[tile]
@@ -232,12 +326,18 @@ function Simulation:explode(cell)
 			previous = target
 		end
 	end
+	if self.chestUnlocked then
+		self.bombs, self.blasts, self.blastCenters, self.blastConnections = {}, {}, {}, {}
+	end
 end
 
 function Simulation:checkHazards()
+	if self.chestUnlocked then
+		return
+	end
 	local playerX, playerY = ActorMotion.cell(self, self.time)
 	for _, bomb in pairs(self.bombs) do
-		if bomb.passThrough and (bomb.x ~= playerX or bomb.y ~= playerY) then
+		if bomb.passThrough and not PlayerMovement.overlapsBomb(self.x, self.y, bomb) then
 			bomb.passThrough = false
 		end
 	end
@@ -257,6 +357,9 @@ function Simulation:checkHazards()
 end
 
 function Simulation:advance()
+	if self.chest then
+		return self:interactChest()
+	end
 	self:emit("stage_completed")
 	if self.stage == #self.definition.stages then
 		self.mode = "won"
@@ -279,108 +382,48 @@ end
 function Simulation:checkpoint()
 	local result = table.clone(self.profile)
 	-- Snapshot mutable account data before the asynchronous save starts.
-	for _, name in ipairs({ "settings", "daily", "supplies", "ownedSkinPacks" }) do
+	for _, name in ipairs({
+		"settings",
+		"daily",
+		"supplies",
+		"ownedSkinPacks",
+		"phaseKeys",
+		"phaseSecrets",
+		"phaseChests",
+		"cosmetics",
+	}) do
 		if type(result[name]) == "table" then
 			result[name] = table.clone(result[name])
 		end
 	end
-	result.capacity, result.range, result.frog = self.entry.capacity, self.entry.range, self.entry.frog
-	result.version = 1
+	if self.chestUnlocked then
+		-- Once danger ends, resume the rescued mount and upgrades beside the
+		-- claimable chest instead of rolling them back to the stage entrance.
+		result.capacity, result.range, result.frog = self.capacity, self.range, self.frog
+	else
+		result.capacity, result.range, result.frog = self.entry.capacity, self.entry.range, self.entry.frog
+	end
+	result.version = 2
+	result.phaseId = self.definition.phaseId
 	return result
 end
 
 function Simulation:restartPhase()
 	self.stage, self.profile.stage, self.profile.deaths = 1, 1, 0
 	self.profile.finished = false
+	self.profile.phaseChests[self.definition.phaseId] = nil
 	self.entry = { capacity = 1, range = 2, frog = false }
 	self:loadStage()
 	self:emit("phase_started")
 end
 
--- Check both grid lanes under an off-center support. A turn may only start
--- between centers if the whole corridor is clear, including bombs and the gate.
-function Simulation:clearPath(px, py, points)
-	for _, point in ipairs(points) do
-		if px ~= point[1] and py ~= point[2] then
-			return false
-		end
-		for x = math.floor(math.min(px, point[1]) + 0.000001), math.ceil(math.max(px, point[1]) - 0.000001) do
-			for y = math.floor(math.min(py, point[2]) + 0.000001), math.ceil(math.max(py, point[2]) - 0.000001) do
-				if self:blocked(x, y, "player") then
-					return false
-				end
-			end
-		end
-		px, py = point[1], point[2]
-	end
-	return true
-end
-
-function Simulation:steer(direction)
-	local delta = directions[direction]
-	if not delta or self.mode ~= "playing" then
-		return false
-	end
-	local px, py = ActorMotion.position(self, self.time)
-	local moving = self.motion and self.time < self.motion.at + self.motion.duration
-	local points
-	if moving then
-		if (self.motion.input or self.direction) == direction then
-			self.direction = direction
-			return false
-		end
-		local fx, fy = ActorMotion.position(self, self.time + 0.00001)
-		local opposite = delta[1] * (fx - px) + delta[2] * (fy - py) < -0.00000001
-		local x = delta[1] < 0 and math.floor(px) or delta[1] > 0 and math.ceil(px) or px
-		local y = delta[2] < 0 and math.floor(py) or delta[2] > 0 and math.ceil(py) or py
-		if not opposite then
-			if delta[1] ~= 0 and x == px then
-				x += delta[1]
-			end
-			if delta[2] ~= 0 and y == py then
-				y += delta[2]
-			end
-		end
-		points = { { x, y }, { math.floor(x + 0.5), math.floor(y + 0.5) } }
-		if not self:clearPath(px, py, points) then
-			-- Beside a solid corner, approach the nearest reachable intersection
-			-- instead of finishing the old step in the wrong direction.
-			points = nil
-			local best = math.huge
-			for _, center in ipairs({
-				{ math.floor(px), math.floor(py) },
-				{ math.ceil(px), math.floor(py) },
-				{ math.floor(px), math.ceil(py) },
-				{ math.ceil(px), math.ceil(py) },
-			}) do
-				local candidate = { center, { center[1] + delta[1], center[2] + delta[2] } }
-				local distance = math.abs(center[1] - px) + math.abs(center[2] - py)
-				if distance < best and self:clearPath(px, py, candidate) then
-					points, best = candidate, distance
-				end
-			end
-		end
-	else
-		if self.time < self.nextMove and direction == self.direction then
-			return false
-		end
-		points = { { self.x + delta[1], self.y + delta[2] } }
-	end
-	if not points or not self:clearPath(px, py, points) then
-		self.direction = direction
-		if not moving then
-			self.nextMove = self.time + self.definition.moveInterval
-		end
-		return false
-	end
-	self.direction = direction
-	local duration = ActorMotion.beginPath(self, points, direction, self.time, self.definition.moveInterval)
-	self.nextMove = self.time + duration
-	if not self.firstMove then
-		self.firstMove = true
-		self:emit("first_move")
-	end
-	return true
+-- Input changes velocity only; it never commits a destination cell.
+function Simulation:steer(input)
+	local vx, vy = PlayerMovement.vector(input)
+	self.input = { vx, vy }
+	self.direction = PlayerMovement.facing(vx, vy, self.direction)
+	self.motion = nil
+	return vx ~= 0 or vy ~= 0
 end
 
 function Simulation:step(dt, direction)
@@ -413,19 +456,28 @@ function Simulation:step(dt, direction)
 	if self.mode ~= "playing" then
 		return
 	end
-	self:steer(direction)
+	if direction ~= nil then
+		self:steer(direction)
+	end
+	local oldX, oldY = self.x, self.y
+	self.x, self.y = PlayerMovement.advance(self, self.x, self.y, self.input, dt, self.definition.moveInterval)
+	if not self.firstMove and (self.x ~= oldX or self.y ~= oldY) then
+		self.firstMove = true
+		self:emit("first_move")
+	end
 	self:pickup()
-	if self.time >= self.nextEnemy then
-		self.nextEnemy = self.time + self.definition.enemyInterval
+	if not self.chestUnlocked then
 		for _, enemy in ipairs(self.enemies) do
-			if enemy.alive then
+			if enemy.alive and self.time >= (enemy.nextMove or self.nextEnemy) then
+				local interval = enemy.kind == "beetle" and 0.65 or self.definition.enemyInterval
+				enemy.nextMove = self.time + interval
 				for offset = 0, 3 do
 					local index = table.find(patrolOrder, enemy.direction) or 1
 					local nextDirection = patrolOrder[(index + offset - 1) % 4 + 1]
 					local delta = directions[nextDirection]
 					local x, y = enemy.x + delta[1], enemy.y + delta[2]
 					if not self:blocked(x, y, "enemy") then
-						ActorMotion.begin(enemy, x, y, self.time, self.definition.enemyInterval)
+						ActorMotion.begin(enemy, x, y, self.time, interval)
 						enemy.direction = nextDirection
 						break
 					end
@@ -447,7 +499,10 @@ end
 
 function Simulation:snapshot()
 	return {
+		width = self.definition.width,
+		height = self.definition.height,
 		stage = self.stage,
+		phaseId = self.definition.phaseId,
 		revision = self.revision,
 		time = self.time,
 		mode = self.mode,
@@ -455,6 +510,7 @@ function Simulation:snapshot()
 		y = self.y,
 		direction = self.direction,
 		motion = self.motion,
+		input = self.input,
 		frog = self.frog,
 		skinPack = self.profile.skinPack,
 		capacity = self.capacity,
@@ -474,6 +530,12 @@ function Simulation:snapshot()
 		secret = self.profile.secret,
 		deaths = self.profile.deaths,
 		frogUnlocked = self.profile.frogUnlocked,
+		chest = self.chest,
+		chestUnlocked = self.chestUnlocked,
+		canInteractChest = self:canInteractChest(),
+		phaseKeys = self.profile.phaseKeys,
+		phaseSecrets = self.profile.phaseSecrets,
+		cosmetics = self.profile.cosmetics,
 		invulnerable = self.time < self.invulnerableUntil,
 		firstMove = self.firstMove == true,
 		firstBomb = self.firstBomb == true,

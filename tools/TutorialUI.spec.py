@@ -27,7 +27,7 @@ normal = json.loads((ROOT / "game/Assets/TutorialUI.model.json").read_text())
 compact = json.loads((ROOT / "game/Assets/TutorialCompactUI.model.json").read_text())
 for asset in (normal, compact):
     assert asset["ClassName"] == "ScreenGui"
-    assert asset["Properties"]["ScreenInsets"] == "CoreUISafeInsets"
+    assert asset["Properties"]["ScreenInsets"] == "DeviceSafeInsets"
     top = children(asset)
     board = children(top["PlayArea"])["Board"]
     cells = children(board)
@@ -59,7 +59,11 @@ for asset in (normal, compact):
         shadow = cells[name]
         assert shadow["ClassName"] == "Frame"
         assert shadow["Properties"]["AnchorPoint"] == [.5, .5]
-        assert shadow["Properties"]["BackgroundTransparency"] == .65
+        assert shadow["Properties"]["BackgroundTransparency"] == 1
+        strips = list(children(shadow).values())
+        assert len(strips) == 32
+        assert all(strip["Properties"]["BackgroundTransparency"] == .65 for strip in strips)
+        assert strips[0]["Properties"]["Size"]["UDim2"][0][0] < strips[16]["Properties"]["Size"]["UDim2"][0][0]
         assert not shadow["Properties"]["Visible"]
     assert all(not effect["Properties"]["Visible"] for effect in children(cells["Effects"]).values())
     assert gate["Pointer"]["Properties"]["ZIndex"] > 37

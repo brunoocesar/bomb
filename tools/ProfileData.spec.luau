@@ -13,21 +13,25 @@ expect(not fresh.visited, "first access does not open lobby")
 expect(fresh.daily.day == 100, "daily initialized from server time")
 local legacy = Data.sanitize({ version = 1, stage = 2, coins = 12, secret = true, frogUnlocked = true }, now)
 expect(legacy.visited, "legacy saved session returns to lobby")
-expect(legacy.stage == 2 and legacy.coins == 12 and legacy.secret and legacy.frogUnlocked, "legacy progress preserved")
-expect(legacy.settings.language == "en" and legacy.skinPack == "base", "new fields migrate safely")
-local invalid = Data.sanitize(
-	{
-		coins = 0 / 0,
-		stage = math.huge,
-		deaths = -4,
-		skinPack = "unknown",
-		ownedSkinPacks = { unknown = true },
-		settings = { music = 0 / 0, leftHanded = "yes", language = "pt" },
-		supplies = { count = 999 },
-		daily = { day = 99, crates = 3, clear = true },
-	},
-	now
+expect(
+	legacy.stage == 1 and legacy.coins == 12 and legacy.secret and legacy.frogUnlocked,
+	"legacy account grants preserved, authored route starts at entrance"
 )
+expect(
+	not legacy.finished and not legacy.completed and not legacy.phaseKeys.world1_phase1,
+	"prototype completion cannot mint a phase key"
+)
+expect(legacy.settings.language == "en" and legacy.skinPack == "base", "new fields migrate safely")
+local invalid = Data.sanitize({
+	coins = 0 / 0,
+	stage = math.huge,
+	deaths = -4,
+	skinPack = "unknown",
+	ownedSkinPacks = { unknown = true },
+	settings = { music = 0 / 0, leftHanded = "yes", language = "pt" },
+	supplies = { count = 999 },
+	daily = { day = 99, crates = 3, clear = true },
+}, now)
 expect(invalid.coins == 0 and invalid.stage == 1 and invalid.deaths == 0, "invalid numeric progress repaired")
 expect(invalid.skinPack == "base" and not invalid.ownedSkinPacks.unknown, "invalid cosmetics rejected")
 expect(
@@ -39,6 +43,8 @@ expect(
 	"bounded rewards and daily reset"
 )
 legacy.completed = true
+legacy.phaseKeys.world1_phase1 = true
+legacy.stage = 2
 legacy.finished = false
 legacy.supplies.count = 6
 Progress.setting(legacy, "music", 0.25)
@@ -64,4 +70,13 @@ local later = Data.sanitize(reopened, now + 3 * 86400)
 expect(later.supplies.count == 7 and later.campBadge, "skipped days retain reward track")
 expect(Progress.claim(later, "supply", now + 3 * 86400), "later day eligible")
 expect(later.supplies.count == 7 and later.coins == 18, "completed track stays bounded")
+local cosmetics =
+	Data.sanitize({ phaseId = Tutorial.phaseId, cosmetics = { cream_body = true, yellow_scarf = true } }, now)
+expect(
+	cosmetics.ownedSkinPacks.cream and cosmetics.ownedSkinPacks.scarf,
+	"saved secret cosmetics recover complete packs"
+)
+local packSim = Simulation.new(Tutorial, cosmetics)
+expect(packSim:equipSkinPack("cream"), "recovered cream reward is equipable")
+expect(Data.sanitize(packSim:checkpoint(), now).skinPack == "cream", "equipped reward pack survives reconnect")
 print(string.format("Profile data passed: %d checks. DataStore transport not exercised.", checks))

@@ -1,9 +1,14 @@
 """Deliberate offline authoring of the tutorial's Roblox UI asset."""
 import json
+import sys
 from copy import deepcopy
 from pathlib import Path
+from UIShapes import oval_children
 
 ROOT = Path(__file__).resolve().parent.parent
+PHASE_ONE = "--phase-one" in sys.argv
+COLS, ROWS = (15, 13) if PHASE_ONE else (13, 9)
+ENEMY_SLOTS = 6 if PHASE_ONE else 4
 
 
 def udim(x, y, ox=0, oy=0):
@@ -81,9 +86,9 @@ def blast():
 
 
 tiles = []
-for y in range(1, 10):
-    for x in range(1, 14):
-        tiles.append(frame(f"Cell_{x}_{y}", udim(1/13, 1/9), udim((x-1)/13, (y-1)/9),
+for y in range(1, ROWS + 1):
+    for x in range(1, COLS + 1):
+        tiles.append(frame(f"Cell_{x}_{y}", udim(1/COLS, 1/ROWS), udim((x-1)/COLS, (y-1)/ROWS),
             "35534B" if (x+y) % 2 == 0 else "3B5B51", 2, [
                 image("Object", udim(1, 1), udim(0, 0), 7, Visible=False),
                 frame("ItemGlow", udim(.9, .9), udim(.05, .05), "85E5CF", 37,
@@ -94,12 +99,12 @@ for y in range(1, 10):
                 image("Bomb", udim(.7, .8), udim(.15, .08), 16, Visible=False),
             ], BackgroundTransparency=1))
 
-hero = frame("Hero", udim(1/13, 1/9), udim(1/13, 1/9), "243E3A", 30,
+hero = frame("Hero", udim(1/COLS, 1/ROWS), udim(1/COLS, 1/ROWS), "243E3A", 30,
     [mascot("Vector"), node("Sprite", "ImageLabel", {"Size": udim(1.35, 1.6),
         "Position": udim(-.175, -.55), "BackgroundTransparency": 1,
         "Image": "", "Visible": False, "ZIndex": 35, "ScaleType": "Stretch"})],
     BackgroundTransparency=1)
-frog = frame("Frog", udim(1.15/13, .9/9), udim(1/13, 1/9), "243E3A", 24,
+frog = frame("Frog", udim(1.15/COLS, .9/ROWS), udim(1/COLS, 1/ROWS), "243E3A", 24,
     [mascot("Vector", True), node("Sprite", "ImageLabel", {"Size": udim(1.25, 1.4),
         "Position": udim(-.125, -.3), "BackgroundTransparency": 1,
         "Image": "", "Visible": False, "ZIndex": 28})],
@@ -108,15 +113,15 @@ for descendant in frog["Children"][0]["Children"]:
     if "ZIndex" in descendant["Properties"]:
         descendant["Properties"]["ZIndex"] -= 8
 frog["Children"][0]["Properties"]["ZIndex"] = 22
-enemies = [image(f"Enemy_{index}", udim(.8/13, .8/9), udim(0, 0), 25, Visible=False)
-    for index in range(1, 5)]
-shadows = [frame(name, udim(.6/13, .18/9), udim(0, 0), "172D2A", 3,
-    children=[node("Corner", "UICorner", {"CornerRadius": {"UDim": [.5, 0]}})],
-    AnchorPoint=[.5, .5], BackgroundTransparency=.65, Visible=False)
-    for name in ["PlayerShadow", *[f"EnemyShadow_{index}" for index in range(1, 5)]]]
+enemies = [image(f"Enemy_{index}", udim(.8/COLS, .8/ROWS), udim(0, 0), 25, Visible=False)
+    for index in range(1, ENEMY_SLOTS + 1)]
+shadows = [frame(name, udim(.6/COLS, .18/ROWS), udim(0, 0), "172D2A", 3,
+    children=oval_children(color("172D2A"), 3),
+    AnchorPoint=[.5, .5], BackgroundTransparency=1, Visible=False)
+    for name in ["PlayerShadow", *[f"EnemyShadow_{index}" for index in range(1, ENEMY_SLOTS + 1)]]]
 destruction = frame("Effects", udim(1, 1), udim(0, 0), z=37,
     BackgroundTransparency=1, ClipsDescendants=True, children=[
-        frame(f"Destroy_{index:02}", udim(1/13, 1/9), udim(0, 0), z=37,
+        frame(f"Destroy_{index:02}", udim(1/COLS, 1/ROWS), udim(0, 0), z=37,
             BackgroundTransparency=1, Visible=False, children=[
                 image("Impact", udim(1, 1), udim(0, 0), 37, Visible=False),
                 *[image(f"Piece_{piece}", udim(.44, .44), udim(.5, .5), 37,
@@ -134,7 +139,7 @@ pointer = frame("Pointer", udim(.7, .7), udim(.5, -.25), "17263A", 38,
     ])
 board = frame("Board", udim(1, 1), udim(.5, .5), "263F37", 1,
     [image("Ground", udim(1, 1), udim(0, 0), 1, ScaleType="Stretch")] + tiles + [
-        frame("Exit", udim(1/13, 1/9), udim(0, 0), z=9, BackgroundTransparency=1,
+        frame("Exit", udim(1/COLS, 1/ROWS), udim(0, 0), z=9, BackgroundTransparency=1,
             children=[frame("Glow", udim(.96, .96), udim(.02, .02), "35CAB4", 34,
                     [round_corner(10), node("Outline", "UIStroke", {"Color": color("85F2D7"), "Thickness": 3})],
                     BackgroundTransparency=.8, Visible=False),
@@ -145,7 +150,7 @@ board = frame("Board", udim(1, 1), udim(.5, .5), "263F37", 1,
                 label("Remaining", "2", udim(0, 0, 18, 18), udim(.5, .77), 11,
                     AnchorPoint=[.5, .5], BackgroundTransparency=.1, BackgroundColor3=color("17263A"))])
     ] + shadows + [frog, hero] + enemies + [destruction,
-        node("Aspect", "UIAspectRatioConstraint", {"AspectRatio": 13/9,
+        node("Aspect", "UIAspectRatioConstraint", {"AspectRatio": COLS/ROWS,
             "AspectType": "FitWithinMaxSize", "DominantAxis": "Width"}),
         node("Outline", "UIStroke", {"Color": color("819F77"), "Thickness": 3})],
     AnchorPoint=[.5, .5], ClipsDescendants=False)
@@ -170,7 +175,7 @@ def modal(name, title, detail, buttons):
         Visible=False, BackgroundTransparency=.15, Active=True)
 
 root = node("TutorialUI", "ScreenGui", {"ResetOnSpawn": False, "DisplayOrder": 20,
-    "ZIndexBehavior": "Global", "ScreenInsets": "CoreUISafeInsets"}, [
+    "ZIndexBehavior": "Global", "ScreenInsets": "DeviceSafeInsets"}, [
     frame("Background", udim(1, 1), udim(0, 0), "152B2A", 0),
     frame("Header", udim(1, 0, 0, 52), udim(0, 0), "1E3243", 40, [
         label("Stage", "FIRST SPARK", udim(.29, 1, -8, -8), udim(0, 0, 4, 4), 41),
@@ -205,7 +210,56 @@ root = node("TutorialUI", "ScreenGui", {"ResetOnSpawn": False, "DisplayOrder": 2
         BackgroundTransparency=.15, BackgroundColor3=color("3C2539")),
 ])
 
-path = ROOT / "game/Assets/TutorialUI.model.json"
+if PHASE_ONE:
+    for child in root["Children"]:
+        if child["Name"] == "Header":
+            for item in child["Children"]:
+                if item["Name"] == "Stage": item["Properties"]["Text"] = "AWAKENING FIELDS"
+    decorations = [image(f"Flower_{index}", udim(.45/COLS, .45/ROWS),
+        udim((x+.275)/COLS, 4.37/ROWS), 18, Visible=False)
+        for index, x in enumerate((8,10,12), start=1)]
+    decorations += [image("Ribbon", udim(.65/COLS, .6/ROWS), udim(11.175/COLS, .12/ROWS), 18, Visible=False)]
+    decorations += [image(f"Sun_{index}", udim(.85/COLS, 1.05/ROWS),
+        udim((x+.075)/COLS, (y-.23)/ROWS), 18, Visible=False)
+        for index, (x,y) in enumerate(((4,4),(10,4),(4,6),(10,6)), start=1)]
+    board["Children"].append(frame("Decorations", udim(1,1), udim(0,0), z=4,
+        BackgroundTransparency=1, children=decorations))
+    board["Children"].append(frame("SealWires", udim(1,1), udim(0,0), z=4,
+        BackgroundTransparency=1, Visible=False, children=[
+            frame(f"Wire_{index}", udim(0,0,4,4), udim(0,0), "85F2D7", 4,
+                [round_corner(3)], BackgroundTransparency=.4, AnchorPoint=[0,.5])
+            for index in (1,2)
+        ]))
+    board["Children"].append(frame("RetireSmoke", udim(1,1), udim(0,0), z=35,
+        BackgroundTransparency=1, children=[
+            frame(f"Smoke_{index}", udim(.9/COLS,.65/ROWS), udim(0,0), z=35,
+                BackgroundTransparency=1, Visible=False, children=[
+                    frame(f"Puff_{puff}", udim(.55,.75), udim(offset,.15), "DFE9E1", 35,
+                        [round_corner(60)], BackgroundTransparency=.2)
+                    for puff,offset in enumerate((0,.22,.44),start=1)
+                ]) for index in range(1, ENEMY_SLOTS + 1)
+        ]))
+    board["Children"].append(frame("Chest", udim(3/COLS, 2/ROWS), udim(6/COLS, 5/ROWS),
+        z=20, BackgroundTransparency=1, Visible=False, children=[
+            image("Sprite", udim(1, 1), udim(0, 0), 20),
+            image("SunKey", udim(.4, .6), udim(.3, -.65), 38, Visible=False),
+            label("Seal", "ENERGY 0/2", udim(1, .3), udim(0, .75), 38,
+                BackgroundTransparency=.2, BackgroundColor3=color("17263A")),
+        ]))
+    for child in root["Children"]:
+        if child["Name"] == "ResultOverlay":
+            child["Children"][0]["Children"][2]["Properties"]["Text"] = "AWAKENING FIELDS COMPLETE!"
+    root["Children"].append(modal("ChestReveal", "SUN KEY FOUND!", "World 1 • Key 1/4", [
+        image("Key", udim(.23, .28), udim(.25, .23), 72),
+        image("Coins", udim(.2, .24), udim(.55, .25), 72),
+        button("Skip", "CONTINUE", udim(.9, .14), udim(.05, .77), "85E5CF", 72),
+    ]))
+    reveal_panel = root["Children"][-1]["Children"][0]
+    for child in reveal_panel["Children"]:
+        if child["Name"] == "Detail":
+            child["Properties"]["Position"] = udim(.05, .55)
+            child["Properties"]["Size"] = udim(.9, .17)
+path = ROOT / ("game/Assets/PhaseOneUI.model.json" if PHASE_ONE else "game/Assets/TutorialUI.model.json")
 root.pop("Name")
 path.write_text(json.dumps(root, indent=2) + "\n", encoding="utf-8")
 compact = deepcopy(root)
@@ -221,5 +275,6 @@ compact_buttons = {child["Name"]: child for child in by_name["Controls"]["Childr
 for name, x, y in (("Up", 58, 0), ("Left", 8, 50), ("Down", 58, 50), ("Right", 108, 50)):
     compact_buttons[name]["Properties"]["Size"] = udim(0, 0, 44, 44)
     compact_buttons[name]["Properties"]["Position"] = udim(0, 0, x, y)
-(ROOT / "game/Assets/TutorialCompactUI.model.json").write_text(json.dumps(compact, indent=2) + "\n", encoding="utf-8")
-print(f"Authored {path.name}: 117 cells, 4 enemy slots, independent hero/frog layers.")
+if not PHASE_ONE:
+    (ROOT / "game/Assets/TutorialCompactUI.model.json").write_text(json.dumps(compact, indent=2) + "\n", encoding="utf-8")
+print(f"Authored {path.name}: {COLS * ROWS} cells, {ENEMY_SLOTS} enemy slots, independent hero/frog layers.")

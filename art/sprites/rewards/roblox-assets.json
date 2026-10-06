@@ -1,0 +1,96 @@
+{
+  "verifiedAt": "2026-10-05T23:54:20Z",
+  "verification": "Studio MarketplaceService.GetProductInfo and AssetService.CreateEditableImageAsync",
+  "assets": [
+    {
+      "file": "BombYourWay-hero-cream-v1.png",
+      "source": "art\\sprites\\hero\\cream\\hero-cream-v1.png",
+      "size": [
+        1024,
+        1024
+      ],
+      "sha256": "BC4CB38790DDAEB445B95866847C7D30D0E81495B01A0F4055E13E350AD4698B",
+      "assetId": 90358837309444,
+      "creatorGroupId": 204998424,
+      "verifiedImageSize": [
+        1024,
+        1024
+      ]
+    },
+    {
+      "file": "BombYourWay-hero-movement-cream-v1.png",
+      "source": "art\\sprites\\hero\\cream\\hero-movement-cream-v1.png",
+      "size": [
+        1024,
+        1024
+      ],
+      "sha256": "232C7980CE5B6D012E72FE6CBD16C1816F3955D17684034EE379F6ADE2C347C2",
+      "assetId": 140382405667063,
+      "creatorGroupId": 204998424,
+      "verifiedImageSize": [
+        1024,
+        1024
+      ]
+    },
+    {
+      "file": "BombYourWay-mounted-cream-v1.png",
+      "source": "art\\sprites\\mounted\\cream\\mounted-cream-v1.png",
+      "size": [
+        1024,
+        1024
+      ],
+      "sha256": "E03C577338213DCC487A171BE13F2346991DE8002182C91A57AC12149FB4489E",
+      "assetId": 109262425070435,
+      "creatorGroupId": 204998424,
+      "verifiedImageSize": [
+        1024,
+        1024
+      ]
+    },
+    {
+      "file": "BombYourWay-hero-scarf-v1.png",
+      "source": "art\\sprites\\hero\\scarf\\hero-scarf-v1.png",
+      "size": [
+        1024,
+        1024
+      ],
+      "sha256": "F43036B9358BF5AE9D4CF105316B35AE57F45AA8DEA78CEDBC12126A3E0FF4CF",
+      "assetId": 74105438863529,
+      "creatorGroupId": 204998424,
+      "verifiedImageSize": [
+        1024,
+        1024
+      ]
+    },
+    {
+      "file": "BombYourWay-hero-movement-scarf-v1.png",
+      "source": "art\\sprites\\hero\\scarf\\hero-movement-scarf-v1.png",
+      "size": [
+        1024,
+        1024
+      ],
+      "sha256": "B58B87D30FC17469D9647CD9E24F179D50060A2F894FAACA184A72B893956ED4",
+      "assetId": 97703057078335,
+      "creatorGroupId": 204998424,
+      "verifiedImageSize": [
+        1024,
+        1024
+      ]
+    },
+    {
+      "file": "BombYourWay-mounted-scarf-v1.png",
+      "source": "art\\sprites\\mounted\\scarf\\mounted-scarf-v1.png",
+      "size": [
+        1024,
+        1024
+      ],
+      "sha256": "0FF76325B390E5A9FBA9CA50243A543924E29A9ED6C0501601FC6F52BB26DECB",
+      "assetId": 128921015875122,
+      "creatorGroupId": 204998424,
+      "verifiedImageSize": [
+        1024,
+        1024
+      ]
+    }
+  ]
+}

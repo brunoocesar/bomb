@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="en"><meta charset="utf-8"><title>Bomb Your Way! — Frame Inspector</title>
+<style>body{background:#172a3b;color:#fff2d6;font:16px system-ui;margin:24px}label,button,select,input{margin:6px;font:inherit}canvas{background:#e6ebef;max-width:100%;border:1px solid #86dfc4}pre{white-space:pre-wrap}button{padding:8px}small{display:block;margin:12px 0}</style>
+<h1>Frame Inspector</h1>
+<label>Atlas <select id="atlas"></select></label>
+<label>Frame <select id="frame"></select></label>
+<label>Sequence <select id="action"><option>idle</option><option>walk</option><option>jump</option><option>celebrate</option></select></label>
+<label>Direction <select id="direction"><option>down</option><option>left</option><option>right</option><option>up</option></select></label>
+<button id="play">Play</button><button id="blink">Inspect blink</button><button id="next">Next frame</button>
+<label>Source <select id="source"><option value="current">Current crop</option><option value="legacy">Legacy frog crop</option></select></label>
+<small>Starts frozen. Blue: crop rectangle. Orange: opaque bounds. Pink: ground anchor. Common source-pixel scale; no per-frame fitting. Jump feet may rise above the ground anchor.</small>
+<canvas id="canvas" width="760" height="480"></canvas><pre id="info"></pre>
+<script src="sprite-manifest.js"></script><script>
+'use strict';
+const $=id=>document.getElementById(id), data=window.spriteManifest;
+let shownIndex=0,playing=false,time=0,last=0,nextBlink=3+Math.random()*3,blinkUntil=0,forceBlink=false;
+const images=new Map();
+data.atlases.forEach(a=>{const o=new Option(a.id,a.id);$('atlas').add(o);const image=new Image();image.src=a.path;images.set(a.id,image);image.onload=draw;});
+function currentAtlas(){return data.atlases.find(a=>a.id===$('atlas').value)}
+function reset(){playing=false;time=0;forceBlink=false;nextBlink=3+Math.random()*3;blinkUntil=0;$('play').textContent='Play';draw()}
+function chooseAtlas(){const a=currentAtlas();$('frame').replaceChildren();a.frames.forEach((f,i)=>$('frame').add(new Option(f.id,i)));reset()}
+$('atlas').onchange=chooseAtlas;
+for(const id of ['frame','action','direction','source'])$(id).onchange=reset;
+$('next').onclick=()=>{const list=$('frame');list.selectedIndex=(list.selectedIndex+1)%list.length;reset()};
+$('blink').onclick=()=>{playing=false;forceBlink=true;$('play').textContent='Play';draw()};
+$('play').onclick=()=>{forceBlink=false;if(playing)$('frame').value=shownIndex;playing=!playing;$('play').textContent=playing?'Freeze':'Play'};
+function draw(){
+ const a=currentAtlas();if(!a)return;let f=a.frames[+$('frame').value],mode='frozen';
+ const kind=a.id==='heroMovement'?'hero':a.id,action=$('action').value,dir=$('direction').value;
+ const animations=data.animationMap[kind], seq=animations?.[action]?.[dir];
+ if(playing||forceBlink){
+  let s=seq;
+  if(action==='idle'&&animations?.blink?.[dir]){
+   if(playing&&time>=nextBlink){blinkUntil=time+.1+Math.random()*.1;nextBlink=blinkUntil+3+Math.random()*3;}
+   if(forceBlink||time<blinkUntil)s=animations.blink[dir];
+  }
+  if(s&&s[0]===a.id){const col=s[2]+(action==='idle'?0:Math.floor(time*8)%(s[3]-s[2]+1));f=a.frames[s[1]*a.columns+col];mode=s===animations?.blink?.[dir]?'blink':action;}
+ }
+ shownIndex=a.frames.indexOf(f);
+ let rect=f.rect,pivot=f.groundPivot;
+ if($('source').value==='legacy'&&a.id==='frog'){
+  const x=Math.round(f.column*1254/8),y=Math.round(f.row*1254/8);
+  rect=[x,y,Math.round((f.column+1)*1254/8)-x,Math.round((f.row+1)*1254/8)-y];pivot=[.5,.95];
+ }
+ const ctx=$('canvas').getContext('2d'),scale=a.id==='mounted'?1:2,anchor=[380,398];
+ ctx.clearRect(0,0,760,480);ctx.fillStyle='#e6ebef';ctx.fillRect(0,0,760,480);
+ ctx.strokeStyle='#7c8b93';ctx.beginPath();ctx.moveTo(0,anchor[1]);ctx.lineTo(760,anchor[1]);ctx.stroke();
+ ctx.fillStyle='#172d2a55';ctx.beginPath();ctx.ellipse(anchor[0],anchor[1],a.id==='mounted'?115:65,14,0,0,Math.PI*2);ctx.fill();
+ const x=anchor[0]-pivot[0]*rect[2]*scale,y=anchor[1]-pivot[1]*rect[3]*scale;
+ const image=images.get(a.id);if(image?.complete)ctx.drawImage(image,...rect,x,y,rect[2]*scale,rect[3]*scale);
+ ctx.strokeStyle='#1689ef';ctx.strokeRect(x,y,rect[2]*scale,rect[3]*scale);
+ if($('source').value==='current'){const b=f.opaqueBounds;ctx.strokeStyle='#e88922';ctx.strokeRect(x+b[0]*scale,y+b[1]*scale,b[2]*scale,b[3]*scale);}
+ ctx.fillStyle='#ed268c';ctx.beginPath();ctx.arc(...anchor,4,0,Math.PI*2);ctx.fill();
+ $('info').textContent=JSON.stringify({frame:f.id,mode,time:+time.toFixed(3),rect,groundPivot:pivot,scale,nextBlink:+nextBlink.toFixed(3),blinkUntil:+blinkUntil.toFixed(3)},null,2);
+}
+function tick(now){if(last&&playing)time+=(now-last)/1000;last=now;draw();requestAnimationFrame(tick)}
+$('atlas').value='frog';chooseAtlas();requestAnimationFrame(tick);
+</script></html>

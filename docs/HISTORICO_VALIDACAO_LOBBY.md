@@ -167,3 +167,24 @@ Extraída a lógica existente de Profiles para ProfileRepository.new(store, cloc
 `tools/ProfileRepository.spec.luau`: 16 verificações com armazenamento injetado. Cobertura: primeira sessão, bloqueio concorrente, gravação/liberação, nova instância restaurando checkpoint/resgate/mute/moedas e destino lobby, recompensa não duplicada após reconexão, rejeição do token antigo, falha de save liberando busy, falha de load sem perfil substituto, retry, recuperação após expiração e proteção contra escrita do proprietário expirado. ProfileData: 20 verificações. Selene quatro módulos: zero erros/avisos. Build concluído.
 
 Os testes comprovam a lógica usada pelo servidor com um contrato de armazenamento simulado. Não comprovam disponibilidade, permissões ou transporte do DataStore Roblox em produção. A refatoração ainda precisa ser carregada em uma nova sessão do Studio para conferir integração dos módulos.
+
+## Teste de transporte real tentado — 05/10/2026
+
+Sessão atual confirmada no Place ID 140221183064352 e Universe ID 10769176732. O roteiro `build/StudioLobbyCloudCheck.luau` usa o repositório real com DataStore BombYourWay_Lobby_QA_v1 e chave qa-UUID criada exclusivamente para o ensaio; não acessa BombYourWay_Tutorial_v1 nem perfis reais. Testa gravação/liberação, nova instância, checkpoint/resgate/mute, idempotência e token antigo; remove somente a chave QA criada por ele ao concluir.
+
+A tentativa recebeu `StudioAccessToApisNotAllowed: Cannot write to DataStore from studio if API access is not enabled` na primeira UpdateAsync. Resultado BOMB_LOBBY_CLOUD_QA_UNAVAILABLE. Não houve gravação comprovada, nem teste real passado. A configuração de acesso às APIs não foi modificada. Nenhuma versão do lugar foi publicada.
+## Encerramento com retry — 05/10/2026
+
+A revisão encontrou gravação final única em PlayerRemoving e BindToClose. ProfileRepository.close agora espera gravações em andamento e repete falhas dentro do prazo restante; os dois caminhos de saída usam essa operação. Não amplia os prazos existentes de encerramento. Testes do repositório: 21 verificações, incluindo falha transitória na saída, preservação do saldo final, liberação do lock, limite de espera e save em andamento. Selene dos dois módulos: zero erros/avisos; build concluído.
+
+O Rojo foi reconectado ao servidor local e mostrou apenas ProfileRepository e Tutorial na revisão de sincronização. As alterações foram aceitas. O primeiro ensaio em Roblox encontrou código antigo e falhou; foi repetido depois da sincronização. A configuração de acesso às APIs permanece inalterada e a confirmação solicitada ao usuário continua pendente.
+Resultado no Roblox: BOMB_LOBBY_CLOSE_RETRY_VERIFIED 41. O módulo real sincronizado recuperou a falha injetada e preservou saldo 41, liberando o lock. Armazenamento usado em memória; não declara transporte cloud testado.
+
+## Sessão real encerrada e pendência externa — 05/10/2026
+
+Play iniciou com código sincronizado e snapshot autoritativo na aventura, confirmado por BOMB_LOBBY_CLOSE_SESSION_READY Local Studio session. Stop encerrou o cliente/servidor; o log registrou remoção dos jogadores e fechamento do contexto em 13:58:31–13:58:32, sem erro de script nesse intervalo. Esse ensaio comprova integração/encerramento local, não gravação cloud. O retry com falha injetada já foi verificado no módulo real e em 21 testes de repositório.
+
+O teste real de dados está preparado em StudioLobbyCloudCheck.luau, mas o Roblox recusou UpdateAsync por StudioAccessToApisNotAllowed. A autorização para habilitar temporariamente o acesso às APIs foi solicitada e não recebeu resposta. A configuração permanece intacta. Após concluir as verificações independentes, esta pendência requer resposta do usuário ou mudança externa para prosseguir; não declarar a validação real concluída.
+## Revalidação somente leitura após retomada — 05/10/2026
+
+A consulta GetAsync de qa-permission-probe no armazenamento exclusivo de QA também foi recusada: StudioAccessToApisNotAllowed, HTTP 403, em 14:03:21 UTC. A tentativa não grava dados nem altera configurações. A condição externa continua presente; não interpretar a retomada automática do objetivo como autorização para habilitar APIs. A resposta à confirmação anterior permanece necessária para a mudança de configuração.

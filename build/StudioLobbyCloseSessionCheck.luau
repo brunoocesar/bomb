@@ -1,0 +1,1 @@
+assert(game.PlaceId==140221183064352); assert(game:GetService("RunService"):IsRunning()); assert(_G.BombLobbyQA and _G.BombLobbyQA.state.location=="adventure"); print("BOMB_LOBBY_CLOSE_SESSION_READY",_G.BombLobbyQA.state.saveStatus)

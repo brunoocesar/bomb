@@ -107,7 +107,7 @@ function LobbyProgress.primary(profile, definition)
 	if profile.finished then
 		return {
 			text = "CHOOSE STAGE",
-			detail = "First Spark complete. Explore your medals or replay the trail.",
+			detail = definition.phaseName .. " complete. Explore your medals or replay the trail.",
 			action = "select",
 		}
 	end

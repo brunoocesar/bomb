@@ -1,4 +1,4 @@
-local Tutorial = require("../game/Shared/Tutorial")
+local Tutorial = require("./fixtures/TestTutorial")
 local Simulation = require("../game/Shared/Simulation")
 
 local assertions = 0
@@ -7,9 +7,13 @@ local function expect(condition, message)
 	assert(condition, message)
 end
 local function advance(sim, seconds, direction)
-	for _ = 1, math.ceil(seconds / 0.05) do
-		sim:step(0.05, direction)
+	local remaining = seconds
+	while remaining > 1e-9 do
+		local dt = math.min(0.01, remaining)
+		sim:step(dt, direction or "stop")
+		remaining -= dt
 	end
+	sim:steer("stop")
 end
 local function fixture(rows)
 	return Simulation.new({
@@ -45,15 +49,15 @@ local sim = fixture({ "#########", "#P.BE..D#", "#.......#", "#########" })
 sim.range = 5
 expect(sim:placeBomb(), "valid first bomb")
 expect(not sim:placeBomb(), "no duplicate bomb")
-advance(sim, 0.3, "down")
+advance(sim, 0.24, "down")
 -- A changed direction starts immediately; release after one cell interval.
-advance(sim, 0.25, "right")
-advance(sim, 0.25, "up")
+advance(sim, 0.24, "right")
+advance(sim, 0.24, "up")
 local x = sim.x
 advance(sim, 0.3, "left")
-expect(sim.x == x, "cannot reenter bomb after leaving it")
-advance(sim, 0.3, "down")
-advance(sim, 1.1)
+expect(sim.x >= 2.72 - 1e-8 and sim.x < x, "approaches but cannot reenter bomb after leaving it")
+advance(sim, 0.24, "down")
+advance(sim, 1.4)
 expect(sim.tiles["4:2"] == nil, "crate destroyed")
 expect(sim.tiles["5:2"] == "E", "crate stops blast before energy box")
 expect(sim.tiles["1:2"] == "#", "permanent wall survives")
@@ -64,7 +68,7 @@ sim.capacity = 2
 expect(sim:placeBomb(), "first chain bomb")
 advance(sim, 0.3, "right")
 expect(sim:placeBomb(), "second chain bomb")
-advance(sim, 0.3, "down")
+advance(sim, 0.24, "down")
 advance(sim, 0.3, "right")
 advance(sim, 1.6)
 expect(next(sim.bombs) == nil, "chain bomb detonates immediately")

@@ -1,5 +1,5 @@
 param(
-    [ValidateSet('Capture','Command','Click','Hover','ScrollDown','Drag','HoldClick','RightClick','AssetId','Key','HoldKey','Paste','Resize','Inspect')][string]$Action,
+    [ValidateSet('Capture','Command','Click','Hover','ScrollDown','Drag','HoldClick','RightClick','AssetId','Key','HoldKey','Chord','Paste','Resize','Inspect')][string]$Action,
     [string]$CommandFile,
     [string]$OutputPath = 'build/Studio-current.png',
     [int]$X,
@@ -8,7 +8,8 @@ param(
     [int]$EndY,
     [string]$Keys,
     [int]$Width,
-    [int]$Height
+    [int]$Height,
+    [int]$DurationMs = 300
 )
 $ErrorActionPreference = 'Stop'
 Add-Type -AssemblyName UIAutomationClient
@@ -114,7 +115,7 @@ switch ($Action) {
         } finally { $graphics.Dispose(); $bitmap.Dispose() }
     }
     'Command' {
-        $command = Get-Content -LiteralPath $CommandFile -Raw
+        $command = Get-Content -LiteralPath $CommandFile -Raw -Encoding UTF8
         $editor = $window.FindFirst([System.Windows.Automation.TreeScope]::Descendants,
             [System.Windows.Automation.PropertyCondition]::new([System.Windows.Automation.AutomationElement]::AutomationIdProperty,'commandBarScriptEditor'))
         if (-not $editor -or $editor.Current.BoundingRectangle.IsEmpty) { throw 'Visible Studio Command Bar not found.' }
@@ -149,6 +150,22 @@ switch ($Action) {
             [StudioDesktop]::keybd_event($virtualKey,0,0,[UIntPtr]::Zero)
             try { Start-Sleep -Milliseconds 300 }
             finally { [StudioDesktop]::keybd_event($virtualKey,0,2,[UIntPtr]::Zero) }
+        }
+    }
+    'Chord' {
+        if ($Keys -notmatch '^[WASD ]{1,4}$' -or $DurationMs -lt 10 -or $DurationMs -gt 10000) {
+            throw 'Only bounded gameplay key chords are supported.'
+        }
+        $pressed = @()
+        try {
+            foreach ($gameKey in $Keys.ToCharArray()) {
+                $virtualKey = [byte]$gameKey
+                [StudioDesktop]::keybd_event($virtualKey,0,0,[UIntPtr]::Zero)
+                $pressed += $virtualKey
+            }
+            Start-Sleep -Milliseconds $DurationMs
+        } finally {
+            foreach ($virtualKey in $pressed) { [StudioDesktop]::keybd_event($virtualKey,0,2,[UIntPtr]::Zero) }
         }
     }
     'Paste' {

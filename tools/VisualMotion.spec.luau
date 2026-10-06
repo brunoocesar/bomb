@@ -81,14 +81,12 @@ expect(sim.motion == nil and sim.enemies[1].motion == nil, "checkpoint resets tr
 sim = fixture()
 sim.enemies = {}
 sim:step(0.05, "right")
-local start = sim.motion.at
-local earlyX = Motion.position(sim, start + sim.definition.moveInterval * 0.8)
-local lateX = Motion.position(sim, start + sim.definition.moveInterval * 0.95)
-expect(lateX > earlyX and lateX < sim.x, "player keeps moving through final quarter like patrol")
-expect(sim.motion.duration == sim.definition.moveInterval, "no stationary tail between held steps")
+local earlyX = sim.x
+sim:step(0.02, "right")
+expect(sim.x > earlyX and sim.motion == nil, "player advances continuously without a destination trajectory")
 for _ = 1, 50 do
 	sim:step(0.05, "left")
 end
 local supportX = Motion.position(sim, sim.time)
-expect(sim.x == 2 and supportX == 2, "continuous player still stops at wall")
+expect(math.abs(sim.x - 1.72) < 1e-8 and supportX == sim.x, "continuous player stops at wall contact")
 print(string.format("Visual motion tests passed: %d assertions.", checks))

@@ -5,7 +5,7 @@
     "Enabled": false,
     "DisplayOrder": 25,
     "ZIndexBehavior": "Global",
-    "ScreenInsets": "CoreUISafeInsets"
+    "ScreenInsets": "DeviceSafeInsets"
   },
   "Children": [
     {
@@ -1508,18 +1508,18 @@
                   0
                 ],
                 [
-                  0.83,
+                  0.72,
                   0
                 ]
               ]
             },
             "BorderSizePixel": 0,
             "BackgroundColor3": [
-              0.1411764705882353,
-              0.23921568627450981,
-              0.19215686274509805
+              0.12549019607843137,
+              0.2196078431372549,
+              0.2901960784313726
             ],
-            "BackgroundTransparency": 0.65,
+            "BackgroundTransparency": 1,
             "ZIndex": 11,
             "AnchorPoint": [
               0.5,
@@ -1528,15 +1528,2542 @@
           },
           "Children": [
             {
-              "Name": "Corner",
-              "ClassName": "UICorner",
+              "Name": "Oval_00",
+              "ClassName": "Frame",
               "Properties": {
-                "CornerRadius": {
-                  "UDim": [
-                    0,
-                    100
+                "Position": {
+                  "UDim2": [
+                    [
+                      0.3759804072938473,
+                      0
+                    ],
+                    [
+                      0.0,
+                      0
+                    ]
                   ]
-                }
+                },
+                "Size": {
+                  "UDim2": [
+                    [
+                      0.24803918541230538,
+                      0
+                    ],
+                    [
+                      0.03125,
+                      0
+                    ]
+                  ]
+                },
+                "BackgroundColor3": [
+                  0.1411764705882353,
+                  0.23921568627450981,
+                  0.19215686274509805
+                ],
+                "BackgroundTransparency": 0.65,
+                "BorderSizePixel": 0,
+                "ZIndex": 12
+              },
+              "Children": []
+            },
+            {
+              "Name": "Oval_01",
+              "ClassName": "Frame",
+              "Properties": {
+                "Position": {
+                  "UDim2": [
+                    [
+                      0.28862891783642686,
+                      0
+                    ],
+                    [
+                      0.03125,
+                      0
+                    ]
+                  ]
+                },
+                "Size": {
+                  "UDim2": [
+                    [
+                      0.42274216432714634,
+                      0
+                    ],
+                    [
+                      0.03125,
+                      0
+                    ]
+                  ]
+                },
+                "BackgroundColor3": [
+                  0.1411764705882353,
+                  0.23921568627450981,
+                  0.19215686274509805
+                ],
+                "BackgroundTransparency": 0.65,
+                "BorderSizePixel": 0,
+                "ZIndex": 12
+              },
+              "Children": []
+            },
+            {
+              "Name": "Oval_02",
+              "ClassName": "Frame",
+              "Properties": {
+                "Position": {
+                  "UDim2": [
+                    [
+                      0.23163181191691146,
+                      0
+                    ],
+                    [
+                      0.0625,
+                      0
+                    ]
+                  ]
+                },
+                "Size": {
+                  "UDim2": [
+                    [
+                      0.5367363761661771,
+                      0
+                    ],
+                    [
+                      0.03125,
+                      0
+                    ]
+                  ]
+                },
+                "BackgroundColor3": [
+                  0.1411764705882353,
+                  0.23921568627450981,
+                  0.19215686274509805
+                ],
+                "BackgroundTransparency": 0.65,
+                "BorderSizePixel": 0,
+                "ZIndex": 12
+              },
+              "Children": []
+            },
+            {
+              "Name": "Oval_03",
+              "ClassName": "Frame",
+              "Properties": {
+                "Position": {
+                  "UDim2": [
+                    [
+                      0.18789086944627847,
+                      0
+                    ],
+                    [
+                      0.09375,
+                      0
+                    ]
+                  ]
+                },
+                "Size": {
+                  "UDim2": [
+                    [
+                      0.624218261107443,
+                      0
+                    ],
+                    [
+                      0.03125,
+                      0
+                    ]
+                  ]
+                },
+                "BackgroundColor3": [
+                  0.1411764705882353,
+                  0.23921568627450981,
+                  0.19215686274509805
+                ],
+                "BackgroundTransparency": 0.65,
+                "BorderSizePixel": 0,
+                "ZIndex": 12
+              },
+              "Children": []
+            },
+            {
+              "Name": "Oval_04",
+              "ClassName": "Frame",
+              "Properties": {
+                "Position": {
+                  "UDim2": [
+                    [
+                      0.1523656959173908,
+                      0
+                    ],
+                    [
+                      0.125,
+                      0
+                    ]
+                  ]
+                },
+                "Size": {
+                  "UDim2": [
+                    [
+                      0.6952686081652184,
+                      0
+                    ],
+                    [
+                      0.03125,
+                      0
+                    ]
+                  ]
+                },
+                "BackgroundColor3": [
+                  0.1411764705882353,
+                  0.23921568627450981,
+                  0.19215686274509805
+                ],
+                "BackgroundTransparency": 0.65,
+                "BorderSizePixel": 0,
+                "ZIndex": 12
+              },
+              "Children": []
+            },
+            {
+              "Name": "Oval_05",
+              "ClassName": "Frame",
+              "Properties": {
+                "Position": {
+                  "UDim2": [
+                    [
+                      0.12272823538594885,
+                      0
+                    ],
+                    [
+                      0.15625,
+                      0
+                    ]
+                  ]
+                },
+                "Size": {
+                  "UDim2": [
+                    [
+                      0.7545435292281023,
+                      0
+                    ],
+                    [
+                      0.03125,
+                      0
+                    ]
+                  ]
+                },
+                "BackgroundColor3": [
+                  0.1411764705882353,
+                  0.23921568627450981,
+                  0.19215686274509805
+                ],
+                "BackgroundTransparency": 0.65,
+                "BorderSizePixel": 0,
+                "ZIndex": 12
+              },
+              "Children": []
+            },
+            {
+              "Name": "Oval_06",
+              "ClassName": "Frame",
+              "Properties": {
+                "Position": {
+                  "UDim2": [
+                    [
+                      0.09767521282550834,
+                      0
+                    ],
+                    [
+                      0.1875,
+                      0
+                    ]
+                  ]
+                },
+                "Size": {
+                  "UDim2": [
+                    [
+                      0.8046495743489833,
+                      0
+                    ],
+                    [
+                      0.03125,
+                      0
+                    ]
+                  ]
+                },
+                "BackgroundColor3": [
+                  0.1411764705882353,
+                  0.23921568627450981,
+                  0.19215686274509805
+                ],
+                "BackgroundTransparency": 0.65,
+                "BorderSizePixel": 0,
+                "ZIndex": 12
+              },
+              "Children": []
+            },
+            {
+              "Name": "Oval_07",
+              "ClassName": "Frame",
+              "Properties": {
+                "Position": {
+                  "UDim2": [
+                    [
+                      0.0763924465085638,
+                      0
+                    ],
+                    [
+                      0.21875,
+                      0
+                    ]
+                  ]
+                },
+                "Size": {
+                  "UDim2": [
+                    [
+                      0.8472151069828724,
+                      0
+                    ],
+                    [
+                      0.03125,
+                      0
+                    ]
+                  ]
+                },
+                "BackgroundColor3": [
+                  0.1411764705882353,
+                  0.23921568627450981,
+                  0.19215686274509805
+                ],
+                "BackgroundTransparency": 0.65,
+                "BorderSizePixel": 0,
+                "ZIndex": 12
+              },
+              "Children": []
+            },
+            {
+              "Name": "Oval_08",
+              "ClassName": "Frame",
+              "Properties": {
+                "Position": {
+                  "UDim2": [
+                    [
+                      0.058334561715544686,
+                      0
+                    ],
+                    [
+                      0.25,
+                      0
+                    ]
+                  ]
+                },
+                "Size": {
+                  "UDim2": [
+                    [
+                      0.8833308765689106,
+                      0
+                    ],
+                    [
+                      0.03125,
+                      0
+                    ]
+                  ]
+                },
+                "BackgroundColor3": [
+                  0.1411764705882353,
+                  0.23921568627450981,
+                  0.19215686274509805
+                ],
+                "BackgroundTransparency": 0.65,
+                "BorderSizePixel": 0,
+                "ZIndex": 12
+              },
+              "Children": []
+            },
+            {
+              "Name": "Oval_09",
+              "ClassName": "Frame",
+              "Properties": {
+                "Position": {
+                  "UDim2": [
+                    [
+                      0.043119015087079826,
+                      0
+                    ],
+                    [
+                      0.28125,
+                      0
+                    ]
+                  ]
+                },
+                "Size": {
+                  "UDim2": [
+                    [
+                      0.9137619698258403,
+                      0
+                    ],
+                    [
+                      0.03125,
+                      0
+                    ]
+                  ]
+                },
+                "BackgroundColor3": [
+                  0.1411764705882353,
+                  0.23921568627450981,
+                  0.19215686274509805
+                ],
+                "BackgroundTransparency": 0.65,
+                "BorderSizePixel": 0,
+                "ZIndex": 12
+              },
+              "Children": []
+            },
+            {
+              "Name": "Oval_10",
+              "ClassName": "Frame",
+              "Properties": {
+                "Position": {
+                  "UDim2": [
+                    [
+                      0.030469399958852506,
+                      0
+                    ],
+                    [
+                      0.3125,
+                      0
+                    ]
+                  ]
+                },
+                "Size": {
+                  "UDim2": [
+                    [
+                      0.939061200082295,
+                      0
+                    ],
+                    [
+                      0.03125,
+                      0
+                    ]
+                  ]
+                },
+                "BackgroundColor3": [
+                  0.1411764705882353,
+                  0.23921568627450981,
+                  0.19215686274509805
+                ],
+                "BackgroundTransparency": 0.65,
+                "BorderSizePixel": 0,
+                "ZIndex": 12
+              },
+              "Children": []
+            },
+            {
+              "Name": "Oval_11",
+              "ClassName": "Frame",
+              "Properties": {
+                "Position": {
+                  "UDim2": [
+                    [
+                      0.02018273335049725,
+                      0
+                    ],
+                    [
+                      0.34375,
+                      0
+                    ]
+                  ]
+                },
+                "Size": {
+                  "UDim2": [
+                    [
+                      0.9596345332990055,
+                      0
+                    ],
+                    [
+                      0.03125,
+                      0
+                    ]
+                  ]
+                },
+                "BackgroundColor3": [
+                  0.1411764705882353,
+                  0.23921568627450981,
+                  0.19215686274509805
+                ],
+                "BackgroundTransparency": 0.65,
+                "BorderSizePixel": 0,
+                "ZIndex": 12
+              },
+              "Children": []
+            },
+            {
+              "Name": "Oval_12",
+              "ClassName": "Frame",
+              "Properties": {
+                "Position": {
+                  "UDim2": [
+                    [
+                      0.01210953137512516,
+                      0
+                    ],
+                    [
+                      0.375,
+                      0
+                    ]
+                  ]
+                },
+                "Size": {
+                  "UDim2": [
+                    [
+                      0.9757809372497497,
+                      0
+                    ],
+                    [
+                      0.03125,
+                      0
+                    ]
+                  ]
+                },
+                "BackgroundColor3": [
+                  0.1411764705882353,
+                  0.23921568627450981,
+                  0.19215686274509805
+                ],
+                "BackgroundTransparency": 0.65,
+                "BorderSizePixel": 0,
+                "ZIndex": 12
+              },
+              "Children": []
+            },
+            {
+              "Name": "Oval_13",
+              "ClassName": "Frame",
+              "Properties": {
+                "Position": {
+                  "UDim2": [
+                    [
+                      0.006141230335027892,
+                      0
+                    ],
+                    [
+                      0.40625,
+                      0
+                    ]
+                  ]
+                },
+                "Size": {
+                  "UDim2": [
+                    [
+                      0.9877175393299442,
+                      0
+                    ],
+                    [
+                      0.03125,
+                      0
+                    ]
+                  ]
+                },
+                "BackgroundColor3": [
+                  0.1411764705882353,
+                  0.23921568627450981,
+                  0.19215686274509805
+                ],
+                "BackgroundTransparency": 0.65,
+                "BorderSizePixel": 0,
+                "ZIndex": 12
+              },
+              "Children": []
+            },
+            {
+              "Name": "Oval_14",
+              "ClassName": "Frame",
+              "Properties": {
+                "Position": {
+                  "UDim2": [
+                    [
+                      0.0022021149351877933,
+                      0
+                    ],
+                    [
+                      0.4375,
+                      0
+                    ]
+                  ]
+                },
+                "Size": {
+                  "UDim2": [
+                    [
+                      0.9955957701296244,
+                      0
+                    ],
+                    [
+                      0.03125,
+                      0
+                    ]
+                  ]
+                },
+                "BackgroundColor3": [
+                  0.1411764705882353,
+                  0.23921568627450981,
+                  0.19215686274509805
+                ],
+                "BackgroundTransparency": 0.65,
+                "BorderSizePixel": 0,
+                "ZIndex": 12
+              },
+              "Children": []
+            },
+            {
+              "Name": "Oval_15",
+              "ClassName": "Frame",
+              "Properties": {
+                "Position": {
+                  "UDim2": [
+                    [
+                      0.0002442002587663694,
+                      0
+                    ],
+                    [
+                      0.46875,
+                      0
+                    ]
+                  ]
+                },
+                "Size": {
+                  "UDim2": [
+                    [
+                      0.9995115994824673,
+                      0
+                    ],
+                    [
+                      0.03125,
+                      0
+                    ]
+                  ]
+                },
+                "BackgroundColor3": [
+                  0.1411764705882353,
+                  0.23921568627450981,
+                  0.19215686274509805
+                ],
+                "BackgroundTransparency": 0.65,
+                "BorderSizePixel": 0,
+                "ZIndex": 12
+              },
+              "Children": []
+            },
+            {
+              "Name": "Oval_16",
+              "ClassName": "Frame",
+              "Properties": {
+                "Position": {
+                  "UDim2": [
+                    [
+                      0.0002442002587663694,
+                      0
+                    ],
+                    [
+                      0.5,
+                      0
+                    ]
+                  ]
+                },
+                "Size": {
+                  "UDim2": [
+                    [
+                      0.9995115994824673,
+                      0
+                    ],
+                    [
+                      0.03125,
+                      0
+                    ]
+                  ]
+                },
+                "BackgroundColor3": [
+                  0.1411764705882353,
+                  0.23921568627450981,
+                  0.19215686274509805
+                ],
+                "BackgroundTransparency": 0.65,
+                "BorderSizePixel": 0,
+                "ZIndex": 12
+              },
+              "Children": []
+            },
+            {
+              "Name": "Oval_17",
+              "ClassName": "Frame",
+              "Properties": {
+                "Position": {
+                  "UDim2": [
+                    [
+                      0.0022021149351877933,
+                      0
+                    ],
+                    [
+                      0.53125,
+                      0
+                    ]
+                  ]
+                },
+                "Size": {
+                  "UDim2": [
+                    [
+                      0.9955957701296244,
+                      0
+                    ],
+                    [
+                      0.03125,
+                      0
+                    ]
+                  ]
+                },
+                "BackgroundColor3": [
+                  0.1411764705882353,
+                  0.23921568627450981,
+                  0.19215686274509805
+                ],
+                "BackgroundTransparency": 0.65,
+                "BorderSizePixel": 0,
+                "ZIndex": 12
+              },
+              "Children": []
+            },
+            {
+              "Name": "Oval_18",
+              "ClassName": "Frame",
+              "Properties": {
+                "Position": {
+                  "UDim2": [
+                    [
+                      0.006141230335027892,
+                      0
+                    ],
+                    [
+                      0.5625,
+                      0
+                    ]
+                  ]
+                },
+                "Size": {
+                  "UDim2": [
+                    [
+                      0.9877175393299442,
+                      0
+                    ],
+                    [
+                      0.03125,
+                      0
+                    ]
+                  ]
+                },
+                "BackgroundColor3": [
+                  0.1411764705882353,
+                  0.23921568627450981,
+                  0.19215686274509805
+                ],
+                "BackgroundTransparency": 0.65,
+                "BorderSizePixel": 0,
+                "ZIndex": 12
+              },
+              "Children": []
+            },
+            {
+              "Name": "Oval_19",
+              "ClassName": "Frame",
+              "Properties": {
+                "Position": {
+                  "UDim2": [
+                    [
+                      0.01210953137512516,
+                      0
+                    ],
+                    [
+                      0.59375,
+                      0
+                    ]
+                  ]
+                },
+                "Size": {
+                  "UDim2": [
+                    [
+                      0.9757809372497497,
+                      0
+                    ],
+                    [
+                      0.03125,
+                      0
+                    ]
+                  ]
+                },
+                "BackgroundColor3": [
+                  0.1411764705882353,
+                  0.23921568627450981,
+                  0.19215686274509805
+                ],
+                "BackgroundTransparency": 0.65,
+                "BorderSizePixel": 0,
+                "ZIndex": 12
+              },
+              "Children": []
+            },
+            {
+              "Name": "Oval_20",
+              "ClassName": "Frame",
+              "Properties": {
+                "Position": {
+                  "UDim2": [
+                    [
+                      0.02018273335049725,
+                      0
+                    ],
+                    [
+                      0.625,
+                      0
+                    ]
+                  ]
+                },
+                "Size": {
+                  "UDim2": [
+                    [
+                      0.9596345332990055,
+                      0
+                    ],
+                    [
+                      0.03125,
+                      0
+                    ]
+                  ]
+                },
+                "BackgroundColor3": [
+                  0.1411764705882353,
+                  0.23921568627450981,
+                  0.19215686274509805
+                ],
+                "BackgroundTransparency": 0.65,
+                "BorderSizePixel": 0,
+                "ZIndex": 12
+              },
+              "Children": []
+            },
+            {
+              "Name": "Oval_21",
+              "ClassName": "Frame",
+              "Properties": {
+                "Position": {
+                  "UDim2": [
+                    [
+                      0.030469399958852506,
+                      0
+                    ],
+                    [
+                      0.65625,
+                      0
+                    ]
+                  ]
+                },
+                "Size": {
+                  "UDim2": [
+                    [
+                      0.939061200082295,
+                      0
+                    ],
+                    [
+                      0.03125,
+                      0
+                    ]
+                  ]
+                },
+                "BackgroundColor3": [
+                  0.1411764705882353,
+                  0.23921568627450981,
+                  0.19215686274509805
+                ],
+                "BackgroundTransparency": 0.65,
+                "BorderSizePixel": 0,
+                "ZIndex": 12
+              },
+              "Children": []
+            },
+            {
+              "Name": "Oval_22",
+              "ClassName": "Frame",
+              "Properties": {
+                "Position": {
+                  "UDim2": [
+                    [
+                      0.043119015087079826,
+                      0
+                    ],
+                    [
+                      0.6875,
+                      0
+                    ]
+                  ]
+                },
+                "Size": {
+                  "UDim2": [
+                    [
+                      0.9137619698258403,
+                      0
+                    ],
+                    [
+                      0.03125,
+                      0
+                    ]
+                  ]
+                },
+                "BackgroundColor3": [
+                  0.1411764705882353,
+                  0.23921568627450981,
+                  0.19215686274509805
+                ],
+                "BackgroundTransparency": 0.65,
+                "BorderSizePixel": 0,
+                "ZIndex": 12
+              },
+              "Children": []
+            },
+            {
+              "Name": "Oval_23",
+              "ClassName": "Frame",
+              "Properties": {
+                "Position": {
+                  "UDim2": [
+                    [
+                      0.058334561715544686,
+                      0
+                    ],
+                    [
+                      0.71875,
+                      0
+                    ]
+                  ]
+                },
+                "Size": {
+                  "UDim2": [
+                    [
+                      0.8833308765689106,
+                      0
+                    ],
+                    [
+                      0.03125,
+                      0
+                    ]
+                  ]
+                },
+                "BackgroundColor3": [
+                  0.1411764705882353,
+                  0.23921568627450981,
+                  0.19215686274509805
+                ],
+                "BackgroundTransparency": 0.65,
+                "BorderSizePixel": 0,
+                "ZIndex": 12
+              },
+              "Children": []
+            },
+            {
+              "Name": "Oval_24",
+              "ClassName": "Frame",
+              "Properties": {
+                "Position": {
+                  "UDim2": [
+                    [
+                      0.0763924465085638,
+                      0
+                    ],
+                    [
+                      0.75,
+                      0
+                    ]
+                  ]
+                },
+                "Size": {
+                  "UDim2": [
+                    [
+                      0.8472151069828724,
+                      0
+                    ],
+                    [
+                      0.03125,
+                      0
+                    ]
+                  ]
+                },
+                "BackgroundColor3": [
+                  0.1411764705882353,
+                  0.23921568627450981,
+                  0.19215686274509805
+                ],
+                "BackgroundTransparency": 0.65,
+                "BorderSizePixel": 0,
+                "ZIndex": 12
+              },
+              "Children": []
+            },
+            {
+              "Name": "Oval_25",
+              "ClassName": "Frame",
+              "Properties": {
+                "Position": {
+                  "UDim2": [
+                    [
+                      0.09767521282550834,
+                      0
+                    ],
+                    [
+                      0.78125,
+                      0
+                    ]
+                  ]
+                },
+                "Size": {
+                  "UDim2": [
+                    [
+                      0.8046495743489833,
+                      0
+                    ],
+                    [
+                      0.03125,
+                      0
+                    ]
+                  ]
+                },
+                "BackgroundColor3": [
+                  0.1411764705882353,
+                  0.23921568627450981,
+                  0.19215686274509805
+                ],
+                "BackgroundTransparency": 0.65,
+                "BorderSizePixel": 0,
+                "ZIndex": 12
+              },
+              "Children": []
+            },
+            {
+              "Name": "Oval_26",
+              "ClassName": "Frame",
+              "Properties": {
+                "Position": {
+                  "UDim2": [
+                    [
+                      0.12272823538594885,
+                      0
+                    ],
+                    [
+                      0.8125,
+                      0
+                    ]
+                  ]
+                },
+                "Size": {
+                  "UDim2": [
+                    [
+                      0.7545435292281023,
+                      0
+                    ],
+                    [
+                      0.03125,
+                      0
+                    ]
+                  ]
+                },
+                "BackgroundColor3": [
+                  0.1411764705882353,
+                  0.23921568627450981,
+                  0.19215686274509805
+                ],
+                "BackgroundTransparency": 0.65,
+                "BorderSizePixel": 0,
+                "ZIndex": 12
+              },
+              "Children": []
+            },
+            {
+              "Name": "Oval_27",
+              "ClassName": "Frame",
+              "Properties": {
+                "Position": {
+                  "UDim2": [
+                    [
+                      0.1523656959173908,
+                      0
+                    ],
+                    [
+                      0.84375,
+                      0
+                    ]
+                  ]
+                },
+                "Size": {
+                  "UDim2": [
+                    [
+                      0.6952686081652184,
+                      0
+                    ],
+                    [
+                      0.03125,
+                      0
+                    ]
+                  ]
+                },
+                "BackgroundColor3": [
+                  0.1411764705882353,
+                  0.23921568627450981,
+                  0.19215686274509805
+                ],
+                "BackgroundTransparency": 0.65,
+                "BorderSizePixel": 0,
+                "ZIndex": 12
+              },
+              "Children": []
+            },
+            {
+              "Name": "Oval_28",
+              "ClassName": "Frame",
+              "Properties": {
+                "Position": {
+                  "UDim2": [
+                    [
+                      0.18789086944627847,
+                      0
+                    ],
+                    [
+                      0.875,
+                      0
+                    ]
+                  ]
+                },
+                "Size": {
+                  "UDim2": [
+                    [
+                      0.624218261107443,
+                      0
+                    ],
+                    [
+                      0.03125,
+                      0
+                    ]
+                  ]
+                },
+                "BackgroundColor3": [
+                  0.1411764705882353,
+                  0.23921568627450981,
+                  0.19215686274509805
+                ],
+                "BackgroundTransparency": 0.65,
+                "BorderSizePixel": 0,
+                "ZIndex": 12
+              },
+              "Children": []
+            },
+            {
+              "Name": "Oval_29",
+              "ClassName": "Frame",
+              "Properties": {
+                "Position": {
+                  "UDim2": [
+                    [
+                      0.23163181191691146,
+                      0
+                    ],
+                    [
+                      0.90625,
+                      0
+                    ]
+                  ]
+                },
+                "Size": {
+                  "UDim2": [
+                    [
+                      0.5367363761661771,
+                      0
+                    ],
+                    [
+                      0.03125,
+                      0
+                    ]
+                  ]
+                },
+                "BackgroundColor3": [
+                  0.1411764705882353,
+                  0.23921568627450981,
+                  0.19215686274509805
+                ],
+                "BackgroundTransparency": 0.65,
+                "BorderSizePixel": 0,
+                "ZIndex": 12
+              },
+              "Children": []
+            },
+            {
+              "Name": "Oval_30",
+              "ClassName": "Frame",
+              "Properties": {
+                "Position": {
+                  "UDim2": [
+                    [
+                      0.28862891783642686,
+                      0
+                    ],
+                    [
+                      0.9375,
+                      0
+                    ]
+                  ]
+                },
+                "Size": {
+                  "UDim2": [
+                    [
+                      0.42274216432714634,
+                      0
+                    ],
+                    [
+                      0.03125,
+                      0
+                    ]
+                  ]
+                },
+                "BackgroundColor3": [
+                  0.1411764705882353,
+                  0.23921568627450981,
+                  0.19215686274509805
+                ],
+                "BackgroundTransparency": 0.65,
+                "BorderSizePixel": 0,
+                "ZIndex": 12
+              },
+              "Children": []
+            },
+            {
+              "Name": "Oval_31",
+              "ClassName": "Frame",
+              "Properties": {
+                "Position": {
+                  "UDim2": [
+                    [
+                      0.3759804072938473,
+                      0
+                    ],
+                    [
+                      0.96875,
+                      0
+                    ]
+                  ]
+                },
+                "Size": {
+                  "UDim2": [
+                    [
+                      0.24803918541230538,
+                      0
+                    ],
+                    [
+                      0.03125,
+                      0
+                    ]
+                  ]
+                },
+                "BackgroundColor3": [
+                  0.1411764705882353,
+                  0.23921568627450981,
+                  0.19215686274509805
+                ],
+                "BackgroundTransparency": 0.65,
+                "BorderSizePixel": 0,
+                "ZIndex": 12
+              },
+              "Children": []
+            }
+          ]
+        },
+        {
+          "Name": "FrogShadow",
+          "ClassName": "Frame",
+          "Properties": {
+            "Size": {
+              "UDim2": [
+                [
+                  0.16,
+                  0
+                ],
+                [
+                  0.04,
+                  0
+                ]
+              ]
+            },
+            "Position": {
+              "UDim2": [
+                [
+                  0.82,
+                  0
+                ],
+                [
+                  0.72,
+                  0
+                ]
+              ]
+            },
+            "BorderSizePixel": 0,
+            "BackgroundColor3": [
+              0.12549019607843137,
+              0.2196078431372549,
+              0.2901960784313726
+            ],
+            "BackgroundTransparency": 1,
+            "ZIndex": 11,
+            "AnchorPoint": [
+              0.5,
+              0.5
+            ]
+          },
+          "Children": [
+            {
+              "Name": "Oval_00",
+              "ClassName": "Frame",
+              "Properties": {
+                "Position": {
+                  "UDim2": [
+                    [
+                      0.3759804072938473,
+                      0
+                    ],
+                    [
+                      0.0,
+                      0
+                    ]
+                  ]
+                },
+                "Size": {
+                  "UDim2": [
+                    [
+                      0.24803918541230538,
+                      0
+                    ],
+                    [
+                      0.03125,
+                      0
+                    ]
+                  ]
+                },
+                "BackgroundColor3": [
+                  0.1411764705882353,
+                  0.23921568627450981,
+                  0.19215686274509805
+                ],
+                "BackgroundTransparency": 0.65,
+                "BorderSizePixel": 0,
+                "ZIndex": 12
+              },
+              "Children": []
+            },
+            {
+              "Name": "Oval_01",
+              "ClassName": "Frame",
+              "Properties": {
+                "Position": {
+                  "UDim2": [
+                    [
+                      0.28862891783642686,
+                      0
+                    ],
+                    [
+                      0.03125,
+                      0
+                    ]
+                  ]
+                },
+                "Size": {
+                  "UDim2": [
+                    [
+                      0.42274216432714634,
+                      0
+                    ],
+                    [
+                      0.03125,
+                      0
+                    ]
+                  ]
+                },
+                "BackgroundColor3": [
+                  0.1411764705882353,
+                  0.23921568627450981,
+                  0.19215686274509805
+                ],
+                "BackgroundTransparency": 0.65,
+                "BorderSizePixel": 0,
+                "ZIndex": 12
+              },
+              "Children": []
+            },
+            {
+              "Name": "Oval_02",
+              "ClassName": "Frame",
+              "Properties": {
+                "Position": {
+                  "UDim2": [
+                    [
+                      0.23163181191691146,
+                      0
+                    ],
+                    [
+                      0.0625,
+                      0
+                    ]
+                  ]
+                },
+                "Size": {
+                  "UDim2": [
+                    [
+                      0.5367363761661771,
+                      0
+                    ],
+                    [
+                      0.03125,
+                      0
+                    ]
+                  ]
+                },
+                "BackgroundColor3": [
+                  0.1411764705882353,
+                  0.23921568627450981,
+                  0.19215686274509805
+                ],
+                "BackgroundTransparency": 0.65,
+                "BorderSizePixel": 0,
+                "ZIndex": 12
+              },
+              "Children": []
+            },
+            {
+              "Name": "Oval_03",
+              "ClassName": "Frame",
+              "Properties": {
+                "Position": {
+                  "UDim2": [
+                    [
+                      0.18789086944627847,
+                      0
+                    ],
+                    [
+                      0.09375,
+                      0
+                    ]
+                  ]
+                },
+                "Size": {
+                  "UDim2": [
+                    [
+                      0.624218261107443,
+                      0
+                    ],
+                    [
+                      0.03125,
+                      0
+                    ]
+                  ]
+                },
+                "BackgroundColor3": [
+                  0.1411764705882353,
+                  0.23921568627450981,
+                  0.19215686274509805
+                ],
+                "BackgroundTransparency": 0.65,
+                "BorderSizePixel": 0,
+                "ZIndex": 12
+              },
+              "Children": []
+            },
+            {
+              "Name": "Oval_04",
+              "ClassName": "Frame",
+              "Properties": {
+                "Position": {
+                  "UDim2": [
+                    [
+                      0.1523656959173908,
+                      0
+                    ],
+                    [
+                      0.125,
+                      0
+                    ]
+                  ]
+                },
+                "Size": {
+                  "UDim2": [
+                    [
+                      0.6952686081652184,
+                      0
+                    ],
+                    [
+                      0.03125,
+                      0
+                    ]
+                  ]
+                },
+                "BackgroundColor3": [
+                  0.1411764705882353,
+                  0.23921568627450981,
+                  0.19215686274509805
+                ],
+                "BackgroundTransparency": 0.65,
+                "BorderSizePixel": 0,
+                "ZIndex": 12
+              },
+              "Children": []
+            },
+            {
+              "Name": "Oval_05",
+              "ClassName": "Frame",
+              "Properties": {
+                "Position": {
+                  "UDim2": [
+                    [
+                      0.12272823538594885,
+                      0
+                    ],
+                    [
+                      0.15625,
+                      0
+                    ]
+                  ]
+                },
+                "Size": {
+                  "UDim2": [
+                    [
+                      0.7545435292281023,
+                      0
+                    ],
+                    [
+                      0.03125,
+                      0
+                    ]
+                  ]
+                },
+                "BackgroundColor3": [
+                  0.1411764705882353,
+                  0.23921568627450981,
+                  0.19215686274509805
+                ],
+                "BackgroundTransparency": 0.65,
+                "BorderSizePixel": 0,
+                "ZIndex": 12
+              },
+              "Children": []
+            },
+            {
+              "Name": "Oval_06",
+              "ClassName": "Frame",
+              "Properties": {
+                "Position": {
+                  "UDim2": [
+                    [
+                      0.09767521282550834,
+                      0
+                    ],
+                    [
+                      0.1875,
+                      0
+                    ]
+                  ]
+                },
+                "Size": {
+                  "UDim2": [
+                    [
+                      0.8046495743489833,
+                      0
+                    ],
+                    [
+                      0.03125,
+                      0
+                    ]
+                  ]
+                },
+                "BackgroundColor3": [
+                  0.1411764705882353,
+                  0.23921568627450981,
+                  0.19215686274509805
+                ],
+                "BackgroundTransparency": 0.65,
+                "BorderSizePixel": 0,
+                "ZIndex": 12
+              },
+              "Children": []
+            },
+            {
+              "Name": "Oval_07",
+              "ClassName": "Frame",
+              "Properties": {
+                "Position": {
+                  "UDim2": [
+                    [
+                      0.0763924465085638,
+                      0
+                    ],
+                    [
+                      0.21875,
+                      0
+                    ]
+                  ]
+                },
+                "Size": {
+                  "UDim2": [
+                    [
+                      0.8472151069828724,
+                      0
+                    ],
+                    [
+                      0.03125,
+                      0
+                    ]
+                  ]
+                },
+                "BackgroundColor3": [
+                  0.1411764705882353,
+                  0.23921568627450981,
+                  0.19215686274509805
+                ],
+                "BackgroundTransparency": 0.65,
+                "BorderSizePixel": 0,
+                "ZIndex": 12
+              },
+              "Children": []
+            },
+            {
+              "Name": "Oval_08",
+              "ClassName": "Frame",
+              "Properties": {
+                "Position": {
+                  "UDim2": [
+                    [
+                      0.058334561715544686,
+                      0
+                    ],
+                    [
+                      0.25,
+                      0
+                    ]
+                  ]
+                },
+                "Size": {
+                  "UDim2": [
+                    [
+                      0.8833308765689106,
+                      0
+                    ],
+                    [
+                      0.03125,
+                      0
+                    ]
+                  ]
+                },
+                "BackgroundColor3": [
+                  0.1411764705882353,
+                  0.23921568627450981,
+                  0.19215686274509805
+                ],
+                "BackgroundTransparency": 0.65,
+                "BorderSizePixel": 0,
+                "ZIndex": 12
+              },
+              "Children": []
+            },
+            {
+              "Name": "Oval_09",
+              "ClassName": "Frame",
+              "Properties": {
+                "Position": {
+                  "UDim2": [
+                    [
+                      0.043119015087079826,
+                      0
+                    ],
+                    [
+                      0.28125,
+                      0
+                    ]
+                  ]
+                },
+                "Size": {
+                  "UDim2": [
+                    [
+                      0.9137619698258403,
+                      0
+                    ],
+                    [
+                      0.03125,
+                      0
+                    ]
+                  ]
+                },
+                "BackgroundColor3": [
+                  0.1411764705882353,
+                  0.23921568627450981,
+                  0.19215686274509805
+                ],
+                "BackgroundTransparency": 0.65,
+                "BorderSizePixel": 0,
+                "ZIndex": 12
+              },
+              "Children": []
+            },
+            {
+              "Name": "Oval_10",
+              "ClassName": "Frame",
+              "Properties": {
+                "Position": {
+                  "UDim2": [
+                    [
+                      0.030469399958852506,
+                      0
+                    ],
+                    [
+                      0.3125,
+                      0
+                    ]
+                  ]
+                },
+                "Size": {
+                  "UDim2": [
+                    [
+                      0.939061200082295,
+                      0
+                    ],
+                    [
+                      0.03125,
+                      0
+                    ]
+                  ]
+                },
+                "BackgroundColor3": [
+                  0.1411764705882353,
+                  0.23921568627450981,
+                  0.19215686274509805
+                ],
+                "BackgroundTransparency": 0.65,
+                "BorderSizePixel": 0,
+                "ZIndex": 12
+              },
+              "Children": []
+            },
+            {
+              "Name": "Oval_11",
+              "ClassName": "Frame",
+              "Properties": {
+                "Position": {
+                  "UDim2": [
+                    [
+                      0.02018273335049725,
+                      0
+                    ],
+                    [
+                      0.34375,
+                      0
+                    ]
+                  ]
+                },
+                "Size": {
+                  "UDim2": [
+                    [
+                      0.9596345332990055,
+                      0
+                    ],
+                    [
+                      0.03125,
+                      0
+                    ]
+                  ]
+                },
+                "BackgroundColor3": [
+                  0.1411764705882353,
+                  0.23921568627450981,
+                  0.19215686274509805
+                ],
+                "BackgroundTransparency": 0.65,
+                "BorderSizePixel": 0,
+                "ZIndex": 12
+              },
+              "Children": []
+            },
+            {
+              "Name": "Oval_12",
+              "ClassName": "Frame",
+              "Properties": {
+                "Position": {
+                  "UDim2": [
+                    [
+                      0.01210953137512516,
+                      0
+                    ],
+                    [
+                      0.375,
+                      0
+                    ]
+                  ]
+                },
+                "Size": {
+                  "UDim2": [
+                    [
+                      0.9757809372497497,
+                      0
+                    ],
+                    [
+                      0.03125,
+                      0
+                    ]
+                  ]
+                },
+                "BackgroundColor3": [
+                  0.1411764705882353,
+                  0.23921568627450981,
+                  0.19215686274509805
+                ],
+                "BackgroundTransparency": 0.65,
+                "BorderSizePixel": 0,
+                "ZIndex": 12
+              },
+              "Children": []
+            },
+            {
+              "Name": "Oval_13",
+              "ClassName": "Frame",
+              "Properties": {
+                "Position": {
+                  "UDim2": [
+                    [
+                      0.006141230335027892,
+                      0
+                    ],
+                    [
+                      0.40625,
+                      0
+                    ]
+                  ]
+                },
+                "Size": {
+                  "UDim2": [
+                    [
+                      0.9877175393299442,
+                      0
+                    ],
+                    [
+                      0.03125,
+                      0
+                    ]
+                  ]
+                },
+                "BackgroundColor3": [
+                  0.1411764705882353,
+                  0.23921568627450981,
+                  0.19215686274509805
+                ],
+                "BackgroundTransparency": 0.65,
+                "BorderSizePixel": 0,
+                "ZIndex": 12
+              },
+              "Children": []
+            },
+            {
+              "Name": "Oval_14",
+              "ClassName": "Frame",
+              "Properties": {
+                "Position": {
+                  "UDim2": [
+                    [
+                      0.0022021149351877933,
+                      0
+                    ],
+                    [
+                      0.4375,
+                      0
+                    ]
+                  ]
+                },
+                "Size": {
+                  "UDim2": [
+                    [
+                      0.9955957701296244,
+                      0
+                    ],
+                    [
+                      0.03125,
+                      0
+                    ]
+                  ]
+                },
+                "BackgroundColor3": [
+                  0.1411764705882353,
+                  0.23921568627450981,
+                  0.19215686274509805
+                ],
+                "BackgroundTransparency": 0.65,
+                "BorderSizePixel": 0,
+                "ZIndex": 12
+              },
+              "Children": []
+            },
+            {
+              "Name": "Oval_15",
+              "ClassName": "Frame",
+              "Properties": {
+                "Position": {
+                  "UDim2": [
+                    [
+                      0.0002442002587663694,
+                      0
+                    ],
+                    [
+                      0.46875,
+                      0
+                    ]
+                  ]
+                },
+                "Size": {
+                  "UDim2": [
+                    [
+                      0.9995115994824673,
+                      0
+                    ],
+                    [
+                      0.03125,
+                      0
+                    ]
+                  ]
+                },
+                "BackgroundColor3": [
+                  0.1411764705882353,
+                  0.23921568627450981,
+                  0.19215686274509805
+                ],
+                "BackgroundTransparency": 0.65,
+                "BorderSizePixel": 0,
+                "ZIndex": 12
+              },
+              "Children": []
+            },
+            {
+              "Name": "Oval_16",
+              "ClassName": "Frame",
+              "Properties": {
+                "Position": {
+                  "UDim2": [
+                    [
+                      0.0002442002587663694,
+                      0
+                    ],
+                    [
+                      0.5,
+                      0
+                    ]
+                  ]
+                },
+                "Size": {
+                  "UDim2": [
+                    [
+                      0.9995115994824673,
+                      0
+                    ],
+                    [
+                      0.03125,
+                      0
+                    ]
+                  ]
+                },
+                "BackgroundColor3": [
+                  0.1411764705882353,
+                  0.23921568627450981,
+                  0.19215686274509805
+                ],
+                "BackgroundTransparency": 0.65,
+                "BorderSizePixel": 0,
+                "ZIndex": 12
+              },
+              "Children": []
+            },
+            {
+              "Name": "Oval_17",
+              "ClassName": "Frame",
+              "Properties": {
+                "Position": {
+                  "UDim2": [
+                    [
+                      0.0022021149351877933,
+                      0
+                    ],
+                    [
+                      0.53125,
+                      0
+                    ]
+                  ]
+                },
+                "Size": {
+                  "UDim2": [
+                    [
+                      0.9955957701296244,
+                      0
+                    ],
+                    [
+                      0.03125,
+                      0
+                    ]
+                  ]
+                },
+                "BackgroundColor3": [
+                  0.1411764705882353,
+                  0.23921568627450981,
+                  0.19215686274509805
+                ],
+                "BackgroundTransparency": 0.65,
+                "BorderSizePixel": 0,
+                "ZIndex": 12
+              },
+              "Children": []
+            },
+            {
+              "Name": "Oval_18",
+              "ClassName": "Frame",
+              "Properties": {
+                "Position": {
+                  "UDim2": [
+                    [
+                      0.006141230335027892,
+                      0
+                    ],
+                    [
+                      0.5625,
+                      0
+                    ]
+                  ]
+                },
+                "Size": {
+                  "UDim2": [
+                    [
+                      0.9877175393299442,
+                      0
+                    ],
+                    [
+                      0.03125,
+                      0
+                    ]
+                  ]
+                },
+                "BackgroundColor3": [
+                  0.1411764705882353,
+                  0.23921568627450981,
+                  0.19215686274509805
+                ],
+                "BackgroundTransparency": 0.65,
+                "BorderSizePixel": 0,
+                "ZIndex": 12
+              },
+              "Children": []
+            },
+            {
+              "Name": "Oval_19",
+              "ClassName": "Frame",
+              "Properties": {
+                "Position": {
+                  "UDim2": [
+                    [
+                      0.01210953137512516,
+                      0
+                    ],
+                    [
+                      0.59375,
+                      0
+                    ]
+                  ]
+                },
+                "Size": {
+                  "UDim2": [
+                    [
+                      0.9757809372497497,
+                      0
+                    ],
+                    [
+                      0.03125,
+                      0
+                    ]
+                  ]
+                },
+                "BackgroundColor3": [
+                  0.1411764705882353,
+                  0.23921568627450981,
+                  0.19215686274509805
+                ],
+                "BackgroundTransparency": 0.65,
+                "BorderSizePixel": 0,
+                "ZIndex": 12
+              },
+              "Children": []
+            },
+            {
+              "Name": "Oval_20",
+              "ClassName": "Frame",
+              "Properties": {
+                "Position": {
+                  "UDim2": [
+                    [
+                      0.02018273335049725,
+                      0
+                    ],
+                    [
+                      0.625,
+                      0
+                    ]
+                  ]
+                },
+                "Size": {
+                  "UDim2": [
+                    [
+                      0.9596345332990055,
+                      0
+                    ],
+                    [
+                      0.03125,
+                      0
+                    ]
+                  ]
+                },
+                "BackgroundColor3": [
+                  0.1411764705882353,
+                  0.23921568627450981,
+                  0.19215686274509805
+                ],
+                "BackgroundTransparency": 0.65,
+                "BorderSizePixel": 0,
+                "ZIndex": 12
+              },
+              "Children": []
+            },
+            {
+              "Name": "Oval_21",
+              "ClassName": "Frame",
+              "Properties": {
+                "Position": {
+                  "UDim2": [
+                    [
+                      0.030469399958852506,
+                      0
+                    ],
+                    [
+                      0.65625,
+                      0
+                    ]
+                  ]
+                },
+                "Size": {
+                  "UDim2": [
+                    [
+                      0.939061200082295,
+                      0
+                    ],
+                    [
+                      0.03125,
+                      0
+                    ]
+                  ]
+                },
+                "BackgroundColor3": [
+                  0.1411764705882353,
+                  0.23921568627450981,
+                  0.19215686274509805
+                ],
+                "BackgroundTransparency": 0.65,
+                "BorderSizePixel": 0,
+                "ZIndex": 12
+              },
+              "Children": []
+            },
+            {
+              "Name": "Oval_22",
+              "ClassName": "Frame",
+              "Properties": {
+                "Position": {
+                  "UDim2": [
+                    [
+                      0.043119015087079826,
+                      0
+                    ],
+                    [
+                      0.6875,
+                      0
+                    ]
+                  ]
+                },
+                "Size": {
+                  "UDim2": [
+                    [
+                      0.9137619698258403,
+                      0
+                    ],
+                    [
+                      0.03125,
+                      0
+                    ]
+                  ]
+                },
+                "BackgroundColor3": [
+                  0.1411764705882353,
+                  0.23921568627450981,
+                  0.19215686274509805
+                ],
+                "BackgroundTransparency": 0.65,
+                "BorderSizePixel": 0,
+                "ZIndex": 12
+              },
+              "Children": []
+            },
+            {
+              "Name": "Oval_23",
+              "ClassName": "Frame",
+              "Properties": {
+                "Position": {
+                  "UDim2": [
+                    [
+                      0.058334561715544686,
+                      0
+                    ],
+                    [
+                      0.71875,
+                      0
+                    ]
+                  ]
+                },
+                "Size": {
+                  "UDim2": [
+                    [
+                      0.8833308765689106,
+                      0
+                    ],
+                    [
+                      0.03125,
+                      0
+                    ]
+                  ]
+                },
+                "BackgroundColor3": [
+                  0.1411764705882353,
+                  0.23921568627450981,
+                  0.19215686274509805
+                ],
+                "BackgroundTransparency": 0.65,
+                "BorderSizePixel": 0,
+                "ZIndex": 12
+              },
+              "Children": []
+            },
+            {
+              "Name": "Oval_24",
+              "ClassName": "Frame",
+              "Properties": {
+                "Position": {
+                  "UDim2": [
+                    [
+                      0.0763924465085638,
+                      0
+                    ],
+                    [
+                      0.75,
+                      0
+                    ]
+                  ]
+                },
+                "Size": {
+                  "UDim2": [
+                    [
+                      0.8472151069828724,
+                      0
+                    ],
+                    [
+                      0.03125,
+                      0
+                    ]
+                  ]
+                },
+                "BackgroundColor3": [
+                  0.1411764705882353,
+                  0.23921568627450981,
+                  0.19215686274509805
+                ],
+                "BackgroundTransparency": 0.65,
+                "BorderSizePixel": 0,
+                "ZIndex": 12
+              },
+              "Children": []
+            },
+            {
+              "Name": "Oval_25",
+              "ClassName": "Frame",
+              "Properties": {
+                "Position": {
+                  "UDim2": [
+                    [
+                      0.09767521282550834,
+                      0
+                    ],
+                    [
+                      0.78125,
+                      0
+                    ]
+                  ]
+                },
+                "Size": {
+                  "UDim2": [
+                    [
+                      0.8046495743489833,
+                      0
+                    ],
+                    [
+                      0.03125,
+                      0
+                    ]
+                  ]
+                },
+                "BackgroundColor3": [
+                  0.1411764705882353,
+                  0.23921568627450981,
+                  0.19215686274509805
+                ],
+                "BackgroundTransparency": 0.65,
+                "BorderSizePixel": 0,
+                "ZIndex": 12
+              },
+              "Children": []
+            },
+            {
+              "Name": "Oval_26",
+              "ClassName": "Frame",
+              "Properties": {
+                "Position": {
+                  "UDim2": [
+                    [
+                      0.12272823538594885,
+                      0
+                    ],
+                    [
+                      0.8125,
+                      0
+                    ]
+                  ]
+                },
+                "Size": {
+                  "UDim2": [
+                    [
+                      0.7545435292281023,
+                      0
+                    ],
+                    [
+                      0.03125,
+                      0
+                    ]
+                  ]
+                },
+                "BackgroundColor3": [
+                  0.1411764705882353,
+                  0.23921568627450981,
+                  0.19215686274509805
+                ],
+                "BackgroundTransparency": 0.65,
+                "BorderSizePixel": 0,
+                "ZIndex": 12
+              },
+              "Children": []
+            },
+            {
+              "Name": "Oval_27",
+              "ClassName": "Frame",
+              "Properties": {
+                "Position": {
+                  "UDim2": [
+                    [
+                      0.1523656959173908,
+                      0
+                    ],
+                    [
+                      0.84375,
+                      0
+                    ]
+                  ]
+                },
+                "Size": {
+                  "UDim2": [
+                    [
+                      0.6952686081652184,
+                      0
+                    ],
+                    [
+                      0.03125,
+                      0
+                    ]
+                  ]
+                },
+                "BackgroundColor3": [
+                  0.1411764705882353,
+                  0.23921568627450981,
+                  0.19215686274509805
+                ],
+                "BackgroundTransparency": 0.65,
+                "BorderSizePixel": 0,
+                "ZIndex": 12
+              },
+              "Children": []
+            },
+            {
+              "Name": "Oval_28",
+              "ClassName": "Frame",
+              "Properties": {
+                "Position": {
+                  "UDim2": [
+                    [
+                      0.18789086944627847,
+                      0
+                    ],
+                    [
+                      0.875,
+                      0
+                    ]
+                  ]
+                },
+                "Size": {
+                  "UDim2": [
+                    [
+                      0.624218261107443,
+                      0
+                    ],
+                    [
+                      0.03125,
+                      0
+                    ]
+                  ]
+                },
+                "BackgroundColor3": [
+                  0.1411764705882353,
+                  0.23921568627450981,
+                  0.19215686274509805
+                ],
+                "BackgroundTransparency": 0.65,
+                "BorderSizePixel": 0,
+                "ZIndex": 12
+              },
+              "Children": []
+            },
+            {
+              "Name": "Oval_29",
+              "ClassName": "Frame",
+              "Properties": {
+                "Position": {
+                  "UDim2": [
+                    [
+                      0.23163181191691146,
+                      0
+                    ],
+                    [
+                      0.90625,
+                      0
+                    ]
+                  ]
+                },
+                "Size": {
+                  "UDim2": [
+                    [
+                      0.5367363761661771,
+                      0
+                    ],
+                    [
+                      0.03125,
+                      0
+                    ]
+                  ]
+                },
+                "BackgroundColor3": [
+                  0.1411764705882353,
+                  0.23921568627450981,
+                  0.19215686274509805
+                ],
+                "BackgroundTransparency": 0.65,
+                "BorderSizePixel": 0,
+                "ZIndex": 12
+              },
+              "Children": []
+            },
+            {
+              "Name": "Oval_30",
+              "ClassName": "Frame",
+              "Properties": {
+                "Position": {
+                  "UDim2": [
+                    [
+                      0.28862891783642686,
+                      0
+                    ],
+                    [
+                      0.9375,
+                      0
+                    ]
+                  ]
+                },
+                "Size": {
+                  "UDim2": [
+                    [
+                      0.42274216432714634,
+                      0
+                    ],
+                    [
+                      0.03125,
+                      0
+                    ]
+                  ]
+                },
+                "BackgroundColor3": [
+                  0.1411764705882353,
+                  0.23921568627450981,
+                  0.19215686274509805
+                ],
+                "BackgroundTransparency": 0.65,
+                "BorderSizePixel": 0,
+                "ZIndex": 12
+              },
+              "Children": []
+            },
+            {
+              "Name": "Oval_31",
+              "ClassName": "Frame",
+              "Properties": {
+                "Position": {
+                  "UDim2": [
+                    [
+                      0.3759804072938473,
+                      0
+                    ],
+                    [
+                      0.96875,
+                      0
+                    ]
+                  ]
+                },
+                "Size": {
+                  "UDim2": [
+                    [
+                      0.24803918541230538,
+                      0
+                    ],
+                    [
+                      0.03125,
+                      0
+                    ]
+                  ]
+                },
+                "BackgroundColor3": [
+                  0.1411764705882353,
+                  0.23921568627450981,
+                  0.19215686274509805
+                ],
+                "BackgroundTransparency": 0.65,
+                "BorderSizePixel": 0,
+                "ZIndex": 12
               },
               "Children": []
             }
@@ -2060,7 +4587,7 @@
             },
             "BackgroundTransparency": 1,
             "BorderSizePixel": 0,
-            "Text": "FIRST SPARK",
+            "Text": "AWAKENING FIELDS",
             "Font": "GothamBold",
             "TextColor3": [
               1.0,
@@ -2468,7 +4995,7 @@
                     },
                     "BackgroundTransparency": 1,
                     "BorderSizePixel": 0,
-                    "Text": "First trail \u2022 First Spark",
+                    "Text": "First trail \u2022 Awakening Fields",
                     "Font": "GothamBold",
                     "TextColor3": [
                       0.792156862745098,
@@ -3448,6 +5975,195 @@
                       0.5215686274509804,
                       0.8745098039215686,
                       0.7686274509803922
+                    ],
+                    "AutoButtonColor": true
+                  },
+                  "Children": [
+                    {
+                      "Name": "Corner",
+                      "ClassName": "UICorner",
+                      "Properties": {
+                        "CornerRadius": {
+                          "UDim": [
+                            0,
+                            12
+                          ]
+                        }
+                      },
+                      "Children": []
+                    }
+                  ]
+                },
+                {
+                  "Name": "Select_base",
+                  "ClassName": "TextButton",
+                  "Properties": {
+                    "Size": {
+                      "UDim2": [
+                        [
+                          1,
+                          0
+                        ],
+                        [
+                          0,
+                          44
+                        ]
+                      ]
+                    },
+                    "Position": {
+                      "UDim2": [
+                        [
+                          0,
+                          0
+                        ],
+                        [
+                          0,
+                          422
+                        ]
+                      ]
+                    },
+                    "BackgroundTransparency": 0,
+                    "BorderSizePixel": 0,
+                    "Text": "ORIGINAL PACK",
+                    "Font": "GothamBold",
+                    "TextColor3": [
+                      0.09019607843137255,
+                      0.16470588235294117,
+                      0.23137254901960785
+                    ],
+                    "TextSize": 16,
+                    "TextWrapped": true,
+                    "ZIndex": 14,
+                    "BackgroundColor3": [
+                      1.0,
+                      0.6823529411764706,
+                      0.2823529411764706
+                    ],
+                    "AutoButtonColor": true
+                  },
+                  "Children": [
+                    {
+                      "Name": "Corner",
+                      "ClassName": "UICorner",
+                      "Properties": {
+                        "CornerRadius": {
+                          "UDim": [
+                            0,
+                            12
+                          ]
+                        }
+                      },
+                      "Children": []
+                    }
+                  ]
+                },
+                {
+                  "Name": "Select_cream",
+                  "ClassName": "TextButton",
+                  "Properties": {
+                    "Size": {
+                      "UDim2": [
+                        [
+                          1,
+                          0
+                        ],
+                        [
+                          0,
+                          44
+                        ]
+                      ]
+                    },
+                    "Position": {
+                      "UDim2": [
+                        [
+                          0,
+                          0
+                        ],
+                        [
+                          0,
+                          474
+                        ]
+                      ]
+                    },
+                    "BackgroundTransparency": 0,
+                    "BorderSizePixel": 0,
+                    "Text": "CREAM PACK",
+                    "Font": "GothamBold",
+                    "TextColor3": [
+                      0.09019607843137255,
+                      0.16470588235294117,
+                      0.23137254901960785
+                    ],
+                    "TextSize": 16,
+                    "TextWrapped": true,
+                    "ZIndex": 14,
+                    "BackgroundColor3": [
+                      1.0,
+                      0.6823529411764706,
+                      0.2823529411764706
+                    ],
+                    "AutoButtonColor": true
+                  },
+                  "Children": [
+                    {
+                      "Name": "Corner",
+                      "ClassName": "UICorner",
+                      "Properties": {
+                        "CornerRadius": {
+                          "UDim": [
+                            0,
+                            12
+                          ]
+                        }
+                      },
+                      "Children": []
+                    }
+                  ]
+                },
+                {
+                  "Name": "Select_scarf",
+                  "ClassName": "TextButton",
+                  "Properties": {
+                    "Size": {
+                      "UDim2": [
+                        [
+                          1,
+                          0
+                        ],
+                        [
+                          0,
+                          44
+                        ]
+                      ]
+                    },
+                    "Position": {
+                      "UDim2": [
+                        [
+                          0,
+                          0
+                        ],
+                        [
+                          0,
+                          526
+                        ]
+                      ]
+                    },
+                    "BackgroundTransparency": 0,
+                    "BorderSizePixel": 0,
+                    "Text": "YELLOW SCARF PACK",
+                    "Font": "GothamBold",
+                    "TextColor3": [
+                      0.09019607843137255,
+                      0.16470588235294117,
+                      0.23137254901960785
+                    ],
+                    "TextSize": 16,
+                    "TextWrapped": true,
+                    "ZIndex": 14,
+                    "BackgroundColor3": [
+                      1.0,
+                      0.6823529411764706,
+                      0.2823529411764706
                     ],
                     "AutoButtonColor": true
                   },
@@ -4806,7 +7522,7 @@
                         },
                         "BackgroundTransparency": 1,
                         "BorderSizePixel": 0,
-                        "Text": "Complete First Spark without dying \u2022 10 coins",
+                        "Text": "Complete Awakening Fields without dying \u2022 10 coins",
                         "Font": "GothamBold",
                         "TextColor3": [
                           1.0,

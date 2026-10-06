@@ -6,6 +6,8 @@ Cada skin é um pack completo. A orientação mais recente do usuário substitui
 - `frog/base`: sapinho sem cavaleiro, usado também pelo ícone do HUD.
 - `mounted/base/mounted-v1.png`: terceiro tipo de sprite; protagonista sentado no sapinho, desenhados juntos.
 - `sprite-manifest.json`: recortes medidos, pontos de apoio e sequências.
+- `frog/frame-crops.json`: limites explícitos que excluem pixels de frames vizinhos sem cortar cabeça ou pés.
+- `frame-inspector.html`: inspeção congelada com limites, apoio e reprodução opcional; independente de `preview.html`.
 - `roblox-assets.json`: registro de uploads ao grupo 204998424, Capyboom Studios.
 - `preview.html`: prévia local das três formas.
 
@@ -23,6 +25,6 @@ Os recortes preservam a proporção original e usam escala uniforme de pixels. O
 
 Os PNGs ficam fora da árvore do Rojo. Rojo sincroniza módulos e vínculos; o importador do Studio envia as imagens. Os quatro atlas foram enviados em 03/10/2026 ao grupo autorizado. Os originais possuem 1254×1254 pixels; o Roblox entrega 1024×1024. O cliente converte os recortes à resolução entregue.
 
-Os atlas antigos mantêm seus recortes e sequências. A antiga linha de poses sentadas do protagonista permanece no catálogo como referência de arte; a renderização montada agora usa o terceiro atlas. O atlas novo contém caminhada e idle nas quatro direções. Ações montadas específicas de dano, vitória, montar e desmontar ainda não foram produzidas; o jogo atual não as solicita.
+Os recortes do sapinho foram revisados para excluir arte vizinha. Idle frontal mantém olhos abertos; SpriteAnimation seleciona piscadas ocasionais usando poses fechadas existentes. A antiga linha de poses sentadas do protagonista permanece no catálogo como referência de arte; a renderização montada usa o terceiro atlas. O atlas montado contém caminhada e idle nas quatro direções. Ações montadas específicas de piscada, dano, vitória, montar e desmontar ainda não foram produzidas. Veja docs/ANIMACAO_E_RECORTES.md para pendências de arte e resultados reais da validação.
 
 Para regenerar metadados, execute `tools/Measure-SpriteAtlases.ps1` e `tools/Generate-SpriteCatalog.py`. A geração preserva os PNGs e os IDs enviados. `tools/SkinPacks.spec.luau` valida resolução de frames, suporte visual e persistência do pack; `tools/Preview-Mounted.ps1` gera uma prévia estática.

@@ -1,0 +1,1 @@
+assert(game.PlaceId==140221183064352); local ui=game.Players.LocalPlayer.PlayerGui.TutorialUI; ui:SetAttribute("ArenaDebug",false); print("BOMB_STONE_QA_CLEANED",ui:GetAttribute("ArenaDebug"))

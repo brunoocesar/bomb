@@ -6,6 +6,8 @@ Antes de qualquer tarefa, leia integralmente [Plano_Profissional_Bomb_Your_Way (
 
 Este é o GDD versão 2.0, com 40 páginas no arquivo atual. Ele substitui integralmente o PDF anterior; não use a versão antiga como referência. Preserve as distinções do documento: APROVADO é direção definida, RECOMENDADO é proposta sujeita a teste e FUTURO está fora do lançamento. Exemplos de textos em português no PDF devem ser adaptados para inglês no jogo.
 
+Antes de planejar, criar ou alterar qualquer mundo, fase ou etapa, consulte também [Mundos_Fases_Etapas_Bomb_Your_Way (1).pdf](<Mundos_Fases_Etapas_Bomb_Your_Way (1).pdf>), incluindo a planta e o design correspondentes. O usuário definiu esse documento como a referência inicial para os mundos, fases e etapas; suas propostas podem ser revisadas após os testes. Use-o em conjunto com o GDD e as instruções mais recentes do usuário. A presença de toda a campanha no PDF não autoriza implementá-la integralmente sem solicitação. Se não conseguir ler o documento ou suas plantas, informe a limitação e não invente os detalhes.
+
 ## Idioma e projeto
 
 Converse com o usuário em português. Apenas o jogo em si deve estar em inglês: textos exibidos, menus, dicas, controles, nomes apresentados e resultados. A documentação pode estar em português. Preserve nomes externos e caminhos quando necessário.
@@ -23,7 +25,7 @@ Esta pasta pertence exclusivamente a **Bomb Your Way!**. Fire and Water, Bomb Yo
 - Campanha, medalhas, segredos, cosméticos e desafios; monetização cosmética sem poder permanente no lançamento.
 - Primeiro marco: protótipo de movimento, grade, bombas, explosão, dano e controles móveis. Depois: fatia vertical de três etapas.
 
-Exemplos e quantidades sugeridas não substituem decisões pendentes. Mundos, inimigos iniciais, power-ups, história e antagonista ainda precisam ser definidos. Não implemente toda a campanha sem solicitação.
+Exemplos e quantidades sugeridas não substituem decisões pendentes. Para o planejamento inicial de mundos, fases e etapas, consulte Mundos_Fases_Etapas_Bomb_Your_Way (1).pdf; não trate esses elementos como indefinidos apenas porque aparecem como pendentes no GDD anterior ao documento. Outras decisões pendentes devem ser verificadas nas referências atuais e nas instruções do usuário. Não implemente toda a campanha sem solicitação.
 
 ## Rojo e Studio
 

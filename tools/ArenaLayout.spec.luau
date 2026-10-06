@@ -22,6 +22,17 @@ local function overlap(a, b)
 		and b[2] < a[2] + a[4] - 1e-6
 end
 for _, size in ipairs(sizes) do
+	for _, inset in ipairs({ 36, 58, 64 }) do
+		local g = Layout.compute(size[1], size[2], inset)
+		assert(g.header[2] >= inset and g.hint[2] >= inset, "HUD clears the Roblox top bar")
+		assert(g.board[2] >= inset and g.board[2] + g.board[4] <= size[2], "safe layout keeps arena visible")
+		assert(math.abs(g.board[3] / 13 - g.board[4] / 9) < 1e-9, "safe layout preserves square cells")
+		for _, b in pairs(g.buttons) do
+			assert(b[2] >= inset and b[2] + b[4] <= size[2], "safe controls fit")
+		end
+	end
+end
+for _, size in ipairs(sizes) do
 	local w, h = unpack(size)
 	local g = Layout.compute(w, h)
 	local board = g.board

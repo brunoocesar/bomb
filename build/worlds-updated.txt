@@ -1,0 +1,6360 @@
+=== PAGE 1 ===
+BOMB YOUR WAY! | BÍBLIA DE MUNDOS E LEVEL DESIGN
+1
+BOMB YOUR WAY!
+Mundos, fases e etapas
+Bíblia de direção de arte e level design | Versão 1.0 | 05/10/2026
+3 mundos • 12 fases • 36 etapas • 3 arenas de chefe
+Planícies, Floresta Sombria e Deserto. Cada etapa tem planta esquemática, coordenadas, composição
+visual, obstáculos, inimigos, itens e intenção de gameplay.
+Nova estrutura: quatro fases entregam quatro chaves. As chaves abrem uma arena de chefe separada. A
+etapa final de cada fase termina em um superbaú, não em uma porta.
+Referência fornecida pelo usuário. Usada para composição compacta, alternância de obstáculos e destaque do objetivo
+central; os cenários propostos são originais.
+
+=== PAGE 2 ===
+BOMB YOUR WAY! | BÍBLIA DE MUNDOS E LEVEL DESIGN
+2
+Como ler e construir
+As plantas são layouts de projeto, não ilustrações finais. Cada planta usa 13 colunas por 11 linhas
+internas, mais uma borda permanente externa. As coordenadas começam no canto superior esquerdo em
+(1,1). O espaço é uma área física contínua: a grade organiza colisão e bombas; o personagem anda
+livremente com joystick, sem saltar de casa em casa.
+Legenda única
+ Símbolo
+Função
+P
+Entrada segura em (2,11).
+#
+Parede permanente: bloqueia personagem, inimigo e explosão.
+B
+Obstáculo destrutível, 1 explosão.
+R
+Caixa de energia visível e destrutível, 1 explosão.
+U
+Power-up garantido escondido sob obstáculo quebrável.
+S
+Segredo: obstáculo com pista distinta, recompensa única.
+O
+Ovo/resgate de sapinho, visível em chão acessível.
+N
+Posição inicial de inimigo; tipo descrito na ficha.
+H
+Casa com perigo/terreno; comportamento conforme etapa.
+~
+Água ou fenda; bloqueio conforme ficha.
+D
+Porta de etapa intermediária, abre com todas as caixas.
+X
+Superbaú e pedestal: ocupa 3x2 casas, bloqueio permanente.
+Regra de largura
+Casa-base sugerida: 64 unidades de arte. Colisor do jogador: cerca de 34-38 unidades. Corredor de uma
+casa precisa permitir movimento suave e fuga consistente. Travessias usam pontes de duas casas; o
+personagem não precisa saltar para concluir nenhum objetivo.
+
+=== PAGE 3 ===
+BOMB YOUR WAY! | BÍBLIA DE MUNDOS E LEVEL DESIGN
+3
+Energia, baús e quatro chaves
+Etapa intermediária
+Destruir R atualiza “Energia 2/3”. A última caixa acende a porta D. Inimigos restantes não impedem sair. A
+passagem salva checkpoint, montaria e estado de power-ups da fase.
+Etapa final
+O superbaú central fica trancado por um selo e fios de luz temática. Não recebe dano nem age como
+chefe. Cada R alimenta uma parte do selo. Com todas destruídas, ataques inimigos são encerrados,
+inimigos restantes saem em fumaça sem recompensa de combate e o baú é liberado. O jogador se
+aproxima de uma face acessível e interage; animação pulável de até 3 s revela chave, moeda e
+conclusão. A fase só é registrada quando a chave foi concedida com sucesso.
+Progressão no mundo
+As fases abrem em sequência na primeira passagem. Cada uma entrega uma chave única, identificada
+por mundo e fase. Repetições nunca duplicam chaves. O lobby mostra 0/4 a 4/4; com quatro chaves, o
+botão “DESAFIAR CHEFE” abre uma arena separada. As chaves não são consumidas; perder para o chefe
+permite tentar novamente.
+Segurança e repetição
+Após morrer, reinicia-se apenas a etapa. Segredo permanente já concedido não paga novamente. Ao
+voltar, o jogador continua no checkpoint. Se sair entre desbloquear e abrir o baú, salvar ambos estados;
+ao retornar, apresentar a etapa concluída em estado seguro e permitir coleta. Nenhuma compra ou
+montaria específica é necessária.
+Conflitos resolvidos com o plano anterior
+O chefe deixa de morar na quarta fase. Cada mundo passa a ter quatro fases normais e uma arena de
+chefe adicional. Portas existem apenas nas etapas intermediárias. Este documento é um complemento
+novo e não sobrescreve o GDD anterior.
+
+=== PAGE 4 ===
+BOMB YOUR WAY! | BÍBLIA DE MUNDOS E LEVEL DESIGN
+4
+MUNDO 1 | Planícies do Primeiro
+Brilho
+Luz quente, céu limpo, verde fresco, formas redondas. Chão com poucos detalhes; flores e cercas
+decorativas ficam fora da colisão.
+Kit de arte
+Grama baixa; terra batida; pedra cinza clara; cerca branca; palha; engrenagens de madeira. Blocos
+quebráveis: fardos de palha com cintas laranja. Alvos: caixa de metal creme com núcleo turquesa.
+Inimigos e leitura
+Lesma: patrulha lenta, cai com 1 explosão. Besouro: anda em linha e vira ao bater; 1 explosão.
+Espantalhinho: pausa 1 s antes de lançar semente lenta; 1 explosão.
+Baú, chave e sapinho
+baú de madeira clara com ferragens douradas e selo de sol. chave dourada com cabeça de sol. Sapinho
+de Lagoa: verde-água, barriga creme. Mesma proteção e salto contextual do sapinho base.
+Fase
+Etapas
+Propósito
+1-1 Campos do Despertar
+2
+Aprender bomba, fuga, energia e resgate.
+1-2 Fazenda dos Fardos
+2
+Abrir atalhos e atrair inimigos.
+1-3 Moinho dos Ventos
+3
+Entender terreno e leitura de ataques.
+1-4 Jardim das Pedras Antigas
+3
+Combinar rotas, cobertura e energia.
+Composição e iluminação
+Campo útil claro; fundo menos saturado. Alvos cianos nunca mudam de significado. Decoração alta fica
+fora da área jogável ou atrás dos sprites. Desenhar oclusão pela posição dos pés e sombras discretas. A
+borda externa comunica limite real.
+Chefe do mundo
+Bramo, o Carneiro de Pedra fica disponível após abrir os quatro superbaús.
+
+=== PAGE 5 ===
+BOMB YOUR WAY! | BÍBLIA DE MUNDOS E LEVEL DESIGN
+5
+1-1.1 | Canteiros da Entrada
+Campos do Despertar • ETAPA INTERMEDIÁRIA • 1/2
+B
+B
+B
+B
+B
+B
+B
+D
+B
+#
+R
+#
+B
+#
+B
+#
+B
+#
+R
+#
+B
+B
+B
+B
+B
+B
+B
+B
+#
+B
+#
+B
+#
+B
+#
+N
+#
+B
+N
+B
+B
+B
+B
+B
+B
+S
+B
+#
+#
+B
+#
+B
+#
+#
+#
+B
+B
+B
+B
+B
+B
+B
+B
+#
+#
+#
+B
+#
+B
+#
+B
+B
+U
+B
+B
+B
+B
+B
+#
+#
+#
+#
+#
+B
+P
+B
+B
+B
+B
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+NORTE EM CIMA | (coluna, linha)
+IDENTIDADE DA FASE
+Aprender bomba, fuga, energia e resgate.
+Tempo de teste: 60-100 s
+Base: malha Bomberman
+Composição: ilhas
+Terreno: sem
+Blocos B: 54 + U/S
+Caixas R: 2
+Inimigos: 2
+Referência de orientação:
+entrada sul-oeste; norte para cima. Coordenadas são posição
+inicial, não rota automática.
+Malha clássica: Pilares # em coluna PAR e linha PAR, alternados com corredores; 27 pilares mantidos. Exceções
+locais: (4,4), (10,8), (2,10).
+Visual e composição: Um jardim aberto com quatro canteiros baixos e um arco branco ao norte. A estrada
+central bege conduz o olhar à porta.
+Rota e decisão: Primeiro alvo já visível; dois fardos fecham o caminho secundário. Uma lesma patrulha longe da
+entrada. A primeira bomba pode ser colocada sem ameaça imediata.
+Energia e destino: R em (3,2), (11,2). D em (13,1); todas as caixas abrem a passagem.
+Encontro: Lesmas em (11,4); Lesmas em (3,5). Evitar perseguição no primeiro instante; aviso antes de tiro ou
+carga.
+Obstáculos e perigo: fardos de palha com cintas laranja nos B; Sem terreno especial: o desafio vem da
+arquitetura e inimigos.
+Power-up e sapinho: Bombas +1 garantido em U (4,9). Sem ovo garantido nesta etapa; montaria anterior
+permanece.
+Segredo: Flor azul repetida em três pedras aponta para o canto leste. S em (12,5). Recompensa: Corpo base: cor
+creme.
+Teste e acabamento: Conferir acesso a todos R sem sapinho; fugir de bomba em cada bolso; não cobrir R com
+decoração. Porta deve abrir mesmo com inimigos vivos. Alvos não ficam sob obstáculos aleatórios.
+
+=== PAGE 6 ===
+BOMB YOUR WAY! | BÍBLIA DE MUNDOS E LEVEL DESIGN
+6
+1-1.2 | Pátio do Sol
+Campos do Despertar • FINAL: SUPERBAÚ E CHAVE • 2/2
+B
+N
+B
+B
+B
+B
+B
+S
+B
+B
+#
+R
+#
+B
+#
+N
+#
+B
+#
+R
+#
+B
+B
+B
+B
+B
+B
+B
+B
+#
+B
+#
+B
+B
+B
+#
+N
+#
+B
+N
+B
+X
+X
+X
+B
+N
+B
+#
+B
+#
+B
+X
+X
+X
+B
+#
+B
+#
+B
+B
+B
+B
+B
+B
+O
+B
+B
+B
+B
+#
+B
+#
+B
+#
+#
+B
+#
+B
+#
+B
+U
+B
+B
+B
+N
+B
+#
+B
+#
+B
+#
+B
+#
+#
+P
+B
+B
+B
+B
+B
+B
+B
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+NORTE EM CIMA | (coluna, linha)
+IDENTIDADE DA FASE
+Aprender bomba, fuga, energia e resgate.
+Tempo de teste: 90-150 s
+Base: malha Bomberman
+Composição: anel
+Terreno: sem
+Blocos B: 59 + U/S
+Caixas R: 2
+Inimigos: 6
+Referência de orientação:
+entrada sul-oeste; norte para cima. Coordenadas são posição
+inicial, não rota automática.
+Malha clássica: Pilares # em coluna PAR e linha PAR, alternados com corredores; 25 pilares mantidos. Exceções
+locais: (6,4), (8,4), (6,6), (8,6), (2,10).
+Visual e composição: Pátio circular representado por uma arena quadrada; quatro esculturas de sol pequenas
+enquadram o baú. Sem máquina industrial.
+Rota e decisão: Ensina o final de fase: destruir alvos alimenta o selo central. O jogador pode circular pelas duas
+laterais e observar o baú desde a entrada.
+Energia e destino: R em (3,2), (11,2). X cobre colunas 6-8, linhas 5-6; abrir após todos R. Chave 1/4 do mundo 1.
+Encontro: Lesmas em (11,4); Lesmas em (3,5); Besouro em (10,9); Besouro em (7,2); Lesmas em (12,5); Besouro
+em (3,1). Evitar perseguição no primeiro instante; aviso antes de tiro ou carga.
+Obstáculos e perigo: fardos de palha com cintas laranja nos B; Sem terreno especial: o desafio vem da
+arquitetura e inimigos.
+Power-up e sapinho: Alcance +1 garantido em U (4,9). Resgate O em (10,7); equipa a aparência escolhida.
+Segredo: Uma fita dourada presa no muro norte indica a alcova de tesouro. S em (11,1). Recompensa: Acessório:
+lenço amarelo.
+Teste e acabamento: Conferir acesso a todos R sem sapinho; fugir de bomba em cada bolso; não cobrir R com
+decoração. Baú deve abrir e chave salvar antes da tela de resultado. Alvos não ficam sob obstáculos aleatórios.
+
+=== PAGE 7 ===
+BOMB YOUR WAY! | BÍBLIA DE MUNDOS E LEVEL DESIGN
+7
+1-2.1 | Quintal do Celeiro
+Fazenda dos Fardos • ETAPA INTERMEDIÁRIA • 1/2
+B
+B
+B
+B
+B
+B
+D
+#
+R
+#
+#
+N
+#
+B
+#
+R
+#
+B
+B
+B
+B
+B
+B
+B
+B
+B
+B
+#
+B
+#
+B
+#
+B
+#
+#
+N
+#
+B
+S
+N
+B
+B
+B
+B
+B
+B
+B
+#
+B
+#
+B
+#
+B
+#
+B
+#
+B
+#
+B
+B
+B
+B
+B
+B
+B
+B
+B
+B
+#
+B
+#
+B
+#
+#
+B
+#
+B
+#
+B
+B
+U
+B
+B
+B
+B
+N
+B
+R
+#
+#
+#
+#
+B
+#
+P
+B
+B
+B
+B
+B
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+NORTE EM CIMA | (coluna, linha)
+IDENTIDADE DA FASE
+Abrir atalhos e atrair inimigos.
+Tempo de teste: 60-100 s
+Base: malha Bomberman
+Composição: faixas
+Terreno: sem
+Blocos B: 60 + U/S
+Caixas R: 3
+Inimigos: 4
+Referência de orientação:
+entrada sul-oeste; norte para cima. Coordenadas são posição
+inicial, não rota automática.
+Malha clássica: Pilares # em coluna PAR e linha PAR, alternados com corredores; 29 pilares mantidos. Exceções
+locais: (2,10).
+Visual e composição: Quintal com cerca branca, bebedouro decorativo e faixas de plantio. O celeiro vermelho
+aparece acima do limite norte.
+Rota e decisão: Duas fileiras quebráveis criam passagem de ida e volta. Um besouro percorre a faixa superior,
+outro a inferior; abrir um atalho facilita atraí-los.
+Energia e destino: R em (3,2), (11,2), (12,9). D em (13,1); todas as caixas abrem a passagem.
+Encontro: Besouros em (11,4); Besouros em (3,5); Besouros em (10,9); Besouros em (7,2). Evitar perseguição no
+primeiro instante; aviso antes de tiro ou carga.
+Obstáculos e perigo: fardos de palha com cintas laranja nos B; Sem terreno especial: o desafio vem da
+arquitetura e inimigos.
+Power-up e sapinho: Bombas +1 garantido em U (4,9). Sem ovo garantido nesta etapa; montaria anterior
+permanece.
+Segredo: Pegadas pequenas terminam em um fardo marcado junto ao muro oeste. S em (2,5). Recompensa:
+Moedas de exploração.
+Teste e acabamento: Conferir acesso a todos R sem sapinho; fugir de bomba em cada bolso; não cobrir R com
+decoração. Porta deve abrir mesmo com inimigos vivos. Alvos não ficam sob obstáculos aleatórios.
+
+=== PAGE 8 ===
+BOMB YOUR WAY! | BÍBLIA DE MUNDOS E LEVEL DESIGN
+8
+1-2.2 | Salão das Colheitas
+Fazenda dos Fardos • FINAL: SUPERBAÚ E CHAVE • 2/2
+B
+N
+B
+B
+B
+B
+B
+B
+B
+#
+R
+#
+B
+#
+N
+#
+B
+#
+R
+#
+B
+B
+B
+B
+B
+B
+B
+B
+#
+B
+B
+B
+B
+B
+N
+#
+N
+B
+X
+X
+X
+B
+N
+B
+#
+B
+#
+B
+X
+X
+X
+B
+#
+B
+#
+B
+B
+B
+B
+B
+B
+B
+B
+#
+B
+B
+B
+#
+B
+#
+B
+O
+B
+#
+B
+B
+R
+U
+B
+B
+B
+N
+B
+R
+B
+#
+B
+#
+B
+#
+B
+#
+S
+#
+P
+B
+B
+B
+B
+B
+B
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+NORTE EM CIMA | (coluna, linha)
+IDENTIDADE DA FASE
+Abrir atalhos e atrair inimigos.
+Tempo de teste: 90-150 s
+Base: malha Bomberman
+Composição: salas
+Terreno: sem
+Blocos B: 60 + U/S
+Caixas R: 4
+Inimigos: 6
+Referência de orientação:
+entrada sul-oeste; norte para cima. Coordenadas são posição
+inicial, não rota automática.
+Malha clássica: Pilares # em coluna PAR e linha PAR, alternados com corredores; 21 pilares mantidos. Exceções
+locais: (4,4), (6,4), (8,4), (10,4), (6,6), (8,6), (4,8), (10,8), (2,10).
+Visual e composição: Interior do celeiro: tábuas claras, pilares de pedra e pilhas de palha. O baú ocupa uma
+plataforma de madeira no centro.
+Rota e decisão: Quatro compartimentos com portas largas; a energia vem dos cantos. O atirador guarda a ala
+norte e oferece um primeiro teste de cobertura.
+Energia e destino: R em (3,2), (11,2), (12,9), (3,9). X cobre colunas 6-8, linhas 5-6; abrir após todos R. Chave 2/4
+do mundo 1.
+Encontro: Lesma em (11,4); Besouros em (3,5); Besouros em (10,9); Espantalhinho em (7,2); Besouros em (12,5);
+Espantalhinho em (3,1). Evitar perseguição no primeiro instante; aviso antes de tiro ou carga.
+Obstáculos e perigo: fardos de palha com cintas laranja nos B; Sem terreno especial: o desafio vem da
+arquitetura e inimigos.
+Power-up e sapinho: Velocidade +1 garantido em U (4,9). Resgate O em (10,8); equipa a aparência escolhida.
+Segredo: Uma tábua com símbolo de sapo destaca o compartimento sudeste. S em (11,10). Recompensa:
+Sapinho: aparência Palha.
+Teste e acabamento: Conferir acesso a todos R sem sapinho; fugir de bomba em cada bolso; não cobrir R com
+decoração. Baú deve abrir e chave salvar antes da tela de resultado. Alvos não ficam sob obstáculos aleatórios.
+
+=== PAGE 9 ===
+BOMB YOUR WAY! | BÍBLIA DE MUNDOS E LEVEL DESIGN
+9
+1-3.1 | Estrada dos Girassóis
+Moinho dos Ventos • ETAPA INTERMEDIÁRIA • 1/3
+B
+B
+B
+B
+B
+B
+B
+B
+D
+B
+#
+R
+#
+#
+N
+#
+B
+#
+R
+#
+B
+B
+B
+B
+B
+H
+B
+B
+B
+B
+B
+#
+B
+B
+B
+#
+B
+#
+B
+#
+N
+#
+B
+B
+N
+B
+B
+B
+B
+S
+B
+B
+#
+#
+B
+#
+#
+#
+B
+#
+B
+B
+B
+B
+B
+B
+B
+B
+B
+B
+B
+#
+B
+#
+B
+#
+#
+H
+B
+#
+B
+B
+U
+B
+B
+N
+R
+B
+#
+B
+#
+#
+B
+#
+#
+P
+B
+B
+B
+B
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+NORTE EM CIMA | (coluna, linha)
+IDENTIDADE DA FASE
+Entender terreno e leitura de ataques.
+Tempo de teste: 60-100 s
+Base: malha Bomberman
+Composição: zigue
+Terreno: vento
+Blocos B: 60 + U/S
+Caixas R: 3
+Inimigos: 4
+Referência de orientação:
+entrada sul-oeste; norte para cima. Coordenadas são posição
+inicial, não rota automática.
+Malha clássica: Pilares # em coluna PAR e linha PAR, alternados com corredores; 27 pilares mantidos. Exceções
+locais: (4,4), (10,8), (2,10).
+Visual e composição: Estrada ladeada por girassóis gigantes fora do tabuleiro. Pedras interrompem a estrada em
+dois desvios suaves.
+Rota e decisão: Duas casas de vento são lentas e ficam em rotas opcionais. Setas e poeira mostram direção
+antes de qualquer deslocamento. Segurar o movimento vence o empurrão.
+Energia e destino: R em (3,2), (11,2), (12,9). D em (13,1); todas as caixas abrem a passagem.
+Encontro: Besouros em (11,4); Besouros em (3,5); Besouros em (10,9); Besouros em (7,2). Evitar perseguição no
+primeiro instante; aviso antes de tiro ou carga.
+Obstáculos e perigo: fardos de palha com cintas laranja nos B; H sopra 1 s após aviso de 1 s; empurrão leve e
+rota paralela. H em (6,3), (9,8).
+Power-up e sapinho: Velocidade +1 garantido em U (4,9). Sem ovo garantido nesta etapa; montaria anterior
+permanece.
+Segredo: Girassol virado para o chão indica o segredo no lado leste. S em (12,5). Recompensa: Moedas de
+exploração.
+Teste e acabamento: Conferir acesso a todos R sem sapinho; fugir de bomba em cada bolso; não cobrir R com
+decoração. Porta deve abrir mesmo com inimigos vivos. Alvos não ficam sob obstáculos aleatórios.
+
+=== PAGE 10 ===
+BOMB YOUR WAY! | BÍBLIA DE MUNDOS E LEVEL DESIGN
+10
+1-3.2 | Oficina do Moinho
+Moinho dos Ventos • ETAPA INTERMEDIÁRIA • 2/3
+B
+B
+B
+B
+B
+B
+B
+D
+B
+#
+R
+#
+B
+#
+N
+#
+B
+#
+R
+#
+B
+B
+B
+B
+B
+B
+B
+B
+B
+B
+#
+B
+#
+B
+#
+B
+#
+B
+#
+N
+#
+N
+B
+B
+B
+B
+B
+B
+B
+B
+#
+B
+#
+B
+B
+B
+B
+B
+#
+B
+#
+B
+S
+B
+B
+B
+O
+#
+B
+#
+#
+#
+B
+#
+#
+B
+U
+B
+B
+B
+N
+B
+R
+B
+#
+#
+B
+#
+B
+#
+B
+#
+B
+P
+B
+B
+B
+B
+B
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+NORTE EM CIMA | (coluna, linha)
+IDENTIDADE DA FASE
+Entender terreno e leitura de ataques.
+Tempo de teste: 60-100 s
+Base: malha Bomberman
+Composição: cruz
+Terreno: sem
+Blocos B: 60 + U/S
+Caixas R: 3
+Inimigos: 4
+Referência de orientação:
+entrada sul-oeste; norte para cima. Coordenadas são posição
+inicial, não rota automática.
+Malha clássica: Pilares # em coluna PAR e linha PAR, alternados com corredores; 27 pilares mantidos. Exceções
+locais: (6,6), (8,6), (2,10).
+Visual e composição: Sala de manutenção, quatro pilares fixos, ferramentas pintadas e engrenagem grande
+apenas no fundo.
+Rota e decisão: A cruz cria quatro bolsões. Destruir fardos conecta bolsões; paredes permanentes oferecem
+cobertura contra sementes.
+Energia e destino: R em (3,2), (11,2), (12,9). D em (13,1); todas as caixas abrem a passagem.
+Encontro: Espantalhinhos em (11,4); Espantalhinhos em (3,5); Lesma em (10,9); Lesma em (7,2). Evitar
+perseguição no primeiro instante; aviso antes de tiro ou carga.
+Obstáculos e perigo: fardos de palha com cintas laranja nos B; Sem terreno especial: o desafio vem da
+arquitetura e inimigos.
+Power-up e sapinho: Bombas +1 garantido em U (4,9). Resgate O em (10,7); equipa a aparência escolhida.
+Segredo: Marca de chave inglesa turquesa indica o bloco com item. S em (2,7). Recompensa: Bomba cosmética:
+noz.
+Teste e acabamento: Conferir acesso a todos R sem sapinho; fugir de bomba em cada bolso; não cobrir R com
+decoração. Porta deve abrir mesmo com inimigos vivos. Alvos não ficam sob obstáculos aleatórios.
+
+=== PAGE 11 ===
+BOMB YOUR WAY! | BÍBLIA DE MUNDOS E LEVEL DESIGN
+11
+1-3.3 | Praça das Hélices
+Moinho dos Ventos • FINAL: SUPERBAÚ E CHAVE • 3/3
+B
+N
+B
+B
+B
+B
+B
+B
+B
+B
+#
+R
+#
+#
+N
+#
+B
+#
+R
+#
+B
+B
+B
+B
+B
+B
+B
+B
+B
+B
+#
+#
+B
+H
+B
+#
+N
+#
+B
+B
+N
+B
+B
+X
+X
+X
+B
+B
+S
+B
+B
+#
+B
+#
+B
+X
+X
+X
+B
+#
+N
+#
+B
+B
+B
+B
+B
+B
+B
+B
+B
+B
+#
+B
+#
+#
+#
+H
+#
+#
+B
+B
+R
+U
+B
+N
+R
+B
+#
+B
+#
+B
+#
+#
+#
+P
+B
+B
+B
+B
+B
+B
+B
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+NORTE EM CIMA | (coluna, linha)
+IDENTIDADE DA FASE
+Entender terreno e leitura de ataques.
+Tempo de teste: 90-150 s
+Base: malha Bomberman
+Composição: ferradura
+Terreno: vento
+Blocos B: 57 + U/S
+Caixas R: 4
+Inimigos: 6
+Referência de orientação:
+entrada sul-oeste; norte para cima. Coordenadas são posição
+inicial, não rota automática.
+Malha clássica: Pilares # em coluna PAR e linha PAR, alternados com corredores; 25 pilares mantidos. Exceções
+locais: (6,4), (8,4), (6,6), (8,6), (2,10).
+Visual e composição: Praça externa do moinho com um grande disco de madeira sob o baú. Hélices ficam acima
+do limite e giram lentamente.
+Rota e decisão: Uma parede em U protege o baú, mas aberturas laterais permitem contorná-la. Ventos opcionais
+encurtam a rota de coleta; nenhuma explosão depende do vento.
+Energia e destino: R em (3,2), (11,2), (12,9), (3,9). X cobre colunas 6-8, linhas 5-6; abrir após todos R. Chave 3/4
+do mundo 1.
+Encontro: Besouros em (11,4); Besouros em (3,5); Espantalhinho em (10,9); Espantalhinho em (7,2); Besouros em
+(11,6); Espantalhinho em (3,1). Evitar perseguição no primeiro instante; aviso antes de tiro ou carga.
+Obstáculos e perigo: fardos de palha com cintas laranja nos B; H sopra 1 s após aviso de 1 s; empurrão leve e
+rota paralela. H em (6,4), (9,8).
+Power-up e sapinho: Alcance +1 garantido em U (4,9). Sem ovo garantido nesta etapa; montaria anterior
+permanece.
+Segredo: Pena branca junto à abertura leste sugere a alcova. S em (12,5). Recompensa: Acessório: gorro de
+aviador.
+Teste e acabamento: Conferir acesso a todos R sem sapinho; fugir de bomba em cada bolso; não cobrir R com
+decoração. Baú deve abrir e chave salvar antes da tela de resultado. Alvos não ficam sob obstáculos aleatórios.
+
+=== PAGE 12 ===
+BOMB YOUR WAY! | BÍBLIA DE MUNDOS E LEVEL DESIGN
+12
+1-4.1 | Pomar dos Muros Baixos
+Jardim das Pedras Antigas • ETAPA INTERMEDIÁRIA • 1/3
+B
+B
+B
+B
+B
+B
+B
+B
+D
+B
+#
+R
+#
+B
+#
+N
+#
+B
+#
+R
+#
+B
+B
+B
+B
+B
+B
+B
+B
+#
+B
+#
+B
+#
+B
+#
+N
+#
+B
+B
+N
+B
+B
+B
+B
+B
+B
+B
+#
+B
+#
+B
+#
+#
+#
+B
+#
+B
+S
+B
+B
+B
+B
+B
+B
+B
+B
+B
+#
+#
+B
+#
+B
+#
+B
+#
+B
+B
+B
+U
+N
+B
+R
+#
+B
+#
+B
+#
+B
+#
+B
+#
+P
+B
+B
+B
+B
+B
+B
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+NORTE EM CIMA | (coluna, linha)
+IDENTIDADE DA FASE
+Combinar rotas, cobertura e energia.
+Tempo de teste: 60-100 s
+Base: malha Bomberman
+Composição: ilhas
+Terreno: sem
+Blocos B: 61 + U/S
+Caixas R: 3
+Inimigos: 4
+Referência de orientação:
+entrada sul-oeste; norte para cima. Coordenadas são posição
+inicial, não rota automática.
+Malha clássica: Pilares # em coluna PAR e linha PAR, alternados com corredores; 27 pilares mantidos. Exceções
+locais: (4,4), (10,8), (2,10).
+Visual e composição: Pomar com árvores fora do campo, muros de pedra curtos e maçãs como decoração. Chão
+verde com caminhos claros.
+Rota e decisão: Ilhas permanentes quebram linhas de tiro e dão rotas de fuga. Blocos posicionados em pares
+podem ser removidos por uma mesma explosão.
+Energia e destino: R em (3,2), (11,2), (12,9). D em (13,1); todas as caixas abrem a passagem.
+Encontro: Lesmas em (11,4); Lesmas em (3,5); Espantalhinho em (10,9); Espantalhinho em (7,2). Evitar
+perseguição no primeiro instante; aviso antes de tiro ou carga.
+Obstáculos e perigo: fardos de palha com cintas laranja nos B; Sem terreno especial: o desafio vem da
+arquitetura e inimigos.
+Power-up e sapinho: Bombas +1 garantido em U (4,9). Sem ovo garantido nesta etapa; montaria anterior
+permanece.
+Segredo: Maçã dourada desenhada num fardo marca o segredo. S em (2,7). Recompensa: Moedas de exploração.
+Teste e acabamento: Conferir acesso a todos R sem sapinho; fugir de bomba em cada bolso; não cobrir R com
+decoração. Porta deve abrir mesmo com inimigos vivos. Alvos não ficam sob obstáculos aleatórios.
+
+=== PAGE 13 ===
+BOMB YOUR WAY! | BÍBLIA DE MUNDOS E LEVEL DESIGN
+13
+1-4.2 | Canal das Duas Margens
+Jardim das Pedras Antigas • ETAPA INTERMEDIÁRIA • 2/3
+B
+B
+B
+B
+B
+~
+B
+B
+B
+B
+D
+B
+#
+R
+#
+#
+~
+#
+B
+#
+R
+#
+B
+B
+B
+B
+B
+N
+B
+S
+B
+B
+#
+B
+#
+B
+B
+B
+#
+N
+#
+B
+B
+N
+B
+~
+B
+B
+B
+B
+B
+B
+#
+#
+B
+#
+~
+#
+B
+#
+#
+B
+B
+B
+~
+O
+#
+B
+#
+B
+B
+B
+#
+B
+#
+B
+B
+U
+B
+B
+N
+B
+R
+#
+B
+#
+~
+#
+B
+#
+B
+#
+B
+P
+B
+~
+B
+B
+B
+B
+B
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+NORTE EM CIMA | (coluna, linha)
+IDENTIDADE DA FASE
+Combinar rotas, cobertura e energia.
+Tempo de teste: 60-100 s
+Base: malha Bomberman
+Composição: ponte
+Terreno: água
+Blocos B: 57 + U/S
+Caixas R: 3
+Inimigos: 4
+Referência de orientação:
+entrada sul-oeste; norte para cima. Coordenadas são posição
+inicial, não rota automática.
+Malha clássica: Pilares # em coluna PAR e linha PAR, alternados com corredores; 25 pilares mantidos. Exceções
+locais: (6,4), (8,4), (6,8), (8,8), (2,10).
+Visual e composição: Canal estreito corta a arena; duas pontes largas de madeira mantêm as margens
+conectadas. Água azul clara, sem bordas ambíguas.
+Rota e decisão: Primeira água real da campanha. As duas pontes são permanentes e gratuitas. Sapinho permite
+atalho contextual adicional, nunca necessário para alcançar uma caixa.
+Energia e destino: R em (3,2), (11,2), (12,9). D em (13,1); todas as caixas abrem a passagem.
+Encontro: Besouros em (11,4); Besouros em (3,5); Lesma em (10,9); Lesma em (7,3). Evitar perseguição no
+primeiro instante; aviso antes de tiro ou carga.
+Obstáculos e perigo: fardos de palha com cintas laranja nos B; Água bloqueia; todas as conexões de piso
+permanecem indestrutíveis.
+Power-up e sapinho: Velocidade +1 garantido em U (4,9). Resgate O em (10,7); equipa a aparência escolhida.
+Segredo: Lírio branco na margem oposta marca a alcova secreta acessível por ponte. S em (12,3). Recompensa:
+Sapinho: aparência Lírio.
+Teste e acabamento: Conferir acesso a todos R sem sapinho; fugir de bomba em cada bolso; não cobrir R com
+decoração. Porta deve abrir mesmo com inimigos vivos. Alvos não ficam sob obstáculos aleatórios.
+
+=== PAGE 14 ===
+BOMB YOUR WAY! | BÍBLIA DE MUNDOS E LEVEL DESIGN
+14
+1-4.3 | Santuário da Campina
+Jardim das Pedras Antigas • FINAL: SUPERBAÚ E CHAVE • 3/3
+B
+N
+B
+B
+B
+B
+#
+R
+#
+#
+N
+#
+B
+#
+R
+#
+B
+B
+B
+B
+B
+B
+B
+B
+B
+B
+B
+#
+#
+B
+B
+B
+#
+N
+#
+B
+N
+B
+B
+X
+X
+X
+B
+B
+N
+B
+B
+#
+#
+B
+X
+X
+X
+#
+B
+#
+B
+B
+B
+B
+B
+B
+B
+B
+B
+B
+B
+#
+B
+#
+B
+#
+B
+#
+#
+#
+B
+B
+R
+U
+B
+B
+B
+N
+R
+B
+#
+B
+#
+#
+B
+#
+S
+#
+B
+P
+B
+B
+B
+B
+B
+B
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+NORTE EM CIMA | (coluna, linha)
+IDENTIDADE DA FASE
+Combinar rotas, cobertura e energia.
+Tempo de teste: 90-150 s
+Base: malha Bomberman
+Composição: diamante
+Terreno: sem
+Blocos B: 58 + U/S
+Caixas R: 4
+Inimigos: 6
+Referência de orientação:
+entrada sul-oeste; norte para cima. Coordenadas são posição
+inicial, não rota automática.
+Malha clássica: Pilares # em coluna PAR e linha PAR, alternados com corredores; 25 pilares mantidos. Exceções
+locais: (6,4), (8,4), (6,6), (8,6), (2,10).
+Visual e composição: Santuário de pedra coberto por grama. Quatro obeliscos pequenos cercam o baú solar e
+deixam o miolo legível.
+Rota e decisão: Quatro alvos exigem percorrer os setores. O jogador pode escolher a ordem; o atirador central
+nunca bloqueia todas as fugas. Esta fase entrega a quarta chave.
+Energia e destino: R em (3,2), (11,2), (12,9), (3,9). X cobre colunas 6-8, linhas 5-6; abrir após todos R. Chave 4/4
+do mundo 1.
+Encontro: Espantalhinhos em (11,4); Espantalhinhos em (3,5); Besouros em (10,9); Besouros em (7,2);
+Espantalhinhos em (12,5); Besouros em (3,1). Evitar perseguição no primeiro instante; aviso antes de tiro ou carga.
+Obstáculos e perigo: fardos de palha com cintas laranja nos B; Sem terreno especial: o desafio vem da
+arquitetura e inimigos.
+Power-up e sapinho: Alcance +1 garantido em U (4,9). Sem ovo garantido nesta etapa; montaria anterior
+permanece.
+Segredo: Luz azul em uma rachadura do muro sul destaca o segredo. S em (11,10). Recompensa: Roupa:
+explorador da campina.
+Teste e acabamento: Conferir acesso a todos R sem sapinho; fugir de bomba em cada bolso; não cobrir R com
+decoração. Baú deve abrir e chave salvar antes da tela de resultado. Alvos não ficam sob obstáculos aleatórios.
+
+=== PAGE 15 ===
+BOMB YOUR WAY! | BÍBLIA DE MUNDOS E LEVEL DESIGN
+15
+CHEFE 1 | Bramo, o Carneiro de
+Pedra
+Arena adicional, liberada por quatro chaves; não conta como quinta fase de campanha.
+Aparência
+Carneiro fofo de pedra cinza clara, chifres de madeira, lã representada por musgo arredondado e núcleo
+solar na testa.
+Arena
+Campina circular sugerida por borda quadrada de pedra; quatro pilares baixos nos quadrantes, chão seco
+e nenhuma queda.
+Padrões de ataque
+1. Pisada: sombra circular cresce por 1 s e a onda ocupa uma linha. 2. Investida: seta no chão por 1,2 s;
+corre em linha e para no pilar. 3. Recuperação: fica tonto por 2,5 s, abrindo o núcleo para uma bomba.
+Balanceamento inicial
+3 acertos válidos. Após o primeiro, alterna duas direções de investida; após o segundo, uma lesma nasce
+longe do jogador. Não aumentar velocidade fora da preparação legível.
+Entrada e proteção
+Jogador aparece na borda sul; chefe no norte. Prévia de 2 s mostra ataque, sem interromper controle por
+mais tempo. Estado básico de 1 bomba, alcance 2 e velocidade padrão é suficiente. Se montaria foi
+perdida, um ovo de treino opcional aparece na entrada, fora da zona de ataque. Não depender de farm da
+campanha.
+Vitória e retorno
+Passagem para Floresta dos Ecos; aparência Sapinho Campestre; troféu solar no lobby. Primeira vitória
+salva recompensa única, mundo concluído e próximo acesso. Repetições não repetem cosméticos. Ao
+perder, reinicia-se a arena, sem perder chaves. Ataques são cancelados antes da animação de vitória.
+Medalhas propostas
+Vencer; vencer sem morrer; vencer sem perder montaria (ou sem montaria ativa na tentativa). A terceira
+medalha é opcional e não bloqueia o mundo seguinte.
+
+=== PAGE 16 ===
+BOMB YOUR WAY! | BÍBLIA DE MUNDOS E LEVEL DESIGN
+16
+MUNDO 2 | Floresta dos Ecos
+Sombria e charmosa, sem escurecer o campo. Piso verde acinzentado claro; borda roxa e azul; névoa
+exclusivamente fora da área útil.
+Kit de arte
+Raízes grossas; tronco serrado; pedra úmida; folhas roxas; lanternas; cogumelos luminosos. Blocos
+quebráveis: troncos cortados com cogumelo azul. Alvos: caixa de raízes metálicas com núcleo ciano.
+Inimigos e leitura
+Cogumelo: patrulha lenta; 1 explosão. Mariposa: movimento contínuo previsível, colisão com paredes; 1
+explosão. Broto: prepara raiz por 1 s e marca duas casas; 1 explosão. Corvinho: perseguição apenas com
+linha de visão; 1 explosão.
+Baú, chave e sapinho
+baú de madeira escura com folhas violetas e selo de lua. chave prateada com cabeça de lua. Sapinho
+Vagalume: turquesa escuro, pequenas pintas amarelas, função idêntica à base.
+Fase
+Etapas
+Propósito
+2-1 Trilha dos Vagalumes
+3
+Apresentar a floresta com clareza.
+2-2 Vilarejo Esquecido
+3
+Explorar construções com atalhos.
+2-3 Pântano dos Reflexos
+3
+Escolher caminhos seguros em terreno úmido.
+2-4 Ruínas da Lua
+3
+Dominar perseguição e ataques marcados.
+Composição e iluminação
+Campo útil claro; fundo menos saturado. Alvos cianos nunca mudam de significado. Decoração alta fica
+fora da área jogável ou atrás dos sprites. Desenhar oclusão pela posição dos pés e sombras discretas. A
+borda externa comunica limite real.
+Chefe do mundo
+Umbra, a Coruja das Raízes fica disponível após abrir os quatro superbaús.
+
+=== PAGE 17 ===
+BOMB YOUR WAY! | BÍBLIA DE MUNDOS E LEVEL DESIGN
+17
+2-1.1 | Portal das Lanternas
+Trilha dos Vagalumes • ETAPA INTERMEDIÁRIA • 1/3
+B
+B
+B
+B
+B
+B
+S
+D
+B
+#
+R
+#
+#
+N
+#
+#
+R
+#
+B
+B
+B
+B
+B
+B
+B
+B
+B
+B
+B
+B
+B
+#
+B
+B
+B
+#
+B
+#
+B
+N
+#
+B
+N
+B
+B
+B
+B
+B
+B
+B
+#
+#
+#
+#
+#
+B
+#
+B
+B
+B
+B
+B
+B
+B
+#
+B
+B
+B
+#
+#
+B
+B
+#
+B
+B
+B
+U
+B
+B
+B
+N
+B
+R
+B
+#
+B
+#
+B
+#
+B
+#
+B
+#
+B
+P
+B
+B
+B
+B
+B
+B
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+NORTE EM CIMA | (coluna, linha)
+IDENTIDADE DA FASE
+Apresentar a floresta com clareza.
+Tempo de teste: 75-120 s
+Base: malha Bomberman
+Composição: salas
+Terreno: sem
+Blocos B: 65 + U/S
+Caixas R: 3
+Inimigos: 4
+Referência de orientação:
+entrada sul-oeste; norte para cima. Coordenadas são posição
+inicial, não rota automática.
+Malha clássica: Pilares # em coluna PAR e linha PAR, alternados com corredores; 25 pilares mantidos. Exceções
+locais: (4,4), (10,4), (4,8), (10,8), (2,10).
+Visual e composição: Portal de madeira entalhada, lanternas violetas e quatro recuos entre troncos. Piso seco,
+sem buracos.
+Rota e decisão: Começa com área ampla de leitura. Os compartimentos permitem observar a mariposa antes de
+persegui-la. Cor de energia continua ciano.
+Energia e destino: R em (3,2), (11,2), (12,9). D em (13,1); todas as caixas abrem a passagem.
+Encontro: Cogumelos em (11,4); Cogumelos em (3,5); Mariposa em (10,9); Mariposa em (7,2). Evitar perseguição
+no primeiro instante; aviso antes de tiro ou carga.
+Obstáculos e perigo: troncos cortados com cogumelo azul nos B; Sem terreno especial: o desafio vem da
+arquitetura e inimigos.
+Power-up e sapinho: Bombas +1 garantido em U (4,9). Sem ovo garantido nesta etapa; montaria anterior
+permanece.
+Segredo: Três lanternas azuis apontam para o canto nordeste. S em (11,1). Recompensa: Moedas de exploração.
+Teste e acabamento: Conferir acesso a todos R sem sapinho; fugir de bomba em cada bolso; não cobrir R com
+decoração. Porta deve abrir mesmo com inimigos vivos. Alvos não ficam sob obstáculos aleatórios.
+
+=== PAGE 18 ===
+BOMB YOUR WAY! | BÍBLIA DE MUNDOS E LEVEL DESIGN
+18
+2-1.2 | Clareira dos Cogumelos
+Trilha dos Vagalumes • ETAPA INTERMEDIÁRIA • 2/3
+B
+S
+B
+B
+B
+B
+B
+B
+D
+B
+#
+R
+#
+#
+N
+#
+B
+#
+R
+#
+B
+B
+B
+B
+H
+B
+B
+#
+B
+B
+#
+B
+#
+B
+#
+N
+#
+B
+N
+B
+B
+B
+B
+B
+B
+B
+B
+B
+#
+B
+#
+#
+#
+B
+#
+B
+#
+B
+B
+B
+B
+B
+B
+B
+B
+B
+B
+#
+B
+#
+#
+B
+#
+H
+O
+B
+#
+B
+B
+U
+B
+B
+N
+B
+R
+#
+B
+#
+B
+#
+B
+#
+B
+#
+B
+P
+B
+B
+B
+B
+B
+B
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+NORTE EM CIMA | (coluna, linha)
+IDENTIDADE DA FASE
+Apresentar a floresta com clareza.
+Tempo de teste: 75-120 s
+Base: malha Bomberman
+Composição: ilhas
+Terreno: esporos
+Blocos B: 61 + U/S
+Caixas R: 3
+Inimigos: 4
+Referência de orientação:
+entrada sul-oeste; norte para cima. Coordenadas são posição
+inicial, não rota automática.
+Malha clássica: Pilares # em coluna PAR e linha PAR, alternados com corredores; 27 pilares mantidos. Exceções
+locais: (4,4), (10,8), (2,10).
+Visual e composição: Clareira de cogumelos azuis com pequenas ilhas de raiz. Partículas luminosas decorativas
+ficam abaixo dos personagens.
+Rota e decisão: Duas marcas de esporo opcionais desaceleram por um instante, sem dano. A borda mostra
+pulsação antes de ativar. O Broto ensina ataque marcado.
+Energia e destino: R em (3,2), (11,2), (12,9). D em (13,1); todas as caixas abrem a passagem.
+Encontro: Cogumelos em (11,4); Cogumelos em (3,5); Cogumelos em (10,9); Broto em (7,2). Evitar perseguição
+no primeiro instante; aviso antes de tiro ou carga.
+Obstáculos e perigo: troncos cortados com cogumelo azul nos B; H desacelera 20% por 1 s, alterna 2 s ativo/3 s
+inativo; sem dano. H em (6,3), (9,8).
+Power-up e sapinho: Velocidade +1 garantido em U (4,9). Resgate O em (10,8); equipa a aparência escolhida.
+Segredo: Cogumelo inclinado destaca um tronco diferente. S em (2,1). Recompensa: Acessório: chapéu de
+cogumelo.
+Teste e acabamento: Conferir acesso a todos R sem sapinho; fugir de bomba em cada bolso; não cobrir R com
+decoração. Porta deve abrir mesmo com inimigos vivos. Alvos não ficam sob obstáculos aleatórios.
+
+=== PAGE 19 ===
+BOMB YOUR WAY! | BÍBLIA DE MUNDOS E LEVEL DESIGN
+19
+2-1.3 | Círculo dos Vagalumes
+Trilha dos Vagalumes • FINAL: SUPERBAÚ E CHAVE • 3/3
+B
+N
+B
+B
+B
+B
+B
+#
+R
+#
+B
+#
+N
+#
+#
+R
+#
+B
+B
+B
+B
+B
+B
+B
+B
+B
+B
+B
+B
+#
+B
+#
+B
+B
+#
+N
+#
+B
+B
+N
+B
+B
+X
+X
+X
+B
+N
+B
+#
+B
+#
+B
+X
+X
+X
+#
+B
+#
+B
+B
+B
+B
+B
+B
+B
+B
+B
+#
+B
+#
+B
+#
+B
+#
+B
+#
+#
+B
+R
+U
+N
+B
+N
+B
+R
+B
+#
+B
+#
+B
+#
+#
+S
+#
+B
+P
+B
+B
+B
+B
+B
+B
+B
+B
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+NORTE EM CIMA | (coluna, linha)
+IDENTIDADE DA FASE
+Apresentar a floresta com clareza.
+Tempo de teste: 90-150 s
+Base: malha Bomberman
+Composição: anel
+Terreno: sem
+Blocos B: 59 + U/S
+Caixas R: 4
+Inimigos: 7
+Referência de orientação:
+entrada sul-oeste; norte para cima. Coordenadas são posição
+inicial, não rota automática.
+Malha clássica: Pilares # em coluna PAR e linha PAR, alternados com corredores; 25 pilares mantidos. Exceções
+locais: (6,4), (8,4), (6,6), (8,6), (2,10).
+Visual e composição: Anel de lanternas enquadra o baú lunar. Fundo com vaga-lumes, mas sem partículas
+cobrindo explosões.
+Rota e decisão: Circundar o anel permite atacar alvos laterais. A rota interna só é atalho; a borda externa sempre
+oferece uma segunda fuga.
+Energia e destino: R em (3,2), (11,2), (12,9), (3,9). X cobre colunas 6-8, linhas 5-6; abrir após todos R. Chave 1/4
+do mundo 2.
+Encontro: Mariposas em (11,4); Mariposas em (3,5); Cogumelos em (10,9); Cogumelos em (7,2); Mariposas em
+(12,5); Cogumelos em (3,1); Mariposas em (7,9). Evitar perseguição no primeiro instante; aviso antes de tiro ou
+carga.
+Obstáculos e perigo: troncos cortados com cogumelo azul nos B; Sem terreno especial: o desafio vem da
+arquitetura e inimigos.
+Power-up e sapinho: Alcance +1 garantido em U (4,9). Sem ovo garantido nesta etapa; montaria anterior
+permanece.
+Segredo: Uma lanterna apagada indica o recuo sul. S em (11,10). Recompensa: Sapinho: aparência Vagalume.
+Teste e acabamento: Conferir acesso a todos R sem sapinho; fugir de bomba em cada bolso; não cobrir R com
+decoração. Baú deve abrir e chave salvar antes da tela de resultado. Alvos não ficam sob obstáculos aleatórios.
+
+=== PAGE 20 ===
+BOMB YOUR WAY! | BÍBLIA DE MUNDOS E LEVEL DESIGN
+20
+2-2.1 | Rua das Janelas Apagadas
+Vilarejo Esquecido • ETAPA INTERMEDIÁRIA • 1/3
+B
+B
+B
+B
+B
+D
+B
+#
+R
+#
+B
+#
+N
+#
+B
+#
+R
+#
+B
+B
+B
+B
+B
+B
+B
+B
+B
+#
+B
+#
+#
+#
+B
+#
+N
+#
+B
+B
+S
+N
+B
+B
+B
+B
+B
+N
+B
+B
+#
+#
+#
+#
+B
+#
+#
+B
+B
+B
+B
+B
+B
+B
+B
+B
+B
+#
+B
+#
+B
+#
+#
+B
+#
+B
+#
+B
+B
+U
+B
+B
+B
+N
+B
+R
+B
+#
+B
+#
+B
+#
+B
+#
+B
+#
+B
+P
+B
+B
+B
+B
+B
+B
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+NORTE EM CIMA | (coluna, linha)
+IDENTIDADE DA FASE
+Explorar construções com atalhos.
+Tempo de teste: 75-120 s
+Base: malha Bomberman
+Composição: faixas
+Terreno: sem
+Blocos B: 61 + U/S
+Caixas R: 3
+Inimigos: 5
+Referência de orientação:
+entrada sul-oeste; norte para cima. Coordenadas são posição
+inicial, não rota automática.
+Malha clássica: Pilares # em coluna PAR e linha PAR, alternados com corredores; 29 pilares mantidos. Exceções
+locais: (2,10).
+Visual e composição: Rua com fachadas tortas fora da arena; muros curtos simulam jardins e portas. Lanternas
+dão acolhimento.
+Rota e decisão: O corvinho perde perseguição atrás de muro. Ruas paralelas e atalhos quebráveis ensinam
+controlar linha de visão.
+Energia e destino: R em (3,2), (11,2), (12,9). D em (13,1); todas as caixas abrem a passagem.
+Encontro: Corvinhos em (11,4); Corvinhos em (3,5); Cogumelo em (10,9); Cogumelo em (7,2); Corvinhos em
+(12,5). Evitar perseguição no primeiro instante; aviso antes de tiro ou carga.
+Obstáculos e perigo: troncos cortados com cogumelo azul nos B; Sem terreno especial: o desafio vem da
+arquitetura e inimigos.
+Power-up e sapinho: Bombas +1 garantido em U (4,9). Sem ovo garantido nesta etapa; montaria anterior
+permanece.
+Segredo: Janela com luz verde aponta para o lado oeste. S em (2,5). Recompensa: Moedas de exploração.
+Teste e acabamento: Conferir acesso a todos R sem sapinho; fugir de bomba em cada bolso; não cobrir R com
+decoração. Porta deve abrir mesmo com inimigos vivos. Alvos não ficam sob obstáculos aleatórios.
+
+=== PAGE 21 ===
+BOMB YOUR WAY! | BÍBLIA DE MUNDOS E LEVEL DESIGN
+21
+2-2.2 | Casa das Raízes
+Vilarejo Esquecido • ETAPA INTERMEDIÁRIA • 2/3
+B
+B
+B
+B
+B
+B
+B
+B
+D
+#
+R
+#
+B
+#
+N
+#
+B
+#
+R
+#
+B
+B
+B
+H
+B
+B
+#
+B
+B
+#
+B
+#
+N
+#
+B
+B
+N
+B
+B
+B
+B
+B
+N
+B
+B
+#
+B
+#
+#
+B
+#
+B
+#
+#
+B
+B
+B
+B
+B
+B
+B
+B
+B
+B
+#
+B
+B
+B
+#
+#
+H
+O
+B
+#
+B
+B
+B
+U
+B
+B
+B
+B
+N
+R
+#
+B
+#
+#
+B
+#
+S
+#
+B
+P
+B
+B
+B
+B
+B
+B
+B
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+NORTE EM CIMA | (coluna, linha)
+IDENTIDADE DA FASE
+Explorar construções com atalhos.
+Tempo de teste: 75-120 s
+Base: malha Bomberman
+Composição: salas
+Terreno: raízes
+Blocos B: 61 + U/S
+Caixas R: 3
+Inimigos: 5
+Referência de orientação:
+entrada sul-oeste; norte para cima. Coordenadas são posição
+inicial, não rota automática.
+Malha clássica: Pilares # em coluna PAR e linha PAR, alternados com corredores; 25 pilares mantidos. Exceções
+locais: (4,4), (10,4), (4,8), (10,8), (2,10).
+Visual e composição: Interior doméstico com piso cinza de tábuas e raízes atravessando duas paredes. Móveis
+pequenos viram blocos.
+Rota e decisão: Duas faixas de raiz marcam perigo antes de brotar. Sempre existe passagem paralela sem
+perigo. Os móveis abrem fuga e não escondem todos os alvos.
+Energia e destino: R em (3,2), (11,2), (12,9). D em (13,1); todas as caixas abrem a passagem.
+Encontro: Brotos em (11,4); Brotos em (3,5); Corvinho em (10,9); Corvinho em (7,2); Brotos em (12,5). Evitar
+perseguição no primeiro instante; aviso antes de tiro ou carga.
+Obstáculos e perigo: troncos cortados com cogumelo azul nos B; H avisa 1 s e causa dano por 0,8 s; intervalos
+alternados de 4 s. H em (6,3), (9,8).
+Power-up e sapinho: Alcance +1 garantido em U (4,9). Resgate O em (10,8); equipa a aparência escolhida.
+Segredo: Quadro de um sapinho destaca a parede do segredo. S em (11,10). Recompensa: Rosto: óculos
+redondos.
+Teste e acabamento: Conferir acesso a todos R sem sapinho; fugir de bomba em cada bolso; não cobrir R com
+decoração. Porta deve abrir mesmo com inimigos vivos. Alvos não ficam sob obstáculos aleatórios.
+
+=== PAGE 22 ===
+BOMB YOUR WAY! | BÍBLIA DE MUNDOS E LEVEL DESIGN
+22
+2-2.3 | Praça do Sino Mudo
+Vilarejo Esquecido • FINAL: SUPERBAÚ E CHAVE • 3/3
+B
+N
+B
+B
+B
+B
+B
+B
+B
+#
+R
+#
+#
+N
+#
+#
+R
+#
+B
+B
+B
+B
+B
+B
+B
+B
+#
+B
+#
+B
+B
+B
+B
+B
+#
+N
+#
+B
+N
+B
+X
+X
+X
+B
+N
+B
+B
+#
+B
+#
+B
+X
+X
+X
+#
+B
+#
+B
+S
+B
+B
+B
+B
+B
+B
+B
+B
+B
+B
+#
+#
+B
+#
+B
+#
+B
+#
+#
+B
+B
+R
+U
+N
+B
+N
+B
+R
+B
+#
+B
+#
+#
+B
+#
+B
+#
+B
+P
+B
+B
+B
+B
+B
+B
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+NORTE EM CIMA | (coluna, linha)
+IDENTIDADE DA FASE
+Explorar construções com atalhos.
+Tempo de teste: 90-150 s
+Base: malha Bomberman
+Composição: cruz
+Terreno: sem
+Blocos B: 59 + U/S
+Caixas R: 4
+Inimigos: 7
+Referência de orientação:
+entrada sul-oeste; norte para cima. Coordenadas são posição
+inicial, não rota automática.
+Malha clássica: Pilares # em coluna PAR e linha PAR, alternados com corredores; 25 pilares mantidos. Exceções
+locais: (6,4), (8,4), (6,6), (8,6), (2,10).
+Visual e composição: Praça com poço fechado decorativo; baú no centro sob um sino, visível por cima. Sem poço
+letal.
+Rota e decisão: Pilares formam cruz assimétrica com cobertura. É possível circular sem atravessar a zona do
+Broto; quatro alvos restauram luz no sino.
+Energia e destino: R em (3,2), (11,2), (12,9), (3,9). X cobre colunas 6-8, linhas 5-6; abrir após todos R. Chave 2/4
+do mundo 2.
+Encontro: Corvinhos em (11,4); Corvinhos em (3,5); Mariposa em (10,9); Broto em (7,2); Mariposa em (12,5);
+Broto em (3,1); Corvinhos em (7,9). Evitar perseguição no primeiro instante; aviso antes de tiro ou carga.
+Obstáculos e perigo: troncos cortados com cogumelo azul nos B; Sem terreno especial: o desafio vem da
+arquitetura e inimigos.
+Power-up e sapinho: Velocidade +1 garantido em U (4,9). Sem ovo garantido nesta etapa; montaria anterior
+permanece.
+Segredo: Sino pequeno de cobre marca o tronco do segredo. S em (2,7). Recompensa: Roupa: carteiro noturno.
+Teste e acabamento: Conferir acesso a todos R sem sapinho; fugir de bomba em cada bolso; não cobrir R com
+decoração. Baú deve abrir e chave salvar antes da tela de resultado. Alvos não ficam sob obstáculos aleatórios.
+
+=== PAGE 23 ===
+BOMB YOUR WAY! | BÍBLIA DE MUNDOS E LEVEL DESIGN
+23
+2-3.1 | Passarela dos Juncos
+Pântano dos Reflexos • ETAPA INTERMEDIÁRIA • 1/3
+B
+B
+B
+B
+B
+B
+~
+B
+B
+B
+B
+D
+#
+R
+#
+B
+#
+~
+#
+#
+R
+#
+B
+B
+B
+B
+B
+N
+B
+B
+B
+#
+B
+#
+B
+B
+B
+#
+N
+#
+B
+N
+B
+~
+B
+S
+B
+#
+B
+#
+B
+#
+~
+#
+B
+#
+N
+#
+B
+B
+B
+B
+B
+B
+~
+B
+B
+B
+B
+B
+#
+#
+B
+B
+#
+B
+#
+B
+B
+B
+U
+B
+B
+B
+N
+B
+R
+B
+#
+#
+~
+#
+B
+#
+B
+#
+B
+P
+~
+B
+B
+B
+B
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+NORTE EM CIMA | (coluna, linha)
+IDENTIDADE DA FASE
+Escolher caminhos seguros em terreno úmido.
+Tempo de teste: 75-120 s
+Base: malha Bomberman
+Composição: ponte
+Terreno: água
+Blocos B: 59 + U/S
+Caixas R: 3
+Inimigos: 5
+Referência de orientação:
+entrada sul-oeste; norte para cima. Coordenadas são posição
+inicial, não rota automática.
+Malha clássica: Pilares # em coluna PAR e linha PAR, alternados com corredores; 25 pilares mantidos. Exceções
+locais: (6,4), (8,4), (6,8), (8,8), (2,10).
+Visual e composição: Canal de água rasa escura, duas pontes de pedra clara e juncos fora das rotas. Bordas
+creme tornam colisão legível.
+Rota e decisão: Duas margens conectadas por pontes; água é bloqueio e não dano. Sapinho salta um trecho
+marcado opcional. Sem mergulho obrigatório.
+Energia e destino: R em (3,2), (11,2), (12,9). D em (13,1); todas as caixas abrem a passagem.
+Encontro: Cogumelos em (11,4); Cogumelos em (3,5); Mariposa em (10,9); Mariposa em (7,3); Cogumelos em
+(11,6). Evitar perseguição no primeiro instante; aviso antes de tiro ou carga.
+Obstáculos e perigo: troncos cortados com cogumelo azul nos B; Água bloqueia; todas as conexões de piso
+permanecem indestrutíveis.
+Power-up e sapinho: Velocidade +1 garantido em U (4,9). Sem ovo garantido nesta etapa; montaria anterior
+permanece.
+Segredo: Reflexo turquesa marca a alcova leste. S em (12,5). Recompensa: Moedas de exploração.
+Teste e acabamento: Conferir acesso a todos R sem sapinho; fugir de bomba em cada bolso; não cobrir R com
+decoração. Porta deve abrir mesmo com inimigos vivos. Alvos não ficam sob obstáculos aleatórios.
+
+=== PAGE 24 ===
+BOMB YOUR WAY! | BÍBLIA DE MUNDOS E LEVEL DESIGN
+24
+2-3.2 | Ilhotas de Pedra
+Pântano dos Reflexos • ETAPA INTERMEDIÁRIA • 2/3
+B
+B
+B
+B
+B
+S
+B
+D
+~
+~
+R
+#
+B
+#
+N
+#
+B
+#
+R
+~
+~
+~
+~
+B
+B
+B
+B
+B
+B
+~
+~
+B
+#
+#
+B
+#
+B
+#
+B
+#
+N
+#
+N
+B
+B
+B
+B
+B
+N
+B
+#
+B
+#
+B
+B
+#
+B
+#
+B
+B
+B
+B
+B
+B
+B
+O
+B
+B
+#
+#
+B
+#
+B
+#
+#
+#
+B
+~
+~
+B
+U
+B
+B
+N
+R
+~
+~
+~
+#
+#
+B
+#
+B
+#
+B
+~
+~
+P
+B
+B
+B
+B
+B
+B
+B
+B
+B
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+NORTE EM CIMA | (coluna, linha)
+IDENTIDADE DA FASE
+Escolher caminhos seguros em terreno úmido.
+Tempo de teste: 75-120 s
+Base: malha Bomberman
+Composição: diamante
+Terreno: água
+Blocos B: 55 + U/S
+Caixas R: 3
+Inimigos: 5
+Referência de orientação:
+entrada sul-oeste; norte para cima. Coordenadas são posição
+inicial, não rota automática.
+Malha clássica: Pilares # em coluna PAR e linha PAR, alternados com corredores; 24 pilares mantidos. Exceções
+locais: (2,2), (12,2), (6,6), (8,6), (2,10), (12,10).
+Visual e composição: Quatro pequenos lagos bloqueantes ocupam os cantos. Áreas de combate ficam em lajes
+secas conectadas por chão firme.
+Rota e decisão: Lagos ocupam cantos e não uma linha central. O jogador escolhe sentido de circulação ao redor
+das pedras. Os ataques de raiz não cobrem as duas saídas.
+Energia e destino: R em (3,2), (11,2), (11,9). D em (13,1); todas as caixas abrem a passagem.
+Encontro: Brotos em (11,4); Brotos em (3,5); Cogumelos em (10,9); Cogumelos em (7,2); Brotos em (12,5). Evitar
+perseguição no primeiro instante; aviso antes de tiro ou carga.
+Obstáculos e perigo: troncos cortados com cogumelo azul nos B; Água bloqueia; todas as conexões de piso
+permanecem indestrutíveis.
+Power-up e sapinho: Bombas +1 garantido em U (4,9). Resgate O em (10,7); equipa a aparência escolhida.
+Segredo: Pedra com espiral destaca o tesouro no norte. S em (11,1). Recompensa: Bomba cosmética: cogumelo.
+Teste e acabamento: Conferir acesso a todos R sem sapinho; fugir de bomba em cada bolso; não cobrir R com
+decoração. Porta deve abrir mesmo com inimigos vivos. Alvos não ficam sob obstáculos aleatórios.
+
+=== PAGE 25 ===
+BOMB YOUR WAY! | BÍBLIA DE MUNDOS E LEVEL DESIGN
+25
+2-3.3 | Altar do Espelho Negro
+Pântano dos Reflexos • FINAL: SUPERBAÚ E CHAVE • 3/3
+N
+B
+B
+B
+B
+B
+B
+B
+B
+#
+R
+#
+B
+#
+N
+#
+B
+#
+R
+#
+B
+B
+B
+B
+B
+B
+B
+B
+B
+B
+#
+B
+#
+B
+B
+B
+B
+#
+N
+#
+B
+S
+N
+B
+X
+X
+X
+B
+N
+B
+#
+#
+X
+X
+X
+B
+#
+#
+B
+B
+B
+B
+B
+B
+B
+B
+B
+B
+B
+#
+B
+#
+#
+B
+#
+#
+#
+B
+B
+R
+U
+B
+N
+B
+N
+R
+B
+#
+B
+#
+B
+#
+#
+B
+#
+P
+B
+B
+B
+B
+B
+B
+B
+B
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+NORTE EM CIMA | (coluna, linha)
+IDENTIDADE DA FASE
+Escolher caminhos seguros em terreno úmido.
+Tempo de teste: 90-150 s
+Base: malha Bomberman
+Composição: ferradura
+Terreno: sem
+Blocos B: 59 + U/S
+Caixas R: 4
+Inimigos: 7
+Referência de orientação:
+entrada sul-oeste; norte para cima. Coordenadas são posição
+inicial, não rota automática.
+Malha clássica: Pilares # em coluna PAR e linha PAR, alternados com corredores; 25 pilares mantidos. Exceções
+locais: (6,4), (8,4), (6,6), (8,6), (2,10).
+Visual e composição: Altar de pedra com baú acima de um mosaico de água pintada. O reflexo é arte no piso,
+sem buraco.
+Rota e decisão: O U de pedra oferece abrigo. Ataques alternados dos Brotos criam janela para explodir alvos.
+Evita uma terceira etapa consecutiva de travessias.
+Energia e destino: R em (3,2), (11,2), (12,9), (3,9). X cobre colunas 6-8, linhas 5-6; abrir após todos R. Chave 3/4
+do mundo 2.
+Encontro: Corvinhos em (11,4); Corvinhos em (3,5); Brotos em (10,9); Brotos em (7,2); Corvinhos em (12,5);
+Brotos em (3,1); Corvinhos em (7,9). Evitar perseguição no primeiro instante; aviso antes de tiro ou carga.
+Obstáculos e perigo: troncos cortados com cogumelo azul nos B; Sem terreno especial: o desafio vem da
+arquitetura e inimigos.
+Power-up e sapinho: Alcance +1 garantido em U (4,9). Sem ovo garantido nesta etapa; montaria anterior
+permanece.
+Segredo: Musgo azul no recuo oeste sinaliza o segredo. S em (2,5). Recompensa: Sapinho: aparência Musgo.
+Teste e acabamento: Conferir acesso a todos R sem sapinho; fugir de bomba em cada bolso; não cobrir R com
+decoração. Baú deve abrir e chave salvar antes da tela de resultado. Alvos não ficam sob obstáculos aleatórios.
+
+=== PAGE 26 ===
+BOMB YOUR WAY! | BÍBLIA DE MUNDOS E LEVEL DESIGN
+26
+2-4.1 | Escadaria Quebrada
+Ruínas da Lua • ETAPA INTERMEDIÁRIA • 1/3
+B
+B
+B
+B
+B
+B
+D
+B
+#
+R
+#
+B
+#
+N
+#
+B
+#
+R
+#
+B
+B
+B
+B
+B
+B
+B
+B
+#
+B
+#
+B
+#
+B
+#
+N
+#
+B
+N
+B
+B
+B
+B
+B
+B
+B
+S
+B
+#
+B
+#
+B
+#
+B
+#
+B
+#
+N
+#
+B
+B
+B
+B
+B
+B
+B
+B
+B
+B
+B
+B
+B
+#
+#
+B
+#
+B
+#
+B
+#
+B
+B
+U
+B
+B
+B
+B
+N
+B
+R
+#
+#
+#
+#
+B
+#
+P
+B
+B
+B
+B
+B
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+NORTE EM CIMA | (coluna, linha)
+IDENTIDADE DA FASE
+Dominar perseguição e ataques marcados.
+Tempo de teste: 75-120 s
+Base: malha Bomberman
+Composição: zigue
+Terreno: sem
+Blocos B: 62 + U/S
+Caixas R: 3
+Inimigos: 5
+Referência de orientação:
+entrada sul-oeste; norte para cima. Coordenadas são posição
+inicial, não rota automática.
+Malha clássica: Pilares # em coluna PAR e linha PAR, alternados com corredores; 27 pilares mantidos. Exceções
+locais: (4,4), (10,8), (2,10).
+Visual e composição: Escadaria representada por pisos planos e bordas decorativas, sem mudança de altura
+real. Arcos partidos fora da arena.
+Rota e decisão: Duas mudanças de direção interrompem perseguição. Ataques dependem de alinhamento; o
+caminho mais curto tem mais blocos, o largo tem mais inimigos.
+Energia e destino: R em (3,2), (11,2), (12,9). D em (13,1); todas as caixas abrem a passagem.
+Encontro: Corvinhos em (11,4); Corvinhos em (3,5); Mariposas em (10,9); Mariposas em (7,2); Corvinhos em
+(11,6). Evitar perseguição no primeiro instante; aviso antes de tiro ou carga.
+Obstáculos e perigo: troncos cortados com cogumelo azul nos B; Sem terreno especial: o desafio vem da
+arquitetura e inimigos.
+Power-up e sapinho: Bombas +1 garantido em U (4,9). Sem ovo garantido nesta etapa; montaria anterior
+permanece.
+Segredo: Lua crescente gravada indica segredo no leste. S em (12,5). Recompensa: Moedas de exploração.
+Teste e acabamento: Conferir acesso a todos R sem sapinho; fugir de bomba em cada bolso; não cobrir R com
+decoração. Porta deve abrir mesmo com inimigos vivos. Alvos não ficam sob obstáculos aleatórios.
+
+=== PAGE 27 ===
+BOMB YOUR WAY! | BÍBLIA DE MUNDOS E LEVEL DESIGN
+27
+2-4.2 | Galeria dos Espinhos
+Ruínas da Lua • ETAPA INTERMEDIÁRIA • 2/3
+B
+B
+B
+B
+B
+B
+B
+B
+D
+B
+#
+R
+#
+B
+#
+N
+#
+B
+#
+R
+#
+B
+B
+B
+H
+B
+B
+B
+B
+S
+B
+#
+#
+#
+B
+#
+#
+N
+#
+B
+N
+B
+B
+B
+B
+N
+B
+B
+#
+B
+#
+#
+B
+#
+B
+#
+#
+B
+B
+B
+B
+B
+B
+B
+O
+B
+#
+B
+#
+#
+#
+H
+#
+#
+B
+B
+B
+U
+B
+B
+B
+B
+N
+B
+R
+B
+#
+B
+#
+B
+#
+B
+#
+B
+#
+P
+B
+B
+B
+B
+B
+B
+B
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+NORTE EM CIMA | (coluna, linha)
+IDENTIDADE DA FASE
+Dominar perseguição e ataques marcados.
+Tempo de teste: 75-120 s
+Base: malha Bomberman
+Composição: faixas
+Terreno: raízes
+Blocos B: 59 + U/S
+Caixas R: 3
+Inimigos: 5
+Referência de orientação:
+entrada sul-oeste; norte para cima. Coordenadas são posição
+inicial, não rota automática.
+Malha clássica: Pilares # em coluna PAR e linha PAR, alternados com corredores; 29 pilares mantidos. Exceções
+locais: (2,10).
+Visual e composição: Galeria de pilares e vasos rachados. Espinhos são temporários em duas casas sinalizadas,
+não muros invisíveis.
+Rota e decisão: Três corredores conectados; ameaças pulsam em alternância. O jogador pode esperar em bolso
+seguro ou usar corredor lateral.
+Energia e destino: R em (3,2), (11,2), (12,9). D em (13,1); todas as caixas abrem a passagem.
+Encontro: Brotos em (11,4); Brotos em (3,5); Cogumelos em (10,9); Cogumelos em (7,2); Brotos em (12,5). Evitar
+perseguição no primeiro instante; aviso antes de tiro ou carga.
+Obstáculos e perigo: troncos cortados com cogumelo azul nos B; H avisa 1 s e causa dano por 0,8 s; intervalos
+alternados de 4 s. H em (6,3), (9,8).
+Power-up e sapinho: Alcance +1 garantido em U (4,9). Resgate O em (10,7); equipa a aparência escolhida.
+Segredo: Vaso com folha prateada identifica o item único. S em (12,3). Recompensa: Acessório: coroa de galhos.
+Teste e acabamento: Conferir acesso a todos R sem sapinho; fugir de bomba em cada bolso; não cobrir R com
+decoração. Porta deve abrir mesmo com inimigos vivos. Alvos não ficam sob obstáculos aleatórios.
+
+=== PAGE 28 ===
+BOMB YOUR WAY! | BÍBLIA DE MUNDOS E LEVEL DESIGN
+28
+2-4.3 | Câmara das Quatro Lanternas
+Ruínas da Lua • FINAL: SUPERBAÚ E CHAVE • 3/3
+N
+B
+B
+B
+B
+B
+B
+B
+B
+B
+#
+R
+#
+B
+#
+N
+#
+B
+#
+R
+#
+B
+B
+B
+B
+B
+B
+B
+B
+B
+B
+#
+B
+#
+B
+B
+B
+B
+#
+N
+#
+B
+N
+X
+X
+X
+B
+N
+B
+#
+B
+#
+X
+X
+X
+#
+B
+#
+B
+B
+B
+B
+B
+B
+B
+B
+B
+B
+B
+B
+B
+B
+#
+#
+#
+B
+#
+#
+B
+#
+B
+B
+R
+U
+B
+N
+B
+N
+R
+B
+#
+#
+#
+B
+#
+S
+#
+B
+P
+B
+B
+B
+B
+B
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+NORTE EM CIMA | (coluna, linha)
+IDENTIDADE DA FASE
+Dominar perseguição e ataques marcados.
+Tempo de teste: 90-150 s
+Base: malha Bomberman
+Composição: anel
+Terreno: sem
+Blocos B: 59 + U/S
+Caixas R: 4
+Inimigos: 7
+Referência de orientação:
+entrada sul-oeste; norte para cima. Coordenadas são posição
+inicial, não rota automática.
+Malha clássica: Pilares # em coluna PAR e linha PAR, alternados com corredores; 25 pilares mantidos. Exceções
+locais: (6,4), (8,4), (6,6), (8,6), (2,10).
+Visual e composição: Baú lunar central entre quatro lanternas de pedra. Um vitral aparece além da parede
+norte.
+Rota e decisão: Quatro alvos iluminam lanternas uma a uma. Rotas claras combinam atração, cobertura e bomba
+em cadeia. A quarta chave libera Umbra no mapa.
+Energia e destino: R em (3,2), (11,2), (12,9), (3,9). X cobre colunas 6-8, linhas 5-6; abrir após todos R. Chave 4/4
+do mundo 2.
+Encontro: Corvinhos em (11,4); Corvinhos em (3,5); Brotos em (10,9); Mariposa em (7,2); Brotos em (12,5);
+Mariposa em (3,1); Corvinhos em (7,9). Evitar perseguição no primeiro instante; aviso antes de tiro ou carga.
+Obstáculos e perigo: troncos cortados com cogumelo azul nos B; Sem terreno especial: o desafio vem da
+arquitetura e inimigos.
+Power-up e sapinho: Velocidade +1 garantido em U (4,9). Sem ovo garantido nesta etapa; montaria anterior
+permanece.
+Segredo: Vitral com uma estrela aponta para o recuo sul. S em (11,10). Recompensa: Roupa: guardião da lua.
+Teste e acabamento: Conferir acesso a todos R sem sapinho; fugir de bomba em cada bolso; não cobrir R com
+decoração. Baú deve abrir e chave salvar antes da tela de resultado. Alvos não ficam sob obstáculos aleatórios.
+
+=== PAGE 29 ===
+BOMB YOUR WAY! | BÍBLIA DE MUNDOS E LEVEL DESIGN
+29
+CHEFE 2 | Umbra, a Coruja das
+Raízes
+Arena adicional, liberada por quatro chaves; não conta como quinta fase de campanha.
+Aparência
+Coruja pequena de penas violetas, olhos dourados, máscara de casca e asas largas arredondadas; sem
+horror realista.
+Arena
+Clareira seca com quatro pilares de raiz e contorno de lanternas; água e névoa apenas fora do campo.
+Padrões de ataque
+1. Raízes: marca duas faixas por 1,2 s e fecha cada uma por 1 s, sem bloquear todas as saídas. 2.
+Rasante: sombra atravessa o piso, voo não tem colisão invisível. 3. Pouso: aterrissa em pedestal por 3 s e
+fica vulnerável à bomba.
+Balanceamento inicial
+4 acertos válidos. Alterna os pedestais; máximo um corvinho adicional no estágio final. A explosão só
+causa dano quando a coruja está no chão e o núcleo está aceso.
+Entrada e proteção
+Jogador aparece na borda sul; chefe no norte. Prévia de 2 s mostra ataque, sem interromper controle por
+mais tempo. Estado básico de 1 bomba, alcance 2 e velocidade padrão é suficiente. Se montaria foi
+perdida, um ovo de treino opcional aparece na entrada, fora da zona de ataque. Não depender de farm da
+campanha.
+Vitória e retorno
+Passagem ao Deserto; aparência Sapinho Lunar; lanterna de vitória no lobby. Primeira vitória salva
+recompensa única, mundo concluído e próximo acesso. Repetições não repetem cosméticos. Ao perder,
+reinicia-se a arena, sem perder chaves. Ataques são cancelados antes da animação de vitória.
+Medalhas propostas
+Vencer; vencer sem morrer; vencer sem perder montaria (ou sem montaria ativa na tentativa). A terceira
+medalha é opcional e não bloqueia o mundo seguinte.
+
+=== PAGE 30 ===
+BOMB YOUR WAY! | BÍBLIA DE MUNDOS E LEVEL DESIGN
+30
+MUNDO 3 | Deserto das Engrenagens
+Areia creme, sombra roxa suave e detalhes coral/turquesa. O chão tem pouco ruído. Partículas de areia
+ficam fora do tabuleiro.
+Kit de arte
+Arenito; lona coral; cobre; tecido; palmeira; cerâmica; engrenagem; azulejo azul. Blocos quebráveis: vasos
+e caixas de madeira com tecido vermelho. Alvos: caixa de cobre com cristal ciano.
+Inimigos e leitura
+Escaravelho: corre em reta após preparação de 1 s; 1 explosão. Cacto: atira agulha lenta após marca
+clara; 1 explosão. Lagartinho: anda entre coberturas; 1 explosão. Sentinela: vulnerável apenas quando
+abre escudo, 1 acerto válido; não recebe vida extra artificial.
+Baú, chave e sapinho
+baú de cobre e ouro com selo de ampulheta. chave de cobre com cabeça de ampulheta. Sapinho Oásis:
+verde-água com lenço creme, função idêntica à base.
+Fase
+Etapas
+Propósito
+3-1 Oásis da Primeira Sombra
+3
+Apresentar deserto e carga em linha.
+3-2 Mercado Soterrado
+3
+Combinar cobertura e armadilhas de areia.
+3-3 Fortaleza das Dunas
+4
+Introduzir sentinelas e cronometrar passagens.
+3-4 Templo da Ampulheta
+4
+Prova final de leitura e controle de rotas.
+Composição e iluminação
+Campo útil claro; fundo menos saturado. Alvos cianos nunca mudam de significado. Decoração alta fica
+fora da área jogável ou atrás dos sprites. Desenhar oclusão pela posição dos pés e sombras discretas. A
+borda externa comunica limite real.
+Chefe do mundo
+Tic-Tac, o Escaravelho Mecânico fica disponível após abrir os quatro superbaús.
+
+=== PAGE 31 ===
+BOMB YOUR WAY! | BÍBLIA DE MUNDOS E LEVEL DESIGN
+31
+3-1.1 | Entrada das Palmeiras
+Oásis da Primeira Sombra • ETAPA INTERMEDIÁRIA • 1/3
+B
+B
+B
+B
+B
+B
+B
+B
+D
+B
+#
+R
+#
+B
+#
+N
+#
+B
+#
+R
+#
+B
+B
+B
+B
+B
+B
+B
+S
+B
+#
+B
+B
+B
+#
+#
+B
+#
+N
+#
+B
+B
+N
+B
+B
+B
+B
+B
+B
+N
+B
+#
+B
+#
+B
+#
+B
+#
+B
+#
+B
+#
+B
+B
+B
+B
+B
+B
+B
+B
+B
+#
+#
+B
+#
+B
+#
+B
+B
+#
+B
+B
+U
+B
+N
+B
+R
+B
+#
+#
+#
+B
+#
+#
+B
+P
+B
+B
+B
+B
+B
+B
+B
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+NORTE EM CIMA | (coluna, linha)
+IDENTIDADE DA FASE
+Apresentar deserto e carga em linha.
+Tempo de teste: 75-120 s
+Base: malha Bomberman
+Composição: ilhas
+Terreno: sem
+Blocos B: 64 + U/S
+Caixas R: 3
+Inimigos: 5
+Referência de orientação:
+entrada sul-oeste; norte para cima. Coordenadas são posição
+inicial, não rota automática.
+Malha clássica: Pilares # em coluna PAR e linha PAR, alternados com corredores; 27 pilares mantidos. Exceções
+locais: (4,4), (10,8), (2,10).
+Visual e composição: Palmeiras externas, pedra clara e tapetes curtos. Pequena fonte é apenas decoração fora
+da arena.
+Rota e decisão: Primeira carga é telegrafada em área ampla. Pedras permitem desviar e alinhar bomba. Os alvos
+ficam em rotas visíveis.
+Energia e destino: R em (3,2), (11,2), (12,9). D em (13,1); todas as caixas abrem a passagem.
+Encontro: Escaravelhos em (11,4); Escaravelhos em (3,5); Lagartinho em (10,9); Lagartinho em (7,2);
+Escaravelhos em (12,5). Evitar perseguição no primeiro instante; aviso antes de tiro ou carga.
+Obstáculos e perigo: vasos e caixas de madeira com tecido vermelho nos B; Sem terreno especial: o desafio
+vem da arquitetura e inimigos.
+Power-up e sapinho: Bombas +1 garantido em U (4,9). Sem ovo garantido nesta etapa; montaria anterior
+permanece.
+Segredo: Três tâmaras desenhadas num vaso marcam o segredo. S em (12,3). Recompensa: Moedas de
+exploração.
+Teste e acabamento: Conferir acesso a todos R sem sapinho; fugir de bomba em cada bolso; não cobrir R com
+decoração. Porta deve abrir mesmo com inimigos vivos. Alvos não ficam sob obstáculos aleatórios.
+
+=== PAGE 32 ===
+BOMB YOUR WAY! | BÍBLIA DE MUNDOS E LEVEL DESIGN
+32
+3-1.2 | Jardim dos Azulejos
+Oásis da Primeira Sombra • ETAPA INTERMEDIÁRIA • 2/3
+B
+B
+B
+B
+~
+B
+B
+B
+B
+B
+D
+B
+#
+R
+#
+B
+#
+~
+#
+B
+#
+R
+#
+B
+B
+B
+B
+B
+N
+B
+B
+B
+B
+B
+#
+B
+#
+B
+B
+B
+B
+#
+N
+#
+B
+B
+S
+N
+B
+~
+B
+N
+B
+#
+B
+#
+B
+#
+~
+#
+B
+#
+B
+#
+B
+B
+B
+B
+B
+~
+B
+O
+B
+B
+#
+B
+#
+B
+B
+B
+B
+#
+#
+B
+B
+U
+B
+B
+B
+N
+B
+R
+B
+#
+#
+~
+#
+#
+B
+#
+P
+~
+B
+B
+B
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+NORTE EM CIMA | (coluna, linha)
+IDENTIDADE DA FASE
+Apresentar deserto e carga em linha.
+Tempo de teste: 75-120 s
+Base: malha Bomberman
+Composição: ponte
+Terreno: água
+Blocos B: 60 + U/S
+Caixas R: 3
+Inimigos: 5
+Referência de orientação:
+entrada sul-oeste; norte para cima. Coordenadas são posição
+inicial, não rota automática.
+Malha clássica: Pilares # em coluna PAR e linha PAR, alternados com corredores; 25 pilares mantidos. Exceções
+locais: (6,4), (8,4), (6,8), (8,8), (2,10).
+Visual e composição: Canal estreito do oásis com duas pontes de azulejo; sombra de palmeira nunca obscurece
+inimigos.
+Rota e decisão: Travessia com cobertura nas duas margens. Água bloqueia, pontes não quebram. Sapinho tem
+atalho marcado, sem vantagem obrigatória.
+Energia e destino: R em (3,2), (11,2), (12,9). D em (13,1); todas as caixas abrem a passagem.
+Encontro: Cactos em (11,4); Cactos em (3,5); Escaravelho em (10,9); Escaravelho em (7,3); Cactos em (12,5).
+Evitar perseguição no primeiro instante; aviso antes de tiro ou carga.
+Obstáculos e perigo: vasos e caixas de madeira com tecido vermelho nos B; Água bloqueia; todas as conexões
+de piso permanecem indestrutíveis.
+Power-up e sapinho: Velocidade +1 garantido em U (4,9). Resgate O em (10,7); equipa a aparência escolhida.
+Segredo: Azulejo com sapo aponta para o recuo oeste. S em (2,5). Recompensa: Acessório: lenço do oásis.
+Teste e acabamento: Conferir acesso a todos R sem sapinho; fugir de bomba em cada bolso; não cobrir R com
+decoração. Porta deve abrir mesmo com inimigos vivos. Alvos não ficam sob obstáculos aleatórios.
+
+=== PAGE 33 ===
+BOMB YOUR WAY! | BÍBLIA DE MUNDOS E LEVEL DESIGN
+33
+3-1.3 | Pavilhão das Águas
+Oásis da Primeira Sombra • FINAL: SUPERBAÚ E CHAVE • 3/3
+N
+B
+B
+B
+B
+N
+B
+B
+B
+#
+R
+#
+#
+N
+#
+B
+#
+R
+#
+B
+B
+B
+B
+B
+B
+B
+B
+B
+B
+B
+#
+B
+#
+B
+B
+B
+B
+#
+N
+#
+B
+B
+N
+B
+X
+X
+X
+B
+B
+N
+B
+B
+#
+B
+#
+X
+X
+X
+#
+B
+#
+B
+B
+B
+B
+B
+B
+B
+B
+B
+B
+B
+B
+B
+#
+#
+#
+#
+B
+#
+#
+B
+R
+U
+B
+N
+B
+N
+B
+R
+B
+#
+B
+#
+#
+#
+S
+#
+P
+B
+B
+B
+B
+B
+B
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+NORTE EM CIMA | (coluna, linha)
+IDENTIDADE DA FASE
+Apresentar deserto e carga em linha.
+Tempo de teste: 90-150 s
+Base: malha Bomberman
+Composição: cruz
+Terreno: sem
+Blocos B: 59 + U/S
+Caixas R: 4
+Inimigos: 8
+Referência de orientação:
+entrada sul-oeste; norte para cima. Coordenadas são posição
+inicial, não rota automática.
+Malha clássica: Pilares # em coluna PAR e linha PAR, alternados com corredores; 25 pilares mantidos. Exceções
+locais: (6,4), (8,4), (6,6), (8,6), (2,10).
+Visual e composição: Pavilhão de colunas creme e lona coral; baú central em mosaico azul, sem lagos.
+Rota e decisão: Colunas protegem contra agulhas. Abrir as duas laterais cria circulação fluida até todos os alvos.
+Energia e destino: R em (3,2), (11,2), (12,9), (3,9). X cobre colunas 6-8, linhas 5-6; abrir após todos R. Chave 1/4
+do mundo 3.
+Encontro: Cactos em (11,4); Cactos em (3,5); Lagartinhos em (10,9); Lagartinhos em (7,2); Cactos em (12,5);
+Lagartinhos em (3,1); Cactos em (7,9); Lagartinhos em (11,1). Evitar perseguição no primeiro instante; aviso antes
+de tiro ou carga.
+Obstáculos e perigo: vasos e caixas de madeira com tecido vermelho nos B; Sem terreno especial: o desafio
+vem da arquitetura e inimigos.
+Power-up e sapinho: Alcance +1 garantido em U (4,9). Sem ovo garantido nesta etapa; montaria anterior
+permanece.
+Segredo: Uma jarra azul quebrável contém o segredo. S em (11,10). Recompensa: Sapinho: aparência Oásis.
+Teste e acabamento: Conferir acesso a todos R sem sapinho; fugir de bomba em cada bolso; não cobrir R com
+decoração. Baú deve abrir e chave salvar antes da tela de resultado. Alvos não ficam sob obstáculos aleatórios.
+
+=== PAGE 34 ===
+BOMB YOUR WAY! | BÍBLIA DE MUNDOS E LEVEL DESIGN
+34
+3-2.1 | Rua dos Tecidos
+Mercado Soterrado • ETAPA INTERMEDIÁRIA • 1/3
+B
+S
+N
+B
+B
+B
+B
+D
+B
+#
+R
+#
+B
+#
+N
+#
+B
+#
+R
+#
+B
+B
+B
+B
+B
+B
+B
+B
+B
+B
+#
+B
+#
+B
+#
+B
+#
+#
+N
+#
+B
+N
+B
+B
+B
+B
+B
+B
+N
+B
+B
+#
+B
+#
+B
+#
+B
+#
+B
+#
+B
+#
+B
+B
+B
+B
+B
+B
+B
+B
+B
+B
+#
+B
+#
+B
+#
+B
+#
+#
+B
+#
+B
+B
+U
+B
+B
+N
+R
+B
+#
+B
+#
+B
+#
+#
+B
+#
+P
+B
+B
+B
+B
+B
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+NORTE EM CIMA | (coluna, linha)
+IDENTIDADE DA FASE
+Combinar cobertura e armadilhas de areia.
+Tempo de teste: 75-120 s
+Base: malha Bomberman
+Composição: faixas
+Terreno: sem
+Blocos B: 62 + U/S
+Caixas R: 3
+Inimigos: 6
+Referência de orientação:
+entrada sul-oeste; norte para cima. Coordenadas são posição
+inicial, não rota automática.
+Malha clássica: Pilares # em coluna PAR e linha PAR, alternados com corredores; 29 pilares mantidos. Exceções
+locais: (2,10).
+Visual e composição: Rua de mercado, toldos altos fora da colisão e caixas com tecidos. Areia aparece como
+manchas decorativas.
+Rota e decisão: Faixas de banca criam corredores, mas atalhos quebráveis conectam os lados. Lagartinhos
+circulam pelas bancas sem teleporte.
+Energia e destino: R em (3,2), (11,2), (12,9). D em (13,1); todas as caixas abrem a passagem.
+Encontro: Lagartinhos em (11,4); Lagartinhos em (3,5); Lagartinhos em (10,9); Cacto em (7,2); Lagartinhos em
+(12,5); Cacto em (3,1). Evitar perseguição no primeiro instante; aviso antes de tiro ou carga.
+Obstáculos e perigo: vasos e caixas de madeira com tecido vermelho nos B; Sem terreno especial: o desafio
+vem da arquitetura e inimigos.
+Power-up e sapinho: Bombas +1 garantido em U (4,9). Sem ovo garantido nesta etapa; montaria anterior
+permanece.
+Segredo: Tecido com desenho de bomba destaca uma caixa. S em (2,1). Recompensa: Moedas de exploração.
+Teste e acabamento: Conferir acesso a todos R sem sapinho; fugir de bomba em cada bolso; não cobrir R com
+decoração. Porta deve abrir mesmo com inimigos vivos. Alvos não ficam sob obstáculos aleatórios.
+
+=== PAGE 35 ===
+BOMB YOUR WAY! | BÍBLIA DE MUNDOS E LEVEL DESIGN
+35
+3-2.2 | Depósito das Caravanas
+Mercado Soterrado • ETAPA INTERMEDIÁRIA • 2/3
+N
+B
+B
+B
+B
+B
+B
+B
+D
+B
+#
+R
+#
+B
+#
+N
+#
+B
+#
+R
+#
+B
+B
+B
+B
+H
+B
+B
+B
+B
+B
+B
+B
+#
+B
+B
+B
+#
+#
+N
+#
+B
+N
+B
+B
+B
+N
+B
+B
+#
+B
+#
+B
+#
+B
+#
+B
+#
+B
+#
+B
+B
+B
+B
+B
+B
+B
+B
+B
+B
+#
+B
+#
+B
+#
+H
+O
+B
+#
+B
+U
+B
+B
+B
+B
+N
+B
+R
+#
+#
+#
+B
+#
+S
+#
+P
+B
+B
+B
+B
+B
+B
+B
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+NORTE EM CIMA | (coluna, linha)
+IDENTIDADE DA FASE
+Combinar cobertura e armadilhas de areia.
+Tempo de teste: 75-120 s
+Base: malha Bomberman
+Composição: salas
+Terreno: areia
+Blocos B: 62 + U/S
+Caixas R: 3
+Inimigos: 6
+Referência de orientação:
+entrada sul-oeste; norte para cima. Coordenadas são posição
+inicial, não rota automática.
+Malha clássica: Pilares # em coluna PAR e linha PAR, alternados com corredores; 25 pilares mantidos. Exceções
+locais: (4,4), (10,4), (4,8), (10,8), (2,10).
+Visual e composição: Depósito de cerâmica com pilares e grandes carroças decorativas além da borda. Duas
+casas de areia fofa.
+Rota e decisão: Areia reduz levemente velocidade, nunca prende. Corredor paralelo permite evitar o efeito.
+Preparação da carga dá tempo para cruzar.
+Energia e destino: R em (3,2), (11,2), (12,9). D em (13,1); todas as caixas abrem a passagem.
+Encontro: Escaravelhos em (11,4); Escaravelhos em (3,5); Cacto em (10,9); Cacto em (7,2); Escaravelhos em
+(12,5); Cacto em (3,1). Evitar perseguição no primeiro instante; aviso antes de tiro ou carga.
+Obstáculos e perigo: vasos e caixas de madeira com tecido vermelho nos B; H reduz velocidade em 20%; saída
+livre, sem prender ou afetar pavio. H em (6,3), (9,8).
+Power-up e sapinho: Alcance +1 garantido em U (4,9). Resgate O em (10,8); equipa a aparência escolhida.
+Segredo: Marca de pata na cerâmica indica o segredo. S em (11,10). Recompensa: Bomba cosmética: pote.
+Teste e acabamento: Conferir acesso a todos R sem sapinho; fugir de bomba em cada bolso; não cobrir R com
+decoração. Porta deve abrir mesmo com inimigos vivos. Alvos não ficam sob obstáculos aleatórios.
+
+=== PAGE 36 ===
+BOMB YOUR WAY! | BÍBLIA DE MUNDOS E LEVEL DESIGN
+36
+3-2.3 | Praça dos Mercadores
+Mercado Soterrado • FINAL: SUPERBAÚ E CHAVE • 3/3
+B
+N
+B
+B
+N
+S
+B
+B
+#
+R
+#
+B
+#
+N
+#
+B
+#
+R
+#
+B
+B
+B
+B
+B
+B
+B
+B
+B
+B
+B
+#
+B
+#
+B
+B
+B
+B
+B
+#
+N
+#
+B
+N
+B
+B
+X
+X
+X
+B
+B
+N
+B
+B
+#
+#
+B
+X
+X
+X
+B
+#
+B
+#
+B
+B
+B
+B
+B
+B
+B
+#
+B
+#
+B
+#
+B
+#
+B
+#
+B
+#
+B
+R
+U
+B
+N
+N
+R
+#
+B
+#
+B
+#
+B
+#
+B
+#
+P
+B
+B
+B
+B
+B
+B
+B
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+NORTE EM CIMA | (coluna, linha)
+IDENTIDADE DA FASE
+Combinar cobertura e armadilhas de areia.
+Tempo de teste: 90-150 s
+Base: malha Bomberman
+Composição: diamante
+Terreno: sem
+Blocos B: 59 + U/S
+Caixas R: 4
+Inimigos: 8
+Referência de orientação:
+entrada sul-oeste; norte para cima. Coordenadas são posição
+inicial, não rota automática.
+Malha clássica: Pilares # em coluna PAR e linha PAR, alternados com corredores; 25 pilares mantidos. Exceções
+locais: (6,4), (8,4), (6,6), (8,6), (2,10).
+Visual e composição: Baú sobre tapete real, quatro pilares com bandeiras e fundo de bazar. Campo seco e
+legível.
+Rota e decisão: Espaço central e rotas laterais permitem atrair a carga para a explosão. Não repetir a areia do
+depósito.
+Energia e destino: R em (3,2), (11,2), (12,9), (3,9). X cobre colunas 6-8, linhas 5-6; abrir após todos R. Chave 2/4
+do mundo 3.
+Encontro: Escaravelhos em (11,4); Escaravelhos em (3,5); Cactos em (10,9); Cactos em (7,2); Escaravelhos em
+(12,5); Cactos em (3,1); Escaravelhos em (7,9); Cactos em (10,1). Evitar perseguição no primeiro instante; aviso
+antes de tiro ou carga.
+Obstáculos e perigo: vasos e caixas de madeira com tecido vermelho nos B; Sem terreno especial: o desafio
+vem da arquitetura e inimigos.
+Power-up e sapinho: Velocidade +1 garantido em U (4,9). Sem ovo garantido nesta etapa; montaria anterior
+permanece.
+Segredo: Bandeira turquesa aponta para o recuo norte. S em (11,1). Recompensa: Roupa: mercador aventureiro.
+Teste e acabamento: Conferir acesso a todos R sem sapinho; fugir de bomba em cada bolso; não cobrir R com
+decoração. Baú deve abrir e chave salvar antes da tela de resultado. Alvos não ficam sob obstáculos aleatórios.
+
+=== PAGE 37 ===
+BOMB YOUR WAY! | BÍBLIA DE MUNDOS E LEVEL DESIGN
+37
+3-3.1 | Pátio das Bandeiras
+Fortaleza das Dunas • ETAPA INTERMEDIÁRIA • 1/4
+B
+N
+B
+B
+B
+B
+B
+D
+B
+#
+R
+#
+B
+#
+N
+#
+B
+#
+R
+#
+B
+B
+B
+B
+B
+B
+B
+B
+#
+#
+B
+#
+B
+#
+N
+#
+N
+B
+B
+B
+B
+B
+B
+N
+#
+B
+#
+B
+#
+B
+#
+B
+#
+#
+B
+B
+B
+B
+B
+B
+B
+B
+B
+B
+B
+B
+B
+#
+#
+B
+#
+#
+B
+B
+B
+#
+B
+B
+U
+B
+B
+B
+B
+N
+B
+R
+#
+B
+#
+B
+#
+B
+#
+S
+#
+B
+P
+B
+B
+B
+B
+B
+B
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+NORTE EM CIMA | (coluna, linha)
+IDENTIDADE DA FASE
+Introduzir sentinelas e cronometrar passagens.
+Tempo de teste: 75-120 s
+Base: malha Bomberman
+Composição: zigue
+Terreno: sem
+Blocos B: 63 + U/S
+Caixas R: 3
+Inimigos: 6
+Referência de orientação:
+entrada sul-oeste; norte para cima. Coordenadas são posição
+inicial, não rota automática.
+Malha clássica: Pilares # em coluna PAR e linha PAR, alternados com corredores; 27 pilares mantidos. Exceções
+locais: (4,4), (10,8), (2,10).
+Visual e composição: Muralha de arenito, bandeiras coral e blocos como caixas militares fictícias.
+Rota e decisão: Sentinela abre escudo para preparar ataque; brilho ciano mostra vulnerabilidade. Desvios largos
+permitem recuar enquanto espera.
+Energia e destino: R em (3,2), (11,2), (12,9). D em (13,1); todas as caixas abrem a passagem.
+Encontro: Escaravelhos em (11,4); Escaravelhos em (3,5); Sentinela em (10,9); Sentinela em (7,2); Escaravelhos
+em (12,5); Sentinela em (3,1). Evitar perseguição no primeiro instante; aviso antes de tiro ou carga.
+Obstáculos e perigo: vasos e caixas de madeira com tecido vermelho nos B; Sem terreno especial: o desafio
+vem da arquitetura e inimigos.
+Power-up e sapinho: Bombas +1 garantido em U (4,9). Sem ovo garantido nesta etapa; montaria anterior
+permanece.
+Segredo: Bandeira com símbolo de chave marca o segredo. S em (11,10). Recompensa: Moedas de exploração.
+Teste e acabamento: Conferir acesso a todos R sem sapinho; fugir de bomba em cada bolso; não cobrir R com
+decoração. Porta deve abrir mesmo com inimigos vivos. Alvos não ficam sob obstáculos aleatórios.
+
+=== PAGE 38 ===
+BOMB YOUR WAY! | BÍBLIA DE MUNDOS E LEVEL DESIGN
+38
+3-3.2 | Oficina de Cobre
+Fortaleza das Dunas • ETAPA INTERMEDIÁRIA • 2/4
+B
+N
+B
+B
+B
+B
+B
+B
+D
+B
+#
+R
+#
+#
+N
+#
+B
+#
+R
+#
+B
+B
+B
+B
+B
+H
+B
+B
+B
+B
+#
+#
+B
+#
+#
+#
+N
+#
+B
+B
+N
+B
+B
+B
+B
+B
+N
+B
+B
+#
+B
+#
+B
+B
+B
+B
+B
+#
+B
+#
+B
+S
+B
+B
+O
+B
+B
+#
+B
+#
+#
+B
+#
+H
+#
+#
+B
+B
+B
+U
+B
+B
+B
+N
+B
+R
+B
+#
+B
+#
+B
+#
+#
+B
+#
+B
+P
+B
+B
+B
+B
+B
+B
+B
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+NORTE EM CIMA | (coluna, linha)
+IDENTIDADE DA FASE
+Introduzir sentinelas e cronometrar passagens.
+Tempo de teste: 75-120 s
+Base: malha Bomberman
+Composição: cruz
+Terreno: jatos
+Blocos B: 61 + U/S
+Caixas R: 3
+Inimigos: 6
+Referência de orientação:
+entrada sul-oeste; norte para cima. Coordenadas são posição
+inicial, não rota automática.
+Malha clássica: Pilares # em coluna PAR e linha PAR, alternados com corredores; 27 pilares mantidos. Exceções
+locais: (6,6), (8,6), (2,10).
+Visual e composição: Oficina com tubos baixos decorativos e duas válvulas no chão. Engrenagens de fundo não
+giram sobre personagens.
+Rota e decisão: Jatos recebem aviso 1 s antes e afetam uma casa por vez. Sempre existe alternativa seca.
+Bombas mantêm pavio padrão.
+Energia e destino: R em (3,2), (11,2), (12,9). D em (13,1); todas as caixas abrem a passagem.
+Encontro: Sentinelas em (11,4); Sentinelas em (3,5); Lagartinho em (10,9); Lagartinho em (7,2); Sentinelas em
+(12,5); Lagartinho em (3,1). Evitar perseguição no primeiro instante; aviso antes de tiro ou carga.
+Obstáculos e perigo: vasos e caixas de madeira com tecido vermelho nos B; H avisa 1 s e ativa por 0,8 s, a cada
+4 s; nunca os dois juntos. H em (6,3), (9,8).
+Power-up e sapinho: Alcance +1 garantido em U (4,9). Resgate O em (10,7); equipa a aparência escolhida.
+Segredo: Válvula marcada com estrela indica o segredo. S em (2,7). Recompensa: Acessório: óculos de mecânico.
+Teste e acabamento: Conferir acesso a todos R sem sapinho; fugir de bomba em cada bolso; não cobrir R com
+decoração. Porta deve abrir mesmo com inimigos vivos. Alvos não ficam sob obstáculos aleatórios.
+
+=== PAGE 39 ===
+BOMB YOUR WAY! | BÍBLIA DE MUNDOS E LEVEL DESIGN
+39
+3-3.3 | Terraço das Dunas
+Fortaleza das Dunas • ETAPA INTERMEDIÁRIA • 3/4
+N
+B
+B
+B
+B
+B
+D
+B
+#
+R
+#
+B
+#
+N
+#
+#
+R
+#
+B
+B
+B
+B
+B
+B
+S
+B
+#
+B
+#
+H
+B
+B
+B
+#
+N
+#
+B
+B
+N
+B
+B
+B
+B
+B
+N
+B
+#
+B
+#
+B
+#
+B
+#
+B
+#
+B
+#
+B
+B
+B
+B
+B
+B
+B
+B
+B
+B
+B
+B
+#
+#
+B
+#
+#
+H
+#
+B
+#
+B
+B
+B
+U
+B
+B
+B
+N
+B
+R
+B
+#
+B
+#
+B
+#
+B
+#
+#
+B
+P
+B
+B
+B
+B
+B
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+NORTE EM CIMA | (coluna, linha)
+IDENTIDADE DA FASE
+Introduzir sentinelas e cronometrar passagens.
+Tempo de teste: 75-120 s
+Base: malha Bomberman
+Composição: ferradura
+Terreno: vento
+Blocos B: 62 + U/S
+Caixas R: 3
+Inimigos: 6
+Referência de orientação:
+entrada sul-oeste; norte para cima. Coordenadas são posição
+inicial, não rota automática.
+Malha clássica: Pilares # em coluna PAR e linha PAR, alternados com corredores; 27 pilares mantidos. Exceções
+locais: (6,4), (8,4), (2,10).
+Visual e composição: Terraço com parapeito completo; dunas ao fundo e setas de vento. Sem queda nas bordas.
+Rota e decisão: Rajadas curtas só deslocam levemente em duas casas opcionais. U de pedra fornece abrigo e
+rotas alternativas.
+Energia e destino: R em (3,2), (11,2), (12,9). D em (13,1); todas as caixas abrem a passagem.
+Encontro: Cactos em (11,4); Cactos em (3,5); Escaravelhos em (10,9); Escaravelhos em (7,2); Cactos em (12,5);
+Escaravelhos em (3,1). Evitar perseguição no primeiro instante; aviso antes de tiro ou carga.
+Obstáculos e perigo: vasos e caixas de madeira com tecido vermelho nos B; H sopra 1 s após aviso de 1 s;
+empurrão leve e rota paralela. H em (6,4), (9,8).
+Power-up e sapinho: Velocidade +1 garantido em U (4,9). Sem ovo garantido nesta etapa; montaria anterior
+permanece.
+Segredo: Fita vermelha presa à pedra indica a alcova. S em (12,3). Recompensa: Sapinho: aparência Areia.
+Teste e acabamento: Conferir acesso a todos R sem sapinho; fugir de bomba em cada bolso; não cobrir R com
+decoração. Porta deve abrir mesmo com inimigos vivos. Alvos não ficam sob obstáculos aleatórios.
+
+=== PAGE 40 ===
+BOMB YOUR WAY! | BÍBLIA DE MUNDOS E LEVEL DESIGN
+40
+3-3.4 | Cofre da Fortaleza
+Fortaleza das Dunas • FINAL: SUPERBAÚ E CHAVE • 4/4
+S
+N
+B
+B
+N
+B
+B
+#
+R
+#
+B
+#
+N
+#
+#
+R
+#
+B
+B
+B
+B
+B
+B
+B
+B
+B
+B
+B
+B
+#
+B
+#
+B
+B
+B
+B
+#
+N
+#
+B
+N
+X
+X
+X
+B
+B
+N
+B
+#
+B
+#
+X
+X
+X
+B
+#
+#
+B
+B
+B
+B
+B
+B
+B
+B
+B
+B
+B
+#
+B
+#
+B
+#
+B
+#
+B
+#
+#
+B
+B
+R
+U
+B
+N
+B
+N
+B
+R
+B
+#
+B
+#
+B
+#
+B
+#
+#
+B
+P
+B
+B
+B
+B
+B
+B
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+NORTE EM CIMA | (coluna, linha)
+IDENTIDADE DA FASE
+Introduzir sentinelas e cronometrar passagens.
+Tempo de teste: 90-150 s
+Base: malha Bomberman
+Composição: anel
+Terreno: sem
+Blocos B: 59 + U/S
+Caixas R: 4
+Inimigos: 8
+Referência de orientação:
+entrada sul-oeste; norte para cima. Coordenadas são posição
+inicial, não rota automática.
+Malha clássica: Pilares # em coluna PAR e linha PAR, alternados com corredores; 25 pilares mantidos. Exceções
+locais: (6,4), (8,4), (6,6), (8,6), (2,10).
+Visual e composição: Baú central em cofre aberto de cobre, anel de lajes e placas de energia em quatro
+direções.
+Rota e decisão: Combina escudo e cobertura sem jatos ou vento adicionais. Quatro caixas abrem o cofre; não
+existe dano após a animação do baú.
+Energia e destino: R em (3,2), (11,2), (12,9), (3,9). X cobre colunas 6-8, linhas 5-6; abrir após todos R. Chave 3/4
+do mundo 3.
+Encontro: Sentinelas em (11,4); Sentinelas em (3,5); Cacto em (10,9); Escaravelho em (7,2); Cacto em (12,5);
+Escaravelho em (3,1); Sentinelas em (7,9); Cacto em (11,1). Evitar perseguição no primeiro instante; aviso antes
+de tiro ou carga.
+Obstáculos e perigo: vasos e caixas de madeira com tecido vermelho nos B; Sem terreno especial: o desafio
+vem da arquitetura e inimigos.
+Power-up e sapinho: Bombas +1 garantido em U (4,9). Sem ovo garantido nesta etapa; montaria anterior
+permanece.
+Segredo: Placa de cobre com rachadura azul sinaliza o item. S em (2,1). Recompensa: Roupa: mecânico de cobre.
+Teste e acabamento: Conferir acesso a todos R sem sapinho; fugir de bomba em cada bolso; não cobrir R com
+decoração. Baú deve abrir e chave salvar antes da tela de resultado. Alvos não ficam sob obstáculos aleatórios.
+
+=== PAGE 41 ===
+BOMB YOUR WAY! | BÍBLIA DE MUNDOS E LEVEL DESIGN
+41
+3-4.1 | Avenida dos Obeliscos
+Templo da Ampulheta • ETAPA INTERMEDIÁRIA • 1/4
+B
+N
+B
+B
+B
+B
+B
+B
+B
+D
+B
+#
+R
+#
+B
+#
+N
+#
+#
+R
+#
+B
+B
+B
+B
+B
+B
+B
+B
+B
+B
+B
+#
+B
+#
+B
+#
+B
+#
+N
+#
+B
+B
+N
+B
+B
+B
+B
+N
+B
+#
+#
+#
+B
+#
+B
+#
+B
+#
+B
+S
+B
+B
+B
+B
+B
+B
+B
+B
+#
+B
+#
+#
+#
+B
+B
+B
+#
+B
+B
+U
+B
+B
+N
+B
+R
+B
+#
+B
+#
+B
+#
+#
+B
+#
+B
+P
+B
+B
+B
+B
+B
+B
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+NORTE EM CIMA | (coluna, linha)
+IDENTIDADE DA FASE
+Prova final de leitura e controle de rotas.
+Tempo de teste: 75-120 s
+Base: malha Bomberman
+Composição: ilhas
+Terreno: sem
+Blocos B: 63 + U/S
+Caixas R: 3
+Inimigos: 6
+Referência de orientação:
+entrada sul-oeste; norte para cima. Coordenadas são posição
+inicial, não rota automática.
+Malha clássica: Pilares # em coluna PAR e linha PAR, alternados com corredores; 27 pilares mantidos. Exceções
+locais: (4,4), (10,8), (2,10).
+Visual e composição: Obeliscos baixos, areia creme e símbolos azuis apontando para o templo. Os obeliscos
+altos são fundo.
+Rota e decisão: Ilhas de pedra interrompem tiro e carga. Duas caixas exigem mudar de setor, mas não coletar
+poder específico.
+Energia e destino: R em (3,2), (11,2), (12,9). D em (13,1); todas as caixas abrem a passagem.
+Encontro: Escaravelhos em (11,4); Escaravelhos em (3,5); Cactos em (10,9); Cactos em (7,2); Escaravelhos em
+(12,5); Cactos em (3,1). Evitar perseguição no primeiro instante; aviso antes de tiro ou carga.
+Obstáculos e perigo: vasos e caixas de madeira com tecido vermelho nos B; Sem terreno especial: o desafio
+vem da arquitetura e inimigos.
+Power-up e sapinho: Alcance +1 garantido em U (4,9). Sem ovo garantido nesta etapa; montaria anterior
+permanece.
+Segredo: Símbolo de ampulheta invertida destaca o segredo. S em (2,7). Recompensa: Moedas de exploração.
+Teste e acabamento: Conferir acesso a todos R sem sapinho; fugir de bomba em cada bolso; não cobrir R com
+decoração. Porta deve abrir mesmo com inimigos vivos. Alvos não ficam sob obstáculos aleatórios.
+
+=== PAGE 42 ===
+BOMB YOUR WAY! | BÍBLIA DE MUNDOS E LEVEL DESIGN
+42
+3-4.2 | Salão da Areia Mansa
+Templo da Ampulheta • ETAPA INTERMEDIÁRIA • 2/4
+N
+B
+B
+B
+B
+B
+D
+B
+#
+R
+#
+#
+N
+#
+B
+#
+R
+#
+B
+B
+B
+B
+B
+B
+H
+B
+B
+B
+S
+B
+#
+#
+#
+B
+#
+B
+#
+N
+#
+B
+B
+N
+B
+B
+B
+B
+B
+B
+B
+N
+B
+B
+#
+B
+#
+B
+#
+B
+#
+#
+B
+#
+B
+B
+B
+B
+B
+O
+B
+B
+B
+B
+#
+B
+#
+B
+#
+#
+H
+#
+B
+#
+B
+B
+B
+U
+B
+B
+B
+N
+R
+B
+#
+#
+#
+#
+B
+#
+B
+P
+B
+B
+B
+B
+B
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+NORTE EM CIMA | (coluna, linha)
+IDENTIDADE DA FASE
+Prova final de leitura e controle de rotas.
+Tempo de teste: 75-120 s
+Base: malha Bomberman
+Composição: faixas
+Terreno: areia
+Blocos B: 60 + U/S
+Caixas R: 3
+Inimigos: 6
+Referência de orientação:
+entrada sul-oeste; norte para cima. Coordenadas são posição
+inicial, não rota automática.
+Malha clássica: Pilares # em coluna PAR e linha PAR, alternados com corredores; 29 pilares mantidos. Exceções
+locais: (2,10).
+Visual e composição: Salão com tapetes seguros e duas manchas claras de areia, delimitadas por pedras
+pequenas.
+Rota e decisão: Tapetes são piso normal. Rotas laterais evitam areia; ela aumenta risco apenas se o jogador
+escolher atalho.
+Energia e destino: R em (3,2), (11,2), (12,9). D em (13,1); todas as caixas abrem a passagem.
+Encontro: Sentinela em (11,4); Lagartinhos em (3,5); Lagartinhos em (10,9); Cacto em (7,2); Lagartinhos em
+(12,5); Cacto em (3,1). Evitar perseguição no primeiro instante; aviso antes de tiro ou carga.
+Obstáculos e perigo: vasos e caixas de madeira com tecido vermelho nos B; H reduz velocidade em 20%; saída
+livre, sem prender ou afetar pavio. H em (6,3), (9,8).
+Power-up e sapinho: Velocidade +1 garantido em U (4,9). Resgate O em (10,7); equipa a aparência escolhida.
+Segredo: Borda de tapete azul marca a caixa secreta. S em (12,3). Recompensa: Acessório: turbante leve.
+Teste e acabamento: Conferir acesso a todos R sem sapinho; fugir de bomba em cada bolso; não cobrir R com
+decoração. Porta deve abrir mesmo com inimigos vivos. Alvos não ficam sob obstáculos aleatórios.
+
+=== PAGE 43 ===
+BOMB YOUR WAY! | BÍBLIA DE MUNDOS E LEVEL DESIGN
+43
+3-4.3 | Galeria das Fendas
+Templo da Ampulheta • ETAPA INTERMEDIÁRIA • 3/4
+B
+S
+N
+B
+~
+B
+B
+B
+D
+B
+#
+R
+#
+B
+#
+~
+#
+B
+#
+R
+#
+B
+B
+B
+B
+B
+N
+B
+B
+B
+#
+B
+#
+B
+B
+B
+B
+#
+N
+#
+B
+B
+N
+B
+B
+~
+B
+B
+N
+B
+#
+#
+B
+#
+~
+#
+B
+#
+B
+#
+B
+B
+B
+B
+B
+~
+B
+B
+B
+B
+#
+#
+B
+B
+B
+#
+B
+#
+B
+B
+U
+B
+B
+B
+N
+R
+B
+#
+#
+~
+#
+B
+#
+B
+#
+B
+P
+B
+~
+B
+B
+B
+B
+B
+B
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+NORTE EM CIMA | (coluna, linha)
+IDENTIDADE DA FASE
+Prova final de leitura e controle de rotas.
+Tempo de teste: 75-120 s
+Base: malha Bomberman
+Composição: ponte
+Terreno: fenda
+Blocos B: 60 + U/S
+Caixas R: 3
+Inimigos: 6
+Referência de orientação:
+entrada sul-oeste; norte para cima. Coordenadas são posição
+inicial, não rota automática.
+Malha clássica: Pilares # em coluna PAR e linha PAR, alternados com corredores; 25 pilares mantidos. Exceções
+locais: (6,4), (8,4), (6,8), (8,8), (2,10).
+Visual e composição: Única etapa do deserto com abismo real: fenda roxa escura, contorno claro e duas pontes
+largas de pedra.
+Rota e decisão: Pontes indestrutíveis, duas conexões obrigatórias disponíveis. Queda só ocorre ao cruzar borda
+explicitamente marcada. Sem carga inicial perto do precipício.
+Energia e destino: R em (3,2), (11,2), (12,9). D em (13,1); todas as caixas abrem a passagem.
+Encontro: Escaravelhos em (11,4); Escaravelhos em (3,5); Sentinelas em (10,9); Sentinelas em (7,3);
+Escaravelhos em (12,5); Sentinelas em (3,1). Evitar perseguição no primeiro instante; aviso antes de tiro ou carga.
+Obstáculos e perigo: vasos e caixas de madeira com tecido vermelho nos B; Fenda letal apenas na borda
+marcada; duas pontes garantem acesso.
+Power-up e sapinho: Bombas +1 garantido em U (4,9). Sem ovo garantido nesta etapa; montaria anterior
+permanece.
+Segredo: Cristal azul na margem indica segredo alcançável por ponte. S em (2,1). Recompensa: Bomba
+cosmética: cristal.
+Teste e acabamento: Conferir acesso a todos R sem sapinho; fugir de bomba em cada bolso; não cobrir R com
+decoração. Porta deve abrir mesmo com inimigos vivos. Alvos não ficam sob obstáculos aleatórios.
+
+=== PAGE 44 ===
+BOMB YOUR WAY! | BÍBLIA DE MUNDOS E LEVEL DESIGN
+44
+3-4.4 | Tesouro das Quatro Marcas
+Templo da Ampulheta • FINAL: SUPERBAÚ E CHAVE • 4/4
+B
+N
+B
+B
+B
+N
+B
+B
+B
+#
+R
+#
+B
+#
+N
+#
+B
+#
+R
+#
+B
+B
+B
+B
+B
+B
+B
+B
+B
+B
+#
+B
+#
+B
+B
+B
+B
+#
+N
+#
+B
+B
+N
+B
+X
+X
+X
+B
+N
+B
+B
+#
+B
+#
+B
+X
+X
+X
+B
+#
+#
+B
+B
+B
+B
+B
+B
+B
+B
+#
+#
+B
+#
+B
+#
+#
+B
+#
+B
+R
+U
+B
+N
+B
+N
+B
+R
+#
+B
+#
+B
+#
+#
+S
+#
+B
+P
+B
+B
+B
+B
+B
+B
+B
+B
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+NORTE EM CIMA | (coluna, linha)
+IDENTIDADE DA FASE
+Prova final de leitura e controle de rotas.
+Tempo de teste: 90-150 s
+Base: malha Bomberman
+Composição: diamante
+Terreno: sem
+Blocos B: 59 + U/S
+Caixas R: 4
+Inimigos: 8
+Referência de orientação:
+entrada sul-oeste; norte para cima. Coordenadas são posição
+inicial, não rota automática.
+Malha clássica: Pilares # em coluna PAR e linha PAR, alternados com corredores; 25 pilares mantidos. Exceções
+locais: (6,4), (8,4), (6,6), (8,6), (2,10).
+Visual e composição: Sala final seca com baú de ampulheta, quatro pedestais baixos e mural das doze chaves.
+Rota e decisão: Cinco inimigos bem espaçados; quatro alvos em setores e duas rotas por setor. A última chave
+libera arena de Tic-Tac, sem chefe surpresa na sala.
+Energia e destino: R em (3,2), (11,2), (12,9), (3,9). X cobre colunas 6-8, linhas 5-6; abrir após todos R. Chave 4/4
+do mundo 3.
+Encontro: Sentinelas em (11,4); Sentinelas em (3,5); Cactos em (10,9); Cactos em (7,2); Escaravelho em (12,5);
+Escaravelho em (3,1); Sentinelas em (7,9); Cactos em (11,1). Evitar perseguição no primeiro instante; aviso antes
+de tiro ou carga.
+Obstáculos e perigo: vasos e caixas de madeira com tecido vermelho nos B; Sem terreno especial: o desafio
+vem da arquitetura e inimigos.
+Power-up e sapinho: Alcance +1 garantido em U (4,9). Sem ovo garantido nesta etapa; montaria anterior
+permanece.
+Segredo: Azulejo de sapo prateado identifica o segredo final. S em (11,10). Recompensa: Roupa: explorador do
+templo.
+Teste e acabamento: Conferir acesso a todos R sem sapinho; fugir de bomba em cada bolso; não cobrir R com
+decoração. Baú deve abrir e chave salvar antes da tela de resultado. Alvos não ficam sob obstáculos aleatórios.
+
+=== PAGE 45 ===
+BOMB YOUR WAY! | BÍBLIA DE MUNDOS E LEVEL DESIGN
+45
+CHEFE 3 | Tic-Tac, o Escaravelho
+Mecânico
+Arena adicional, liberada por quatro chaves; não conta como quinta fase de campanha.
+Aparência
+Escaravelho de cobre e turquesa, patas curtas, engrenagem arredondada nas costas e olhos grandes;
+sombra bem definida.
+Arena
+Salão de arenito seco com quatro pilares e dois circuitos de jato em casas marcadas. Sem abismo no
+chefe final.
+Padrões de ataque
+1. Marcha: avança por linha com preparação de 1 s. 2. Válvulas: ativa um jato sinalizado por vez. 3.
+Sobrecarga: para 3 s, abre carapaça e expõe núcleo. Uma bomba no alcance válido causa dano.
+Balanceamento inicial
+5 acertos válidos. Após o terceiro, alterna marcha e válvula; máximo dois ataques em sequência antes de
+abrir núcleo. Nenhum ataque altera o pavio ou a velocidade do jogador.
+Entrada e proteção
+Jogador aparece na borda sul; chefe no norte. Prévia de 2 s mostra ataque, sem interromper controle por
+mais tempo. Estado básico de 1 bomba, alcance 2 e velocidade padrão é suficiente. Se montaria foi
+perdida, um ovo de treino opcional aparece na entrada, fora da zona de ataque. Não depender de farm da
+campanha.
+Vitória e retorno
+Final da campanha; Sapinho Real do Oásis; coroa do protagonista e acesso livre às fases/desafios.
+Primeira vitória salva recompensa única, mundo concluído e próximo acesso. Repetições não repetem
+cosméticos. Ao perder, reinicia-se a arena, sem perder chaves. Ataques são cancelados antes da
+animação de vitória.
+Medalhas propostas
+Vencer; vencer sem morrer; vencer sem perder montaria (ou sem montaria ativa na tentativa). A terceira
+medalha é opcional e não bloqueia o mundo seguinte.
+
+=== PAGE 46 ===
+BOMB YOUR WAY! | BÍBLIA DE MUNDOS E LEVEL DESIGN
+46
+Produção e validação das plantas
+Ordem sugerida
+1. Fazer 1-1.1 e 1-1.2 para validar controle e superbaú. 2. Construir uma arquitetura de cada família. 3.
+Testar chaves e chefe. 4. Produzir Planícies. 5. Acrescentar os perigos da floresta e do deserto em uma
+arena de teste antes de colocar em campanha.
+Contrato de layout
+Cada R, U, S, O, N e H tem coordenadas explícitas. Todo #, B, água/fenda e X está marcado na planta. As
+células vazias são piso. A borda externa é parede permanente. Fios e raízes decorativos nunca
+acrescentam colisão. Não colocar obstáculos aleatórios por cima de alvos, entrada, pontes ou acesso ao
+baú.
+Testes por etapa
+Validar com todos os B removidos a conectividade de entrada, alvos, itens e saída. Depois jogar desde o
+estado inicial sem montaria e sem itens opcionais. Verificar fuga em cada colocação de bomba e se os
+inimigos nascem longe da entrada. Duração é alvo para teste, não obrigação de esperar.
+Controle de repetição
+Mudar arquitetura, posição dos alvos, inimigos e ambiente; não apenas recolorir o chão. Água: quatro
+etapas. Fenda real: uma etapa. As outras 31 áreas não possuem buracos de travessia. Vento, raízes e
+jatos aparecem com moderação e nunca precisam ser somados todos em uma mesma sala.
+Telemetria
+Registrar stage_started, energy_box_destroyed, stage_completed, chest_unlocked, chest_opened,
+world_key_awarded e boss_unlocked. Cada evento leva world_id, phase_id e stage_id. Distinguir
+abandonar antes do último alvo, depois de liberar baú e durante coleta. Isso localiza falhas de leitura e
+salvamento.
+
+=== PAGE 47 ===
+BOMB YOUR WAY! | BÍBLIA DE MUNDOS E LEVEL DESIGN
+47
+Inventário de arte e critérios finais
+ Kit
+Peças essenciais
+Global
+Protagonista; sapinho; bomba; explosão em cruz; sombras; R; D; pedestal X; ícones de chave;
+moedas; U; segredos.
+Planícies
+Grama, terra, pedra, cerca, fardo, palha, celeiro, moinho, maçã, sol, ponte e água.
+Floresta
+Piso claro úmido, raiz, tronco, pedra, cogumelo, lanterna, casa, vitral, juncos e lua.
+Deserto
+Areia, arenito, vaso, caixa, lona, cobre, azulejo, palmeira, obelisco, válvula e ampulheta.
+Inimigos
+3 tipos nas Planícies; 4 na Floresta; 4 no Deserto; 3 chefes com padrões próprios.
+O que está definido e o que testar
+Definido nesta proposta: nomes, divisão das 12 fases e 36 etapas, arquitetura, posição de todos os
+elementos, identidade de arte, quatro chaves por mundo e arena separada. Provisório para protótipo:
+velocidades, duração, aviso dos perigos, número de acertos dos chefes, preços e quantidade de moedas.
+Não prometer retenção antes de medir.
+Checklist de aprovação
+Uma etapa é aprovada quando: é legível no celular; tem rota sem item específico; não possui bolsão sem
+fuga; caixa parece objetivo e não bloco comum; segredo tem pista; ataque é anunciado; checkpoint
+retorna corretamente; recompensa única não duplica; baú pode ser aberto; chave permite acesso ao
+chefe; exploração não exige quebrar todos os blocos.
+Resultado esperado
+Uma aventura reconhecível como jogo de bombas de arena, com três mundos de personalidade própria. A
+máquina central da referência é substituída por baús e pedestais únicos, preservando escala e foco visual
+sem copiar o cenário original.
+
+=== PAGE 48 ===
+BOMB YOUR WAY! | BÍBLIA DE MUNDOS E LEVEL DESIGN
+48
+Revisão 1.1 | Estrutura clássica
+Regra obrigatória
+A revisão substitui as plantas abertas por uma malha regular: um pilar indestrutível, uma casa de
+corredor, outro pilar. Pilares nas interseções pares (2,2), (4,2), (6,2) etc. Linhas ímpares e espaços entre
+pilares formam rotas de circulação. Não se trata de um xadrez que bloqueia todas as diagonais: são
+pilares isolados em pontos alternados das duas direções.
+Blocos destrutíveis
+B, U e S ocupam corredores entre pilares, nunca substituem a malha permanente. Quebrar os blocos cria
+novas conexões e linhas de explosão. R também fica em corredor acessível. O cenário varia por
+aparência, distribuição dos blocos, inimigos, objetivos e pequenas clareiras locais.
+Exceções explícitas
+A ficha de cada etapa lista todas as posições pares que deixam de ser pilares. Motivos permitidos: entrada
+segura, ponte de duas casas, lago/fenda e área central do superbaú. Cada etapa conserva pelo menos 20
+dos 30 pilares-base. Arenas de chefe continuam abertas, pois usam padrões de combate próprios.
+Como ler as descrições de composição
+“Anel”, “cruz”, “salas”, “diamante” e “ferradura” descrevem organização temática de pisos, setores,
+blocos e recuos. A planta corrigida tem prioridade sobre referências textuais a paredes em U ou quatro
+compartimentos: não construir essas formas substituindo a malha. Usar piso pintado, bloco quebrável ou
+decoração sem colisão quando não houver # na planta.
+Exemplo corrigido: etapa inicial
+B
+B
+B
+B
+B
+B
+B
+D
+B
+#
+R
+#
+B
+#
+B
+#
+B
+#
+R
+#
+B
+B
+B
+B
+B
+B
+B
+B
+#
+B
+#
+B
+#
+B
+#
+N
+#
+B
+N
+B
+B
+B
+B
+B
+B
+S
+B
+#
+#
+B
+#
+B
+#
+#
+#
+B
+B
+B
+B
+B
+B
+B
+B
+#
+#
+#
+B
+#
+B
+#
+B
+B
+U
+B
+B
+B
+B
+B
+#
+#
+#
+#
+#
+B
+P
+B
+B
+B
+B
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+NORTE EM CIMA | (coluna, linha)
+A mesma regra foi aplicada às 36 plantas, não apenas ao exemplo. As posições de objetivos e itens foram recalculadas para
+não colidir com os novos pilares.
+
+=== PAGE 49 ===
+BOMB YOUR WAY! | BÍBLIA DE MUNDOS E LEVEL DESIGN
+49
+Revisão 1.2 | Mais destruição e
+combate
+Esta revisão atualiza todas as plantas e fichas. Substitui as quantidades anteriores; a estrutura de pilares
+alternados permanece.
+Densidade de blocos destrutíveis
+Preencher com B cerca de 65% a 72,5% dos espaços elegíveis nos corredores, após reservar objetivos,
+itens, perigos, entrada segura e um trecho curto de patrulha por monstro. A primeira etapa usa 55% para
+ensinar bomba e fuga. U e S acrescentam dois obstáculos quebráveis por etapa. Os números exatos estão
+nas fichas e nas plantas, não devem ser acrescentados aleatoriamente durante a construção.
+Mundo
+Monstros intermediários
+Monstros na final
+Blocos B por etapa
+Planícies
+2 no tutorial; 3-4
+6
+54 a 61 + U/S
+Floresta Sombria
+4-5
+7
+55 a 65 + U/S
+Deserto
+5-6
+8
+59 a 64 + U/S
+Distribuição e ritmo
+Todos os monstros indicados nascem no início, em posições distintas, a pelo menos cinco casas de
+distância Manhattan da entrada. Distribuir os encontros pelos setores da arena. Conservar os avisos de
+ataque de cada espécie. Mais inimigos não significa aumentar velocidade ou vida. Blocos separam os
+setores e o combate ganha intensidade à medida que o jogador abre caminhos.
+Condições de conclusão
+A porta e o superbaú continuam vinculados às caixas de energia, sem exigir derrotar todos os monstros
+ou destruir todos os B. Na etapa final, o mínimo é seis monstros: seis nas Planícies, sete na Floresta, oito
+no Deserto. Ao liberar o baú, aplicar o encerramento seguro do combate já descrito nas fichas.
+Validação no protótipo
+Tempos revistos: 60-100 s nas intermediárias das Planícies, 75-120 s nas demais intermediárias e 90-150
+s nas finais. São hipóteses para teste. Confirmar com controle móvel se a entrada permite primeira
+bomba e fuga, se os corredores têm recuos úteis e se o jogador consegue alcançar cada objetivo abrindo
+os blocos. A verificação automática confirma conectividade após remover os blocos; o combate precisa de
+teste jogável.

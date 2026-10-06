@@ -1,5 +1,5 @@
 -- A planning controller walks the actual production simulation; it never teleports or edits level state.
-local Tutorial = require("../game/Shared/Tutorial")
+local Tutorial = require("./fixtures/TestTutorial")
 local Simulation = require("../game/Shared/Simulation")
 local directions = { { "up", 0, -1 }, { "right", 1, 0 }, { "down", 0, 1 }, { "left", -1, 0 } }
 local sim = Simulation.new(Tutorial)
@@ -18,26 +18,24 @@ end
 local function walk(model, path)
 	for _, direction in ipairs(path) do
 		local x, y = model.x, model.y
-		for _ = 1, 8 do
-			model:step(0.05, direction)
-			if model.x ~= x or model.y ~= y or model.mode ~= "playing" then
-				break
-			end
+		local remaining = model.definition.moveInterval
+		while remaining > 1e-9 and model.mode == "playing" do
+			local dt = math.min(0.01, remaining)
+			model:step(dt, direction)
+			remaining -= dt
 		end
-		-- Plan from the position reached on screen, rather than the queued target.
-		while model.motion and model.time < model.motion.at + model.motion.duration and model.mode == "playing" do
-			model:step(0.05)
-		end
-		if (model.x == x and model.y == y) or model.mode ~= "playing" then
-			return false
+		model:steer("stop")
+		if (math.abs(model.x - x) < 1e-8 and math.abs(model.y - y) < 1e-8) or model.mode ~= "playing" then
+			return model.mode == "won"
 		end
 	end
 	return true
 end
 
 local function reachable(model)
-	local start = { x = model.x, y = model.y, path = {} }
-	local queue, seen = { start }, { [model.x .. ":" .. model.y] = true }
+	local cx, cy = math.floor(model.x + 0.5), math.floor(model.y + 0.5)
+	local start = { x = cx, y = cy, path = {} }
+	local queue, seen = { start }, { [cx .. ":" .. cy] = true }
 	local index = 1
 	while index <= #queue do
 		local current = queue[index]
@@ -93,7 +91,7 @@ local function safeBombPlan(cell)
 			local attempt = copy(model)
 			if walk(attempt, refuge.path) then
 				while attempt.time < at + Tutorial.fuse + Tutorial.blastDuration + 0.15 do
-					attempt:step(0.05)
+					attempt:step(0.05, "stop")
 				end
 				if attempt.mode == "playing" and attempt.profile.deaths == 0 and attempt.stage == sim.stage then
 					return refuge.path
@@ -138,7 +136,7 @@ while sim.mode ~= "won" and actions < 150 do
 					local at = sim.time
 					assert(walk(sim, refuge), "escape planned bomb")
 					while sim.time < at + Tutorial.fuse + Tutorial.blastDuration + 0.15 do
-						sim:step(0.05)
+						sim:step(0.05, "stop")
 					end
 					acted = true
 					break

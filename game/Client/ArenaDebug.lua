@@ -1,5 +1,6 @@
 -- Studio-only, lazy overlay. Set TutorialUI attribute ArenaDebug to true to enable.
 local ArenaDebug = {}
+local Collision = require(game:GetService("ReplicatedStorage").Shared.ObstacleCollision)
 ArenaDebug.__index = ArenaDebug
 
 function ArenaDebug.new(board, width, height)
@@ -53,6 +54,15 @@ function ArenaDebug:actor(name, x, y, cellX, cellY, visible)
 		box.BorderSizePixel = 2
 		box.ZIndex = 39
 		box.Parent = self.root
+		local contact = Instance.new("Frame")
+		contact.Name = name .. "GroundContact"
+		contact.Size = UDim2.fromScale(2 * Collision.halfWidth / self.width, 2 * Collision.halfHeight / self.height)
+		contact.BackgroundTransparency = 0.65
+		contact.BackgroundColor3 = Color3.fromRGB(80, 255, 110)
+		contact.BorderSizePixel = 1
+		contact.BorderColor3 = contact.BackgroundColor3
+		contact.ZIndex = 39
+		contact.Parent = self.root
 		local dot = Instance.new("Frame")
 		dot.Name = name .. "GroundPoint"
 		dot.AnchorPoint = Vector2.new(0.5, 0.5)
@@ -61,10 +71,15 @@ function ArenaDebug:actor(name, x, y, cellX, cellY, visible)
 		dot.BorderSizePixel = 0
 		dot.ZIndex = 39
 		dot.Parent = self.root
-		actor = { box = box, dot = dot }
+		actor = { box = box, dot = dot, contact = contact }
 		self.actors[name] = actor
 	end
 	actor.box.Visible, actor.dot.Visible = visible, visible
+	actor.contact.Visible = visible and name == "Player"
+	actor.contact.Position = UDim2.fromScale(
+		(x - 0.5 - Collision.halfWidth) / self.width,
+		(y - 0.5 + Collision.groundOffset - Collision.halfHeight) / self.height
+	)
 	actor.box.Position = UDim2.fromScale((cellX - 1) / self.width, (cellY - 1) / self.height)
 	actor.dot.Position = UDim2.fromScale((x - 0.5) / self.width, (y - 0.18) / self.height)
 end

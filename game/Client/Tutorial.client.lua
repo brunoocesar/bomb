@@ -4,6 +4,7 @@ local UserInputService = game:GetService("UserInputService")
 local RunService = game:GetService("RunService")
 local TweenService = game:GetService("TweenService")
 local StarterGui = game:GetService("StarterGui")
+local GuiService = game:GetService("GuiService")
 
 local player = Players.LocalPlayer
 local assets = ReplicatedStorage:WaitForChild("Assets")
@@ -23,14 +24,18 @@ task.spawn(function()
 end)
 local mapImages = require(ReplicatedStorage.Shared.MapImages)
 local mapCatalog = require(ReplicatedStorage.Shared.MapCatalog)
+local phaseArt = definition.phaseId == "world1_phase1" and require(ReplicatedStorage.Shared.PhaseOneArt) or nil
 local ActorMotion = require(ReplicatedStorage.Shared.ActorMotion)
+local PlayerMovement = require(ReplicatedStorage.Shared.PlayerMovement)
+local playerPrediction = require(ReplicatedStorage.Shared.PlayerPrediction).new(definition.moveInterval)
 local SpriteLayout = require(ReplicatedStorage.Shared.SpriteLayout)
-local SkinPacks = require(ReplicatedStorage.Shared.SkinPacks)
+local spriteAnimation = require(ReplicatedStorage.Shared.SpriteAnimation).new()
 local BlastVisual = require(ReplicatedStorage.Shared.BlastVisual)
 local Feedback = require(ReplicatedStorage.Shared.FeedbackPresentation)
 local ArenaLayout = require(ReplicatedStorage.Shared.ArenaLayout)
 local Preferences = require(script.Parent.Preferences)
-local ui = assets:WaitForChild("TutorialUI"):Clone()
+local uiTemplate = assets:WaitForChild(phaseArt and "PhaseOneUI" or "TutorialUI")
+local ui = uiTemplate:Clone()
 local lobby = require(script.Parent.LobbyController).new(player, assets, remotes)
 local campFeedback = require(script.Parent.CampFeedback).new(assets)
 campFeedback:bind(ui)
@@ -42,18 +47,33 @@ local debugOverlay = require(script.Parent.ArenaDebug).new(board, definition.wid
 local state, previousState = nil, nil
 local held = {}
 local inputOrder = 0
-local currentDirection = "stop"
+local currentDirection = { 0, 0 }
 local lastRefresh = 0
 local stateReceivedAt = os.clock()
 local gamepadDirection = nil
 local wideLayout = false
+local pendingAnalogInput = false
+local revealUntil = 0
+local retireSmoke = {}
+local enemySlots = 4
+for _, stage in ipairs(definition.stages) do
+	enemySlots = math.max(enemySlots, #(stage.enemySpawns or {}))
+end
 
 local function applyAuthoredLayout()
 	local size = ui.AbsoluteSize
 	if size.X < 1 or size.Y < 1 then
 		return
 	end
-	local geometry = ArenaLayout.compute(size.X, size.Y)
+	local deviceArea = GuiService:GetInsetArea(Enum.ScreenInsets.DeviceSafeInsets)
+	local coreArea = GuiService:GetInsetArea(Enum.ScreenInsets.CoreUISafeInsets)
+	local geometry = ArenaLayout.compute(
+		size.X,
+		size.Y,
+		math.max(0, coreArea.Min.Y - deviceArea.Min.Y),
+		definition.width,
+		definition.height
+	)
 	wideLayout = geometry.wide
 	local function place(view, rect)
 		view.Position = UDim2.fromOffset(rect[1], rect[2])
@@ -75,8 +95,8 @@ local function applyAuthoredLayout()
 		end
 	else
 		for _, name in ipairs({ "Stage", "Energy", "Stats", "Pause" }) do
-			ui.Header[name].Position = assets.TutorialUI.Header[name].Position
-			ui.Header[name].Size = assets.TutorialUI.Header[name].Size
+			ui.Header[name].Position = uiTemplate.Header[name].Position
+			ui.Header[name].Size = uiTemplate.Header[name].Size
 		end
 	end
 	if state then
@@ -88,6 +108,7 @@ local function applyAuthoredLayout()
 	end
 end
 ui:GetPropertyChangedSignal("AbsoluteSize"):Connect(applyAuthoredLayout)
+GuiService:GetPropertyChangedSignal("TopbarInset"):Connect(applyAuthoredLayout)
 applyAuthoredLayout()
 
 pcall(function()
@@ -111,19 +132,28 @@ local keyDirections = {
 }
 
 local function sendDirection()
-	local direction, order = gamepadDirection or "stop", 0
+	local active = {}
 	for _, value in pairs(held) do
-		if value.order > order then
-			direction, order = value.direction, value.order
-		end
+		active[value.direction] = true
+	end
+	local x = (active.right and 1 or 0) - (active.left and 1 or 0)
+	local y = (active.down and 1 or 0) - (active.up and 1 or 0)
+	if next(active) == nil and gamepadDirection then
+		x, y = gamepadDirection[1], gamepadDirection[2]
 	end
 	if state and (state.location == "lobby" or state.paused or state.mode ~= "playing") then
-		direction = "stop"
+		x, y = 0, 0
 	end
-	if direction ~= currentDirection then
-		currentDirection = direction
-		remotes.Input:FireServer("move", direction)
-		lastRefresh = os.clock()
+	x, y = PlayerMovement.vector({ x, y })
+	if x ~= currentDirection[1] or y ~= currentDirection[2] then
+		currentDirection = playerPrediction:setInput(state, { x, y }, os.clock())
+		if gamepadDirection and next(active) == nil and os.clock() - lastRefresh < 0.05 then
+			pendingAnalogInput = true
+		else
+			remotes.Input:FireServer("move", currentDirection)
+			lastRefresh = os.clock()
+			pendingAnalogInput = false
+		end
 	end
 end
 
@@ -141,7 +171,7 @@ end
 
 local function bomb()
 	if state and state.location ~= "lobby" and not state.paused and state.mode == "playing" then
-		remotes.Input:FireServer("bomb")
+		remotes.Input:FireServer(state.canInteractChest and "interact" or "bomb")
 	end
 end
 
@@ -202,6 +232,10 @@ UserInputService.InputBegan:Connect(function(input, processed)
 		pressInput(input.KeyCode, keyDirections[input.KeyCode])
 	elseif input.KeyCode == Enum.KeyCode.Space or input.KeyCode == Enum.KeyCode.ButtonA then
 		bomb()
+	elseif input.KeyCode == Enum.KeyCode.E or input.KeyCode == Enum.KeyCode.ButtonX then
+		if state and state.canInteractChest and not state.paused then
+			remotes.Input:FireServer("interact")
+		end
 	elseif input.KeyCode == Enum.KeyCode.P or input.KeyCode == Enum.KeyCode.ButtonStart then
 		pause()
 	end
@@ -214,12 +248,12 @@ end)
 UserInputService.InputChanged:Connect(function(input)
 	if input.KeyCode == Enum.KeyCode.Thumbstick1 then
 		local vector = input.Position
-		if math.max(math.abs(vector.X), math.abs(vector.Y)) < 0.35 then
+		local magnitude = math.sqrt(vector.X * vector.X + vector.Y * vector.Y)
+		if magnitude < 0.18 then
 			gamepadDirection = nil
-		elseif math.abs(vector.X) > math.abs(vector.Y) then
-			gamepadDirection = vector.X > 0 and "right" or "left"
 		else
-			gamepadDirection = vector.Y > 0 and "up" or "down"
+			local strength = math.min(1, (magnitude - 0.18) / 0.82)
+			gamepadDirection = { vector.X / magnitude * strength, -vector.Y / magnitude * strength }
 		end
 		sendDirection()
 	end
@@ -247,7 +281,8 @@ local function hint()
 	elseif state.stage == 2 and not state.frogUnlocked then
 		return "Rescue the frog ahead. It can protect you from one hit!"
 	else
-		return "Destroy the glowing energy crates to open the exit."
+		return state.chest and "Destroy both energy crates to unlock the Sun Chest."
+			or "Destroy the glowing energy crates to open the exit."
 	end
 end
 
@@ -260,6 +295,11 @@ local tileSprites = {
 	C = "coinCrate",
 	E = "energy",
 }
+if phaseArt then
+	for _, token in ipairs({ "B", "A", "L", "S" }) do
+		tileSprites[token] = "hay"
+	end
+end
 
 local mapSpriteNames = {}
 local function setMapSprite(view, name)
@@ -271,13 +311,16 @@ local function setMapSprite(view, name)
 	if not name then
 		return
 	end
-	local rect = mapCatalog.frames[name]
-	local scaleX = mapImages.atlasSize[1] / mapCatalog.imageSize[1]
-	local scaleY = mapImages.atlasSize[2] / mapCatalog.imageSize[2]
+	local art = phaseArt and phaseArt.frames[name] and phaseArt or nil
+	local rect = art and art.frames[name] or mapCatalog.frames[name]
+	local scaleX = (art and art.atlasSize[1] or mapImages.atlasSize[1])
+		/ (art and art.imageSize[1] or mapCatalog.imageSize[1])
+	local scaleY = (art and art.atlasSize[2] or mapImages.atlasSize[2])
+		/ (art and art.imageSize[2] or mapCatalog.imageSize[2])
 	local left, top = math.round(rect[1] * scaleX), math.round(rect[2] * scaleY)
 	local right = math.round((rect[1] + rect[3]) * scaleX)
 	local bottom = math.round((rect[2] + rect[4]) * scaleY)
-	view.Image = mapImages.atlas
+	view.Image = art and art.atlas or mapImages.atlas
 	view.ImageRectOffset = Vector2.new(left, top)
 	view.ImageRectSize = Vector2.new(right - left, bottom - top)
 end
@@ -327,6 +370,49 @@ end
 local function updateBoard()
 	updateFeedback()
 	board.Ground.Image = state.stage == 1 and mapImages.garden or mapImages.courtyard
+	if phaseArt then
+		board.Ground.Image = state.stage == 1 and phaseArt.entrance or phaseArt.courtyard
+		for index = 1, 3 do
+			setMapSprite(board.Decorations["Flower_" .. index], state.stage == 1 and "blueFlowers" or nil)
+		end
+		setMapSprite(board.Decorations.Ribbon, state.stage == 2 and "goldRibbon" or nil)
+		for index = 1, 4 do
+			setMapSprite(board.Decorations["Sun_" .. index], state.stage == 2 and "sunStatue" or nil)
+			board.Decorations["Sun_" .. index].ZIndex = SpriteLayout.depth(index <= 2 and 5 or 7, definition.height) + 2
+		end
+		board.SealWires.Visible = state.chest ~= nil and not state.chestUnlocked
+		board.Chest.Visible = state.chest ~= nil
+		if state.chest then
+			local chest = state.chest
+			board.Chest.Position = UDim2.fromScale(chest.x / definition.width, chest.y / definition.height)
+			local collected = state.mode == "won"
+			local name = collected and "chestOpen" or "chestClosed"
+			setMapSprite(board.Chest.Sprite, name)
+			local rect = phaseArt.frames[name]
+			board.Chest.Sprite.AnchorPoint = Vector2.new(0.5, 1)
+			board.Chest.Sprite.Position = UDim2.fromScale(0.5, 1)
+			board.Chest.Sprite.Size = UDim2.fromScale(rect[3] / 304, rect[4] / 304 * 1.5)
+			board.Chest.Sprite.ZIndex = SpriteLayout.depth(chest.y + chest.height, definition.height) + 2
+			board.Chest.Seal.Text = state.chestUnlocked and "OPEN THE CHEST"
+				or string.format("SUN SEAL %d/%d", state.energy, state.totalEnergy)
+			board.Chest.SunKey.Visible = collected
+			setMapSprite(board.Chest.SunKey, collected and "sunKey" or nil)
+			for index, x in ipairs({ 4, 12 }) do
+				local wire = board.SealWires["Wire_" .. index]
+				local size = board.AbsoluteSize
+				local from = Vector2.new((x - 0.5) / definition.width * size.X, 2.5 / definition.height * size.Y)
+				local to = Vector2.new(7.5 / definition.width * size.X, 5.5 / definition.height * size.Y)
+				local delta = to - from
+				wire.AnchorPoint = Vector2.new(0.5, 0.5)
+				local midpoint = (from + to) * 0.5
+				wire.Position = UDim2.fromOffset(midpoint.X, midpoint.Y)
+				wire.Size = UDim2.fromOffset(delta.Magnitude, 3)
+				wire.Rotation = math.deg(math.atan2(delta.Y, delta.X))
+				wire.BackgroundTransparency = state.tiles[x .. ":3"] and 0.65 or 0.15
+			end
+		end
+	end
+	board.Exit.Visible = state.exitX > 0
 	board.Exit.Position = UDim2.fromScale((state.exitX - 1) / definition.width, (state.exitY - 1) / definition.height)
 	local exitOpen = state.energy == state.totalEnergy
 	board.Exit.Glow.Visible = exitOpen
@@ -357,16 +443,27 @@ local function updateBoard()
 			for _, name in ipairs({ "Up", "Right", "Down", "Left", "Core" }) do
 				setMapSprite(tile.Blast[name], parts and parts[name] or nil)
 			end
-			tile.Object.ZIndex = SpriteLayout.depth(y) + 2
+			tile.Object.ZIndex = SpriteLayout.depth(y, definition.height) + 2
 		end
 	end
-	for index = 1, 4 do
+	for index = 1, enemySlots do
 		local enemy = state.enemies[index]
+		if phaseArt and previousState and previousState.revision == state.revision then
+			local previous = previousState.enemies[index]
+			if enemy and enemy.retired and previous and previous.alive then
+				local x, y = ActorMotion.position(previous, state.time)
+				retireSmoke[index] = { at = os.clock(), x = x, y = y }
+			end
+		end
 		local view = board["Enemy_" .. index]
-		setMapSprite(view, enemy and enemy.alive and "enemy" or nil)
+		local name = enemy and enemy.alive and "enemy" or nil
+		if name and phaseArt then
+			name = enemy.kind .. "_" .. enemy.direction
+		end
+		setMapSprite(view, name)
 	end
 	board.Frog.Size = board.Hero.Size
-	local exitDepth = SpriteLayout.depth(state.exitY)
+	local exitDepth = SpriteLayout.depth(state.exitY, definition.height)
 	board.Exit.Gate.ZIndex = exitOpen and 35 or exitDepth + 2
 	board.Exit.Sparkle.ZIndex = exitOpen and 35 or exitDepth + 2
 	board.Exit.Remaining.ZIndex = exitDepth + 2
@@ -379,13 +476,8 @@ local function updateBoard()
 	board.Frog.Visible = false
 end
 
-local function setSprite(view, kind, animation, direction)
-	local sequence = catalog.animations[kind][animation][direction]
-	if not sequence then
-		sequence = catalog.animations[kind].idle[direction]
-	end
-	local atlasId, row, first, last = unpack(sequence)
-	atlasId = SkinPacks.atlas(state.skinPack, kind, atlasId)
+local function setSprite(view, kind, animation, direction, time)
+	local frame, atlasId = spriteAnimation:select(view, state.skinPack, kind, animation, direction, time)
 	local imageId = images[atlasId]
 	local enabled = imageId ~= ""
 	view.Sprite.Visible = enabled
@@ -393,9 +485,7 @@ local function setSprite(view, kind, animation, direction)
 	if not enabled then
 		return
 	end
-	local column = first + math.floor(state.time * 8) % (last - first + 1)
 	local atlas = catalog.atlases[atlasId]
-	local frame = atlas.frames[row * atlas.columns + column + 1]
 	local width, height, x, y = SpriteLayout.frame(frame, kind, state.frog, direction)
 	view.Sprite.ScaleType = Enum.ScaleType.Stretch
 	view.Sprite.Size = UDim2.fromScale(width, height)
@@ -412,6 +502,14 @@ local function setSprite(view, kind, animation, direction)
 	view.Sprite.ImageRectSize = Vector2.new(right - left, bottom - top)
 end
 
+if phaseArt then
+	ui.ChestReveal.Panel.Skip.Activated:Connect(function()
+		revealUntil = 0
+		ui.ChestReveal.Visible = false
+		ui.ResultOverlay.Visible = state and state.mode == "won"
+	end)
+end
+
 remotes.State.OnClientEvent:Connect(function(nextState)
 	if nextState.error then
 		ui.ErrorOverlay.Visible = true
@@ -422,6 +520,7 @@ remotes.State.OnClientEvent:Connect(function(nextState)
 		return
 	end
 	previousState, state = state, nextState
+	playerPrediction:receive(state, os.clock())
 	campFeedback:update(state, previousState)
 	ui.Enabled = state.location == "adventure"
 	lobby:update(state)
@@ -439,6 +538,16 @@ remotes.State.OnClientEvent:Connect(function(nextState)
 		string.format(wideLayout and "ENERGY %d/%d" or "ENERGY\n%d/%d", state.energy, state.totalEnergy)
 	ui.Header.Stats.Text = Feedback.stats(state, ui.AbsoluteSize.X < 600)
 	ui.Hint.Text = hint()
+	if state.chest then
+		if state.mode == "claiming" then
+			ui.Hint.Text = "Saving your Sun Key... " .. (state.saveStatus or "")
+		elseif state.canInteractChest then
+			ui.Hint.Text = "Open the chest • E / X / OPEN"
+		elseif state.chestUnlocked then
+			ui.Hint.Text = "The Sun Chest is ready. Approach any clear side."
+		end
+	end
+	ui.Controls.Bomb.Text = state.canInteractChest and "OPEN" or state.mode == "claiming" and "SAVING" or "BOMB"
 	ui.Status.Mount.Text = Feedback.mount(state)
 	ui.Status.Mount.TextColor3 = state.frog and Color3.fromRGB(133, 242, 215) or Color3.fromRGB(255, 244, 221)
 	ui.Status.Coins.Text = string.format("COINS %d", state.coins)
@@ -449,8 +558,19 @@ remotes.State.OnClientEvent:Connect(function(nextState)
 		ui.PauseOverlay.Panel.Restart.Text = "RESTART STAGE"
 	end
 	ui.Death.Visible = state.mode == "dead"
-	ui.ResultOverlay.Visible = state.mode == "won"
-	ui.ResultOverlay.Panel.Title.Text = "FIRST SPARK COMPLETE!"
+	if phaseArt and state.mode == "won" and (not previousState or previousState.mode ~= "won") then
+		revealUntil = os.clock() + 2.2
+		setMapSprite(ui.ChestReveal.Panel.Key, "sunKey")
+		local newKey = not previousState or not previousState.phaseKeys[definition.keyId]
+		setMapSprite(ui.ChestReveal.Panel.Coins, newKey and "coins" or nil)
+		ui.ChestReveal.Panel.Detail.Text = newKey and "World 1 • Sun Key 1/4\n+20 coins • Reward saved."
+			or "World 1 • Sun Key already owned\nNo duplicate rewards."
+	end
+	if phaseArt then
+		ui.ChestReveal.Visible = state.mode == "won" and os.clock() < revealUntil
+	end
+	ui.ResultOverlay.Visible = state.mode == "won" and os.clock() >= revealUntil
+	ui.ResultOverlay.Panel.Title.Text = definition.phaseName:upper() .. " COMPLETE!"
 	ui.ResultOverlay.Panel.Camp.Text = "CAMP"
 	ui.ResultOverlay.Panel.Detail.Text = string.format(
 		"Completion: earned\nExploration: %s\nNo deaths: %s\nCoins: %d | Frog collection: %s\n%s",
@@ -460,6 +580,22 @@ remotes.State.OnClientEvent:Connect(function(nextState)
 		state.frogUnlocked and "unlocked" or "not rescued",
 		Feedback.saveMessage(state)
 	)
+	if phaseArt then
+		local secrets = 0
+		for _, stage in ipairs(definition.stages) do
+			if state.phaseSecrets[stage.secretId] then
+				secrets += 1
+			end
+		end
+		ui.ResultOverlay.Panel.Detail.Text = string.format(
+			"Sun Key: saved • World 1: 1/4\nSecrets: %d/2\nNo deaths: %s\nCoins: %d • Pond Frog: %s\n%s",
+			secrets,
+			state.noDeathsMedal and "earned" or "try again",
+			state.coins,
+			state.frogUnlocked and "rescued" or "not rescued",
+			Feedback.saveMessage(state)
+		)
+	end
 	updateBoard()
 	if
 		state.location == "lobby"
@@ -500,18 +636,50 @@ RunService.RenderStepped:Connect(function()
 	if not state or state.location ~= "adventure" then
 		return
 	end
-	if os.clock() - lastRefresh > 0.35 and currentDirection ~= "stop" then
+	if phaseArt and state.mode == "won" and ui.ChestReveal.Visible and os.clock() >= revealUntil then
+		ui.ChestReveal.Visible = false
+		ui.ResultOverlay.Visible = true
+	end
+	if phaseArt then
+		for index = 1, enemySlots do
+			local smoke = retireSmoke[index]
+			local view = board.RetireSmoke["Smoke_" .. index]
+			local age = smoke and (os.clock() - smoke.at) / 0.6 or 2
+			view.Visible = age < 1
+			if age < 1 then
+				view.Position = UDim2.fromScale(
+					(smoke.x - 0.95) / definition.width,
+					(smoke.y - 0.6 - age * 0.35) / definition.height
+				)
+				for _, puff in ipairs(view:GetChildren()) do
+					if puff:IsA("Frame") then
+						puff.BackgroundTransparency = 0.2 + age * 0.8
+					end
+				end
+			end
+		end
+	end
+	if
+		pendingAnalogInput and os.clock() - lastRefresh >= 0.05
+		or os.clock() - lastRefresh > 0.35 and (currentDirection[1] ~= 0 or currentDirection[2] ~= 0)
+	then
 		lastRefresh = os.clock()
 		remotes.Input:FireServer("move", currentDirection)
+		pendingAnalogInput = false
 	end
 	-- Bounded extrapolation of the same simulation trajectory; freeze on pause/death.
 	local renderTime = state.time
 	if not state.paused and state.mode == "playing" then
 		renderTime += math.min(os.clock() - stateReceivedAt, 0.05)
 	end
-	local moving = state.motion and renderTime < state.motion.at + state.motion.duration
+	local playerX, playerY = playerPrediction:advance(
+		state,
+		os.clock(),
+		not state.paused and state.mode == "playing" and os.clock() - stateReceivedAt < 0.15
+	)
+	local visualDirection = PlayerMovement.facing(currentDirection[1], currentDirection[2], state.direction)
+	local moving = not state.paused and (currentDirection[1] ~= 0 or currentDirection[2] ~= 0)
 	local animation = moving and "walk" or "idle"
-	local playerX, playerY = ActorMotion.position(state, renderTime)
 	for index, effect in pairs(effects) do
 		local view = board.Effects[string.format("Destroy_%02d", index)]
 		local age = renderTime - effect.at
@@ -536,7 +704,7 @@ RunService.RenderStepped:Connect(function()
 	end
 	local origin = UDim2.fromScale((playerX - 1) / definition.width, (playerY - 1) / definition.height)
 	board.Hero.Position, board.Frog.Position = origin, origin
-	local depth = SpriteLayout.depth(playerY)
+	local depth = SpriteLayout.depth(playerY, definition.height)
 	board.PlayerShadow.Visible = state.mode ~= "dead"
 	board.PlayerShadow.Position =
 		UDim2.fromScale((playerX - 0.5) / definition.width, (playerY - 0.18) / definition.height)
@@ -546,14 +714,14 @@ RunService.RenderStepped:Connect(function()
 	actorLayer(board.Frog, depth)
 	actorLayer(board.Hero, depth + 1)
 	-- Match vector fallback to the same support point, including the rider's seat.
-	local seat = state.frog and SpriteLayout.seats[state.direction] or SpriteLayout.ground
+	local seat = state.frog and SpriteLayout.seats[visualDirection] or SpriteLayout.ground
 	board.Hero.Vector.Position = UDim2.fromScale(seat[1] - 0.38, seat[2] - 0.7875)
 	board.Frog.Vector.Position = UDim2.fromScale(0.12, 0.0325)
 	debugOverlay:enable(RunService:IsStudio() and ui:GetAttribute("ArenaDebug") == true)
 	debugOverlay:obstacles(state)
 	local cellX, cellY = ActorMotion.cell(state, renderTime)
 	debugOverlay:actor("Player", playerX, playerY, cellX, cellY, state.mode ~= "dead")
-	for index = 1, 4 do
+	for index = 1, enemySlots do
 		local enemy = state.enemies[index]
 		local view = board["Enemy_" .. index]
 		local shadow = board["EnemyShadow_" .. index]
@@ -563,17 +731,23 @@ RunService.RenderStepped:Connect(function()
 			view.AnchorPoint = Vector2.new(0.5, 1)
 			view.Position = UDim2.fromScale((enemyX - 0.5) / definition.width, (enemyY - 0.18) / definition.height)
 			view.Size = UDim2.fromScale(0.8 / definition.width, (0.8 * 182 / 244) / definition.height)
-			view.ZIndex = SpriteLayout.depth(enemyY) + 1
+			if phaseArt and enemy.alive then
+				local name = enemy.kind .. "_" .. enemy.direction
+				setMapSprite(view, name)
+				local rect = phaseArt.frames[name]
+				view.Size = UDim2.fromScale(rect[3] * 0.003 / definition.width, rect[4] * 0.003 / definition.height)
+			end
+			view.ZIndex = SpriteLayout.depth(enemyY, definition.height) + 1
 			shadow.Position = UDim2.fromScale((enemyX - 0.5) / definition.width, (enemyY - 0.18) / definition.height)
-			shadow.ZIndex = SpriteLayout.depth(enemyY) - 1
+			shadow.ZIndex = SpriteLayout.depth(enemyY, definition.height) - 1
 			local enemyCellX, enemyCellY = ActorMotion.cell(enemy, renderTime)
 			debugOverlay:actor("Enemy" .. index, enemyX, enemyY, enemyCellX, enemyCellY, enemy.alive)
 		else
 			debugOverlay:actor("Enemy" .. index, 1, 1, 1, 1, false)
 		end
 	end
-	setSprite(board.Hero, state.frog and "mounted" or "hero", animation, state.direction)
-	setSprite(board.Frog, "frog", animation, state.direction)
+	setSprite(board.Hero, state.frog and "mounted" or "hero", animation, visualDirection, renderTime)
+	setSprite(board.Frog, "frog", animation, visualDirection, renderTime)
 	ui.Status.FrogIcon.Image = board.Frog.Sprite.Image
 	ui.Status.FrogIcon.ImageRectOffset = board.Frog.Sprite.ImageRectOffset
 	ui.Status.FrogIcon.ImageRectSize = board.Frog.Sprite.ImageRectSize

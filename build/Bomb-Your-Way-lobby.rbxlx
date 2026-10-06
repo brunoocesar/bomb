@@ -95883,6 +95883,22 @@ function Repository.new(store, clock, tokenFactory)
 		return ok and result ~= nil
 	end
 
+	function Profiles.close(profile, data, timeout, elapsed, sleep)
+		elapsed = elapsed or os.clock
+		sleep = sleep or task.wait
+		local deadline = elapsed() + math.max(0, timeout)
+		repeat
+			if not profile.busy and Profiles.save(profile, data, true) then
+				return true
+			end
+			local remaining = deadline - elapsed()
+			if remaining <= 0 then
+				return false
+			end
+			sleep(math.min(0.5, remaining))
+		until false
+	end
+
 	return Profiles
 end
 return Repository
@@ -96156,7 +96172,7 @@ Players.PlayerRemoving:Connect(function(player)
 		while session.saving and os.clock() < deadline do
 			task.wait(0.1)
 		end
-		Profiles.save(session.profile, session.sim:checkpoint(), true)
+		Profiles.close(session.profile, session.sim:checkpoint(), math.max(0, deadline - os.clock()))
 	end
 end)
 
@@ -96169,7 +96185,7 @@ game:BindToClose(function()
 			while session.saving and os.clock() < deadline do
 				task.wait(0.1)
 			end
-			Profiles.save(session.profile, session.sim:checkpoint(), true)
+			Profiles.close(session.profile, session.sim:checkpoint(), math.max(0, deadline - os.clock()))
 			pending = pending - 1
 		end)
 	end

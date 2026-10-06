@@ -1,0 +1,1 @@
+assert(game.PlaceId==140221183064352); assert(_G.BombSpriteInspect); _G.BombSpriteInspect.playing=true; task.delay(10.5,function() _G.BombSpriteInspect.playing=false; print("BOMB_SPRITE_SEQUENCE_FINISHED",_G.BombSpriteInspect.time) end)

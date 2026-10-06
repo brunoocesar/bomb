@@ -2,7 +2,7 @@ local Packs = require("../game/Shared/SkinPacks")
 local Catalog = require("../game/Shared/SpriteCatalog")
 local Layout = require("../game/Shared/SpriteLayout")
 local Simulation = require("../game/Shared/Simulation")
-local Tutorial = require("../game/Shared/Tutorial")
+local Tutorial = require("./fixtures/TestTutorial")
 local checks = 0
 local function expect(ok, message)
 	checks += 1

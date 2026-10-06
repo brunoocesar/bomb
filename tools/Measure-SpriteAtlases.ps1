@@ -26,7 +26,21 @@ $definitions = @(
     # Measured gutters: uniform quarters would clip rear flames into right-facing frames.
     @{ id='mounted'; path='mounted/base/mounted-v1.png'; columns=4; bands=@(0,.248,.49,.731,1) }
 )
+foreach ($variant in @('cream','scarf')) {
+    foreach ($form in @('hero','heroMovement','mounted')) {
+        $source = $definitions | Where-Object { $_.id -eq $form } | Select-Object -First 1
+        $fileName = if ($form -eq 'heroMovement') { "hero-movement-$variant-v1.png" } else { "$form-$variant-v1.png" }
+        $family = if ($form -eq 'mounted') { 'mounted' } else { 'hero' }
+        $relative = "$family/$variant/$fileName"
+        if (Test-Path -LiteralPath (Join-Path $ProjectRoot "art/sprites/$relative")) {
+            $entry = @{ id=($form + ($variant.Substring(0,1).ToUpper() + $variant.Substring(1))); path=$relative; bands=$source.bands }
+            if ($source.columns) { $entry.columns = $source.columns }
+            $definitions += $entry
+        }
+    }
+}
 $atlases = @()
+$frogCrops = Get-Content -Raw -Encoding UTF8 (Join-Path $ProjectRoot 'art/sprites/frog/frame-crops.json') | ConvertFrom-Json
 foreach ($definition in $definitions) {
     $imagePath = Join-Path $ProjectRoot ('art/sprites/' + $definition.path)
     $bitmap = [System.Drawing.Bitmap]::new($imagePath)
@@ -40,13 +54,19 @@ foreach ($definition in $definitions) {
                 $y=[int][Math]::Round($definition.bands[$row]*$bitmap.Height)
                 $width=[int][Math]::Round(($column+1)*$bitmap.Width/$columns)-$x
                 $height=[int][Math]::Round($definition.bands[$row+1]*$bitmap.Height)-$y
+                $annotation = $null
+                if ($definition.id -eq 'frog') {
+                    $annotation = $frogCrops.frames.('frog_r{0}_c{1}' -f $row,$column)
+                    $x,$y,$width,$height = $annotation.rect
+                }
                 $bounds=[SpriteBounds]::Find($bitmap,$x,$y,$width,$height)
+                $groundY = if ($annotation -and $annotation.groundY) { $annotation.groundY-$y } else { $bounds[1]+$bounds[3] }
                 $frames += [ordered]@{
                     id=('{0}_r{1}_c{2}' -f $definition.id,$row,$column)
                     row=$row; column=$column
                     rect=@($x,$y,$width,$height)
                     opaqueBounds=$bounds
-                    groundPivot=@([Math]::Round(($bounds[0]+$bounds[2]/2)/$width,4),[Math]::Round(($bounds[1]+$bounds[3])/$height,4))
+                    groundPivot=@([Math]::Round(($bounds[0]+$bounds[2]/2)/$width,4),[Math]::Round($groundY/$height,4))
                 }
             }
         }
@@ -70,7 +90,8 @@ $manifest=[ordered]@{
     animationMap=[ordered]@{
         hero=[ordered]@{
             walk=@{down=@('hero',0,0,7);left=@('hero',1,0,7);right=@('hero',2,0,7);up=@('heroMovement',3,0,7)}
-            idle=@{down=@('hero',3,0,7);left=@('hero',1,0,0);right=@('hero',2,0,0);up=@('heroMovement',3,0,0)}
+            idle=@{down=@('hero',3,0,0);left=@('hero',1,0,0);right=@('hero',2,0,0);up=@('heroMovement',3,0,0)}
+            blink=@{down=@('hero',3,2,2)}
             placeBomb=@{down=@('hero',4,0,0);up=@('hero',6,0,0)}
             damage=@{down=@('hero',4,1,1);up=@('hero',6,1,1)}
             victory=@{down=@('hero',4,2,2);up=@('hero',6,2,2)}
@@ -80,7 +101,8 @@ $manifest=[ordered]@{
         }
         frog=[ordered]@{
             walk=@{down=@('frog',0,0,7);left=@('frog',1,0,7);right=@('frog',2,0,7);up=@('frog',3,0,7)}
-            idle=@{down=@('frog',4,0,7);left=@('frog',1,0,0);right=@('frog',2,0,0);up=@('frog',3,0,0)}
+            idle=@{down=@('frog',4,0,0);left=@('frog',1,0,0);right=@('frog',2,0,0);up=@('frog',3,0,0)}
+            blink=@{down=@('frog',4,2,2)}
             jump=@{down=@('frog',5,0,7)}
             protect=@{down=@('frog',6,0,3)}
             disappear=@{down=@('frog',6,4,7)}

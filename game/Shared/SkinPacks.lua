@@ -4,7 +4,10 @@ local SkinPacks = {}
 SkinPacks.default = "base"
 SkinPacks.packs = {
 	base = { hero = "hero", heroMovement = "heroMovement", frog = "frog", mounted = "mounted" },
+	cream = { hero = "heroCream", heroMovement = "heroMovementCream", frog = "frog", mounted = "mountedCream" },
+	scarf = { hero = "heroScarf", heroMovement = "heroMovementScarf", frog = "frog", mounted = "mountedScarf" },
 }
+SkinPacks.names = { base = "Original Pack", cream = "Cream Pack", scarf = "Yellow Scarf Pack" }
 
 function SkinPacks.resolve(id)
 	return SkinPacks.packs[id] or SkinPacks.packs[SkinPacks.default]

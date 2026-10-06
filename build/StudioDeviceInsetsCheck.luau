@@ -1,0 +1,1 @@
+assert(game.PlaceId==140221183064352 and game.GameId==10769176732); for _,name in ipairs({"LobbyUI","TutorialUI","TutorialCompactUI"}) do local gui=game.ReplicatedStorage.Assets[name]; assert(gui.ScreenInsets==Enum.ScreenInsets.DeviceSafeInsets,name); print("BOMB_DEVICE_SAFE_INSETS",name,gui.ScreenInsets.Name) end

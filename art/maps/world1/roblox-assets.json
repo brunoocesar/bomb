@@ -1,0 +1,34 @@
+{
+  "assets": [
+    {
+      "file": "BombYourWay-Phase1Objects-v1.png",
+      "size": [
+        1024,
+        1024
+      ],
+      "sha256": "C5DAF1948FC5ECAE285BF31C7FDC025E1E6CE7CB5B9DB37460E446FBE1765341",
+      "assetId": 114790931774586,
+      "creatorGroupId": 204998424
+    },
+    {
+      "file": "BombYourWay-Phase1Courtyard-v1.png",
+      "size": [
+        1024,
+        887
+      ],
+      "sha256": "A4103CD047439A22EB38A5AA239CA1A8E30C75C603F12A9EFF1E42FC5BD727C6",
+      "assetId": 112943965283471,
+      "creatorGroupId": 204998424
+    },
+    {
+      "file": "BombYourWay-Phase1Entrance-v1.png",
+      "size": [
+        1024,
+        888
+      ],
+      "sha256": "09C1E04C4C56E5A826A9C480E1AACDB38595373F484D31D5222006692FA297B5",
+      "assetId": 76195326912660,
+      "creatorGroupId": 204998424
+    }
+  ]
+}

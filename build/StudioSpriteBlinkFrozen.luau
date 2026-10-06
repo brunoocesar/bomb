@@ -1,0 +1,1 @@
+assert(game.PlaceId==140221183064352); _G.BombSpriteInspect.frames={"hero_r3_c2","frog_r4_c2","frog_r5_c3"};

@@ -7,6 +7,7 @@ local Simulation = require(ReplicatedStorage.Shared.Simulation)
 local Tutorial = require(ReplicatedStorage.Shared.Tutorial)
 local LobbyProgress = require(ReplicatedStorage.Shared.LobbyProgress)
 local ProfileData = require(ReplicatedStorage.Shared.ProfileData)
+local PhaseRewards = require(ReplicatedStorage.Shared.PhaseRewards)
 local Profiles = require(script.Parent.Profiles)
 local remotes = ReplicatedStorage.Assets.TutorialRemotes
 local sessions = {}
@@ -16,6 +17,7 @@ Players.CharacterAutoLoads = false
 local function send(player, session)
 	local state = session.sim:snapshot()
 	state.paused = session.paused
+	state.inputSequence = session.inputSequence or 0
 	state.location = session.location
 	state.lobbyUnlocked = session.lobbyUnlocked or session.sim.profile.completed
 	state.settings = session.sim.profile.settings
@@ -38,16 +40,27 @@ local function save(session, release)
 	session.saving = true
 	local version = session.dirtyVersion
 	local data = session.sim:checkpoint()
+	local claiming = session.sim.mode == "claiming"
+	if claiming then
+		data = PhaseRewards.keyCandidate(data, Tutorial.phaseId)
+		if not data then
+			session.saving = false
+			return
+		end
+	end
 	task.spawn(function()
 		local ok = Profiles.save(session.profile, data, release)
-		session.saving = false
 		if ok then
+			if claiming then
+				session.sim:confirmChestClaim(data)
+			end
 			session.savedVersion = version
 			session.lastSave = os.clock()
 			session.saveStatus = session.dirtyVersion == version and "Checkpoint saved" or "Save pending"
 		else
 			session.saveStatus = "Save pending - retrying"
 		end
+		session.saving = false
 	end)
 end
 
@@ -111,12 +124,18 @@ remotes.Input.OnServerEvent:Connect(function(player, action, value)
 	session.tokens = session.tokens - 1
 	if action == "settings" and session.location == "adventure" then
 		session.location, session.direction, session.paused = "settings", nil, true
+		session.sim:steer("stop")
 		send(player, session)
 	elseif action == "closeSettings" and session.location == "settings" then
 		session.location = "adventure"
 		send(player, session)
-	elseif action == "lobby" and (session.lobbyUnlocked or session.sim.profile.completed) then
+	elseif
+		action == "lobby"
+		and session.sim.mode ~= "claiming"
+		and (session.lobbyUnlocked or session.sim.profile.completed)
+	then
 		session.location, session.direction, session.paused = "lobby", nil, false
+		session.sim:steer("stop")
 		save(session, false)
 		send(player, session)
 	elseif action == "continue" and session.location == "lobby" and not session.sim.profile.finished then
@@ -152,8 +171,32 @@ remotes.Input.OnServerEvent:Connect(function(player, action, value)
 		session.sim.profile.rewardSeen = true
 		session.sim:emit("settings_changed")
 	elseif action == "move" and session.location == "adventure" then
-		if value == "up" or value == "down" or value == "left" or value == "right" or value == "stop" then
-			session.direction = value ~= "stop" and value or nil
+		if
+			value == "up"
+			or value == "down"
+			or value == "left"
+			or value == "right"
+			or value == "stop"
+			or (
+				type(value) == "table"
+				and type(value[1]) == "number"
+				and type(value[2]) == "number"
+				and value[1] == value[1]
+				and value[2] == value[2]
+				and math.abs(value[1]) <= 1
+				and math.abs(value[2]) <= 1
+			)
+		then
+			session.direction = value
+			if
+				type(value) == "table"
+				and type(value[3]) == "number"
+				and value[3] >= 0
+				and value[3] < 2147483647
+				and value[3] % 1 == 0
+			then
+				session.inputSequence = value[3]
+			end
 			session.inputAt = now
 			if not session.paused then
 				session.sim:steer(session.direction)
@@ -166,9 +209,22 @@ remotes.Input.OnServerEvent:Connect(function(player, action, value)
 		end
 	elseif action == "bomb" and session.location == "adventure" and not session.paused then
 		session.sim:placeBomb()
+	elseif action == "interact" and session.location == "adventure" and not session.paused then
+		if session.sim:interactChest() then
+			session.direction = nil
+			session.dirtyVersion += 1
+			session.nextSaveAttempt = 0
+			save(session, false)
+		end
 	elseif action == "pause" and session.location == "adventure" and type(value) == "boolean" then
 		session.paused, session.direction = value, nil
-	elseif action == "restart" and session.location == "adventure" and session.sim.mode ~= "won" then
+		session.sim:steer("stop")
+	elseif
+		action == "restart"
+		and session.location == "adventure"
+		and session.sim.mode ~= "won"
+		and session.sim.mode ~= "claiming"
+	then
 		session.sim.profile.deaths = session.sim.profile.deaths + 1
 		session.sim:loadStage()
 		session.sim:emit("player_died")
@@ -185,19 +241,22 @@ end)
 local elapsed = 0
 RunService.Heartbeat:Connect(function(dt)
 	elapsed = elapsed + dt
-	if elapsed < 0.05 then
-		return
+	local sendState = elapsed >= 0.05
+	if sendState then
+		elapsed = elapsed % 0.05
 	end
-	local steps = math.min(math.floor(elapsed / 0.05), 5)
-	elapsed = elapsed % 0.05
+	-- Physics uses all elapsed time; network snapshots keep their existing rate.
+	local steps = math.max(1, math.ceil(dt / 0.025))
 	for player, session in pairs(sessions) do
 		if os.clock() - session.inputAt > 1 then
-			session.direction = nil
+			session.direction = "stop"
 		end
-		LobbyProgress.refresh(session.sim.profile, os.time())
+		if sendState then
+			LobbyProgress.refresh(session.sim.profile, os.time())
+		end
 		if not session.paused and session.location == "adventure" then
 			for _ = 1, steps do
-				session.sim:step(0.05, session.direction)
+				session.sim:step(dt / steps, session.direction)
 			end
 		end
 		for _, event in ipairs(session.sim.events) do
@@ -214,6 +273,7 @@ RunService.Heartbeat:Connect(function(dt)
 				or event == "settings_changed"
 				or event == "reward_claimed"
 				or event == "energy_box_destroyed"
+				or event == "chest_unlocked"
 			then
 				session.dirtyVersion = session.dirtyVersion + 1
 				session.saveStatus = "Save pending"
@@ -232,7 +292,9 @@ RunService.Heartbeat:Connect(function(dt)
 			session.nextSaveAttempt = os.clock() + 5
 			save(session, false)
 		end
-		send(player, session)
+		if sendState then
+			send(player, session)
+		end
 	end
 end)
 
@@ -244,7 +306,7 @@ Players.PlayerRemoving:Connect(function(player)
 		while session.saving and os.clock() < deadline do
 			task.wait(0.1)
 		end
-		Profiles.save(session.profile, session.sim:checkpoint(), true)
+		Profiles.close(session.profile, session.sim:checkpoint(), math.max(0, deadline - os.clock()))
 	end
 end)
 
@@ -257,7 +319,7 @@ game:BindToClose(function()
 			while session.saving and os.clock() < deadline do
 				task.wait(0.1)
 			end
-			Profiles.save(session.profile, session.sim:checkpoint(), true)
+			Profiles.close(session.profile, session.sim:checkpoint(), math.max(0, deadline - os.clock()))
 			pending = pending - 1
 		end)
 	end

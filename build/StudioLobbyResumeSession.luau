@@ -1,0 +1,1 @@
+assert(game.PlaceId==140221183064352); local r=game:GetService("RunService"); print("BOMB_LOBBY_RESUME_SESSION",game.PlaceId,game.GameId,r:IsRunning(),r:IsClient(),game.ReplicatedStorage:FindFirstChild("Shared")~=nil,game.ServerScriptService:FindFirstChild("Server")~=nil)

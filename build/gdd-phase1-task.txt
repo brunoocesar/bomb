@@ -1,0 +1,1331 @@
+=== PAGE 1 ===
+GAME DESIGN DOCUMENT • VERSÃO 2.0
+BOMB YOUR
+WAY!
+Plano completo do jogo: experiência, sistemas, telas, conteúdo, métricas e
+produção.
+Projeto de Bruno César
+03 de outubro de 2026
+Documento vivo: decisões aprovadas e propostas recomendadas para validação.
+
+=== PAGE 2 ===
+BOMB YOUR WAY!  •  GAME DESIGN DOCUMENT COMPLETO
+02
+1
+LEITURA DO DOCUMENTO
+Como usar este plano
+Este documento explica o jogo em nível suficiente para orientar game design, programação, arte, level
+design, interface, testes e lançamento. Os elementos já discutidos estão tratados como base aprovada.
+Sistemas ainda não definidos recebem uma recomendação clara e devem ser validados no protótipo.
+ APROVADO = direção já definida. • RECOMENDADO = proposta forte, sujeita
+ a teste. • FUTURO = expansão fora do lançamento.
+Sumário
+ Seções
+Conteúdo
+2-5
+Visão, público, pilares e ciclo principal
+6-10
+Movimento, bombas, dano, power-ups e sapinho
+11-16
+Campanha, etapas, objetivos, inimigos, chefes e exemplo completo
+17-21
+Lobby, menus, interface da fase, resultados e mapa da campanha
+22-26
+Progressão, medalhas, coleção, retorno, economia e monetização
+27-30
+História, arte, áudio, celular e acessibilidade
+31-35
+Métricas, salvamento, conteúdo, produção e testes
+36-39
+Lançamento, escopo consolidado e próximos passos
+Princípio de decisão
+Qualquer sistema novo precisa responder a pelo menos uma necessidade: melhorar compreensão,
+aprofundar a ação, criar progressão, dar motivo para retornar ou gerar receita sem prejudicar o jogo. Se
+apenas aumenta complexidade, fica fora do lançamento.
+
+=== PAGE 3 ===
+BOMB YOUR WAY!  •  GAME DESIGN DOCUMENT COMPLETO
+03
+2
+VISÃO
+O jogo em uma frase
+ Abra caminho com bombas, derrote monstros e resgate sapinhos em uma
+ aventura cheia de segredos.
+APROVADO. Bomb Your Way! será uma aventura 2D de campanha, construída com sprites e objetos em
+ScreenGui. O jogador atravessa locais divididos em etapas, posiciona bombas, quebra obstáculos,
+enfrenta criaturas, procura recompensas e destrói caixas de energia para abrir a próxima passagem.
+A base funciona completamente sozinho. Essa escolha evita depender de servidores cheios e permite
+lançar com pouco tráfego. Cooperação pode ser adicionada depois, desde que as fases sejam adaptadas e
+testadas para dois jogadores.
+Fantasia do jogador
+ • Ser um pequeno herói explosivo que transforma um cenário bloqueado em um caminho aberto.
+ • Sentir que posicionou a bomba no lugar certo e provocou uma sequência satisfatória.
+ • Explorar mundos charmosos, encontrar segredos e formar uma coleção de sapinhos e visuais.
+ • Superar chefes usando as mesmas regras aprendidas nas fases, em combinações mais difíceis.
+ 
+Promessa de produto
+Uma experiência fácil de entender nos primeiros segundos, com fases curtas o bastante para celular e
+progresso contínuo o bastante para sustentar várias sessões.
+
+=== PAGE 4 ===
+BOMB YOUR WAY!  •  GAME DESIGN DOCUMENT COMPLETO
+04
+3
+PÚBLICO E PLATAFORMA
+Para quem o jogo será feito
+RECOMENDADO. O público principal são jogadores de Roblox em celular que gostam de aventura casual,
+ação simples, personagens fofos, progressão e itens colecionáveis. O jogo também deve funcionar em
+computador, tablet e console, mas as decisões de câmera, interface e desempenho partem do celular.
+Necessidade do público
+Resposta do projeto
+Entender rápido
+Movimento em quatro direções, um botão de bomba e objetivo visual.
+Sessões flexíveis
+Etapas de 45-90 segundos e fases geralmente entre 3-7 minutos.
+Recompensa frequente
+Itens, portas, medalhas, segredos e progresso após cada fase.
+Identidade
+Protagonista marcante, sapinhos e customização modular.
+Baixa frustração
+Checkpoint por etapa e reinício rápido.
+Motivo para voltar
+Continuação da campanha, desafios e coleção transparente.
+Posicionamento
+O jogo deve parecer uma aventura completa, sem usar “simulator” no título ou prometer competição
+multiplayer. Nome, ícone, thumbnail e primeira fase precisam representar exatamente bombas,
+progressão e exploração.
+
+=== PAGE 5 ===
+BOMB YOUR WAY!  •  GAME DESIGN DOCUMENT COMPLETO
+05
+4
+PILARES
+As regras que orientam todo o projeto
+ Pilar
+Significado
+Teste prático
+Clareza imediata
+O jogador identifica personagem, perigo, objetivo e ação
+principal.
+Consegue agir sem explicação oral?
+Explosão satisfatória
+Toda bomba cria antecipação, impacto, resposta do
+cenário e recompensa.
+Usar bomba continua prazeroso depois de
+10 minutos?
+Fases com propósito
+Cada etapa tem rota, alvos, perigos e ao menos uma
+decisão.
+Existe algo além de limpar blocos?
+Progresso visível
+Sempre há conquista recente e próximo objetivo.
+O lobby mostra claramente onde
+continuar?
+Coleção com identidade
+Visuais reforçam vínculo com personagem e sapinho.
+O item é desejável mesmo sem poder?
+Escopo profissional
+Poucos sistemas bem acabados, desempenho e
+salvamento confiáveis.
+Funciona bem em celular fraco?
+Regra de corte
+Quando uma ideia entra em conflito com esses pilares, ela deve ser simplificada, adiada ou removida.
+Quantidade de conteúdo nunca compensa controles ruins, fase repetitiva ou perda de progresso.
+
+=== PAGE 6 ===
+BOMB YOUR WAY!  •  GAME DESIGN DOCUMENT COMPLETO
+06
+5
+LOOP
+O ciclo de jogo completo
+ Momento
+Ação do jogador
+Recompensa
+Lobby
+Escolhe continuar, personaliza e vê objetivos.
+Direção clara antes de jogar.
+Entrada na fase
+Lê a área, inimigos, porta e contador de energia.
+Plano inicial.
+Exploração
+Quebra obstáculos, abre rotas e encontra itens.
+Moedas, power-ups e segredos.
+Combate
+Usa bombas e cenário para controlar inimigos.
+Espaço seguro e progresso.
+Objetivo
+Destrói todas as caixas de energia.
+Porta abre com feedback forte.
+Transição
+Avança levando melhorias da fase.
+Sensação de jornada e crescimento.
+Conclusão
+Recebe medalhas, itens e próxima fase.
+Progresso permanente.
+Ritmo desejado
+ • Uma micro-recompensa a cada 20-40 segundos: bloco especial, item, inimigo, caixa, segredo ou
+ passagem.
+• Uma novidade ou combinação importante por fase.
+ • Uma conquista maior no final: sapinho, cosmético, chefe, abertura do próximo mundo ou medalha.
+ • Retorno imediato ao jogo depois da morte, sem telas longas.
+ 
+=== PAGE 7 ===
+BOMB YOUR WAY!  •  GAME DESIGN DOCUMENT COMPLETO
+07
+6
+CONTROLES
+Movimento e interação
+APROVADO. O controle básico usa movimento em quatro direções e um botão de bomba. A profundidade
+vem do posicionamento, alcance, tempo do pavio, rotas de fuga e comportamento dos inimigos.
+Plataforma
+Entrada
+Detalhe
+Celular/tablet
+Direcional virtual + botão de bomba.
+Tamanho confortável, resposta ao deslizar e opção de
+posição.
+Computador
+WASD/setas + espaço ou tecla
+configurável.
+Movimento digital consistente com a grade.
+Console
+Analógico/D-pad + botão principal.
+Vibração opcional em explosão e dano.
+Comportamento
+ • O personagem começa a mover imediatamente, sem aceleração lenta.
+ • A grade pode guiar a posição internamente, mas o movimento visual deve parecer suave.
+ • Pequena tolerância ajuda a contornar quinas sem prender o personagem.
+ • A bomba surge na casa atual válida; entradas repetidas não criam bombas em posição impossível.
+ • O jogador não atravessa paredes, caixas sólidas ou bombas, exceto se um poder específico disser o
+ contrário.
+Teste obrigatório
+Medir resposta, quinas, toques perdidos e cobertura de tela em Android de pouca memória. Controles
+ruins destroem a retenção antes de qualquer sistema de recompensa agir.
+
+=== PAGE 8 ===
+BOMB YOUR WAY!  •  GAME DESIGN DOCUMENT COMPLETO
+08
+7
+BOMBAS
+A principal ferramenta do jogo
+APROVADO. A bomba é ataque, ferramenta de exploração e chave de resolução. O jogador coloca uma
+quantidade limitada por vez; após um pavio curto, a explosão percorre linhas horizontais e verticais até o
+alcance atual.
+Regra
+Comportamento
+Colocação
+Somente em posição válida e desocupada.
+Pavio
+Tempo consistente, indicado por som, pulso e animação.
+Explosão
+Forma de cruz; para em paredes resistentes e reage a alvos.
+Bloco destrutível
+É removido e pode revelar item ou passagem.
+Bomba atingida
+Explode imediatamente e cria reação em cadeia.
+Jogador/inimigo
+Recebe dano conforme estado e proteção.
+Leitura
+O efeito visual coincide com a área perigosa real.
+Sensação audiovisual
+A bomba pulsa cada vez mais rápido; o som do pavio acelera; a explosão tem núcleo claro, contorno
+colorido e impacto curto de câmera. Blocos se desfazem em pedaços simples, itens saltam e a coleta
+responde com som limpo. O efeito deve ser vistoso sem esconder inimigos ou uma segunda explosão.
+Valores
+Tempo do pavio, alcance inicial, invencibilidade e quantidade de bombas serão parâmetros de
+balanceamento, definidos no protótipo em vez de fixados neste documento.
+
+=== PAGE 9 ===
+BOMB YOUR WAY!  •  GAME DESIGN DOCUMENT COMPLETO
+09
+8
+FALHA E COMBATE
+Dano, morte e reinício
+RECOMENDADO. O protagonista começa cada tentativa da fase com uma vida ativa; um dano sem
+proteção reinicia a etapa atual. O sapinho absorve um acerto e desaparece. Essa regra é simples de ler e
+mantém o risco das próprias bombas.
+Situação
+Resultado
+Feedback
+Explosão própria ou inimiga
+Dano normal.
+Flash, recuo curto e som distinto.
+Contato com inimigo
+Dano, salvo exceções telegráficas.
+Animação do inimigo + impacto.
+Com sapinho
+Montaria desaparece; jogador sobrevive.
+Salto do personagem, fumaça e som de proteção.
+Sem proteção
+Reinicia a etapa após transição curta.
+Causa da morte permanece visível por um instante.
+Queda/armadilha
+Reinício da etapa.
+Animação específica, sem tela longa.
+Regras contra frustração
+ • Depois de reaparecer, conceder breve proteção para evitar morte instantânea.
+ • Restaurar caixas, inimigos e obstáculos da etapa; preservar tesouros únicos já salvos.
+ • Oferecer “tentar novamente” de forma automática, sem voltar ao lobby.
+ • Se muitas mortes ocorrerem no mesmo trecho, investigar o design antes de oferecer ajuda artificial.
+ 
+=== PAGE 10 ===
+BOMB YOUR WAY!  •  GAME DESIGN DOCUMENT COMPLETO
+10
+9
+POWER-UPS
+Crescimento durante a fase
+RECOMENDADO. Power-ups são temporários e duram até o fim da fase. Isso cria sensação de crescimento
+sem transformar fases antigas em conteúdo inútil.
+Power-up
+Efeito
+Limite de design
+Bomba extra
+Permite manter mais uma bomba ativa.
+Teto definido para não poluir a etapa.
+Mais alcance
+Aumenta a explosão em uma casa.
+Teto evita cobrir toda a arena.
+Velocidade
+Aumenta movimento de forma pequena e controlável.
+Não pode quebrar precisão no celular.
+Chute
+Empurra uma bomba em linha reta.
+Introduzido apenas em fase preparada.
+Controle remoto
+Detona bombas manualmente.
+Raro e usado em desafios avançados.
+Distribuição
+ • Itens básicos podem surgir de blocos marcados ou pontos definidos, evitando depender totalmente de
+ sorte.
+• A primeira fase garante os power-ups necessários para ensinar o sistema.
+ • Nenhuma etapa obrigatória pressupõe que o jogador encontrou um item opcional.
+ • O HUD mostra bombas disponíveis e alcance de forma simples; efeitos raros recebem ícone temporário.
+ 
+Persistência
+Power-ups atravessam etapas da mesma fase e são reiniciados quando a fase termina ou quando uma
+nova tentativa completa começa. O checkpoint precisa reconstruir um estado mínimo viável para evitar
+salvar o jogador preso.
+
+=== PAGE 11 ===
+BOMB YOUR WAY!  •  GAME DESIGN DOCUMENT COMPLETO
+11
+10
+MONTARIA
+O sistema do sapinho
+APROVADO. O sapinho é montaria, proteção e principal eixo colecionável. Aparências são desbloqueadas
+na coleção; durante uma fase, um ovo ou ponto de resgate ativa o sapinho equipado.
+Componente
+Funcionamento
+Obtenção
+Resgate garantido em momentos planejados ou recompensa de desafio.
+Proteção
+Absorve um acerto e desaparece.
+Movimento
+Mantém o controle base e pode ter animação mais saltitante.
+Salto curto
+Usado apenas em passagens marcadas e projetadas para ele.
+Coleção
+Aparências diferentes usam a mesma função no lançamento.
+Perda
+Não conta como morte para a medalha “sem morrer”.
+Por que funciona
+O sapinho aparece cedo, muda visualmente o personagem e cria uma história emergente simples:
+encontrar, montar, proteger e colecionar. Ele também funciona como segunda chance sem adicionar
+barra de vida complexa.
+Expansão futura
+Sapinhos com habilidades próprias só entram depois que a campanha base estiver equilibrada. Poderes
+diferentes exigiriam rotas alternativas e poderiam tornar uma montaria obrigatória, aumentando muito o
+custo de level design.
+
+=== PAGE 12 ===
+BOMB YOUR WAY!  •  GAME DESIGN DOCUMENT COMPLETO
+12
+11
+CAMPANHA
+Estrutura de mundos e fases
+ 1 mundo = 4 fases. Cada fase = várias etapas conectadas. Cada etapa =
+ objetivo, perigo, exploração e passagem.
+APROVADO. A campanha inicial proposta possui três mundos, totalizando doze fases. Esse alvo será
+confirmado após medir o custo e a qualidade da fatia vertical.
+Mundo
+Fase 1
+Fase 2
+Fase 3
+Fase 4
+1 - Introdução
+2 etapas
+2 etapas
+3 etapas
+2 etapas + chefe
+2 - Combinações
+3 etapas
+3 etapas
+3 etapas
+3 etapas + chefe
+3 - Domínio
+3 etapas
+4 etapas
+4 etapas
+3 etapas + chefe
+Duração
+Uma etapa comum mira 45-90 segundos. Uma fase comum fica entre 3-7 minutos; chefes podem durar
+mais. Esses tempos são faixas de teste. A fase termina quando sua ideia foi explorada com qualidade, não
+quando atinge uma quantidade arbitrária de salas.
+Desbloqueio
+Concluir uma fase abre a seguinte. Concluir a quarta fase abre o próximo mundo. Segredos e medalhas
+oferecem domínio, mas não bloqueiam a campanha principal.
+
+=== PAGE 13 ===
+BOMB YOUR WAY!  •  GAME DESIGN DOCUMENT COMPLETO
+13
+12
+ETAPAS
+Como cada pequena área funciona
+A etapa é a unidade mínima de gameplay. Ela cabe em uma tela ou pequena área navegável, tem
+começo compreensível, caixas de energia, obstáculos, inimigos, recompensas opcionais e uma porta de
+saída.
+Momento
+O que acontece
+Entrada
+Câmera apresenta rapidamente porta, parte dos alvos e perigo principal.
+Leitura
+Jogador identifica rotas abertas, blocos e locais de risco.
+Ação
+Bombas abrem caminho, eliminam inimigos e acionam reações.
+Exploração
+Power-ups e segredos recompensam desvio da rota direta.
+Conclusão
+Última caixa é destruída; porta recebe energia e abre.
+Saída
+Jogador atravessa; checkpoint salva e carrega a próxima etapa.
+Checklist de level design
+ • Há espaço seguro para entender a área antes do primeiro perigo.
+ • Toda caixa de energia possui pista ou rota lógica.
+ • A bomba sempre tem pelo menos uma rota de fuga justa.
+ • Segredo é percebido como possibilidade, mesmo sem solução óbvia.
+ • O objetivo não exige destruir cada bloco do mapa.
+ • A saída fica legível quando abre e não é coberta por efeitos.
+ 
+=== PAGE 14 ===
+BOMB YOUR WAY!  •  GAME DESIGN DOCUMENT COMPLETO
+14
+13
+OBJETIVO
+Caixas de energia e portas
+APROVADO. Para liberar a porta, o jogador destrói todas as caixas de energia da etapa. Esse objetivo dá
+direção constante e permite variar o caminho até cada alvo.
+Elemento
+Design visual
+Comportamento
+Caixa de energia
+Núcleo luminoso, símbolo consistente e som
+próprio.
+Pode exigir acesso, combate ou posição correta.
+Contador
+“Energia 2/3” com símbolo da caixa.
+Atualiza imediatamente e pulsa na última unidade.
+Ligação
+Fios, partículas ou luzes apontam para a porta.
+Reage quando uma caixa é destruída.
+Porta fechada
+Contorno sem energia e indicador do total
+restante.
+Bloqueia passagem sem parecer decorativa.
+Porta aberta
+Luz, som, movimento e seta discreta.
+Permite sair; checkpoint ocorre ao atravessar.
+Variações
+ • Caixa exposta para ensinar.
+ • Caixa protegida por inimigo ou barreira.
+ • Caixa móvel ou em plataforma, em mundos avançados.
+ • Conjunto que precisa ser atingido em sequência curta.
+ • Arena especial em que eliminar inimigos substitui as caixas, claramente anunciada.
+ 
+Regra crítica
+A última caixa nunca deve ficar escondida atrás de destruição aleatória sem pista. Procurar um único
+bloco entre dezenas cria tédio, não exploração.
+
+=== PAGE 15 ===
+BOMB YOUR WAY!  •  GAME DESIGN DOCUMENT COMPLETO
+15
+14
+OBSTÁCULOS
+Peças usadas para criar decisões
+ Tipo
+Função
+Resposta à bomba
+Parede permanente
+Define corredores e limites.
+Nunca é destruída.
+Bloco destrutível
+Fecha rota e pode guardar recompensa.
+Desaparece com uma explosão.
+Objeto reativo
+Gera reação em cadeia ou muda o cenário.
+Explode, move ou ativa algo.
+Piso perigoso
+Controla movimento e tempo.
+Pode permanecer ou ser neutralizado.
+Água/buraco
+Cria passagem especial do sapinho.
+Não é atravessável normalmente.
+Interruptor
+Abre rota secundária ou segredo.
+Ativado por explosão ou condição.
+Porta lateral
+Conecta salas, atalhos ou segredos.
+Abre por chave, energia ou descoberta.
+Uso correto
+ • Introduzir uma peça sozinha antes de combiná-la com inimigos.
+ • Usar cor, forma e animação consistentes entre mundos.
+ • Evitar objetos visualmente idênticos com regras diferentes.
+ • Permitir que o jogador aprenda por consequência segura antes de punição severa.
+ 
+Biblioteca modular
+Cada mundo reutiliza a mesma lógica de parede, bloco, alvo e porta, com nova aparência. Mecânicas
+exclusivas entram como módulos. Isso reduz bugs e acelera a produção das etapas.
+
+=== PAGE 16 ===
+BOMB YOUR WAY!  •  GAME DESIGN DOCUMENT COMPLETO
+16
+15
+INIMIGOS
+Papéis de combate
+RECOMENDADO. Cada mundo usa três inimigos comuns e um especial. Eles precisam alterar posição e
+decisão, não apenas receber mais vida.
+Papel
+Comportamento
+O que ensina
+Patrulheiro
+Anda por rota simples e muda ao bloquear.
+Tempo básico da bomba.
+Perseguidor
+Segue ao enxergar ou aproximar.
+Atrair e criar distância.
+Atirador
+Cria projétil lento ou zona de perigo.
+Movimento e cobertura.
+Bloqueador
+Ocupa rota, empurra ou protege caixa.
+Controle de espaço.
+Especial do mundo
+Interage com terreno ou mecânica temática.
+Domínio daquele mundo.
+Regras de justiça
+ • Ataques perigosos têm preparação visual e sonora.
+ • Inimigo não nasce sobre o jogador nem atrás de interface.
+ • Movimento precisa ser previsível o bastante para planejamento.
+ • Quantidade e velocidade aumentam antes de simplesmente aumentar resistência.
+ • Uma explosão bem posicionada derrota inimigos comuns, preservando satisfação.
+ 
+Recompensa
+Inimigos podem soltar moedas ou itens em pontos definidos. Recompensas não devem incentivar o
+jogador a esperar respawn nem tornar obrigatório eliminar todos.
+
+=== PAGE 17 ===
+BOMB YOUR WAY!  •  GAME DESIGN DOCUMENT COMPLETO
+17
+16
+CHEFES
+Final de cada mundo
+RECOMENDADO. O chefe transforma regras conhecidas em um encontro de 2-4 minutos, dividido em
+padrões fáceis de ler. Ele não exige sistema de combate separado.
+Parte
+Função
+Apresentação
+Entrada curta, nome e demonstração segura do perigo principal.
+Padrão 1
+Chefe se expõe e ensina como bombas causam dano.
+Padrão 2
+Combina movimento, inimigos ou terreno do mundo.
+Clímax
+Fase mais rápida, mas ainda previsível.
+Vitória
+Animação, recompensa, sapinho/cosmético e abertura do mundo seguinte.
+Regras
+ • Barra de vida clara e resposta forte a cada acerto.
+ • Checkpoint no início do chefe; derrota reinicia o encontro, não a fase inteira.
+ • Ataques usam áreas telegráficas e espaço de fuga.
+ • Sem longas invulnerabilidades que fazem o jogador esperar.
+ • Primeira vitória entrega recompensa garantida; repetições podem dar moeda ou desafio de tempo.
+ 
+Medalhas no chefe
+Concluir, vencer sem morrer e cumprir um desafio específico podem substituir a medalha de segredo
+quando o encontro não comportar exploração.
+
+=== PAGE 18 ===
+BOMB YOUR WAY!  •  GAME DESIGN DOCUMENT COMPLETO
+18
+17
+EXEMPLO COMPLETO
+A Casa Apagada
+Esta fase demonstra uma localização contínua dividida em áreas compactas. A história ambiental é
+simples: a casa perdeu energia e criaturas ocuparam os cômodos.
+Etapa
+Composição
+Objetivo/recompensa
+1. Quintal
+Entulho, patrulheiro e rota lateral.
+2 caixas; ensina ligação com a porta.
+2. Cozinha
+Móveis, blocos e objetos de reação em cadeia.
+3 caixas; power-up de alcance.
+3. Corredor
+Passagem estreita, portas laterais e perseguidor.
+2 caixas; segredo atrás de pista visual.
+4. Porão
+Arena, gerador e guardião.
+Chefe curto; resgate de sapinho.
+Fluxo
+O jogador começa no quintal, aprende a relação caixa-porta, entra na casa e leva suas melhorias. A
+cozinha apresenta reação em cadeia. O corredor testa planejamento em espaço estreito. O porão conclui
+a fantasia de restaurar energia e oferece recompensa marcante.
+Segredo
+Uma parede apresenta rachadura e som oco. Explodi-la abre despensa com cosmético. A pista ensina
+uma linguagem reutilizada em fases futuras.
+Possível medalha especial
+Concluir a fase sem ativar uma reação perigosa na cozinha, criando uma rota de domínio sem bloquear a
+progressão normal.
+
+=== PAGE 19 ===
+BOMB YOUR WAY!  •  GAME DESIGN DOCUMENT COMPLETO
+19
+18
+LOBBY
+Estrutura completa do acampamento
+APROVADO. O lobby usa a estrutura visual de jogos como Fortnite e Free Fire: personagem em destaque,
+navegação ao redor e ação principal evidente. O cenário e a arte são próprios: uma clareira cartoon usada
+como acampamento do protagonista.
+Área
+Conteúdo
+Interação
+Centro
+Protagonista e sapinho equipados.
+Girar/inspecionar, animação ociosa e prévia de
+visual.
+Direita
+Cartão da próxima fase e botão CONTINUAR.
+Um toque inicia exatamente o próximo objetivo.
+Esquerda
+Aventura, Personagem, Sapinhos e Loja.
+Abre painéis sem esconder o personagem.
+Topo
+Moeda, perfil e configurações.
+Consulta e ajustes rápidos.
+Inferior
+Desafio diário e próxima recompensa.
+Mostra retorno sem dominar a tela.
+Fundo
+Clareira, tendas, caixas e caminho do mundo atual.
+Muda discretamente conforme progresso.
+Entrada no lobby
+No primeiro acesso, o jogador entra direto na fase 1. O lobby completo aparece após a primeira vitória.
+Nas sessões seguintes, o jogo abre no lobby para mostrar progresso e permitir customização.
+
+=== PAGE 20 ===
+BOMB YOUR WAY!  •  GAME DESIGN DOCUMENT COMPLETO
+20
+19
+LOBBY
+Comportamentos e estados
+ Estado do jogador
+Botão principal
+Informação exibida
+Nunca jogou
+JOGAR
+“Comece sua aventura”.
+Fase em andamento
+CONTINUAR
+Mundo, fase e etapa do checkpoint.
+Fase concluída
+PRÓXIMA FASE
+Recompensa seguinte e progresso do mundo.
+Mundo concluído
+NOVO MUNDO
+Prévia visual do local desbloqueado.
+Campanha concluída
+ESCOLHER FASE
+Medalhas pendentes e desafio diário.
+Animações
+ • Protagonista observa a chama, comemora ou interage com o sapinho.
+ • Sapinho pisca, salta curto e reage quando selecionado.
+ • Cenário tem folhas, fumaça e luzes em movimentos lentos, sem poluir a tela.
+ • Item recém-obtido aparece primeiro no personagem, com opção Equipar.
+ 
+Regras de usabilidade
+ • O botão principal é sempre o elemento mais forte.
+ • Nenhuma tela coloca mais de uma oferta concorrendo com Continuar.
+ • Voltar fecha o painel atual e preserva a posição do lobby.
+ • Moedas e notificações usam números legíveis, sem excesso de sinais vermelhos.
+ 
+=== PAGE 21 ===
+BOMB YOUR WAY!  •  GAME DESIGN DOCUMENT COMPLETO
+21
+20
+MENUS
+O que existe em cada aba
+ Aba
+Conteúdo
+Ação principal
+Aventura
+Mapa de mundos, fases, medalhas e segredos.
+Selecionar fase liberada.
+Personagem
+Cor, cabeça, rosto, roupa e bomba cosmética.
+Equipar e salvar conjunto.
+Sapinhos
+Coleção, origem, aparência equipada e prévia.
+Equipar aparência.
+Loja
+Itens diretos, pacotes e destaque do dia.
+Ver preço e confirmar compra.
+Missões
+Diárias, semanais futuras e progresso.
+Coletar recompensa concluída.
+Configurações
+Áudio, vibração, efeitos, controles, idioma e acessibilidade.
+Aplicar imediatamente.
+Personagem e Sapinhos
+Itens bloqueados mostram silhueta, nome e método de obtenção: “Conclua Casa Apagada sem morrer”
+ou “Disponível na loja”. A transparência transforma a coleção em objetivo e reduz frustração.
+Loja
+A loja abre depois da primeira vitória. Cada item possui prévia no personagem, preço claro e confirmação
+do Roblox. Não usar contagem regressiva falsa, múltiplos pop-ups ou compra acidental.
+
+=== PAGE 22 ===
+BOMB YOUR WAY!  •  GAME DESIGN DOCUMENT COMPLETO
+22
+21
+HUD
+Interface durante a fase
+O HUD permanece mínimo para preservar área de jogo. Elementos importantes ficam longe das bordas e
+das zonas ocupadas pelos dedos.
+Elemento
+Posição sugerida
+Função
+Energia
+Topo central
+Mostra caixas destruídas/total e reage ao progresso.
+Estado/sapinho
+Topo esquerdo
+Indica proteção atual sem barra complexa.
+Bombas
+Próximo ao botão ou topo
+Bombas ativas/disponíveis.
+Objetivo curto
+Abaixo do topo, temporário
+“Destrua as caixas de energia”.
+Direcional
+Inferior esquerdo
+Movimento; opacidade ajustável.
+Botão de bomba
+Inferior direito
+Ação principal, grande e responsiva.
+Pausa
+Canto superior
+Retomar, reiniciar, configurações e sair.
+Ajuda contextual
+ • Aparece perto do elemento relevante e some após a ação correta.
+ • Usa ícone de entrada conforme dispositivo.
+ • Não congela o jogo em áreas perigosas.
+ • Pode ser revisada no menu de pausa.
+ 
+Pausa e saída
+Sair confirma que o checkpoint atual foi salvo. Reiniciar explica que a etapa será restaurada. O jogador
+nunca deve perder progresso por fechar o aplicativo depois de atravessar uma porta.
+
+=== PAGE 23 ===
+BOMB YOUR WAY!  •  GAME DESIGN DOCUMENT COMPLETO
+23
+22
+RESULTADOS
+Tela depois de uma fase
+A conclusão deve durar poucos segundos e transformar desempenho em progresso compreensível.
+Ordem
+Conteúdo
+1
+Animação curta de vitória com personagem e sapinho.
+2
+Medalhas aparecem uma a uma, sem demora excessiva.
+3
+Moedas, cosméticos e segredos encontrados são somados.
+4
+Prévia da próxima fase ou do novo mundo.
+5
+Botão grande PRÓXIMA FASE; Lobby como opção secundária.
+Tela de derrota
+Mostra causa da morte por um instante e oferece TENTAR NOVAMENTE como ação principal. A etapa
+reinicia rapidamente. Voltar ao lobby e configurações ficam como ações secundárias.
+Compartilhamento futuro
+Depois de validar o produto, uma vitória rara ou conclusão de mundo pode gerar cartão visual para
+compartilhar. Isso não entra na fatia vertical.
+Telemetria
+Registrar tempo, mortes, medalhas, segredo, power-ups e escolha entre próxima fase/lobby. Esses dados
+mostram se a tela de resultados impulsiona continuidade ou encerra a sessão.
+
+=== PAGE 24 ===
+BOMB YOUR WAY!  •  GAME DESIGN DOCUMENT COMPLETO
+24
+23
+MAPA
+Seleção de mundos e fases
+RECOMENDADO. A aba Aventura apresenta uma trilha visual por mundo. Cada mundo usa uma ilustração
+grande e quatro nós de fase conectados.
+Estado do nó
+Visual
+Interação
+Bloqueado
+Silhueta e cadeado discreto.
+Mostra requisito de fase anterior.
+Liberado
+Cor completa e título.
+Inicia a fase.
+Em andamento
+Borda pulsante e marcador de checkpoint.
+Continua da etapa salva.
+Concluído
+Marca de vitória e medalhas.
+Permite repetir.
+Completo
+Três medalhas e segredo encontrado.
+Mantém recorde/estatísticas futuras.
+Cartão da fase
+Exibe nome, imagem do local, medalhas, segredo, melhor resultado relevante e recompensa ainda não
+obtida. Não mostrar informações demais antes de o jogador concluir pela primeira vez.
+Navegação
+Deslizar troca mundos; setas servem computador e console. O mundo atual abre por padrão. Selecionar
+fase bloqueada não inicia compra nem teleporte; apenas explica o progresso necessário.
+
+=== PAGE 25 ===
+BOMB YOUR WAY!  •  GAME DESIGN DOCUMENT COMPLETO
+25
+24
+PROGRESSÃO
+Camadas dentro e fora da sessão
+ Camada
+O que progride
+Quando reinicia
+Etapa
+Caixas, inimigos, rotas e tesouro local.
+Ao morrer/reiniciar a etapa.
+Fase
+Power-ups, montaria ativa e sequência de etapas.
+Ao começar nova tentativa completa.
+Campanha
+Fases, mundos, medalhas e segredos.
+Nunca; salvo permanentemente.
+Conta
+Cosméticos, moedas, missões e coleção.
+Nunca; salvo permanentemente.
+Princípios
+ • Sempre comunicar o que foi salvo.
+ • Não criar progressão infinita de dano que destrua fases antigas.
+ • Usar domínio e coleção para rejogar, em vez de exigir grind obrigatório.
+ • Recompensas permanentes alteram expressão visual e acesso a conteúdo, não a justiça básica.
+ 
+Checkpoint seguro
+Ao salvar entre etapas, registrar fase, etapa, sapinho ativo e conjunto mínimo de power-ups. Se o estado
+salvo for inválido após uma atualização, reconstruir uma configuração padrão segura e preservar todo
+progresso permanente.
+
+=== PAGE 26 ===
+BOMB YOUR WAY!  •  GAME DESIGN DOCUMENT COMPLETO
+26
+25
+MEDALHAS E SEGREDOS
+Rejogar com objetivo
+APROVADO. Cada fase possui três medalhas independentes. Concluir permite avançar; medalhas
+adicionais são domínio opcional.
+Medalha
+Condição padrão
+Por que existe
+Conclusão
+Terminar a fase.
+Reconhece progresso principal.
+Exploração
+Encontrar o segredo principal.
+Recompensa atenção e rotas alternativas.
+Domínio
+Concluir sem morrer.
+Incentiva repetição com habilidade.
+Variações
+Chefes podem trocar “segredo” por condição própria. Algumas fases especiais podem usar tempo, reação
+em cadeia ou proteção do sapinho, desde que a condição seja exibida antes da tentativa.
+Segredos
+ • Pistas visuais consistentes: rachadura, símbolo, som, objeto fora do padrão ou rota parcialmente visível.
+ • Recompensas garantidas: cosmético, moeda especial ou item de coleção.
+ • Registro imediato para evitar perda se o jogador sair depois.
+ • Uma fase pode ter detalhes extras, mas apenas um segredo principal conta para a medalha.
+ 
+=== PAGE 27 ===
+BOMB YOUR WAY!  •  GAME DESIGN DOCUMENT COMPLETO
+27
+26
+RETORNO
+Missões, desafios e recompensas diárias
+RECOMENDADO. O retorno se apoia primeiro na campanha e coleção. Sistemas diários reorganizam
+conteúdo existente, sem obrigar o jogador a esperar conectado.
+Sistema
+Exemplo
+Recompensa
+Desafio diário
+Concluir uma fase com alcance reduzido ou inimigos extras.
+Moeda e progresso de desafio.
+Missão diária
+Destruir caixas, achar segredo ou vencer chefe.
+Moeda; ações ativas.
+Trilha de 7 resgates
+Entrar e coletar em sete dias não consecutivos.
+Moedas e cosmético final.
+Atualização
+Novo mundo, fases ou conjunto temático.
+Conteúdo e reativação.
+Regras
+ • A trilha diária não volta ao zero quando o jogador falta.
+ • Missões não pedem ficar parado por minutos.
+ • Desafios não bloqueiam campanha e não dependem de item pago.
+ • O lobby mostra apenas a próxima recompensa e o desafio ativo; detalhes ficam na aba.
+ 
+Social futuro
+Cooperação, convite de amigos e desafios de tempo podem melhorar retorno social, mas entram após a
+campanha solo provar retenção e desempenho.
+
+=== PAGE 28 ===
+BOMB YOUR WAY!  •  GAME DESIGN DOCUMENT COMPLETO
+28
+27
+ECONOMIA
+Moedas e recompensas
+RECOMENDADO. O lançamento usa uma moeda gratuita. Evitar múltiplas moedas reduz confusão e
+simplifica preços.
+Origem
+Frequência
+Uso
+Conclusão de etapa/fase
+Constante
+Progresso básico e sensação de ganho.
+Medalhas e segredos
+Única por conquista
+Recompensa de domínio.
+Missões/desafios
+Diária
+Motivo para retornar.
+Repetição de fase
+Reduzida/controlada
+Permite jogar sem farm infinito.
+Compra com Robux
+Somente se necessário e
+transparente
+Atalho cosmético, nunca poder obrigatório.
+Gastos
+ • Acessórios e cores básicos.
+ • Algumas aparências de sapinho.
+ • Efeitos cosméticos de bomba com leitura preservada.
+ • Rotação opcional de itens, mantendo formas diretas de aquisição.
+ 
+Balanceamento
+Definir preços depois de medir ganho por sessão, tempo até primeiro item desejado e capacidade de
+compra sem grind excessivo. A primeira recompensa cosmética deve chegar cedo para ensinar o valor da
+moeda.
+
+=== PAGE 29 ===
+BOMB YOUR WAY!  •  GAME DESIGN DOCUMENT COMPLETO
+29
+28
+MONETIZAÇÃO
+Receita alinhada ao produto
+APROVADO COMO DIREÇÃO. Monetização inicial focada em cosméticos diretos. Vender poder, vidas ou
+solução para dificuldade criaria conflito com level design e confiança.
+Oferta
+Formato
+Proteção de experiência
+Skin completa
+Compra direta.
+Prévia integral e preço claro.
+Acessórios
+Individual ou pacote.
+Compatíveis com corpo base.
+Sapinho
+Aparência cosmética.
+Mesma função no lançamento.
+Bomba cosmética
+Modelo/efeito.
+Área perigosa permanece idêntica.
+Pacote apoiador
+Conjunto exclusivo.
+Sem dano, alcance ou acesso obrigatório.
+Momento
+A loja fica disponível depois da primeira vitória. Ofertas aparecem no lobby e na coleção, nunca durante
+combate, morte ou tutorial. A confirmação usa o fluxo oficial do Roblox.
+Métricas de monetização
+Acompanhar visualização de item, prévia, prompt, compra concluída, conversão e receita por usuário.
+Mudanças de preço devem ser avaliadas junto com retenção; receita curta que reduz confiança pode
+prejudicar o projeto.
+
+=== PAGE 30 ===
+BOMB YOUR WAY!  •  GAME DESIGN DOCUMENT COMPLETO
+30
+29
+NARRATIVA
+História leve e funcional
+RECOMENDADO. O protagonista é um aprendiz ligado a fogos e energia. Um evento espalha núcleos de
+energia e deixa regiões bloqueadas por criaturas. Ele viaja, restaura passagens e resgata sapinhos
+capturados ou perdidos.
+Elemento
+Função narrativa
+Protagonista
+Curioso, corajoso e expressivo; fala pouco para funcionar globalmente.
+Pavio
+Reage a medo, alegria e raiva; substitui diálogo em muitas cenas.
+Sapinhos
+Companheiros resgatados e símbolo de recuperação dos mundos.
+Antagonista
+Responsável pelo colapso de energia; identidade a definir.
+Chefes
+Guardiões corrompidos ou criaturas usando a energia do local.
+Acampamento
+Base que cresce visualmente conforme a campanha avança.
+Apresentação
+ • Cenas de 5-15 segundos, sempre puláveis.
+ • Diálogos curtos, ícones e animação em vez de paredes de texto.
+ • História ambiental nas fases: objetos, luz, moradores e mudanças no cenário.
+ • Conclusão de mundo resolve um problema e apresenta o próximo.
+ 
+=== PAGE 31 ===
+BOMB YOUR WAY!  •  GAME DESIGN DOCUMENT COMPLETO
+31
+30
+DIREÇÃO DE ARTE
+Como o jogo deve parecer
+APROVADO. Estilo 2D cartoon com formas arredondadas, contornos escuros, cores vivas e detalhes
+reduzidos. A arte deve funcionar em tela pequena e manter leitura durante várias explosões.
+Camada
+Direção
+Personagens
+Silhueta simples, olhos grandes, animações curtas e expressivas.
+Cenário
+Peças modulares; fundo menos saturado que elementos interativos.
+Interativos
+Cores e formas consistentes, com destaque suficiente.
+Perigo
+Vermelho/laranja + forma/símbolo; não depender só de cor.
+Efeitos
+Impactantes, curtos e contidos na área real.
+Interface
+Painéis claros, cantos arredondados, laranja e azul-escuro como base.
+Animações mínimas
+ • Protagonista: idle, andar, colocar bomba, dano, vitória, montar e desmontar.
+ • Sapinho: idle, andar/saltar, proteção, desaparecer e comemorar.
+ • Inimigos: idle, movimento, preparação de ataque, dano e derrota.
+ • Ambiente: bloco destruído, caixa atingida, porta abrindo e item coletado.
+ 
+Produção
+Corpo base e encaixes fixos permitem trocar roupa e acessórios sem refazer todas as animações.
+Cenários usam atlas de sprites e variações de peças para reduzir memória e tempo de produção.
+
+=== PAGE 32 ===
+BOMB YOUR WAY!  •  GAME DESIGN DOCUMENT COMPLETO
+32
+31
+ÁUDIO E FEEDBACK
+O jogo precisa soar tão claro quanto
+parece
+ Evento
+Áudio/feedback
+Pavio
+Pulso crescente que informa tempo restante.
+Explosão
+Impacto curto com variação leve para evitar repetição.
+Caixa de energia
+Som elétrico único; última caixa recebe destaque.
+Porta
+Carga, clique e abertura em sequência reconhecível.
+Power-up
+Som ascendente e ícone breve.
+Sapinho
+Vocal curto, salto e som especial ao proteger.
+Dano/morte
+Som claro, diferente de vitória ou coleta.
+Segredo
+Assinatura musical curta e rara.
+Música
+Cada mundo possui tema próprio com variações leves. Chefes usam versão mais intensa. O lobby tem
+música calma. Sons de pavio, perigo e porta recebem prioridade para não serem escondidos.
+Opções
+Volumes separados de música e efeitos, botão geral de silêncio, vibração opcional e intensidade reduzida
+de tremor/flash. Configurações persistem entre sessões.
+
+=== PAGE 33 ===
+BOMB YOUR WAY!  •  GAME DESIGN DOCUMENT COMPLETO
+33
+32
+CELULAR E ACESSIBILIDADE
+Qualidade prática
+ Área
+Requisito
+Toque
+Botões grandes, afastados de gestos do sistema e sem sobrepor objetivos.
+Tela
+Compatível com diferentes proporções e áreas seguras.
+Cor
+Objetivos e perigos usam forma, símbolo e animação além de cor.
+Efeitos
+Opções para reduzir tremor, flash, partículas e vibração.
+Texto
+Fonte legível, contraste alto e mensagens curtas.
+Idioma
+Estrutura pronta para tradução, sem texto desenhado dentro de sprites.
+Desempenho
+Sprites compactos, pools, limites de partículas e carregamento por mundo.
+Metas técnicas recomendadas
+ • Jogabilidade estável em aparelhos Android de pouca memória.
+ • Entrada utilizável durante quedas moderadas de frame.
+ • Carregamento inicial curto e transições de etapa mascaradas por animação rápida.
+ • Sem vazamento de memória ao repetir fases ou trocar de mundo.
+ • Reconexão e salvamento não duplicam recompensas.
+ 
+=== PAGE 34 ===
+BOMB YOUR WAY!  •  GAME DESIGN DOCUMENT COMPLETO
+34
+33
+MÉTRICAS
+O funil completo da experiência
+As métricas respondem onde o projeto perde jogadores. Aquisição, retenção, engajamento e monetização
+precisam ser analisados por origem de tráfego, dispositivo e coorte.
+Pergunta
+Métrica/evento
+Decisão
+A embalagem atrai?
+Impressão → jogada.
+Testar ícone e thumbnail.
+O jogo carrega?
+Entrada → FTUE iniciado.
+Corrigir tempo, erro ou compatibilidade.
+O começo ensina?
+Movimento, 1ª bomba, 1º bloco, 1ª caixa.
+Simplificar o trecho com queda.
+A etapa prende?
+Permanência 1/3/5/10 min e conclusão.
+Rever ritmo, dificuldade e desempenho.
+A campanha continua?
+Próxima fase iniciada e tempo por usuário.
+Melhorar resultado e próximo objetivo.
+Existe retorno?
+D1, D7, D30 e dias jogados.
+Rever metas, conteúdo e progressão.
+Itens interessam?
+Prévia, equipar, prompt e compra.
+Rever visual, preço e apresentação.
+Eventos essenciais
+ftue_started, first_move, first_bomb, first_block_destroyed, energy_box_destroyed,
+stage_started/completed/abandoned, player_died, frog_rescued/lost, secret_found,
+phase_started/completed, next_phase_started, lobby_continue_clicked, cosmetic_previewed/equipped,
+challenge_started/completed, purchase_prompted/completed.
+
+=== PAGE 35 ===
+BOMB YOUR WAY!  •  GAME DESIGN DOCUMENT COMPLETO
+35
+34
+DADOS E SALVAMENTO
+Progresso confiável
+RECOMENDADO. O salvamento é autoritativo no servidor. O cliente solicita ações e mostra interface;
+recompensas permanentes e compras são validadas antes de gravar.
+Grupo de dados
+Conteúdo
+Campanha
+Mundo, fase, etapa/checkpoint, fases concluídas.
+Domínio
+Medalhas, segredos e recompensas únicas.
+Inventário
+Cosméticos possuídos, equipados e sapinhos.
+Economia
+Saldo e histórico mínimo de concessões importantes.
+Missões
+Progresso, data e recompensas coletadas.
+Configurações
+Áudio, controles, efeitos e acessibilidade.
+Versão
+Número do esquema para migrações futuras.
+Proteções
+ • Salvar ao atravessar porta, concluir fase, obter item permanente e sair de forma normal.
+ • Usar tentativas e fila para falhas temporárias sem travar o gameplay.
+ • Idempotência: recompensa única não pode ser recebida duas vezes.
+ • Backup e migração de versão antes de mudanças grandes.
+ • Mensagem clara quando dados não carregarem; evitar iniciar sessão que possa sobrescrever progresso.
+ 
+=== PAGE 36 ===
+BOMB YOUR WAY!  •  GAME DESIGN DOCUMENT COMPLETO
+36
+35
+PRODUÇÃO DE CONTEÚDO
+Do protótipo ao lançamento
+ Marco
+Entregável
+Saída necessária
+1. Protótipo
+Movimento, bomba, explosão, dano e controle móvel.
+Ação divertida e legível.
+2. Fatia vertical
+3 etapas, caixas, porta, inimigo, segredo, sapinho e
+minichefe.
+Primeiros 10-12 min validados.
+3. Base do produto
+Lobby, mapa, salvamento, coleção, HUD e resultados.
+Sessão completa e retorno correto.
+4. Mundo 1
+Quatro fases e chefe com arte próxima do final.
+Curva inicial aprovada.
+5. Conteúdo
+restante
+Mundos 2-3, cosméticos e desafios.
+Campanha sem repetição vazia.
+6. Teste e
+lançamento
+Telemetria, QA, página e operação.
+Métricas estáveis antes de tráfego maior.
+Pipeline de fase
+ 1. Ideia e objetivo da fase em uma frase.
+ 2. Mapa simples em papel/grade.
+ 3. Greybox com inimigos e caixas.
+ 4. Teste de clareza, duração e mortes.
+ 5. Arte e áudio.
+ 6. Teste em dispositivos e telemetria.
+ 7. Polimento e aprovação.
+ 
+=== PAGE 37 ===
+BOMB YOUR WAY!  •  GAME DESIGN DOCUMENT COMPLETO
+37
+36
+QUALIDADE
+Plano de testes
+ Tipo
+O que verificar
+Teste novo jogador
+Compreensão sem explicação, primeira bomba, objetivo e sapinho.
+Level design
+Rotas justas, fuga de bombas, caixas encontráveis e segredos legíveis.
+Dispositivos
+FPS, memória, toque, proporção de tela e carregamento.
+Persistência
+Checkpoint, saída abrupta, reconexão, atualização e recompensa única.
+Economia
+Saldo, compra, falha de compra, reembolso e itens equipados.
+Regressão
+Repetir fases, trocar visual, mudar mundo e morrer em transições.
+Acessibilidade
+Contraste, símbolos, redução de efeitos e controles.
+Ordem de correção
+ 1. Travamento, perda de progresso, compra incorreta e exploração grave.
+ 2. Controle, carregamento e confusão antes da primeira etapa.
+ 3. Dificuldade injusta, softlock e checkpoint quebrado.
+ 4. Ritmo, repetição e falta de objetivo.
+ 5. Polimento visual, economia e conversão.
+ 
+Método
+Observar pessoas que nunca viram o jogo. A equipe não explica durante a tentativa; registra hesitação,
+erros, mortes e comentários. Depois compara comportamento com telemetria.
+
+=== PAGE 38 ===
+BOMB YOUR WAY!  •  GAME DESIGN DOCUMENT COMPLETO
+38
+37
+LANÇAMENTO
+Aquisição e operação
+A página precisa prometer o gameplay real. A thumbnail principal mostra o monstrinho montado no
+sapinho, uma bomba entre blocos, inimigos e a porta ou tesouro adiante.
+Material
+Objetivo
+Ícone
+Rosto do protagonista, pavio e bomba; leitura forte em tamanho pequeno.
+Thumbnail 1
+Aventura e promessa geral.
+Thumbnail 2
+Reação em cadeia e caixa de energia.
+Vídeo curto
+Bomba, destruição, sapinho, chefe e recompensa em sequência rápida.
+Descrição
+Primeira frase resume a promessa; controles e conteúdo em seguida.
+Plano
+ 1. Teste fechado com jogadores novos e dispositivos variados.
+ 2. Corrigir início, salvamento e pontos de abandono.
+ 3. Publicar materiais e pequena rodada de tráfego qualificado.
+ 4. Comparar aquisição paga, orgânica e recomendada separadamente.
+ 5. Atualizar embalagem ou produto conforme a causa do problema.
+ 6. Aumentar divulgação somente com experiência estável.
+ 
+Operação
+Atualizações devem trazer conteúdo real: fases, mundo, desafio ou coleção. Registrar cada versão para
+comparar coortes antes e depois.
+
+=== PAGE 39 ===
+BOMB YOUR WAY!  •  GAME DESIGN DOCUMENT COMPLETO
+39
+38
+ESCOPO FINAL
+O que estará no lançamento
+ Categoria
+Lançamento planejado
+Depois
+Campanha
+3 mundos, 4 fases por mundo, etapas e 3 chefes.
+Novos mundos e fases.
+Gameplay
+Bombas, power-ups, caixas, portas, inimigos, sapinho e
+segredos.
+Novos poderes e variações.
+Progressão
+Checkpoints, medalhas, coleção e moeda.
+Rankings e domínio avançado.
+Lobby
+Acampamento, mapa, personagem, sapinhos, loja, missões
+e configurações.
+Crescimento visual maior da base.
+Retorno
+Desafio diário e trilha de resgates.
+Eventos sazonais e sistemas semanais.
+Social
+Campanha solo.
+Cooperação, convites e desafios sociais.
+Monetização
+Cosméticos e pacote apoiador.
+Novas coleções após validação.
+Decisões já consolidadas
+ • Nome: Bomb Your Way!
+ • Formato 2D em ScreenGui e campanha solo.
+ • Protagonista laranja com pavio; sapinho verde-água como montaria.
+ • Mundo com quatro fases; fases divididas em etapas.
+ • Caixas de energia abrem a porta da próxima etapa.
+ • Lobby de acampamento com personagem central e botão Continuar.
+ • Cosméticos como monetização inicial.
+ 
+=== PAGE 40 ===
+BOMB YOUR WAY!  •  GAME DESIGN DOCUMENT COMPLETO
+40
+39
+PRÓXIMOS PASSOS
+As decisões que faltam fechar
+O conceito e a estrutura do produto já estão claros. O próximo avanço real vem de transformar decisões
+em uma fatia jogável e medir comportamento.
+Prioridade
+Decisão/entregável
+1
+Definir tema, mecânica e aparência dos três mundos.
+2
+Escolher quatro power-ups iniciais e inimigos do Mundo 1.
+3
+Definir antagonista e resumo da história.
+4
+Desenhar em grade as três etapas da fatia vertical.
+5
+Implementar movimento, bomba, explosão, caixa e porta.
+6
+Adicionar sapinho, minichefe, checkpoint e eventos analíticos.
+7
+Testar com jogadores novos antes de produzir doze fases.
+ Próximo marco: uma fatia vertical de 10-12 minutos que prove o controle, a
+ explosão, as etapas, o sapinho e a vontade de continuar.
+Referências oficiais
+Roblox Creator Hub - Discovery: https://create.roblox.com/docs/discovery
+Roblox Creator Hub - Analytics: https://create.roblox.com/docs/production/analytics
+Roblox Creator Hub - Onboarding: https://create.roblox.com/docs/production/game-design/onboarding
+Roblox Creator Hub - Engagement: https://create.roblox.com/docs/production/analytics/engagement

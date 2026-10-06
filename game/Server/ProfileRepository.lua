@@ -57,6 +57,22 @@ function Repository.new(store, clock, tokenFactory)
 		return ok and result ~= nil
 	end
 
+	function Profiles.close(profile, data, timeout, elapsed, sleep)
+		elapsed = elapsed or os.clock
+		sleep = sleep or task.wait
+		local deadline = elapsed() + math.max(0, timeout)
+		repeat
+			if not profile.busy and Profiles.save(profile, data, true) then
+				return true
+			end
+			local remaining = deadline - elapsed()
+			if remaining <= 0 then
+				return false
+			end
+			sleep(math.min(0.5, remaining))
+		until false
+	end
+
 	return Profiles
 end
 return Repository
